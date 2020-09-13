@@ -1,0 +1,372 @@
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+.App {
+  height: 100vh;
+  width: 100vw;
+  max-width: 900px;
+  padding: 1rem;
+  background-color: lightpink;
+}
+
+html,body {
+  /* this makes sure the padding and the border is included in the box sizing */
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+body{
+  scrollbar-width: none;
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #000000,;
+}
+.Menu{
+  font-weight: bolder !important;
+  padding: 0;
+  margin: 0;
+  background-color: rgb(8, 8, 71) !important;
+}
+
+.HomeGrid{
+  margin-top: 4rem !important;
+}
+.HomeGridd{
+ margin-top: 2rem !important;
+}
+.HomeGridColumn{
+ margin: auto;
+}
+.LoadingBtn{
+  margin: auto !important;
+  outline: none !important;
+  background: none !important;
+}
+button{
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+body::-webkit-scrollbar{
+  display: none;
+  }
+.Button{
+outline: none !important;
+padding:0 !important;
+background: none !important;
+}
+
+.form-container{
+ margin: auto ;
+ margin-top: 3.5rem !important;
+}
+.Quote{
+  font-size: 2rem;
+}
+.Tag{
+  color: rgb(255, 0, 0);
+}
+/* .Input{
+ width: 100%;
+ border-radius: 15px;
+ outline: none;
+ border:2px solid teal;
+} */
+
+.ui.teal.button:focus, .ui.teal.buttons .button:focus{
+ background-color: #00b5ad;
+}
+
+.CardDescription{
+ margin-left: 1.5rem;
+ padding: 2rem 0 1rem 2rem;
+}
+
+.CardContent{
+ word-wrap: break-word
+}
+.singlePostGridColumn{
+  margin: auto;
+}
+ .singlePostGrid, .postForm{
+  margin-top: 8rem !important;
+}
+
+
+
+.ui.card>.content{
+  padding: 0.5zrem 1rem !important;
+}
+
+.ui.form textarea {
+    margin: 0;
+    -webkit-appearance: none;
+    padding: .78571429em 1em;
+    background:#00808007 !important;
+    border: none !important;
+    outline: 0;
+    color:rgb(0, 0, 0) !important;
+    border-radius: .28571429rem;
+    box-shadow: 0 0 0 0 transparent inset;
+    transition: color .1s ease,border-color .1s ease;
+    font-size: 1rem !important;
+    font-family: sans-serif;
+    font-weight: bold;
+    line-height: 1.2857;
+    resize: none !important;
+    outline: none !important;
+    overflow: hidden;
+}
+#postForm{
+  width: 70%;
+  margin: auto;
+  margin-top: 4rem !important;
+}
+
+.ui.form textarea {
+  resize: none;
+}
+.SubmitPostBtn{
+  position: absolute;
+  top:-3rem;
+  left: 65vw;
+  z-index: 13;
+  background-color: none !important;
+}
+
+i{
+  font-size: 1.5rem;
+}
+
+.ui.dropdown .menu {
+    cursor: auto;
+    position: absolute !important;
+    overflow: hidden;
+    display: none;
+    outline: 0;
+    width: 25vw !important;
+    height: 80vh !important;
+    padding: 0 0;
+    background: teal !important;
+    font-size: 1em;
+    text-shadow: none;
+    text-align: left;
+    box-shadow: 0 2px 3px 0 rgba(34,36,38,.15);
+    border-radius: .28571429rem;
+    transition: opacity .1s ease;
+    z-index: 11;
+    will-change: transform,opacity;
+}
+
+
+.ui.segment {
+    background: rgb(255, 255, 255);
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    padding: 0 !important;
+    border:none !important;
+    border-radius: 0 !important;
+    font-weight: bolder !important;
+    width: 100vw;
+    position: fixed !important;
+    top: 0px !important ;
+    left: 0 !important;
+    z-index: 11;
+}
+
+
+.ui.segment {
+    position: relative;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    padding: 1em 1em;
+    border-radius: .28571429rem;
+    border: 1px solid rgba(34,36,38,.15);
+}
+
+
+.navbar-nonesticky{
+background: inherit;
+}
+
+.StickyNav{
+display: grid;
+grid-template-columns:  repeat(2, 1fr);
+justify-items: center;
+height: 1rem;
+}
+.Logo{
+ color: rgb(247, 247, 247) !important;
+ font-size:large;
+ position: absolute;
+ font-weight: bolder;
+ left: 5px;
+ top: .5rem;
+}
+.SearchIcon{
+  font-size: x-large;
+  position: absolute;
+  top:1rem;
+  left: 70vw;
+}
+.Footer{
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  text-align: center;
+}
+.ProfileGrid{
+  margin-top: 2.8rem !important;
+}
+.ProfileGridd{
+ margin-top: 2rem !important;
+}
+.DispalyPhotoCover{
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: rgb(255, 0, 191);
+}
+/* .DpCover{
+  position: fixed;
+  top:3rem;
+  z-index: 15;
+  right: 0rem;
+  overflow: hidden;
+} */
+/* .Dp{
+width: 100%;
+height: 100%;
+margin-right: 3rem;
+} */
+/* .DisplayPhoto, .img{
+max-width: 425px;
+width: 100%;
+height: 100%;
+} */
+
+#Card, .Card{
+  margin-top: 3.9rem;
+}
+#Cardd{
+  margin-top: 3rem;
+}
+.PostComment{
+  margin-left: 3rem !important;
+}
+.extra{
+  margin-top: 0.1rem;
+}
+.CommentBtn{
+  outline: none !important;
+  color: teal;
+  border-radius: 20%;
+}
+
+.ui.fluid.card{
+  outline: none !important;
+  padding: 0 !important;
+  margin: 0;
+  box-shadow:none !important;
+}
+
+.SinglePostFeed{
+  position: fixed;
+  top: 0;
+  right: 1rem;
+  z-index: 11;
+}
+.gridd {
+  display: grid;
+  grid-template-rows:repeat(5, 1fr);
+}
+.Me{
+  margin-top: 2.9rem !important;
+}
+
+
+/* .......................................................*/
+.UserInfo{
+display: grid;
+grid-template-columns:  repeat(3, 1fr);
+justify-items: center;
+height: 1rem;
+margin-left:0.5rem ;
+justify-items:initial;
+}
+.DpInfo{
+  z-index: 2;
+}
+
+.UserMeta{
+  display: grid;
+  grid-template-columns:repeat(2, 1fr) ;
+}
+@media only screen and (max-width:600px) {
+  .gridd {
+    width: 100vw;
+  }
+  #postForm{
+  width: 90%;
+  margin: auto;
+  margin-top: 4rem !important;
+ }
+}
+@media only screen and (min-width:600px) {
+  .gridd {
+    width: 100vw;
+  }
+  .ui.error.message{
+  width:50vw;
+  }
+  #postForm{
+  width: 50%;
+ }
+}
+
+@media only screen and (min-width:768px) {
+  .gridd {
+    width: 60vw;
+  }
+}
+@media only screen and (min-width:992px) {
+  .gridd {
+    width: 40vw;
+  }
+}
+.gridd > * {
+  padding: 2px;
+  margin-top: 2px;
+}
+.AboutPage{
+  margin-top: 14rem;
+  color: black;
+}
+.cravings{
+  color: #ff0000;
+  font-size: 3rem;
+  margin: 4rem 0 0 10rem;
+}
+.Dropdown{
+background-color: rgb(8, 8, 71) !important;
+}
+
+/* user about*/
+.sales{
+  font-size: x-large;
+  color: red;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 10rem;
+}
+.userBio{
+  display: grid;
+}
+
+/* .................................... btn*/
+
+.warning{
+  color: blue;
+}
