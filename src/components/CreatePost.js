@@ -68,7 +68,7 @@ const handleOnFocus = () =>{
     limit: HOME_PAGE_POSTS_LIMIT,
   };
  const [createPost, {error, loading }] = useMutation(CREATE_POST,{
-   update(proxy, result){
+   update(proxy){
       const data = proxy.readQuery({
         query:GET_FOLLOWED_POSTS,
         variables
@@ -126,14 +126,7 @@ const handlePriceChange = e => setPrice(e.target.value);
             label="Photo"
             handleChange={handlePostImageUpload}
           />
-
-            <Button  type="button" onClick={handleReset}>
-              Cancel
-            </Button>
-            <Button disabled={isShareDisabled} type="submit">
-              Share
-            </Button>
-              </>
+          </>
             )
       }
     </Form>
