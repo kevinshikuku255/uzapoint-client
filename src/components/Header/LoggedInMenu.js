@@ -3,10 +3,8 @@ import DropdownDropdown from "../DropDown"
 import { Menu,Segment, Icon,Grid } from 'semantic-ui-react'
 import {Link} from "react-router-dom"
 
-
-
 import NavBar from "../StickyNav"
-import useSticky from "../../Utils/useStiky"
+
 
 
 function LoggedInMenu() {
@@ -17,14 +15,14 @@ function LoggedInMenu() {
 
  const [activeItem , setActiveItem] = useState(path)
  const  handleItemClick = (e, { name }) => setActiveItem(name);
- const { isSticky } = useSticky()
+
 
 const menuBar = (
   <>
 <Grid>
   <Grid.Column mobile="16" computer="7" tablet="10">
  <Segment inverted className="Menu" >
-       <NavBar sticky={isSticky}/>
+       <NavBar/>
        <Menu inverted pointing secondary fluid className="menu">
           <Menu.Item
             name='home'

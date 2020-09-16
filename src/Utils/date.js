@@ -11,12 +11,12 @@ export const timeAgo = unixTimestamp => {
   let interval = Math.floor(seconds / 12614400);
 
   if (interval > 1) {
-    return interval + ' years ago';
+    return interval + 'years ago';
   }
 
   interval = Math.floor(seconds / 1071360);
   if (interval > 1) {
-    return interval + ' months ago';
+    return interval + 'months ago';
   }
 
   interval = Math.floor(seconds / 8760);
@@ -31,12 +31,12 @@ export const timeAgo = unixTimestamp => {
 
   interval = Math.floor(seconds / 60);
   if (interval > 1) {
-    return interval + ' mins ago';
+    return interval + 'mins ago';
   }
 
   interval = Math.floor(seconds / 5);
   if (interval > 1) {
-    return  ' few sec ago';
+    return  'few sec ago';
   }
   return  'just now';
 };

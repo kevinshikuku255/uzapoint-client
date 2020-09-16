@@ -3,6 +3,8 @@ import { Dropdown } from 'semantic-ui-react'
 import {Link} from "react-router-dom"
 
 import SignOut from "./App/SignOut"
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
 
 
 // TODO: This is missing functionality for sub-menu here from SUI core examples.
@@ -10,7 +12,7 @@ import SignOut from "./App/SignOut"
 
 const DropdownDropdown = () => {
 return(
-  <Dropdown  placeholder="- - -" className="Dropdown">
+  <Dropdown  placeholder={ <MoreVertIcon /> } className="Dropdown">
     <Dropdown.Menu >
       <Dropdown.Item  as={Link} to="/Me" >
                 Me
@@ -26,3 +28,5 @@ return(
 }
 
 export default DropdownDropdown;
+
+

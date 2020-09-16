@@ -1,9 +1,10 @@
 import React,{useState} from 'react';
 
-import {Button, Icon, Confirm} from 'semantic-ui-react'
+import {Button, Confirm} from 'semantic-ui-react'
 import {useMutation} from '@apollo/client'
 import {GET_POSTS, DELETE_POST} from "../graphql/post"
 import {DELETE_COMMENT} from "../graphql/comment"
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 
 
@@ -43,7 +44,7 @@ const mutation = commentId ? DELETE_COMMENT :  DELETE_POST;
         className="Button"
         floated="right"
         onClick={()=> setConfirmOpen(true) }>
-        <Icon name="trash alternate" style={{margin:0}} color="red"/>
+          <DeleteForeverIcon />
     </Button>
 
      <Confirm

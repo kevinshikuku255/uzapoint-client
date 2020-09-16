@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
-import {Form, Button, Icon, Input, TextArea} from 'semantic-ui-react'
+import {Form, Button, Icon, Input} from 'semantic-ui-react'
 import {useMutation} from "@apollo/client"
+
 
 
 import { useStore } from '../store';
@@ -10,6 +11,12 @@ import { MAX_POST_IMAGE_SIZE } from '../constants/ImageSize';
 import { useGlobalMessage } from '../hooks/useGlobalMessage';
 import { GET_FOLLOWED_POSTS} from  "../graphql/post"
 import {CREATE_POST} from "../graphql/post"
+
+
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+
+
+
 
 
 
@@ -68,7 +75,7 @@ const handleOnFocus = () =>{
     limit: HOME_PAGE_POSTS_LIMIT,
   };
  const [createPost, {error, loading }] = useMutation(CREATE_POST,{
-   update(proxy){
+   update(proxy, result){
       const data = proxy.readQuery({
         query:GET_FOLLOWED_POSTS,
         variables
@@ -98,13 +105,14 @@ const handlePriceChange = e => setPrice(e.target.value);
   <>
     <Form onSubmit={ handleSubmit } id="postForm" className={loading ? "loading": ""} >
        <Form.Field className="FormFiled">
-          <TextArea
-             name='title'
-             onFocus={handleOnFocus}
-             onChange={hadleTitleChangen}
-             value={values.title}
-             error= {error}
-          />
+         <TextareaAutosize
+            aria-label="minimum height"
+            placeholder="Describe your item"
+            name='title'
+            onFocus={handleOnFocus}
+            onChange={hadleTitleChangen}
+            value={values.title}
+            error= {error} />
         <Button type="submit" disabled={isShareDisabled}  className ="SubmitPostBtn" color="blue"  size="tiny"  circular>
             <Icon name="share"/>
        </Button>
@@ -122,11 +130,8 @@ const handlePriceChange = e => setPrice(e.target.value);
       {
           (
             <>
-          <PostImageUpload
-            label="Photo"
-            handleChange={handlePostImageUpload}
-          />
-          </>
+          <PostImageUpload  label="Photo"  handleChange={handlePostImageUpload} />
+           </>
             )
       }
     </Form>

@@ -31,6 +31,7 @@ if(loading){
    return <SkeletonPost/>
 }
 
+
 console.log(data)
  return (
     <Grid className={ auth.user ? "HomeGrid" : "HomeGridd"} inverted>

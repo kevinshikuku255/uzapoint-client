@@ -37,9 +37,7 @@ import UserSales from './UserSales';
    )
  }
 
- const { phone,
-        username,
-         posts, followers, createdAt} = data.getAuthUser;
+ const { phone,  username, posts, followers, createdAt} = data.getAuthUser;
 
 const joinedDate = currentDate(createdAt).split(" ")
  return (

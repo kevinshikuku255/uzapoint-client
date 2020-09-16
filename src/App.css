@@ -189,12 +189,12 @@ i{
 background: inherit;
 }
 
-.StickyNav{
+/* .StickyNav{
 display: grid;
 grid-template-columns:  repeat(2, 1fr);
 justify-items: center;
 height: 1rem;
-}
+} */
 .Logo{
  color: rgb(247, 247, 247) !important;
  font-size:large;
@@ -370,3 +370,4 @@ background-color: rgb(8, 8, 71) !important;
 .warning{
   color: blue;
 }
+
