@@ -37,6 +37,12 @@ import UserSales from './UserSales';
    )
  }
 
+  if(!loading && !data){
+   return(
+     <SkeletonPost/>
+   )
+ }
+
  const { phone,  username, posts, followers, createdAt} = data.getAuthUser;
 
 const joinedDate = currentDate(createdAt).split(" ")

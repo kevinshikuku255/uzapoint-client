@@ -14,7 +14,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 const WEBSOCKET_API_URL = process.env.REACT_APP_WEBSOCKET_API_URL;
 const websocketApiUrl = WEBSOCKET_API_URL
   ? WEBSOCKET_API_URL
-    : API_URL.replace('https://', 'ws://').replace('https://', 'ws://')
+    : API_URL.replace('https://', 'ws://');
 
 
 
