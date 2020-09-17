@@ -94,7 +94,7 @@ const handleSubmit = (e, signup) => {
 
 
     if(Array.isArray(errors)){
-      errorMessage =  errors[0].message;
+      errorMessage =  errors[0];
     }else if(errors){
       errorMessage = errors;
     }
