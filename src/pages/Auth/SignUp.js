@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Grid, Button, GridColumn, Form, Header } from "semantic-ui-react"
+import {Grid, Button, GridColumn, Form} from "semantic-ui-react"
 import {useMutation} from '@apollo/client'
 import {Link} from "react-router-dom"
 
