@@ -47,9 +47,8 @@ const dispatchAction = (token) =>{
  */
  let [signInUser,{ loading}] = useMutation(SIGN_IN, {
   update(_, result){
-    const token = result.data.signin.token
-    localStorage.setItem('jwt', token );
-    dispatchAction(token)
+    localStorage.setItem('jwt', result.data.signin.token);
+    dispatchAction(result.data.signin.token)
     history.push("/");
  },
  variables : values,

@@ -142,7 +142,7 @@ const renderErrors = apiError => {
   <GridColumn mobile={14} tablet={10} computer={8}>
     <Grid.Row>
       <div>
-        <Link to="/about"><Header >About us</Header></Link>
+        <Link to="/about"><h2>About us</h2></Link>
       </div>
     </Grid.Row>
   </GridColumn>
