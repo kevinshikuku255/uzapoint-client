@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import React from 'react'
 import { Accordion } from 'semantic-ui-react'
 import Card from '@material-ui/core/Card';
