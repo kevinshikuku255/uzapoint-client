@@ -109,7 +109,7 @@ const extra = (
       </Link>
      <CardContent>
         { extra }
-        <hr/>
+
         <Accordion>
           <Accordion.Title
             active={activeIndex === 0}
@@ -126,6 +126,7 @@ const extra = (
             </Typography>
           </Accordion.Content>
           </Accordion>
+          <hr/>
       </CardContent>
 </Card>
   </>

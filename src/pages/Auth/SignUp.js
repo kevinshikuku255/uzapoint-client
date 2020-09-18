@@ -9,15 +9,15 @@ import { SIGN_UP } from '../../graphql/user';
 
 
 
-function SignIn({history}) {
-  const [errors, setErrors] = useState('');
+/**
+ *
+ * lets new user in
+ */
+function SignUp({history}) {
+  const [errors, setErrors] = useState("");
+  console.log(errors)
   const [, dispatch] = useStore();
-  const [values, setValues] = useState({
-    fullName: '',
-    username: '',
-    phone: '',
-    password: '',
-  });
+  const [values, setValues] = useState( {fullName: '', username: '', phone: '',  password: ''});
 
 /**
  * change hundler...
@@ -28,34 +28,7 @@ function SignIn({history}) {
   };
 
 
-const validate = () => {
-    if (!phone || !username || !password) {
-      return 'All fields are required';
-    }
-    if (!phone && !username && !password) {
-      return 'All fields are required';
-    }
-    if (phone.length < 10) {
-      return 'provide a correct phone number';
-    }
-    if (phone.length > 13) {
-      return 'provide a correct phone number';
-    }
 
-    const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
-    if (!usernameRegex.test(username)) {
-      return 'Usernames can only use letters, numbers, underscores and periods';
-    } else if (username.length > 20) {
-      return 'Username no more than 50 characters';
-    }
-
-    if (password.length < 6) {
-      return 'Password should be min of  6 characters';
-    }
-
-    return false;
-  };
- const { phone, password, username } = values;
 
 
 const dispatchAction = (token) =>{
@@ -65,72 +38,63 @@ const dispatchAction = (token) =>{
   })
 }
 
-/**
- * submit hundler
- */
-const handleSubmit = (e, signup) => {
-    e.preventDefault();
-    error = validate();
-    if (error) {
-      return setErrors(error);
-    }
 
-    signup().then(async (SigUpnResult) => {
-     if(SigUpnResult){
-      const {data} = SigUpnResult;
-      localStorage.setItem('jwt', data.signup.token);
-      dispatchAction(data.signup.token)
-      history.push("/");
-     }
-    });
+
+
+/**
+ * useMutation hook
+ */
+ let [signUpUser,{ loading}] = useMutation(SIGN_UP,{
+  update(_, result){
+    const token = result.data.signup.token;
+    console.log(result)
+    localStorage.setItem('jwt', token);
+    dispatchAction(token)
+    history.push("/");
+ },
+ variables : values,
+  onError(err){
+      setErrors(err.message)
+  },
+   });
+
+
+
+  const handleSubmit = (e) => {
+       e.preventDefault();
+       signUpUser();
+       setErrors("")
   };
 
 
+
 /**
- * Render errors
+ * api errors
  */
-  const renderErrors = apiError => {
+const renderErrors = apiError => {
     let errorMessage;
-
-
-    if(Array.isArray(errors)){
-      errorMessage =  errors[0];
-    }else if(errors){
+    if (errors) {
       errorMessage = errors;
     }
-
+    else if (apiError) {
+      errorMessage = apiError.message;
+    }
     if (errorMessage) {
       return (
-        <div>{errorMessage}</div>
+         <div>{errorMessage}</div>
       );
     }
     return null;
   };
 
 
-
-
- let [signup, { loading, error}] = useMutation(SIGN_UP, {
-  update(){
-  history.push("/Me");
- },
-  onError(err){
-  setErrors(err.graphQLErrors)
-  },
-  variables : values
-});
-
-
  return (
-
-<Grid className='form-container'>
-
-
+<Grid >
   <GridColumn mobile={14} tablet={10} computer={8}>
     <Grid.Row>
-       <div >
-    <Form onSubmit={e => handleSubmit(e, signup)} noValidate className={loading ? "loading...": ""} >
-      <h1>Sign-up</h1>
+       <div className='form-container'>
+    <Form onSubmit={handleSubmit} noValidate className={loading ? "loading": ""}>
+      <h2>Sign-up</h2>
 
       <Form.Input
       label="Username"
@@ -169,7 +133,7 @@ const handleSubmit = (e, signup) => {
 
      { errors && (
      <div className="ui error message">
-         {renderErrors(error)}
+         {renderErrors(errors)}
     </div>
     )}
   </div>
@@ -184,8 +148,7 @@ const handleSubmit = (e, signup) => {
   </GridColumn>
 </Grid>
 
-
  );
 }
 
-export default SignIn;
+export default SignUp;

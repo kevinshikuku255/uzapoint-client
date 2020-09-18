@@ -12,6 +12,10 @@ import { SET_AUTH_USER } from '../../store/auth';
 
 
 
+/**
+ *
+ * lets existing user in
+ */
 function SignIn({ history}) {
   const [values, setValues] = useState({ phoneOrUsername: '', password: '' });
   const [errors, setErrors] = useState('');
@@ -45,11 +49,11 @@ const dispatchAction = (token) =>{
   update(_, result){
     localStorage.setItem('jwt', result.data.signin.token);
     dispatchAction(result.data.signin.token)
-    history.push("/Me");
+    history.push("/");
  },
  variables : values,
   onError(err){
-  setErrors(err.graphQLErrors)
+     setErrors(err.graphQLErrors)
   },
    });
 
@@ -90,7 +94,7 @@ const renderErrors = apiError => {
        <Grid.Row>
   <div className='form-container'>
     <Form onSubmit={handleSubmit} noValidate className={loading ? "loading": ""} >
-      <h1>Login</h1>
+      <h2>Login</h2>
       <Form.Input
       label="Phone / Username"
       placeholder="PhoneOrUsername"
@@ -127,7 +131,7 @@ const renderErrors = apiError => {
        </Grid.Row>
 
   <div className="Footer">
-<b> <p>Copyright  2020 all rights reserved <br/> Kevin Shikuku production @_Qutekid</p></b>
+  <b><p>Copyright  2020 all rights reserved <br/> Kevin Shikuku production</p></b>
   </div>
      </GridColumn>
    </Grid>

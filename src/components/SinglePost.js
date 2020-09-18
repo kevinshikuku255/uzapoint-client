@@ -17,8 +17,6 @@ import Card from '@material-ui/core/Card';
 
 import CardMedia from '@material-ui/core/CardMedia';
 
-import Typography from '@material-ui/core/Typography';
-
 
 
 
@@ -99,8 +97,8 @@ return (
           image={shoes}
           title="post"
         />
-     <Typography variant="body1" className={classes.paragraph}>
-         <b>{title}</b> <hr/>
+     <div variant="body1" className={classes.paragraph}>
+          <b>{title} </b> <hr/>
           <List horizontal relaxed>
               <List.Item>
                    {`Price: Ksh. ${price}`}
@@ -119,10 +117,8 @@ return (
               </List.Item>
           </List> <hr/>
          {postMarkup}
-     </Typography>
+     </div>
 </Card>
-
-
 
   <Grid>
     <Grid.Column mobile={16} tablet={10} computer={7} className=  "Card" >
