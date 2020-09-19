@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Grid,  Button, GridColumn, Form } from "semantic-ui-react"
+import { Button, Form } from "semantic-ui-react"
 import {useMutation} from '@apollo/client'
 import {Link} from "react-router-dom"
 
@@ -9,6 +9,33 @@ import { useStore } from '../../store';
 import { SET_AUTH_USER } from '../../store/auth';
 
 
+import logo from "./logo.png"
+
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import Alert from '@material-ui/lab/Alert';
+
+
+const useStyles = makeStyles((theme) => ({
+  card: {
+    minWidth: 300,
+    maxWidth:518,
+    margin: theme.spacing(7,0,0,0),
+  },
+  footer:{
+  position: "fixed",
+  width: "100vw",
+  bottom: 0,
+  textAlign: "center",
+  backgroundColor:"white"
+  }
+}));
+
 
 
 
@@ -17,6 +44,7 @@ import { SET_AUTH_USER } from '../../store/auth';
  * lets existing user in
  */
 function SignIn({ history}) {
+  const classes = useStyles();
   const [values, setValues] = useState({ phoneOrUsername: '', password: '' });
   const [errors, setErrors] = useState('');
   const [, dispatch] = useStore();
@@ -89,53 +117,62 @@ const renderErrors = apiError => {
   };
 
  return (
-   <Grid>
-     <GridColumn mobile={14} tablet={10} computer={7}>
-       <Grid.Row>
-  <div className='form-container'>
-    <Form onSubmit={handleSubmit} noValidate className={loading ? "loading": ""} >
-      <h2>Login</h2>
-      <Form.Input
-      label="Phone / Username"
-      placeholder="PhoneOrUsername"
-      name= "phoneOrUsername"
-      type="text"
-      error={ !values.phoneOrUsername && errors ? true : false}
-      value ={values.phoneOrUsername}
-      onChange={handleChange}
+<>
+
+<Card className={classes.card}>
+         <CardHeader
+         avatar={
+              <Avatar  alt="logo" src={logo} />
+             }
+        title={
+            <Typography variant="h4">
+                Sign-in
+            </Typography>
+            }
+         action={
+            <IconButton aria-label="settings">
+               <Link to="/register">Register</Link>
+            </IconButton>
+        }
       />
+      <CardContent>
+        <Form onSubmit={handleSubmit} noValidate className={loading ? "loading": ""} >
+          <h2>Login</h2>
+          <Form.Input
+          label="Phone / Username"
+          placeholder="PhoneOrUsername"
+          name= "phoneOrUsername"
+          type="text"
+          error={ !values.phoneOrUsername && errors ? true : false}
+          value ={values.phoneOrUsername}
+          onChange={handleChange}
+          />
 
-      <Form.Input
-      label="Password"
-      placeholder="Password"
-      name= "password"
-      type="password"
-      error={!values.password && errors ? true : false}
-      value={values.password}
-      onChange={handleChange}
-      />
+          <Form.Input
+          label="Password"
+          placeholder="Password"
+          name= "password"
+          type="password"
+          error={!values.password && errors ? true : false}
+          value={values.password}
+          onChange={handleChange}
+          />
 
-    <Button type="submit" primary>
-         Login
-    </Button>
-    </Form>
+        <Button type="submit" primary>
+            Login
+        </Button>
+        </Form>
+        { errors.length > 0  && (
+              <Alert severity="error">{renderErrors(errors)}</Alert>
+            )}
+      </CardContent>
+</Card>
 
-  <p>Dont have and Account yet? <Link to="/register">Register</Link></p>
-
- { errors.length > 0  && (
-     <div className="ui error message">
-         {renderErrors(errors)}
-    </div>
-    )}
-  </div>
-       </Grid.Row>
-
-  <div className="Footer">
+  <div  className={classes.footer}>
   <b><p>Copyright  2020 all rights reserved <br/> Kevin Shikuku production</p></b>
   </div>
-     </GridColumn>
-   </Grid>
 
+</>
  );
 }
 export default SignIn;

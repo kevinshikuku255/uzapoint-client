@@ -1,11 +1,32 @@
 import React, {useState} from 'react'
-import {Grid, Button, GridColumn, Form} from "semantic-ui-react"
+import { Button, Form,  } from "semantic-ui-react"
 import {useMutation} from '@apollo/client'
 import {Link} from "react-router-dom"
 
 import { SET_AUTH_USER } from '../../store/auth';
 import { useStore } from '../../store';
 import { SIGN_UP } from '../../graphql/user';
+import logo from "./logo.png"
+
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import Alert from '@material-ui/lab/Alert';
+import NearMeIcon from '@material-ui/icons/NearMe';
+
+
+const useStyles = makeStyles((theme) => ({
+  card: {
+    minWidth: 300,
+    maxWidth:518,
+    margin: theme.spacing(7,0,0,0),
+  }
+}));
+
 
 
 
@@ -14,6 +35,7 @@ import { SIGN_UP } from '../../graphql/user';
  * lets new user in
  */
 function SignUp({history}) {
+  const classes = useStyles();
   const [errors, setErrors] = useState("");
   console.log(errors)
   const [, dispatch] = useStore();
@@ -47,8 +69,7 @@ const dispatchAction = (token) =>{
  let [signUpUser,{ loading}] = useMutation(SIGN_UP,{
   update(_, result){
     const token = result.data.signup.token;
-    console.log(result)
-    localStorage.setItem('jwt', token);
+    localStorage.setItem('jwt',token);
     dispatchAction(token)
     history.push("/");
  },
@@ -89,65 +110,65 @@ const renderErrors = apiError => {
 
 
  return (
-<Grid >
-  <GridColumn mobile={14} tablet={10} computer={8}>
-    <Grid.Row>
-       <div className='form-container'>
-    <Form onSubmit={handleSubmit} noValidate className={loading ? "loading": ""}>
-      <h2>Sign-up</h2>
-
-      <Form.Input
-      label="Username"
-      placeholder="Username"
-      name= "username"
-      type="text"
-      error={ !values.username && errors ? true : false}
-      value ={values.username}
-      onChange={handleChange}
+<>
+<Card className={classes.card}>
+         <CardHeader
+         avatar={
+              <Avatar  alt="logo" src={logo} />
+             }
+        title={
+            <Typography variant="h4">
+                Sign-up
+            </Typography>
+            }
+         action={
+            <IconButton aria-label="settings">
+              <Link to="/about">About us <NearMeIcon/> </Link>
+            </IconButton>
+        }
       />
+      <CardContent>
+          <Form onSubmit={handleSubmit} noValidate className={loading ? "loading": ""}>
+            <Form.Input
+            label="Username"
+            placeholder="Username"
+            name= "username"
+            type="text"
+            error={ !values.username && errors ? true : false}
+            value ={values.username}
+            onChange={handleChange}
+            />
 
-      <Form.Input
-      label="Phone"
-      placeholder="Phone"
-      name= "phone"
-      type="phone"
-      error={ !values.phone && errors ? true : false}
-      value={values.phone}
-      onChange={handleChange}
-      />
+            <Form.Input
+            label="Phone"
+            placeholder="Phone"
+            name= "phone"
+            type="phone"
+            error={ !values.phone && errors ? true : false}
+            value={values.phone}
+            onChange={handleChange}
+            />
 
-      <Form.Input
-      label="Password"
-      placeholder="Password"
-      name= "password"
-      type="password"
-      error={!values.password && errors ? true : false}
-      value={values.password}
-      onChange={handleChange}
-      />
+            <Form.Input
+            label="Password"
+            placeholder="Password"
+            name= "password"
+            type="password"
+            error={!values.password && errors ? true : false}
+            value={values.password}
+            onChange={handleChange}
+            />
 
-    <Button type="submit" primary>
-         Sign-up
-    </Button>
-    </Form>
-
-     { errors && (
-     <div className="ui error message">
-         {renderErrors(errors)}
-    </div>
-    )}
-  </div>
-    </Grid.Row>
-  </GridColumn>
-  <GridColumn mobile={14} tablet={10} computer={8}>
-    <Grid.Row>
-      <div>
-        <Link to="/about"><h2>More about us</h2></Link>
-      </div>
-    </Grid.Row>
-  </GridColumn>
-</Grid>
-
+          <Button type="submit" primary>
+              Sign-up
+          </Button>
+          </Form>
+          { errors && (
+          <Alert severity="error">{renderErrors(errors)}</Alert>
+          )}
+      </CardContent>
+</Card>
+</>
  );
 }
 
