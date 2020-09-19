@@ -25,8 +25,8 @@ const content =  <div>
                   <b>WindowShop is guided by basic principles:</b> <br/>
                    Passion for invention  and commitment for excellence.
                   <br/> <br/>
-                  The website was created and maintained to bring you closer to your cravings.  Here  dispose items for people to hit you up or Search for Items you love <br/><br/>
-                  <p> I (Kevin Shikuku) and my team value you and We are obsessed to bring the best.</p>
+                  The website was created and maintained to bring you closer to your cravings.  Here  display items for people to hit you up or Search for Items you love <br/><br/>
+                  <p>We are obsessed to bring the best.</p>
                 </div>
 
 const panels = [
