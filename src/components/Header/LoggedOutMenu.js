@@ -5,18 +5,18 @@ import {Link} from "react-router-dom"
 
 
 function LoggedOutMenu() {
-
  const pathName = window.location.pathname;
  const path = pathName === "/" ? "home" : pathName.substr(1)
 
  const [activeItem , setActiveItem] = useState(path)
  const  handleItemClick = (e, { name }) => setActiveItem(name);
 
+  const titleString = window.location.pathname;
+  const title = titleString.split("/")[1]
 
 const menuBar = (
  <Segment inverted className="Menu">
         <Menu inverted pointing secondary >
-
            <Menu.Item
             name='home'
             active={activeItem === 'home'}
@@ -24,6 +24,13 @@ const menuBar = (
             as ={Link}
             to= '/'
           ><Icon name="home"/></Menu.Item>
+
+          <Menu.Item>
+            {title === "" && "Explore Items" }
+            {title === "login" && "Login" }
+            {title === "register" && "Create Account" }
+            {title === "about" && "About us" }
+          </Menu.Item>
 
           <Menu.Menu position='right' className="Menu_Menu">
            <Menu.Item

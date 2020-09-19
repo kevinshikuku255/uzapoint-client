@@ -25,7 +25,10 @@ const useStyles = makeStyles((theme) => ({
   card: {
     minWidth: 300,
     maxWidth:518,
-    margin: theme.spacing(7,0,0,0),
+    margin:"auto",
+  },
+  container:{
+ margin: theme.spacing(7,0,0,0),
   },
   footer:{
   position: "fixed",
@@ -117,7 +120,7 @@ const renderErrors = apiError => {
   };
 
  return (
-<>
+<div className={classes.container}>
 
 <Card className={classes.card}>
          <CardHeader
@@ -126,18 +129,12 @@ const renderErrors = apiError => {
              }
         title={
             <Typography variant="h4">
-                Sign-in
+                Login
             </Typography>
             }
-         action={
-            <IconButton aria-label="settings">
-               <Link to="/register">Register</Link>
-            </IconButton>
-        }
       />
       <CardContent>
         <Form onSubmit={handleSubmit} noValidate className={loading ? "loading": ""} >
-          <h2>Login</h2>
           <Form.Input
           label="Phone / Username"
           placeholder="PhoneOrUsername"
@@ -165,6 +162,9 @@ const renderErrors = apiError => {
         { errors.length > 0  && (
               <Alert severity="error">{renderErrors(errors)}</Alert>
             )}
+        <IconButton aria-label="settings">
+            <Link to="/register">Create account instead</Link>
+        </IconButton>
       </CardContent>
 </Card>
 
@@ -172,7 +172,7 @@ const renderErrors = apiError => {
   <b><p>Copyright  2020 all rights reserved <br/> Kevin Shikuku production</p></b>
   </div>
 
-</>
+</div>
  );
 }
 export default SignIn;

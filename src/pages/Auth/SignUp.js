@@ -23,8 +23,11 @@ const useStyles = makeStyles((theme) => ({
   card: {
     minWidth: 300,
     maxWidth:518,
-    margin: theme.spacing(7,0,0,0),
-  }
+    margin:"auto",
+  },
+ container:{
+   margin: theme.spacing(7,0,0,0),
+  },
 }));
 
 
@@ -37,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
 function SignUp({history}) {
   const classes = useStyles();
   const [errors, setErrors] = useState("");
-  console.log(errors)
   const [, dispatch] = useStore();
   const [values, setValues] = useState( {fullName: '', username: '', phone: '',  password: ''});
 
@@ -110,7 +112,7 @@ const renderErrors = apiError => {
 
 
  return (
-<>
+<div className={classes.container}>
 <Card className={classes.card}>
          <CardHeader
          avatar={
@@ -121,11 +123,6 @@ const renderErrors = apiError => {
                 Sign-up
             </Typography>
             }
-         action={
-            <IconButton aria-label="settings">
-              <Link to="/about">About us <NearMeIcon/> </Link>
-            </IconButton>
-        }
       />
       <CardContent>
           <Form onSubmit={handleSubmit} noValidate className={loading ? "loading": ""}>
@@ -159,16 +156,20 @@ const renderErrors = apiError => {
             onChange={handleChange}
             />
 
-          <Button type="submit" primary>
+          <Button type="submit" primary className={classes.button}>
               Sign-up
           </Button>
           </Form>
           { errors && (
           <Alert severity="error">{renderErrors(errors)}</Alert>
           )}
+
+            <IconButton aria-label="settings">
+              <Link to="/about">About us <NearMeIcon/> </Link>
+            </IconButton>
       </CardContent>
 </Card>
-</>
+</div>
  );
 }
 
