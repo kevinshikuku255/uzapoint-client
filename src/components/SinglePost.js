@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   card: {
     minWidth: 300,
     maxWidth:518,
-    margin: theme.spacing(7,-1.5,0,-1.5),
+    margin: theme.spacing(6.2,-1.5,0,-1.5),
   },
   media: {
     height: 190,
@@ -98,7 +98,7 @@ return (
           title="post"
         />
      <div variant="body1" className={classes.paragraph}>
-          <b>{title} </b> <hr/>
+           Item description: <b>{title}</b> <hr/>
           <List horizontal relaxed>
               <List.Item>
                    {`Price: Ksh. ${price}`}

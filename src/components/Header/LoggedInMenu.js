@@ -1,63 +1,62 @@
 import React,{useState} from 'react'
-import DropdownDropdown from "../DropDown"
-import { Menu,Segment, Icon,Grid } from 'semantic-ui-react'
+import Drower from "../Drower"
+import { Menu,Segment} from 'semantic-ui-react'
 import {Link} from "react-router-dom"
 
-import NavBar from "../StickyNav"
+import SearchIcon from '@material-ui/icons/Search';
+import HomeIcon from '@material-ui/icons/Home';
+import CreateIcon from '@material-ui/icons/Create';
 
 
 
 function LoggedInMenu() {
+    const pathName = window.location.pathname;
+    const path = pathName === "/" ? "home" : pathName.substr(1);
 
-
- const pathName = window.location.pathname;
- const path = pathName === "/" ? "home" : pathName.substr(1)
-
- const [activeItem , setActiveItem] = useState(path)
- const  handleItemClick = (e, { name }) => setActiveItem(name);
+    const [activeItem , setActiveItem] = useState(path);
+    const  handleItemClick = (e, { name }) => setActiveItem(name);
 
 
 const menuBar = (
   <>
-<Grid>
-  <Grid.Column mobile="16" computer="7" tablet="10">
  <Segment inverted className="Menu" >
-       <NavBar/>
-       <Menu inverted pointing secondary fluid className="menu">
+       <Menu inverted pointing secondary>
           <Menu.Item
             name='home'
             active={activeItem === 'home'}
             onClick={handleItemClick}
             as ={Link}
             to= '/'
-          >
-            <Icon name="home"/>
+          > <HomeIcon/>
           </Menu.Item>
-           <Menu.Item name= "notification"
-            active={activeItem === 'notification'}
-            onClick={handleItemClick}>
-            <Icon name="bell"/>
-          </Menu.Item>
+
            <Menu.Item
-            name= "commnet"
+            name= "notification"
+            active={activeItem === 'notification'}
+            onClick={handleItemClick}
+            as={Link}
+            to="/serch"
+            >
+              <SearchIcon/>
+           </Menu.Item>
+
+           <Menu.Item
+            name= "create Post"
             active={activeItem === 'commnet'}
             onClick={handleItemClick}
             as ={Link}
             to= "/createPost"
           >
-          <Icon name='pencil alternate'  />
+           <CreateIcon />
           </Menu.Item>
-
-
          <Menu.Menu position='right'>
              <Menu.Item>
-               <DropdownDropdown/>
+               <Drower/>
              </Menu.Item>
           </Menu.Menu>
         </Menu>
       </Segment>
-  </Grid.Column>
-</Grid>
+
  </>)
 
     return menuBar;

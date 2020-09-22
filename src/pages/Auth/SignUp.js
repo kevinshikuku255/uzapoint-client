@@ -16,7 +16,8 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
-import NearMeIcon from '@material-ui/icons/NearMe';
+
+import InfoTwoToneIcon from '@material-ui/icons/InfoTwoTone';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
  container:{
    margin: theme.spacing(7,0,0,0),
   },
+  alert:{
+    margin: theme.spacing(1,0,0,0),
+  }
 }));
 
 
@@ -161,11 +165,11 @@ const renderErrors = apiError => {
           </Button>
           </Form>
           { errors && (
-          <Alert severity="error">{renderErrors(errors)}</Alert>
+          <Alert severity="error" className={classes.alert}>{renderErrors(errors)}</Alert>
           )}
 
             <IconButton aria-label="settings">
-              <Link to="/about">About us <NearMeIcon/> </Link>
+               <InfoTwoToneIcon/> <Link to="/about" ><h5 >About us</h5> </Link>
             </IconButton>
       </CardContent>
 </Card>

@@ -163,7 +163,7 @@ const renderErrors = apiError => {
               <Alert severity="error">{renderErrors(errors)}</Alert>
             )}
         <IconButton aria-label="settings">
-            <Link to="/register">Create account instead</Link>
+            <Link to="/register"> <h5>Create account instead !!</h5> </Link>
         </IconButton>
       </CardContent>
 </Card>

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Card, Grid, GridColumn,Label} from "semantic-ui-react"
-import shoes from "../shoes.jpeg"
 
 
 
@@ -15,7 +14,7 @@ const  UserPosts = ({posts}) =>{
        <Card
          fluid
          color='teal'
-         image={shoes}
+         image={"shoes"}
       />
     <Label as='a' tag pointing="above" color="teal" >
         {`Ksh.${post.price}`}

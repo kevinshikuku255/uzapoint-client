@@ -9,8 +9,9 @@ import PostImageUpload from "./post_imageUpload";
 import { HOME_PAGE_POSTS_LIMIT } from '../constants/DataLimit';
 import { MAX_POST_IMAGE_SIZE } from '../constants/ImageSize';
 import { useGlobalMessage } from '../hooks/useGlobalMessage';
-import { GET_FOLLOWED_POSTS} from  "../graphql/post"
+import { GET_POSTS} from  "../graphql/post"
 import {CREATE_POST} from "../graphql/post"
+import Alert from '@material-ui/lab/Alert';
 
 
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
@@ -70,17 +71,29 @@ const handleOnFocus = () =>{
 
  const values = { title, image, price, authorId: auth.user.id };
  const variables = {
-    userId: auth.user.id,
     skip: 0,
     limit: HOME_PAGE_POSTS_LIMIT,
   };
  const [createPost, {error, loading }] = useMutation(CREATE_POST,{
-   update(proxy, result){
-      const data = proxy.readQuery({
-        query:GET_FOLLOWED_POSTS,
+   update(proxy, {data}){
+    try{
+      const {getPosts} = proxy.readQuery({
+        query:GET_POSTS,
         variables
+      });
+    if(getPosts && getPosts !== null | undefined){
+      proxy.writeQuery({
+        query:GET_POSTS,
+        data:{
+           getPosts:{
+             posts:[...getPosts.posts, data.createPost ]
+           }
+        }
       })
-      console.log(data)
+ }
+    }catch(err){
+      throw new Error(err)
+    }
    },
     variables: values,
     onError(err){
@@ -144,7 +157,7 @@ const handlePriceChange = e => setPrice(e.target.value);
     )}
     { !errors && !loading && warning && <div className="warning" style={{marginBottom:20}}>
          <ul className="list">
-           {warning}
+           <Alert severity="success">{warning}</Alert>
          </ul>
       </div>}
   </>

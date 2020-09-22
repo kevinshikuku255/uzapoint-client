@@ -73,10 +73,12 @@ export const CREATE_POST = gql`
         $authorId: ID!
   ) {
     createPost(title:$title, price:$price, image:$image, authorId:$authorId) {
-        id
+      id
     }
   }
 `;
+
+
 
 /**
  * Gets all posts from followed users

@@ -61,7 +61,7 @@ const { posts} = data.getPosts
             <Grid.Row >
                <Transition.Group >
                { data && posts.map( post =>
-                  <Grid.Column key={post.id} style={{marginBottom:15}}  >
+                  <Grid.Column key={post.id} style={{marginBottom:10}}  >
                      <PostCard  post={post}/>
                   </Grid.Column>
                   )}

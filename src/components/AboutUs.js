@@ -25,7 +25,7 @@ const content =  <div>
                   <b>WindowShop is guided by basic principles:</b> <br/>
                    Passion for invention  and commitment for excellence.
                   <br/> <br/>
-                  The website was created and maintained to bring you closer to your cravings.  Here  display items for people to hit you up or Search for Items you love <br/><br/>
+                  The website was created and is maintained to bring you closer to your cravings.  Here  dispose items for people to hit you up or Search for Items you love <br/><br/>
                   <p>We are obsessed to bring the best.</p>
                 </div>
 
@@ -38,12 +38,12 @@ const panels = [
   {
     key: 2,
     title:"Constact us",
-    content: "For any Info, Advertising, Reports or Contributions on Quality of our service Call or WhatsApp: 0740253367  your support to us will be apreciated"
+    content: "For any Info, Advertising, Reports or Contributions on Quality of our service Call or WhatsApp: 0740253367zzy  your support to us will be apreciated"
   },
   {
     key: 3,
     title:" Disclaimer",
-    content: "We dont claim any direct responsibilty for content pushlished on our platform.       Users are warned to be careful on who the get into transuction with. Content on manupilation, intimidation and descrimination  are not allowed."
+    content: "We dont claim any direct responsibilty for content published on our platform.       Users are warned to be careful on who the get into transuction with. Content on manupilation, intimidation and descrimination  are not allowed."
   }
 ]
 

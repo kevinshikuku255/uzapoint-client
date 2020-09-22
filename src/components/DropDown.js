@@ -1,32 +1,33 @@
-import React from 'react'
-import { Dropdown } from 'semantic-ui-react'
-import {Link} from "react-router-dom"
+// import React from 'react'
+// import { Dropdown } from 'semantic-ui-react'
+// import {Link} from "react-router-dom"
 
-import SignOut from "./App/SignOut"
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+// import SignOut from "./App/SignOut"
+// import MoreVertIcon from '@material-ui/icons/MoreVert';
+// import InfoTwoToneIcon from '@material-ui/icons/InfoTwoTone';
 
 
 
-// TODO: This is missing functionality for sub-menu here from SUI core examples.
-// The "Publish To Web" item should contain a sub-menu.
+// // TODO: This is missing functionality for sub-menu here from SUI core examples.
+// // The "Publish To Web" item should contain a sub-menu.
 
-const DropdownDropdown = () => {
-return(
-  <Dropdown  placeholder={ <MoreVertIcon /> } className="Dropdown">
-    <Dropdown.Menu >
-      <Dropdown.Item  as={Link} to="/Me" >
-                Me
-       </Dropdown.Item>
-      <Dropdown.Item icon='home'text='Home' as ={Link} to= '/'  />
-      <Dropdown.Item icon='pencil alternate' text='create post' as ={Link} to= '/createPost' />
-      <SignOut />
-      <Dropdown.Item icon='question circle outline' text='About' as ={Link} to= '/about'  />
+// const DropdownDropdown = () => {
+// return(
+//   <Dropdown  placeholder={ <MoreVertIcon /> } className="Dropdown">
+//     <Dropdown.Menu >
+//       <Dropdown.Item  as={Link} to="/Me" >
+//                 Me
+//        </Dropdown.Item>
+//       <Dropdown.Item icon='home'text='Home' as ={Link} to= '/'  />
+//       <Dropdown.Item icon='pencil alternate' text='create post' as ={Link} to= '/createPost' />
+//       <SignOut />
+//       <Dropdown.Item icon='question circle outline' text='About' as ={Link} to= '/about'  />
 
-    </Dropdown.Menu>
-  </Dropdown>
-  )
-}
+//     </Dropdown.Menu>
+//   </Dropdown>
+//   )
+// }
 
-export default DropdownDropdown;
+// export default DropdownDropdown;
 
 

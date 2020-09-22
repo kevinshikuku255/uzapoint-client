@@ -1,85 +1,132 @@
-import React from 'react';
-import clsx from 'clsx';
+import React,{useState} from 'react';
+import {Link} from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
+import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import InfoTwoToneIcon from '@material-ui/icons/InfoTwoTone';
+import BorderColorTwoToneIcon from '@material-ui/icons/BorderColorTwoTone';
+import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
+import PhoneAndroidOutlinedIcon from '@material-ui/icons/PhoneAndroidOutlined';
+import Avatar from '@material-ui/core/Avatar';
+import { deepOrange} from '@material-ui/core/colors';
 
-const useStyles = makeStyles({
+import SignOut from "./App/SignOut"
+import logo from "./logo.png"
+
+
+
+const useStyles = makeStyles((theme) => ({
   list: {
-    width: 250,
+    width: 270,
   },
-  fullList: {
-    width: 'auto',
+  menuButton: {
+    marginRight: theme.spacing(2),
   },
-});
+  title: {
+    flexGrow: 1,
+  },
+  orange: {
+    color: theme.palette.getContrastText(deepOrange[500]),
+    backgroundColor: deepOrange[500],
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+  div:{
+    margin: theme.spacing(4,0,0,13),
+    textAlign:"centre"
+  }
+}));
 
-export default function SwipeableTemporaryDrawer() {
+
+
+
+
+
+
+
+
+
+export default function TemporaryDrawer() {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
+  const [state, setState] = useState({
     right: false,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
 
+
   const list = (anchor) => (
     <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
+      className={classes.list}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      onClick={toggleDrawer(anchor,false)}
+      onKeyDown={toggleDrawer(anchor,false)}
     >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+
+    <div className={classes.div}>
+       <Avatar alt="logo" src={logo} className={classes.orange}/>
+    </div>
+
+     <List>
+       <ListItem>
+         <ListItemIcon> <PersonOutlineTwoToneIcon /></ListItemIcon>
+       <Link to="/Me"><ListItemText primary="Me" /></Link>
+       </ListItem>
+       <ListItem>
+         <ListItemIcon> <BorderColorTwoToneIcon /></ListItemIcon>
+        <Link to='/createPost'><ListItemText primary="Create Post" /></Link>
+       </ListItem>
+     </List>
       <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+     <List>
+       <ListItem>
+         <ListItemIcon> <MailIcon /></ListItemIcon>
+        <a href="https://www.google.com/gmail/about/"> <ListItemText primary="kevinshikuku254@gmail.com" /> </a>
+       </ListItem>
+       <ListItem>
+         <ListItemIcon> <PhoneAndroidOutlinedIcon /></ListItemIcon>
+         <ListItemText primary="0740253367" />
+       </ListItem>
+       <ListItem>
+         <ListItemIcon> <InfoTwoToneIcon /></ListItemIcon>
+        <Link to="/about"><ListItemText primary="About us" /></Link>
+       </ListItem>
+       <Divider />
+       <ListItem>
+         <SignOut/>
+       </ListItem>
+     </List>
+
     </div>
   );
 
-
   return (
     <div>
-      {['left', 'right', 'top', 'bottom'].map((anchor) => (
+      {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <SwipeableDrawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}
-          >
+          <IconButton
+              onClick={toggleDrawer(anchor, true)}
+              edge="end" className={classes.menuButton}
+              color="inherit"
+              aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+
+          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
             {list(anchor)}
-          </SwipeableDrawer>
+          </Drawer>
         </React.Fragment>
       ))}
     </div>

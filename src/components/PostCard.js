@@ -25,7 +25,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles((theme) => ({
   card: {
     minWidth: 300,
-    maxWidth:518,
+    maxWidth:550,
     margin: theme.spacing(0,0,0,0),
   },
   media: {
@@ -61,7 +61,7 @@ const Postcard = ({post}) => {
 const extra = (
  <div className="extra">
 
- <List horizontal  relaxed='very'>
+ <List horizontal  relaxed>
 
    <ListItem>
       <LikeButton user={author} postId={id} likes={likes}/>
@@ -109,7 +109,6 @@ const extra = (
       </Link>
      <CardContent>
         { extra }
-
         <Accordion>
           <Accordion.Title
             active={activeIndex === 0}

@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
-import { Menu,Segment, Icon } from 'semantic-ui-react'
+import { Menu,Segment} from 'semantic-ui-react'
 import {Link} from "react-router-dom"
 
-
+import HomeIcon from '@material-ui/icons/Home';
 
 function LoggedOutMenu() {
  const pathName = window.location.pathname;
@@ -15,7 +15,28 @@ function LoggedOutMenu() {
   const title = titleString.split("/")[1]
 
 const menuBar = (
+  <>
+{ title === "about" ?
  <Segment inverted className="Menu">
+   <Menu inverted pointing secondary >
+           <Menu.Item
+            name='home'
+            active={activeItem === 'home'}
+            onClick={handleItemClick}
+            as ={Link}
+            to= '/'
+          ><HomeIcon/>
+          </Menu.Item>
+
+          <Menu.Item/>
+          <Menu.Item/>
+          <Menu.Item/>
+          <Menu.Item>
+             About us
+          </Menu.Item>
+   </Menu>
+ </Segment>
+: <Segment inverted className="Menu">
         <Menu inverted pointing secondary >
            <Menu.Item
             name='home'
@@ -23,13 +44,12 @@ const menuBar = (
             onClick={handleItemClick}
             as ={Link}
             to= '/'
-          ><Icon name="home"/></Menu.Item>
+          ><HomeIcon/></Menu.Item>
 
           <Menu.Item>
             {title === "" && "Explore Items" }
             {title === "login" && "Login" }
             {title === "register" && "Create Account" }
-            {title === "about" && "About us" }
           </Menu.Item>
 
           <Menu.Menu position='right' className="Menu_Menu">
@@ -50,7 +70,8 @@ const menuBar = (
             />
           </Menu.Menu>
         </Menu>
-      </Segment>
+  </Segment>}
+  </>
       )
 
     return menuBar;
