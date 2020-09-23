@@ -32,17 +32,17 @@ const content =  <div>
 const panels = [
   {
     key: 1,
-    title:" About us",
+    title:" ABOUT US",
     content: {content}
   },
   {
     key: 2,
-    title:"Constact us",
+    title:"CONTACT US",
     content: "For any Info, Advertising, Reports or Contributions on Quality of our service Call or WhatsApp: 0740253367  your support to us will be apreciated"
   },
   {
     key: 3,
-    title:" Disclaimer",
+    title:" DISCLAIMER",
     content: "We dont claim any direct responsibilty for content published on our platform.       Users are warned to be careful on who the get into transuction with. Content on manupilation, intimidation and descrimination  are not allowed."
   },
   {
