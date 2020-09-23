@@ -104,7 +104,7 @@ const extra = (
        <CardMedia
           className={classes.media}
           image={shoes}
-          title="Ted talk"
+          title="post"
         />
       </Link>
      <CardContent>

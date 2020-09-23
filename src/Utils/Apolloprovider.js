@@ -1,10 +1,11 @@
-import React from "react"
-import {} from 'dotenv/config';
+import dotenv from 'dotenv';
+import React from "react";
 import {ApolloProvider} from "@apollo/client"
 import { createApolloClient } from './apollo_client';
 import { StoreProvider } from '../store';
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/client';
-import App from "../App.js"
+import App from "../App.js";
+dotenv.config()
 
 // GraphQL HTTP URL
 const API_URL = process.env.REACT_APP_API_URL;
@@ -26,7 +27,6 @@ const apolloClient = createApolloClient(API_URL, WEBSOCKET_API_URL);
 
 
 export default(
-
    <ApolloProvider client = {apolloClient}>
      <ApolloHooksProvider client = {apolloClient}>
        <StoreProvider>

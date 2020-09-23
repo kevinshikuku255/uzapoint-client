@@ -38,12 +38,17 @@ const panels = [
   {
     key: 2,
     title:"Constact us",
-    content: "For any Info, Advertising, Reports or Contributions on Quality of our service Call or WhatsApp: 0740253367zzy  your support to us will be apreciated"
+    content: "For any Info, Advertising, Reports or Contributions on Quality of our service Call or WhatsApp: 0740253367  your support to us will be apreciated"
   },
   {
     key: 3,
     title:" Disclaimer",
     content: "We dont claim any direct responsibilty for content published on our platform.       Users are warned to be careful on who the get into transuction with. Content on manupilation, intimidation and descrimination  are not allowed."
+  },
+  {
+    key: 4,
+    title:" NOTICE",
+    content: "If you are intrested in what we are doing and want us to keep running, reach out and let us have a conversation on the same. Thank you."
   }
 ]
 

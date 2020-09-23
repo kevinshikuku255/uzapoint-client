@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "0.1.0",
+  "version": "0.1.15",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.1.4",
@@ -55,5 +55,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy":"https://uzapoint.herokuapp.com/"
 }
