@@ -13,18 +13,14 @@ import { useStore} from '../../store';
 import { CLEAR_AUTH_USER } from '../../store/auth';
 
 /**
- * Component that signs out the user
+ * Component that signsOut the user
  */
-const SignOut = ({client, history}) => {
-  console.log(client)
-  console.log(history)
+const SignOut = () => {
   const [, dispatch] = useStore();
-
+  
   const handleSignOut = () => {
     dispatch({ type: CLEAR_AUTH_USER });
     localStorage.removeItem("jwt");
-    client.resetStore();
-    history.push("/");
   };
 
 

@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
  *
  * lets existing user in
  */
-function SignIn({ history}) {
+function SignIn({history}) {
   const classes = useStyles();
   const [values, setValues] = useState({ phoneOrUsername: '', password: '' });
   const [errors, setErrors] = useState('');
@@ -77,9 +77,10 @@ const dispatchAction = (token) =>{
  * useMutation hook
  */
  let [signInUser,{ loading}] = useMutation(SIGN_IN, {
-  update(_, result){
-    localStorage.setItem('jwt', result.data.signin.token);
-    dispatchAction(result.data.signin.token)
+  update(_, {data}){
+    const token = data.signin.token
+    localStorage.setItem('jwt',token);
+    dispatchAction(token)
     history.push("/");
  },
  variables : values,

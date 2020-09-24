@@ -38,7 +38,7 @@ const panels = [
   {
     key: 2,
     title:"CONTACT US",
-    content: "For any Info, Advertising, Reports or Contributions on Quality of our service Call or WhatsApp: 0740253367  your support to us will be apreciated"
+    content: "For any Info, Advertising, Reports or Contributions on Quality of our service Call or WhatsApp: 0740253367 your support to us will be apreciated"
   },
   {
     key: 3,

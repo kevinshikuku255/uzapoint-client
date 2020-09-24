@@ -18,7 +18,7 @@ import UserSales from './UserSales';
   const  UserAbout = () =>{
 
   const {data, loading} = useQuery(GET_AUTH_USER,{
-    fetchPolicy:"cache-and-network"
+    fetchPolicy:"cache-first"
   });
 
   const [active, setActive] = useState({ activeItem: 'items'})

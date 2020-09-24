@@ -1,5 +1,5 @@
 import React,{useState} from "react"
-import {  Icon,Button,  List, ListItem} from "semantic-ui-react"
+import {  Icon,Button} from "semantic-ui-react"
 import { timeAgo } from '../Utils/date';
 import { Link } from "react-router-dom";
 import shoes from "./shoes.jpeg"
@@ -22,6 +22,7 @@ import Typography from '@material-ui/core/Typography';
 
 
 
+
 const useStyles = makeStyles((theme) => ({
   card: {
     minWidth: 300,
@@ -33,8 +34,24 @@ const useStyles = makeStyles((theme) => ({
   },
   paragraph:{
      margin: theme.spacing(2,1,0,1),
-    overflowWrap:"break-word"
-  }
+     overflowWrap:"break-word"
+  },
+  extra:{
+  marginTop: "-1rem",
+  display:"flex",
+},
+ul:{
+  listStyleType: "none",
+  margin: 0,
+  padding: 0,
+  overflow: "hidden",
+  textAlign:"centre"
+
+},
+li:{
+display: "inline",
+margin:"1rem"
+}
 }));
 
 
@@ -59,25 +76,24 @@ const Postcard = ({post}) => {
   }
 
 const extra = (
- <div className="extra">
-
- <List horizontal  relaxed>
-
-   <ListItem>
-      <LikeButton user={author} postId={id} likes={likes}/>
-   </ListItem>
-   <ListItem>
+  <>
+ <div className={classes.extra}>
+ <ul className={classes.ul}>
+     <li className={classes.li}>
+        <LikeButton user={author} postId={id} likes={likes}/>
+     </li>
+     <li className={classes.li}>
       <Button  as={Link} to={`/posts/${id}`} size="tiny" circular>
-            <Icon name="comment" />{comments.length}
+      <Icon name="comment" />{comments.length}
       </Button>
-   </ListItem>
-   <ListItem>
-         <b>{`Ksh. ${price}`}</b>
-   </ListItem>
-
- </List>
+     </li>
+   <li className={classes.li}>
+      <b>{`Ksh. ${price}`}</b>
+   </li>
+ </ul>
  </div>
-)
+</>
+);
 
    return(
   <>

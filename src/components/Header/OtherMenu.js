@@ -4,8 +4,30 @@ import {Link} from "react-router-dom"
 
 import HomeIcon from '@material-ui/icons/Home';
 
-function OtherMenu() {
 
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles((theme) => ({
+  i: {
+  color:"rgb(255, 192, 225)",
+  fontSize: "small",
+  }
+}));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function OtherMenu() {
+ const classes = useStyles();
  const pathName = window.location.pathname;
  const path = pathName === "/" ? "home" : pathName.substr(1)
 
@@ -30,9 +52,9 @@ const menuBar = (
            <HomeIcon/>
           </Menu.Item>
           <Menu.Item>
-            {title === "" && "Explore Items" }
-            {title === "createPost" && "Display an Item" }
-            {title === "serch" && "Search" }
+            {title === "" && <i className={classes.i}>Explore Items</i> }
+            {title === "createPost" && <i className={classes.i}>Display an Item</i> }
+            {title === "serch" && <i className={classes.i} >Search</i> }
           </Menu.Item>
         </Menu>
       </Segment>

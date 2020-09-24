@@ -17,7 +17,8 @@ import PhoneAndroidOutlinedIcon from '@material-ui/icons/PhoneAndroidOutlined';
 import Avatar from '@material-ui/core/Avatar';
 import { deepOrange} from '@material-ui/core/colors';
 
-import SignOut from "./App/SignOut"
+
+import SignOut from "../pages/Auth/SignOut"
 import logo from "./logo.png"
 
 
@@ -78,7 +79,6 @@ export default function TemporaryDrawer() {
     <div className={classes.div}>
        <Avatar alt="logo" src={logo} className={classes.orange}/>
     </div>
-
      <List>
        <ListItem>
          <ListItemIcon> <PersonOutlineTwoToneIcon /></ListItemIcon>

@@ -11,7 +11,7 @@ export const CLEAR_AUTH_USER = 'CLEAR_AUTH_USER';
  * Initial State
  */
 export const authInitialState = {
-  user: null,
+  user: "",
 };
 
 
