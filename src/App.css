@@ -23,8 +23,6 @@ body{
 }
 .Menu{
   font-weight: bolder !important;
-  padding: 0;
-  margin: 0;
   background-color: #080847 !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -265,28 +263,16 @@ background: inherit;
   grid-template-rows:repeat(5, 1fr);
 }
 .Me{
-  margin-top: 2.9rem !important;
+  margin-top: 3rem !important;
 }
 
 
-/* .......................................................*/
-.UserInfo{
-display: grid;
-grid-template-columns:  repeat(3, 1fr);
-justify-items: center;
-height: 1rem;
-margin-left:0.5rem ;
-justify-items:initial;
-}
-.DpInfo{
-  z-index: 2;
-}
 
-.UserMeta{
-  display: grid;
-  grid-template-columns:repeat(2, 1fr) ;
-}
-@media only screen and (max-width:600px) {
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
   .gridd {
     width: 100vw;
   }
@@ -296,7 +282,9 @@ justify-items:initial;
   margin-top: 4rem !important;
  }
 }
-@media only screen and (min-width:600px) {
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
   .gridd {
     width: 100vw;
   }
@@ -308,16 +296,20 @@ justify-items:initial;
  }
 }
 
-@media only screen and (min-width:768px) {
-  .gridd {
-    width: 60vw;
-  }
+
+
+
+
+
+
+
+
+/* .......................................................*/
+.DpInfo{
+  z-index: 2;
 }
-@media only screen and (min-width:992px) {
-  .gridd {
-    width: 40vw;
-  }
-}
+
+
 .gridd > * {
   padding: 2px;
   margin-top: 2px;
@@ -353,3 +345,70 @@ background-color: rgb(8, 8, 71) !important;
   color: blue;
 }
 
+/* user profile styling*/
+.flexContainer{
+  display: flex;
+  flex-direction:column;
+}
+
+.flexContainer > div {
+  margin-bottom: 10px;
+}
+
+.UserInfo{
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+}
+
+.UserInfo > div {
+  margin: auto;
+  text-align: center;
+}
+
+
+.UserMeta{
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+}
+
+.UserMeta > div {
+  margin: auto;
+  text-align: center;
+}
+
+.cliker{
+  background-color: #73739e4d;
+}
+
+
+/** Media queries*/
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .flexContainer{
+     width: 100vw;
+}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 600px) {
+  .flexContainer{
+     width: 80vw;
+}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .flexContainer{
+     width: 768px;
+}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .flexContainer{
+     width: 768px;
+}
+}

@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paragraph:{
      margin: theme.spacing(2,1,0,1),
-    overflowWrap:"break-word"
+     overflowWrap:"break-word"
   }
 }));
 

@@ -16,16 +16,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-
-
-
-
-
-
-
-
-
-
 function OtherMenu() {
  const classes = useStyles();
  const pathName = window.location.pathname;

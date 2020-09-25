@@ -1,13 +1,29 @@
-import React,{useState} from 'react'
-import {useQuery} from "@apollo/client"
-import { Rating,Grid, GridColumn,Image,Icon,Menu } from 'semantic-ui-react'
-import SkeletonPost from '../../components/Skeleton';
+import React from 'react'
+import { Icon,Button } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
 
 
+import {makeStyles} from "@material-ui/core"
 import { currentDate } from '../../Utils/date';
-import {GET_USER_POSTS} from "../../graphql/user";
-import UserPosts from "./UserPosts";
 import images from "../shoes.jpeg";
+
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import Badge from '@material-ui/core/Badge';
+
+
+const useStyles = makeStyles((theme) => ({
+  card: {
+    minWidth: 300,
+    maxWidth:550,
+  },
+  media: {
+    height: 190,
+  },
+
+}));
+
+
 
 
 /**
@@ -15,81 +31,61 @@ import images from "../shoes.jpeg";
  * About user...
  */
   const  UserAbout = ({user}) =>{
-  const username = user.username;
-  const joinedDate = currentDate(user.createdAt).split(" ")
-  const variables = { username, skip: 0 };
-  const {data, loading} = useQuery(GET_USER_POSTS,{variables});
-
-
- const [active, setActive] = useState({ activeItem: 'items'})
- const  handleItemClick = (e, { name }) => setActive({ activeItem: name })
- const { activeItem } =active
-
-
- if(loading){
-   return(
-    <SkeletonPost/>
-   )
- }
-
-
- const {posts} = data.getUserPosts;
+    console.log(user)
+  const   classes = useStyles();
+  const {
+        username,
+        createdAt, posts,
+        phone, isOnline,
+        followers } = user;
+const joinedDate = currentDate(createdAt).split(" ")
  return (
   <>
- <Grid>
-    <GridColumn mobile={16} tablet={10} computer={7}>
-      <Image src={images} fluid/>
-    </GridColumn>
- </Grid>
-
-
-  <div className="gridd">
+  <div className="flexContainer">
+    <div>
+        <Card >
+              <CardMedia
+                className={classes.media}
+                image={images}
+                title="DpInfo"
+              />
+        </Card>
+    </div>
     <div className="UserInfo">
        <div className="DpInfo">
-         <b>{user.username}</b>
+            {isOnline &&
+              <Badge badgeContent={"online"} color="secondary">
+                <b>{username}</b>
+              </Badge>
+            }
+              { !isOnline &&
+                <i>{username}</i>
+              }
        </div>
        <div>
-         <button>Follow+</button>
+         <Button icon circular content={`Follow ${followers.length}`} as={Link}/>
        </div>
        <div>
-         <Icon name="bell"/>
+           <Button icon circular content={`Items ${posts.length}`} />
        </div>
      </div>
 
-    <div>  <p>User Bio information: </p> </div>
-    <div>{<Rating icon='heart' defaultRating={1} maxRating={3} />} </div>
-    <div> <p>{`Phone: ${user.phone} `}</p> </div>
     <div className="UserMeta">
-        <div>
-          <Icon name="cloud"/>{"Nairobi,Ke"}
-        </div>
+        <div> <Icon  name="phone"/> <b>{phone}</b> </div>
         <div>
          <Icon  name="calendar"/>{`Joined ${joinedDate[0]}, ${joinedDate[2]} `}
         </div>
     </div>
-    <div>
-        <Menu pointing secondary>
-          <Menu.Item
-            name='items'
-            active={activeItem === 'items'}
-            onClick={handleItemClick}
-          />
-          <Menu.Item
-            name='messages'
-            active={activeItem === 'messages'}
-            onClick={handleItemClick}
-          />
-          <Menu.Item
-            name='sales'
-            active={activeItem === 'sales'}
-            onClick={handleItemClick}
-          />
+    <div className="cliker">
+      cLicker
+    </div>
+    <div className="cliker">
+      cLicker
+    </div>
+    <div className="cliker">
+      cLicker
+    </div>
 
-        </Menu>
-    </div>
-    <div>
-      <UserPosts posts={posts}/>
-    </div>
 </div>
 </>
  )

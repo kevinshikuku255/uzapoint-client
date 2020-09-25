@@ -39,9 +39,8 @@ const menuBar = (
             as ={Link}
             to= '/'
           ><HomeIcon/>
+          
           </Menu.Item>
-
-          <Menu.Item/>
           <Menu.Item/>
           <Menu.Item/>
           <Menu.Item >

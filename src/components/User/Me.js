@@ -1,7 +1,8 @@
 import React,{useState} from 'react'
 import {useQuery} from "@apollo/client"
 import { Rating,Grid, GridColumn,Icon,Menu } from 'semantic-ui-react'
-import SkeletonPost from '../../components/Skeleton';
+import SkeletonPost from '../../components/SinglePostSkeleton';
+import { makeStyles } from '@material-ui/core/styles';
 
 
 import Dp from "../Dp"
@@ -11,12 +12,30 @@ import UserPosts from "./UserPosts";
 import UserSales from './UserSales';
 
 
+
+
+const useStyles = makeStyles((theme) => ({
+  skeleton: {
+    margin: theme.spacing(0.5,0,0,0),
+  }
+
+}));
+
+
+
+
+
+
+
+
+
+
 /**
  *
  * About auth user...
  */
   const  UserAbout = () =>{
-
+  const classes = useStyles();
   const {data, loading} = useQuery(GET_AUTH_USER,{
     fetchPolicy:"cache-first"
   });
@@ -29,7 +48,7 @@ import UserSales from './UserSales';
  if(loading){
    return(
 
-  <Grid className="Me">
+  <Grid className={classes.skeleton}>
     <GridColumn mobile={16} tablet={10} computer={7}>
          <SkeletonPost/>
     </GridColumn>
