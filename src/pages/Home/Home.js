@@ -24,6 +24,9 @@ const Home = () =>{
 if(loading){
    return <SkeletonPost/>
 }
+if(!loading && !data){
+   return <SkeletonPost/>
+}
 
  return (
     <Grid className={ auth.user ? "HomeGrid" : "HomeGridd"} inverted>
