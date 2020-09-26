@@ -2,9 +2,9 @@
  * Data limit constants for infinite scroll
  */
 
-export const HOME_PAGE_POSTS_LIMIT = 15;
+export const HOME_PAGE_POSTS_LIMIT = 200;
 
-export const EXPLORE_PAGE_POSTS_LIMIT = 15;
+export const EXPLORE_PAGE_POSTS_LIMIT = 200;
 
 export const PEOPLE_PAGE_USERS_LIMIT = 15;
 

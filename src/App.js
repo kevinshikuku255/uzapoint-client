@@ -14,6 +14,7 @@ import SerchBox from "../src/components/SerchBox"
 import Profile from "./pages/Profile/Profile"
 import AboutUs from "./components/AboutUs"
 import Me from "./components/User/Me"
+import UserPosts from "./components/User/UserPosts"
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
                 <Route exact path="/profile/:id" component={Profile}/>
                 <Route exact path="/me" component={Me}/>
                 <Route exact path="/about" component={AboutUs}/>
+                <Route exact path="/userPosts/:username" component={UserPosts}/>
             </Switch>
             </div>
           </Router>

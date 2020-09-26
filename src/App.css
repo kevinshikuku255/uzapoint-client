@@ -225,7 +225,7 @@ background: inherit;
   background-color: rgb(255, 0, 191);
 }
 
-  .MuiPaper-elevation1{
+.MuiPaper-elevation1{
    box-shadow: none !important
   }
 
@@ -265,38 +265,6 @@ background: inherit;
 .Me{
   margin-top: 3rem !important;
 }
-
-
-
-
-
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  .gridd {
-    width: 100vw;
-  }
-  #postForm{
-  width: 90%;
-  margin: auto;
-  margin-top: 4rem !important;
- }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  .gridd {
-    width: 100vw;
-  }
-  .ui.error.message{
-  width:50vw;
-  }
-  #postForm{
-  width: 50%;
- }
-}
-
-
 
 
 
@@ -387,28 +355,46 @@ background-color: rgb(8, 8, 71) !important;
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .flexContainer{
-     width: 100vw;
-}
+      .flexContainer{
+        width: 100vw;
+    }
+
+      .gridd {
+        width: 100vw;
+      }
+      #postForm{
+      width: 90%;
+      margin: auto;
+      margin-top: 4rem !important;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 600px) {
-  .flexContainer{
-     width: 80vw;
-}
+      .flexContainer{
+        width: 80vw;
+      }
+      .gridd {
+        width: 100vw;
+      }
+      .ui.error.message{
+      width:50vw;
+      }
+      #postForm{
+      width: 50%;
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .flexContainer{
      width: 768px;
-}
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .flexContainer{
      width: 768px;
-}
+  }
 }

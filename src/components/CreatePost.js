@@ -117,7 +117,7 @@ const handlePriceChange = e => setPrice(e.target.value);
   return(
   <>
     <Form onSubmit={ handleSubmit } id="postForm" className={loading ? "loading": ""} >
-       <Form.Field className="FormFiled">
+       <Form.Field >
          <TextareaAutosize
             aria-label="minimum height"
             placeholder="Describe your item"

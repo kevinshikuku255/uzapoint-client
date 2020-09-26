@@ -23,15 +23,11 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-
-
-
 /**
  *
  * About user...
  */
   const  UserAbout = ({user}) =>{
-    console.log(user)
   const   classes = useStyles();
   const {
         username,
@@ -63,10 +59,10 @@ const joinedDate = currentDate(createdAt).split(" ")
               }
        </div>
        <div>
-         <Button icon circular content={`Follow ${followers.length}`} as={Link}/>
+         <Button icon circular content={`Follow ${followers.length}`} />
        </div>
        <div>
-           <Button icon circular content={`Items ${posts.length}`} />
+           <Button icon circular content={`Items ${posts.length}`} as={Link} to={`/userPosts/${username}`} />
        </div>
      </div>
 
@@ -76,16 +72,6 @@ const joinedDate = currentDate(createdAt).split(" ")
          <Icon  name="calendar"/>{`Joined ${joinedDate[0]}, ${joinedDate[2]} `}
         </div>
     </div>
-    <div className="cliker">
-      cLicker
-    </div>
-    <div className="cliker">
-      cLicker
-    </div>
-    <div className="cliker">
-      cLicker
-    </div>
-
 </div>
 </>
  )

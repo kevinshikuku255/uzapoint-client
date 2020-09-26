@@ -3,6 +3,7 @@ import {useQuery}  from '@apollo/client'
 import {Grid, Transition,  GridColumn } from "semantic-ui-react"
 
 
+
 import {GET_POSTS} from "../../graphql/post"
 import { useStore } from '../../store';
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
@@ -24,10 +25,15 @@ const Home = () =>{
 if(loading){
    return <SkeletonPost/>
 }
-if(!loading && !data){
-   return <SkeletonPost/>
-}
 
+
+if(!data && !loading ){
+   return(
+      <>
+      <SkeletonPost/>
+      </>
+   )
+}
  return (
     <Grid className={ auth.user ? "HomeGrid" : "HomeGridd"} inverted>
         <GridColumn mobile={16} tablet={10} computer={8} className="HomeGridColumn">

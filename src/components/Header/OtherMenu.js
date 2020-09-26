@@ -45,6 +45,7 @@ const menuBar = (
             {title === "" && <i className={classes.i}>Explore Items</i> }
             {title === "createPost" && <i className={classes.i}>Display an Item</i> }
             {title === "serch" && <i className={classes.i} >Search</i> }
+            {title === "about" && <i className={classes.i} >About us</i> }
           </Menu.Item>
         </Menu>
       </Segment>

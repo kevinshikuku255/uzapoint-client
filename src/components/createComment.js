@@ -16,7 +16,6 @@ function SinglePost({comments, match}){
   const [{auth}] = useStore()
   const user = auth.user
   const commentInputRef = useRef(null)
- console.log(comments)
   const [comment, setComment]= useState('');
   const variables = {
       postId,

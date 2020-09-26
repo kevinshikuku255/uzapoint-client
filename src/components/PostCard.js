@@ -6,6 +6,9 @@ import shoes from "./shoes.jpeg"
 import images from "./images.jpeg"
 import  LikeButton  from './LikeButton';
 
+
+
+
 import {Accordion} from 'semantic-ui-react'
 
 
@@ -18,6 +21,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Typography from '@material-ui/core/Typography';
+
 
 
 
@@ -37,21 +41,23 @@ const useStyles = makeStyles((theme) => ({
      overflowWrap:"break-word"
   },
   extra:{
-  marginTop: "-1rem",
   display:"flex",
 },
-ul:{
-  listStyleType: "none",
-  margin: 0,
-  padding: 0,
-  overflow: "hidden",
-  textAlign:"centre"
+  ul:{
+    listStyleType: "none",
+    margin: 0,
+    padding: 0,
+    overflow: "hidden",
+    textAlign:"centre"
 
-},
-li:{
-display: "inline",
-margin:"1rem"
-}
+  },
+  li:{
+  display: "inline",
+  margin:"1rem"
+  },
+ acordion:{
+   marginTop: "-1rem",
+ }
 }));
 
 
@@ -116,16 +122,16 @@ const extra = (
             }
         subheader={timeAgo(createdAt)}
       />
-      <Link to={`/posts/${id}`}>
-       <CardMedia
-          className={classes.media}
-          image={shoes}
-          title="post"
-        />
-      </Link>
+
+          <Link to={`/posts/${id}`}>
+          <CardMedia
+              className={classes.media}
+              image={shoes}
+              title="post"
+            />
+          </Link>
      <CardContent>
-        { extra }
-        <Accordion>
+        <Accordion className={classes.acordion}>
           <Accordion.Title
             active={activeIndex === 0}
             index={0}
@@ -141,6 +147,7 @@ const extra = (
             </Typography>
           </Accordion.Content>
           </Accordion>
+          { extra }
           <hr/>
       </CardContent>
 </Card>
