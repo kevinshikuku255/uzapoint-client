@@ -8,8 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Dp from "../Dp"
 import { currentDate } from '../../Utils/date';
 import {GET_AUTH_USER} from "../../graphql/user";
-import UserPosts from "./UserPosts";
-import UserSales from './UserSales';
+// import UserPosts from "./UserPosts";
+// import UserSales from './UserSales';
 
 
 
@@ -113,10 +113,10 @@ const joinedDate = currentDate(createdAt).split(" ")
           />
         </Menu>
     </div>
-    <div>
+    {/* <div>
       { activeItem === "items" ? <UserPosts posts={posts}/>
          : activeItem === "sales" ?  <UserSales/> : " " }
-    </div>
+    </div> */}
 </div>
 </div>
  )

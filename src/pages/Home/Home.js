@@ -22,9 +22,21 @@ const Home = () =>{
  const { data,loading} = useQuery(GET_POSTS,{
     variables,
     });
+
 if(loading){
    return <SkeletonPost/>
 }
+
+
+
+if( !loading && !data){
+   return(
+      <>
+      <SkeletonPost/>
+      </>
+   )
+}
+
 
 
 if(!data && !loading ){
