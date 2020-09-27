@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Button, Form } from "semantic-ui-react"
 import {useMutation} from '@apollo/client'
 import {Link} from "react-router-dom"
+import jwtDecode  from 'jwt-decode'
 
 
 import { SIGN_IN } from '../../graphql/user';
@@ -80,7 +81,8 @@ const dispatchAction = (token) =>{
   update(_, {data}){
     const token = data.signin.token
     localStorage.setItem('jwt',token);
-    dispatchAction(token)
+    const decodedToken = jwtDecode(token);
+    dispatchAction(decodedToken)
     history.push("/");
  },
  variables : values,

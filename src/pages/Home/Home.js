@@ -12,8 +12,10 @@ import SkeletonPost from "../../components/Skeleton"
 import PostCard from "../../components/PostCard";
 
 
+
 const Home = () =>{
-  const [{auth}] = useStore()
+  const [{auth}] = useStore();
+  console.log(auth)
   const variables = {
     skip: 0,
     limit: HOME_PAGE_POSTS_LIMIT,
@@ -22,21 +24,9 @@ const Home = () =>{
  const { data,loading} = useQuery(GET_POSTS,{
     variables,
     });
-
 if(loading){
    return <SkeletonPost/>
 }
-
-
-
-if( !loading && !data){
-   return(
-      <>
-      <SkeletonPost/>
-      </>
-   )
-}
-
 
 
 if(!data && !loading ){
@@ -48,6 +38,16 @@ if(!data && !loading ){
 }
  return (
     <Grid className={ auth.user ? "HomeGrid" : "HomeGridd"} inverted>
+    <div style={
+       {color:"red",
+        position:"absolute",
+        top:"0",
+        left:"5vw",
+        marginTop:"0.2rem",
+        zIndex:"12", }
+       }>
+         <h3>{auth.user.username}</h3>
+       </div>
         <GridColumn mobile={16} tablet={10} computer={8} className="HomeGridColumn">
             <Grid.Row >
                <Transition.Group >

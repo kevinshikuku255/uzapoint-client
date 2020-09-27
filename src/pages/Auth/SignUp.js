@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Button, Form,  } from "semantic-ui-react"
 import {useMutation} from '@apollo/client'
 import {Link} from "react-router-dom"
+import jwtDecode  from 'jwt-decode'
 
 import { SET_AUTH_USER } from '../../store/auth';
 import { useStore } from '../../store';
@@ -75,8 +76,9 @@ const dispatchAction = (token) =>{
  let [signUpUser,{ loading}] = useMutation(SIGN_UP,{
   update(_, result){
     const token = result.data.signup.token;
+    const decodedToken = jwtDecode(token);
     localStorage.setItem('jwt',token);
-    dispatchAction(token)
+    dispatchAction(decodedToken)
     history.push("/");
  },
  variables : values,

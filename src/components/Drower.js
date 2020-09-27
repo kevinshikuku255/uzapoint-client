@@ -9,6 +9,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import InfoTwoToneIcon from '@material-ui/icons/InfoTwoTone';
 import BorderColorTwoToneIcon from '@material-ui/icons/BorderColorTwoTone';
@@ -42,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
   div:{
     margin: theme.spacing(4,0,0,13),
     textAlign:"centre"
+  },
+  signOut:{
+    color:"blue"
   }
 }));
 
@@ -105,7 +109,9 @@ export default function TemporaryDrawer() {
        </ListItem>
        <Divider />
        <ListItem>
-         <SignOut/>
+            <Button>
+                <SignOut className={classes.signOut} />
+            </Button>
        </ListItem>
      </List>
 

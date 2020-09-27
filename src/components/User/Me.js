@@ -3,13 +3,12 @@ import {useQuery} from "@apollo/client"
 import { Rating,Grid, GridColumn,Icon,Menu } from 'semantic-ui-react'
 import SkeletonPost from '../../components/SinglePostSkeleton';
 import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
+import shoes from "../shoes.jpeg"
+import UserSales from "./UserSales"
 
-
-import Dp from "../Dp"
 import { currentDate } from '../../Utils/date';
 import {GET_AUTH_USER} from "../../graphql/user";
-// import UserPosts from "./UserPosts";
-// import UserSales from './UserSales';
 
 
 
@@ -56,14 +55,14 @@ const useStyles = makeStyles((theme) => ({
    )
  }
 
- const { phone,  username, posts, followers, createdAt} = data.getAuthUser;
+ const { phone,  username,followers, createdAt} = data.getAuthUser;
 
 const joinedDate = currentDate(createdAt).split(" ")
  return (
   <div>
  <Grid className="Me">
     <GridColumn mobile={16} tablet={10} computer={7}>
-      <Dp/>
+     <Avatar  alt="logo" src={shoes} />
     </GridColumn>
  </Grid>
 
@@ -113,10 +112,10 @@ const joinedDate = currentDate(createdAt).split(" ")
           />
         </Menu>
     </div>
-    {/* <div>
-      { activeItem === "items" ? <UserPosts posts={posts}/>
+    <div>
+      { activeItem === "items" ? <b>This feature will be added soon</b>
          : activeItem === "sales" ?  <UserSales/> : " " }
-    </div> */}
+    </div>
 </div>
 </div>
  )

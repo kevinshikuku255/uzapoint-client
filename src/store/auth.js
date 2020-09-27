@@ -38,7 +38,7 @@ export const authReducer = (state = authInitialState, action) => {
     case CLEAR_AUTH_USER: {
       return{
         ...state,
-        ...authInitialState,
+        user:"",
       };
     }
 

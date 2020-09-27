@@ -10,6 +10,7 @@ import  LikeButton  from './LikeButton';
 
 
 import {Accordion} from 'semantic-ui-react'
+import { Profile } from '../store/routes'
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -106,7 +107,7 @@ const extra = (
 <Card className={classes.card}>
          <CardHeader
          avatar={
-          <Link to={`profile/${author.id}`}>
+          <Link to={`profile/${author.id}`} onMouseOver={Profile.load}>
               <Avatar  alt="post" src={images} />
           </Link>  }
          action={

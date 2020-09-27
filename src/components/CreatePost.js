@@ -8,7 +8,6 @@ import { useStore } from '../store';
 import PostImageUpload from "./post_imageUpload";
 import { HOME_PAGE_POSTS_LIMIT } from '../constants/DataLimit';
 import { MAX_POST_IMAGE_SIZE } from '../constants/ImageSize';
-import { useGlobalMessage } from '../hooks/useGlobalMessage';
 import { GET_POSTS} from  "../graphql/post"
 import {CREATE_POST} from "../graphql/post"
 import Alert from '@material-ui/lab/Alert';
@@ -33,7 +32,7 @@ function PostForm(){
   const [isFocused, setIsFocused] = useState(false);
   const [errors, setErrors] = useState('');
   const [warning, setWarning] = useState('');
-  const message = useGlobalMessage();
+
 
 
  const handleReset = () => {
@@ -57,11 +56,9 @@ const handleOnFocus = () =>{
     if (!file) return;
 
     if (file.size >= MAX_POST_IMAGE_SIZE) {
-      message.error(
-        `File size should be less then ${MAX_POST_IMAGE_SIZE / 1000000}MB`
-      );
-      return;
+         throw new Error( `File size should be less then ${MAX_POST_IMAGE_SIZE / 1000000}MB`)
     }
+    
     setImage(file);
     e.target.value = null;
   };
