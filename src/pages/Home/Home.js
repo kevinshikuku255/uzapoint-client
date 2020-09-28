@@ -15,7 +15,6 @@ import PostCard from "../../components/PostCard";
 
 const Home = () =>{
   const [{auth}] = useStore();
-  console.log(auth)
   const variables = {
     skip: 0,
     limit: HOME_PAGE_POSTS_LIMIT,
