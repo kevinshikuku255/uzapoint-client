@@ -12,19 +12,12 @@ import {GET_AUTH_USER} from "../../graphql/user";
 
 
 
-
 const useStyles = makeStyles((theme) => ({
   skeleton: {
-    margin: theme.spacing(0.5,0,0,0),
+    margin: theme.spacing(6.5,0,0,0),
   }
 
 }));
-
-
-
-
-
-
 
 
 
@@ -44,18 +37,15 @@ const useStyles = makeStyles((theme) => ({
   const { activeItem } =active
 
 
- if(loading){
+ if(loading ){
    return(
-
-  <Grid className={classes.skeleton}>
-    <GridColumn mobile={16} tablet={10} computer={7}>
-         <SkeletonPost/>
-    </GridColumn>
- </Grid>
+    <div className={classes.skeleton}>
+      <SkeletonPost/>
+    </div>
    )
  }
 
- const { phone,  username,followers, createdAt} = data.getAuthUser;
+ const { phone,  username, followers, createdAt} = data.getAuthUser;
 
 const joinedDate = currentDate(createdAt).split(" ")
  return (

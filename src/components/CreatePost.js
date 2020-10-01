@@ -6,9 +6,7 @@ import {useMutation} from "@apollo/client"
 
 import { useStore } from '../store';
 import PostImageUpload from "./post_imageUpload";
-import { HOME_PAGE_POSTS_LIMIT } from '../constants/DataLimit';
 import { MAX_POST_IMAGE_SIZE } from '../constants/ImageSize';
-import { GET_POSTS} from  "../graphql/post"
 import {CREATE_POST} from "../graphql/post"
 import Alert from '@material-ui/lab/Alert';
 
@@ -48,7 +46,6 @@ const handleOnFocus = () =>{
 
 
 /**
- *
  * handles post image upload !
  */
  const handlePostImageUpload = e => {
@@ -58,7 +55,7 @@ const handleOnFocus = () =>{
     if (file.size >= MAX_POST_IMAGE_SIZE) {
          throw new Error( `File size should be less then ${MAX_POST_IMAGE_SIZE / 1000000}MB`)
     }
-    
+
     setImage(file);
     e.target.value = null;
   };
@@ -67,31 +64,7 @@ const handleOnFocus = () =>{
 
 
  const values = { title, image, price, authorId: auth.user.id };
- const variables = {
-    skip: 0,
-    limit: HOME_PAGE_POSTS_LIMIT,
-  };
  const [createPost, {error, loading }] = useMutation(CREATE_POST,{
-   update(proxy, {data}){
-    try{
-      const {getPosts} = proxy.readQuery({
-        query:GET_POSTS,
-        variables
-      });
-    if(getPosts && getPosts !== null | undefined){
-      proxy.writeQuery({
-        query:GET_POSTS,
-        data:{
-           getPosts:{
-             posts:[...getPosts.posts, data.createPost ]
-           }
-        }
-      })
- }
-    }catch(err){
-      throw new Error(err)
-    }
-   },
     variables: values,
     onError(err){
     setErrors(err)
@@ -106,11 +79,12 @@ const handlePriceChange = e => setPrice(e.target.value);
      e.preventDefault();
      createPost();
      handleReset();
-     setWarning("Sent sucessfully...")
+     setWarning("Sent sucessfully refresh home page to see the post.")
 
   };
 
   const isShareDisabled = loading || (!loading && !image && !title);
+  console.log(image)
   return(
   <>
     <Form onSubmit={ handleSubmit } id="postForm" className={loading ? "loading": ""} >

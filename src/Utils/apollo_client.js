@@ -99,7 +99,6 @@ const wsLink = new WebSocketLink({
   });
 
   // Temporary fix for early websocket closure resulting in websocket connections not being instantiated
-  // https://github.com/apollographql/subscriptions-transport-ws/issues/377
   wsLink.subscriptionClient.maxConnectTimeGenerator.duration = () =>
     wsLink.subscriptionClient.maxConnectTimeGenerator.max;
 

@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 /**
  * Component for uploading post image
  */
-const PostImageUpload = ({ handleChange, label }) => {
+const PostImageUpload = ({ handleChange }) => {
     const classes = useStyles();
 
   return(

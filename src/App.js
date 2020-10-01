@@ -5,6 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 import * as Routes from "./store/routes"
 
 
+
 const AuthRoute = lazy(() => import("./Utils/authRoute"));
 const SignIn = lazy(() => import("./pages/Auth/SignIn"));
 const SignUp = lazy(() => import("./pages/Auth/SignUp"));
@@ -33,6 +34,7 @@ function App() {
                                             alignItems: "center",
                                             backgroundColor:"rgb(225, 34, 193)"
                                             }}>
+
                          <h3> Loading...</h3>
                       </div>}>
                   <div className=" ui container">

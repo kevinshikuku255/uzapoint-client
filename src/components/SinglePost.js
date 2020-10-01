@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
   paragraph:{
      margin: theme.spacing(2,1,0,1),
      overflowWrap:"break-word"
+  },
+    skeleton: {
+    margin: theme.spacing(6.5,0,0,0),
   }
 }));
 
@@ -53,11 +56,20 @@ function SinglePost({history, match}){
   }
 
    if (loading) {
-     return <SkeletonPost/>
+     return(
+       <div className={classes.skeleton}>
+         <SkeletonPost/>
+       </div>
+
+     )
    }
 
    if (!loading && !data) {
-     return <SkeletonPost/>
+     return (
+        <div className={classes.skeleton}>
+           <SkeletonPost/>
+        </div>
+     )
    }
    if (error) {
      return <div>Error!</div>;

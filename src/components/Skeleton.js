@@ -5,16 +5,19 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Skeleton from '@material-ui/lab/Skeleton';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    minWidth: 300,
     maxWidth:518,
-    margin: theme.spacing(10,0,0,0),
+    margin: theme.spacing(-1,0,0,0),
   },
   media: {
     height: 190,
   },
+  progress:{
+    width:"100vw"
+  }
 }));
 
 
@@ -64,13 +67,16 @@ Media.propTypes = {
  */
 export default function SkeletonPost() {
   return (
-    <div>
+    <div >
+      <LinearProgress/>
       <Media loading />
       <Media loading />
       <Media loading />
       <Media loading />
       <Media loading />
       <Media loading />
+
+
     </div>
   );
 }

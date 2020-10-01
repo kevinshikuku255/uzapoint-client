@@ -1,19 +1,26 @@
 import React from 'react'
 import {useQuery}  from '@apollo/client'
-import {Grid, Transition,  GridColumn } from "semantic-ui-react"
+import {Grid, Transition,  GridColumn } from "semantic-ui-react";
+import { makeStyles } from '@material-ui/core/styles';
 
 
 
-import {GET_POSTS} from "../../graphql/post"
+import {GET_POSTS} from "../../graphql/post";
 import { useStore } from '../../store';
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
-import SkeletonPost from "../../components/Skeleton"
-
+import SkeletonPost from "../../components/Skeleton";
 import PostCard from "../../components/PostCard";
 
 
 
+const useStyles = makeStyles((theme) => ({
+  skeleton: {
+    margin: theme.spacing(10,0,0,0),
+  }
+}));
+
 const Home = () =>{
+  const classes = useStyles();
   const [{auth}] = useStore();
   const variables = {
     skip: 0,
@@ -23,16 +30,21 @@ const Home = () =>{
  const { data,loading} = useQuery(GET_POSTS,{
     variables,
     });
+
 if(loading){
-   return <SkeletonPost/>
+   return (
+      <div className={classes.skeleton}>
+         <SkeletonPost />
+      </div>
+   )
 }
 
 
 if(!data && !loading ){
    return(
-      <>
-      <SkeletonPost/>
-      </>
+      <div className={classes.skeleton}>
+         <SkeletonPost />
+      </div>
    )
 }
  return (
