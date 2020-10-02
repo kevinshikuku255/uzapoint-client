@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   orange: {
-    color: theme.palette.getContrastText(deepOrange[500]),
+    color: theme.palette.getContrastText(deepOrange[50]),
     backgroundColor: deepOrange[500],
     width: theme.spacing(7),
     height: theme.spacing(7),

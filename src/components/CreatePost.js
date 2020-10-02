@@ -7,7 +7,7 @@ import {useMutation} from "@apollo/client"
 import { useStore } from '../store';
 import PostImageUpload from "./post_imageUpload";
 import { MAX_POST_IMAGE_SIZE } from '../constants/ImageSize';
-import {CREATE_POST} from "../graphql/post"
+import {CREATE_POST, GET_POSTS} from "../graphql/post"
 import Alert from '@material-ui/lab/Alert';
 
 
@@ -67,8 +67,9 @@ const handleOnFocus = () =>{
  const [createPost, {error, loading }] = useMutation(CREATE_POST,{
     variables: values,
     onError(err){
-    setErrors(err)
-    }
+      setErrors(err)
+    },
+    refetchQueries:[{query:GET_POSTS}]
 });
 
 
@@ -84,7 +85,6 @@ const handlePriceChange = e => setPrice(e.target.value);
   };
 
   const isShareDisabled = loading || (!loading && !image && !title);
-  console.log(image)
   return(
   <>
     <Form onSubmit={ handleSubmit } id="postForm" className={loading ? "loading": ""} >

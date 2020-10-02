@@ -47,17 +47,18 @@ if(!data && !loading ){
       </div>
    )
 }
+console.log(data)
  return (
     <Grid className={ auth.user ? "HomeGrid" : "HomeGridd"} inverted>
     <div style={
-       {color:"red",
+       {color:"black",
         position:"absolute",
         top:"0",
         left:"5vw",
         marginTop:"0.2rem",
         zIndex:"12", }
        }>
-         <h3>{auth.user.username}</h3>
+         <h3>Indoshop</h3>
        </div>
         <GridColumn mobile={16} tablet={10} computer={8} className="HomeGridColumn">
             <Grid.Row >

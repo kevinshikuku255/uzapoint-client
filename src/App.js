@@ -32,7 +32,7 @@ function App() {
                                             display:"flex",
                                             justifyContent:"center",
                                             alignItems: "center",
-                                            backgroundColor:"rgb(225, 34, 193)"
+                                            backgroundColor:"#6d6dcc"
                                             }}>
 
                          <h3> Loading...</h3>

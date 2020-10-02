@@ -1,8 +1,8 @@
 {
-  "short_name": "windowShop",
+  "short_name": "Uzapoint",
   "name": "WindowShop",
   "icons": [
-     {
+    {
       "src": "icon.png",
       "type": "image/png",
       "sizes": "512x512"
@@ -14,8 +14,9 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "https://uzapoint.netlify.app/",
+  "start_url": "http://localhost:3000/",
+  "scope":"/",
   "display": "standalone",
-  "theme_color": "#FF1493",
-  "background_color": "#FF1493"
+  "theme_color": "#6d6dcc",
+  "background_color": "#6d6dcc"
 }

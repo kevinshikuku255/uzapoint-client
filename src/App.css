@@ -6,7 +6,7 @@
   width: 100vw;
   max-width: 900px;
   padding: 1rem;
-  background-color: lightpink;
+  background-color: #6d6dcc;
 }
 
 html,body {
@@ -23,7 +23,7 @@ body{
 }
 .Menu{
   font-weight: bolder !important;
-  background-color: #080847 !important;
+  background-color: #6d6dcc !important;
   padding: 0 !important;
   margin: 0 !important;
 }
@@ -61,21 +61,11 @@ background: none !important;
  margin: auto ;
  margin-top: 3.5rem !important;
 }
-.Quote{
-  font-size: 2rem;
-}
-.Tag{
-  color: rgb(255, 0, 0);
-}
-/* .Input{
- width: 100%;
- border-radius: 15px;
- outline: none;
- border:2px solid teal;
-} */
+
+
 
 .ui.teal.button:focus, .ui.teal.buttons .button:focus{
- background-color: #00b5ad;
+ background-color:#6d6dcc;
 }
 
 .CardDescription{
@@ -138,7 +128,7 @@ background: none !important;
 i{
   font-size: 1.5rem;
 }
-
+/*
 .ui.dropdown .menu {
     cursor: auto;
     position: absolute !important;
@@ -157,7 +147,7 @@ i{
     transition: opacity .1s ease;
     z-index: 11;
     will-change: transform,opacity;
-}
+} */
 
 
 .ui.segment {
@@ -222,7 +212,7 @@ background: inherit;
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  background-color: rgb(255, 0, 191);
+  background-color: #6d6dcc;
 }
 
 .MuiPaper-elevation1{
@@ -241,7 +231,7 @@ background: inherit;
 
 .CommentBtn{
   outline: none !important;
-  color: teal;
+  color: #6d6dcc;
   border-radius: 20%;
 }
 
@@ -292,7 +282,7 @@ background: inherit;
   margin: 4rem 0 0 10rem;
 }
 .Dropdown{
-background-color: rgb(8, 8, 71) !important;
+background-color: #6d6dcc !important;
 }
 
 /* user about*/

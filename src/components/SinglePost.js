@@ -64,7 +64,7 @@ function SinglePost({history, match}){
      )
    }
 
-   if (!loading && !data) {
+   if (!data && !loading) {
      return (
         <div className={classes.skeleton}>
            <SkeletonPost/>

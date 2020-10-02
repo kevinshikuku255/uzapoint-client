@@ -70,10 +70,8 @@ const useStyles = makeStyles((theme) => ({
  */
 const Postcard = ({post}) => {
  const classes = useStyles();
- const {id , author, likes, price, title, comments, image, imagePublicId, createdAt} = post
+ const {id , author, likes, price, title, comments, createdAt} = post
 
-console.log(imagePublicId)
-console.log(image)
   const [activeIndex, setActiveIndex] =useState()
 
  const handleClick = (e, titleProps) => {
