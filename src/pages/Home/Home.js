@@ -58,7 +58,7 @@ console.log(data)
         marginTop:"0.2rem",
         zIndex:"12", }
        }>
-         <h3>Indoshop</h3>
+         <h3>{auth.user  ? "INDOSHOP"}</h3>
        </div>
         <GridColumn mobile={16} tablet={10} computer={8} className="HomeGridColumn">
             <Grid.Row >
