@@ -2,13 +2,13 @@ const expectedCaches = [
    'static-v1'
 ]
 
-const urlsToCache = ["/appShell.html"];
+const urlsToCache = ["/appShell.html", "../src/pages/Home/Home.js"];
 
 const self = this;
 //events
 //1. Instalation of SW
   self.addEventListener('install', (event) => {
-     self.skipWaiting();
+   //   self.skipWaiting();
       event.waitUntil(
          caches.open("static-v1")
           .then( cache => cache.addAll(urlsToCache))
@@ -23,7 +23,7 @@ const self = this;
     caches.match(event.request)
      .then(response => response || fetch(event.request))
      .catch( () => {
-            return caches.match("/appShell.html")
+            return caches.match("../src/pages/Home/Home.js")
      })
  )
  });

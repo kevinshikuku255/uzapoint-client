@@ -1,13 +1,6 @@
 import React from 'react';
 
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-
-
-
 import { useStore} from '../../store';
 import { CLEAR_AUTH_USER } from '../../store/auth';
 
@@ -25,11 +18,10 @@ const SignOut = () => {
 
   return (
     <>
-    <List>
-       <ListItem  onClick={handleSignOut}>
-         <ListItemIcon> Log out <ExitToAppTwoToneIcon /> </ListItemIcon>
-       </ListItem>
-  </List>
+
+<button onClick={handleSignOut}>
+   <p style={{color:"skyblue"}}>Log out</p>
+</button>
    </>
   );
 };

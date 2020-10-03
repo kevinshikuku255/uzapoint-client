@@ -56,10 +56,10 @@ console.log(data)
         top:"0",
         left:"5vw",
         marginTop:"0.2rem",
-        fontFamily:"sans-serif",
+        fontFamily:"serif",
         zIndex:"12", }
        }>
-         <h3>{auth.user  ? "Indoshop" :""}</h3>
+         { auth.user  ? <h3>Indoshop</h3> :""}
        </div>
         <GridColumn mobile={16} tablet={10} computer={8} className="HomeGridColumn">
             <Grid.Row >

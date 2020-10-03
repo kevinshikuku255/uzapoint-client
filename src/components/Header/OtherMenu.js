@@ -8,7 +8,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   i: {
-  color:"rgb(255, 192, 225)",
+  color:"pink",
   fontSize: "small",
   }
 }));
@@ -46,6 +46,7 @@ const menuBar = (
             {title === "createPost" && <i className={classes.i}>Display an Item</i> }
             {title === "serch" && <i className={classes.i} >Search</i> }
             {title === "about" && <i className={classes.i} >About us</i> }
+            {title === "Me" && <i className={classes.i} >Profile</i> }
           </Menu.Item>
         </Menu>
       </Segment>

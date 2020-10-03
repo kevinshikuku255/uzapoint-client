@@ -9,7 +9,7 @@ import PostImageUpload from "./post_imageUpload";
 import { MAX_POST_IMAGE_SIZE } from '../constants/ImageSize';
 import {CREATE_POST, GET_POSTS} from "../graphql/post"
 import Alert from '@material-ui/lab/Alert';
-
+import SendRoundedIcon from '@material-ui/icons/SendRounded';
 
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
@@ -97,9 +97,12 @@ const handlePriceChange = e => setPrice(e.target.value);
             onChange={hadleTitleChangen}
             value={values.title}
             error= {error} />
-        <Button type="submit" disabled={isShareDisabled}  className ="SubmitPostBtn" color="blue"  size="tiny"  circular>
-            <Icon name="share"/>
-       </Button>
+        {/* <Button type="submit"    color="black"  size="tiny"  circular> */}
+           <button>
+            {/* <Icon name="share" /> */}
+            <SendRoundedIcon  className ="SubmitPostBtn"  />
+            </button>
+       {/* </Button> */}
        </Form.Field>
          <Input
           label="Ksh."
@@ -119,17 +122,14 @@ const handlePriceChange = e => setPrice(e.target.value);
             )
       }
     </Form>
-    {errors && (
-      <div className="ui error message" style={{marginBottom:20}}>
-         <ul className="list">
-           <li>{errors.message}</li>
-         </ul>
+    {errors  &&(
+      <div className="ui error message" style={{marginBottom:20, }}>
+          {errors.message}
       </div>
     )}
-    { !errors && !loading && warning && <div className="warning" style={{marginBottom:20}}>
-         <ul className="list">
+    { !errors && !loading && warning &&
+      <div className="warning" style={{marginBottom:20}}>
            <Alert severity="success">{warning}</Alert>
-         </ul>
       </div>}
   </>
   )

@@ -9,18 +9,19 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import InfoTwoToneIcon from '@material-ui/icons/InfoTwoTone';
 import BorderColorTwoToneIcon from '@material-ui/icons/BorderColorTwoTone';
 import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
 import PhoneAndroidOutlinedIcon from '@material-ui/icons/PhoneAndroidOutlined';
 import Avatar from '@material-ui/core/Avatar';
-import { deepOrange} from '@material-ui/core/colors';
-
+import { lightBlue} from '@material-ui/core/colors';
+import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
+import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
 
 import SignOut from "../pages/Auth/SignOut"
 import logo from "./logo.png"
+import Install from "./Install";
 
 
 
@@ -35,17 +36,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   orange: {
-    color: theme.palette.getContrastText(deepOrange[50]),
-    backgroundColor: deepOrange[500],
+    color: theme.palette.getContrastText(lightBlue[50]),
+    backgroundColor: lightBlue[500],
     width: theme.spacing(7),
     height: theme.spacing(7),
   },
   div:{
     margin: theme.spacing(4,0,0,13),
     textAlign:"centre"
-  },
-  signOut:{
-    color:"blue"
   }
 }));
 
@@ -72,6 +70,9 @@ export default function TemporaryDrawer() {
   };
 
 
+
+
+
   const list = (anchor) => (
     <div
       className={classes.list}
@@ -86,14 +87,14 @@ export default function TemporaryDrawer() {
      <List>
        <ListItem>
          <ListItemIcon> <PersonOutlineTwoToneIcon /></ListItemIcon>
-       <Link to="/Me"><ListItemText primary="Me" /></Link>
+       <Link to="/Me"><ListItemText primary="Profile" /></Link>
        </ListItem>
        <ListItem>
          <ListItemIcon> <BorderColorTwoToneIcon /></ListItemIcon>
         <Link to='/createPost'><ListItemText primary="Create Post" /></Link>
        </ListItem>
      </List>
-      <Divider />
+      <Divider/>
      <List>
        <ListItem>
          <ListItemIcon> <MailIcon /></ListItemIcon>
@@ -103,18 +104,22 @@ export default function TemporaryDrawer() {
          <ListItemIcon> <PhoneAndroidOutlinedIcon /></ListItemIcon>
          <ListItemText primary="0740253367" />
        </ListItem>
+       <Divider/>
        <ListItem>
-         <ListItemIcon> <InfoTwoToneIcon /></ListItemIcon>
-        <Link to="/about"><ListItemText primary="About us" /></Link>
+          <ListItemIcon> <InfoTwoToneIcon/></ListItemIcon>
+          <Link to="/about"> <ListItemText primary="About us"/> </Link>
        </ListItem>
-       <Divider />
+
        <ListItem>
-            <Button>
-                <SignOut className={classes.signOut} />
-            </Button>
+          <ListItemIcon> <ExitToAppTwoToneIcon/> </ListItemIcon>
+          <ListItemText primary={<SignOut/>}/>
+       </ListItem>
+       <Divider/>
+
+       <ListItem>
+          <ListItemText primary={<Install/>}/>
        </ListItem>
      </List>
-
     </div>
   );
 

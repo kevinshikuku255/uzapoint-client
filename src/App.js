@@ -35,7 +35,6 @@ function App() {
                                             backgroundColor:"#6d6dcc"
                                             }}>
 
-                         <h3> Loading...</h3>
                       </div>}>
                   <div className=" ui container">
                   <Header/>
