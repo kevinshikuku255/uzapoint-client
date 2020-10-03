@@ -17,7 +17,7 @@ import PhoneAndroidOutlinedIcon from '@material-ui/icons/PhoneAndroidOutlined';
 import Avatar from '@material-ui/core/Avatar';
 import { lightBlue} from '@material-ui/core/colors';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
+
 
 import SignOut from "../pages/Auth/SignOut"
 import logo from "./logo.png"

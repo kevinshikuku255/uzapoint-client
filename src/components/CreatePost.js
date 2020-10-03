@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {Form, Button, Icon, Input} from 'semantic-ui-react'
+import {Form, Input} from 'semantic-ui-react'
 import {useMutation} from "@apollo/client"
 
 
@@ -84,7 +84,7 @@ const handlePriceChange = e => setPrice(e.target.value);
 
   };
 
-  const isShareDisabled = loading || (!loading && !image && !title);
+
   return(
   <>
     <Form onSubmit={ handleSubmit } id="postForm" className={loading ? "loading": ""} >
