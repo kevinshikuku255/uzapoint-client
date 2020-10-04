@@ -2,7 +2,7 @@ const expectedCaches = [
    'static-v1'
 ]
 
-const urlsToCache = ["/appShell.html", "../src/pages/Home/Home.js"];
+const urlsToCache = ["/appShell.html"];
 
 const self = this;
 //events
@@ -23,10 +23,67 @@ const self = this;
     caches.match(event.request)
      .then(response => response || fetch(event.request))
      .catch( () => {
-            return caches.match("../src/pages/Home/Home.js")
+            return caches.match("/appShell.html")
      })
  )
  });
+
+
+
+
+// self.addEventListener('fetch', function(event) {
+
+//     event.respondWith(async function() {
+//         const cache = await caches.open('cache-v1');
+//         console.log(cahce)
+//         const cachedResponse = await cache.match(event.request);
+//         const fetchPromise = fetch(event.request);
+
+//         const networkResponse = await fetchPromise;
+//         console.log(networkResponse)
+//         event.waitUntil(async function () {
+
+//             // Update the cache with a newer version
+//             await cache.put(event.request, networkResponse.clone());
+//         }());
+
+//         // The response contains cached data, if available
+//         return cachedResponse || networkResponse
+//     }());
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
