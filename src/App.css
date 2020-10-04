@@ -340,7 +340,13 @@ background-color: #6d6dcc !important;
 .cliker{
   background-color: #73739e4d;
 }
-
+.copyWrite::before{
+   content: ' \00A9';
+}
+.copyWrite{
+ font-size: smaller;
+ font-weight: bolder;
+}
 
 /** Media queries*/
 

@@ -169,7 +169,7 @@ const renderErrors = apiError => {
 </Card>
 
   <div  className={classes.footer}>
-  <b><p>Copyright  2020 all rights reserved <br/> Kevin Shikuku production</p></b>
+      <p className="copyWrite"> 2020 <br/> Kevin Shikuku production</p>
   </div>
 
 </div>
