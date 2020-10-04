@@ -47,7 +47,6 @@ if(!data && !loading ){
       </div>
    )
 }
-console.log(data)
  return (
     <Grid className={ auth.user ? "HomeGrid" : "HomeGridd"} inverted>
     <div style={
@@ -57,9 +56,12 @@ console.log(data)
         left:"5vw",
         marginTop:"0.2rem",
         fontFamily:"serif",
+        fontStyle: "italic",
+        fontVariant: "small-caps",
+        fontWeight: "bold",
         zIndex:"12", }
        }>
-         { auth.user  ? <h3>Indoshop</h3> :""}
+         { auth.user  ? <h3>Window Shoping</h3> :""}
        </div>
         <GridColumn mobile={16} tablet={10} computer={8} className="HomeGridColumn">
             <Grid.Row >

@@ -1,18 +1,17 @@
-const expectedCaches = [ 'static-v1' ]
+const expectedCaches = [
+   'static-v1'
+]
 
 const urlsToCache = ["/appShell.html"];
 
 const self = this;
-
-
+console.log(self)
 //1. Instalation of SW
   self.addEventListener('install', (event) => {
-     self.skipWaiting();
+   //   self.skipWaiting();
       event.waitUntil(
          caches.open("static-v1")
-          .then( cache => cache.addAll(urlsToCache)
-              .then(() => console.log("caches are ready..."))
-           )
+          .then( cache => cache.addAll(urlsToCache))
       )
   })
 
@@ -21,14 +20,23 @@ const self = this;
 // 2. Listen for requests
 
  self.addEventListener('fetch', (event) => {
+ console.log(event.request.headers)
  event.respondWith(
     caches.match(event.request)
-     .then(response => response || caches.match("/appShell.html"))
+     .then(response => response || fetch(event.request))
      .catch( () => {
             return caches.match("/appShell.html")
      })
  )
  });
+
+
+
+
+
+
+
+
 
 
 

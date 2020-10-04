@@ -13,8 +13,5 @@ const HomeOrExplorePosts = () =>{
   </>
  )
 
-
-
-
 }
 export default HomeOrExplorePosts;

@@ -21,13 +21,12 @@
       position: fixed;
       top:0;
       color: rgb(77, 75, 75);
-      padding-left: 2rem;
+      padding-left: 1rem;
     }
     .body{
       display:flex;
       height:100vh;
       width:100vw;
-      margin-top: 4rem;
       justify-content:center;
       align-items: "center",
     }
@@ -44,18 +43,5 @@
   <div class="body">
       <p> No internet connection !!</p>
   </div>
-
-
-  <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').then(function(registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }).catch(function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
-    });
-  }
-  </script>
 </body>
 </html>
