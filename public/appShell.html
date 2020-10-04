@@ -11,32 +11,41 @@
     body{
       background-color: #6d6dcc;
       color: white;
+      margin: 0;
+      padding: 0;
+    }
+    .header{
+      background-color: blue;
+      height: 4rem;
+      width: 100vw;
+      position: fixed;
+      top:0;
+      color: rgb(77, 75, 75);
+      padding-left: 2rem;
+    }
+    .body{
+      display:flex;
+      height:100vh;
+      width:100vw;
+      margin-top: 4rem;
+      justify-content:center;
+      align-items: "center",
     }
   </style>
 </head>
 
 <body>
   <header class="header">
-    <h1 class="header__title">App Shell</h1>
+    <div class="header">
+        <h1 class="header__title">Indoshop</h1>
+    </div>
   </header>
 
-  <nav class="nav">
-  ...
-  </nav>
-
-  <main class="main">
-  ...
-  </main>
-
-  <div class="dialog-container">
-  ...
+  <div class="body">
+      <p> No internet connection !!</p>
   </div>
 
-  <div class="loader">
-    <!-- Show a spinner or placeholders for content -->
-  </div>
 
-  <script src="app.js" async> </script>
   <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').then(function(registration) {

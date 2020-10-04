@@ -15,7 +15,6 @@
     }
   ],
   "start_url": "http://localhost:3000/",
-  "scope":"/",
   "display": "standalone",
   "theme_color": "#6d6dcc",
   "background_color": "#6d6dcc"
