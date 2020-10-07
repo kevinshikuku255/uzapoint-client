@@ -56,5 +56,4 @@ const mutation = commentId ? DELETE_COMMENT :  DELETE_POST;
    )
 
 }
-
 export default DeleteButton;

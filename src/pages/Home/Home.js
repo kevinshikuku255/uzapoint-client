@@ -55,13 +55,10 @@ if(!data && !loading ){
         top:"0",
         left:"5vw",
         marginTop:"0.2rem",
-        fontFamily:"serif",
-        fontStyle: "italic",
-        fontVariant: "small-caps",
         fontWeight: "bold",
         zIndex:"12", }
        }>
-         { auth.user  ? <h3>Window Shoping</h3> :""}
+         { auth.user  ? <h3>Windowshoppe</h3> :""}
        </div>
         <GridColumn mobile={16} tablet={10} computer={8} className="HomeGridColumn">
             <Grid.Row >

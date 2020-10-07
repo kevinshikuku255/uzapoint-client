@@ -3,7 +3,7 @@ import {Form, Input} from 'semantic-ui-react'
 import {useMutation} from "@apollo/client"
 
 
-
+import { HOME_PAGE_POSTS_LIMIT } from '../constants/DataLimit';
 import { useStore } from '../store';
 import PostImageUpload from "./post_imageUpload";
 import { MAX_POST_IMAGE_SIZE } from '../constants/ImageSize';
@@ -69,22 +69,24 @@ const handleOnFocus = () =>{
     onError(err){
       setErrors(err)
     },
-    refetchQueries:[{query:GET_POSTS}]
+    refetchQueries:[{query:GET_POSTS, variables:{
+          skip: 0,
+          limit: HOME_PAGE_POSTS_LIMIT,
+    }}]
 });
 
 
-const hadleTitleChangen = e => setTitle(e.target.value);
-const handlePriceChange = e => setPrice(e.target.value);
+  const hadleTitleChangen = e => setTitle(e.target.value);
+  const handlePriceChange = e => setPrice(e.target.value);
 
   const handleSubmit = async (e) => {
      e.preventDefault();
      createPost();
      handleReset();
-     setWarning("Sent sucessfully refresh home page to see the post.")
-
+     setWarning("sent")
   };
 
- 
+
   return(
   <>
     <Form onSubmit={ handleSubmit } id="postForm" className={loading ? "loading": ""} >
@@ -97,12 +99,10 @@ const handlePriceChange = e => setPrice(e.target.value);
             onChange={hadleTitleChangen}
             value={values.title}
             error= {error} />
-        {/* <Button type="submit"    color="black"  size="tiny"  circular> */}
            <button>
-            {/* <Icon name="share" /> */}
-            <SendRoundedIcon  className ="SubmitPostBtn"  />
+              <SendRoundedIcon  className ="SubmitPostBtn"  />
             </button>
-       {/* </Button> */}
+
        </Form.Field>
          <Input
           label="Ksh."

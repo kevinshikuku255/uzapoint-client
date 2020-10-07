@@ -229,11 +229,11 @@ background: inherit;
   margin-left: 3rem !important;
 }
 
-.CommentBtn{
+/* .CommentBtn{
   outline: none !important;
   color: #6d6dcc;
   border-radius: 20%;
-}
+} */
 
 .ui.fluid.card{
   outline: none !important;
