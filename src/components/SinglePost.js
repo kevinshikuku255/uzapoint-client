@@ -1,6 +1,6 @@
 import React from 'react';
 import {useQuery } from '@apollo/client'
-import { Grid, List } from 'semantic-ui-react';
+import { Grid} from 'semantic-ui-react';
 
 
 import CreateCommnet from "./createComment"
@@ -33,9 +33,14 @@ const useStyles = makeStyles((theme) => ({
      margin: theme.spacing(2,1,0,1),
      overflowWrap:"break-word"
   },
-    skeleton: {
-    margin: theme.spacing(6.5,0,0,0),
-  }
+postMarkup:{
+ display:"flex",
+ flexDirection:"row",
+ justifyContent:"spaceAround",
+ alignItems:"center",
+ marginTop:"-1rem",
+ marginBottom:"1rem"
+},
 }));
 
 
@@ -81,21 +86,18 @@ function SinglePost({history, match}){
 
  let postMarkup;
         postMarkup = (
-       <div className="extra">
-          <List horizontal relaxed>
-              <List.Item>
-                   {`Likes: ${likes.length}`}
-              </List.Item>
-              <List.Item>
-                  {`Replies: ${comments.length}`}
-              </List.Item>
-              {user &&
-              <List.Item>
-                 {user.username === author.username  &&
-                              <DeleteButton id={id} callback={deletePostCallback}/>}
-              </List.Item>
-              }
-          </List>
+       <div className={classes.postMarkup}>
+
+        <div style={{flexGrow:"1"}}>
+         {`Likes: ${likes.length}`}
+        </div>
+        <div  style={{flexGrow:"1"}}>
+          {`Replies: ${comments.length}`}
+        </div>
+      { user && <div  style={{flexGrow:"1"}}>
+            {user.username === author.username  &&
+           <DeleteButton id={id} callback={deletePostCallback}/>}
+        </div>}
      </div>
         )
 
@@ -107,40 +109,28 @@ return (
        <CardMedia
           className={classes.media}
           image={shoes}
-          title="post"
+          title={user.username}
         />
      <div variant="body1" className={classes.paragraph}>
-           Item description: <b>{title}</b> <hr/>
-          <List horizontal relaxed>
-              <List.Item>
-                   {`Price: Ksh. ${price}`}
-              </List.Item>
-              <List.Item>
-                  {`Posted:  ${timeAgo(createdAt)}`}
-              </List.Item>
-          </List>
-         <hr/>
-          <List horizontal relaxed>
-              <List.Item>
-                  Name: <b>{`${author.username}`}</b>
-              </List.Item>
-              <List.Item>
-                 Phone: <b>{`${author.phone}`}</b>
-              </List.Item>
-          </List> <hr/>
-         {postMarkup}
+         {postMarkup} <br/>
+{/**..................................................... */}
+       <div className={classes.postMarkup}>
+          <div style={{flexGrow:"1"}}>
+          {timeAgo(createdAt)}
+          </div>
+          <div  style={{flexGrow:"1"}}>
+            {`Ksh. ${price}`}
+          </div>
+     </div>
+{/**..................................................... */}
+         <b>{`=> ${title}`}</b>
      </div>
 </Card>
-
   <Grid>
-    <Grid.Column mobile={16} tablet={10} computer={7} className=  "Card" >
 
-       {user && (  <>
-
+    <Grid.Column mobile={16} tablet={10} computer={7}>
+              <br/> <p>Replies</p>
                <CreateCommnet match={match} comments={comments} />
-
-                  </>
-                  )}
     </Grid.Column>
   </Grid>
     </>

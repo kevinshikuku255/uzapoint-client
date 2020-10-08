@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { makeStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
+
 
 
 
@@ -41,7 +41,6 @@ function Media() {
 export default function PostSkeleton() {
   return (
     <div>
-    <LinearProgress/>
     <Box overflow="hidden">
       <Media />
     </Box>

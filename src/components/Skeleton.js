@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Skeleton from '@material-ui/lab/Skeleton';
-import LinearProgress from '@material-ui/core/LinearProgress';
+
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -68,7 +68,6 @@ Media.propTypes = {
 export default function SkeletonPost() {
   return (
     <div >
-      <LinearProgress/>
       <Media loading />
       <Media loading />
       <Media loading />

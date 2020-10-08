@@ -39,14 +39,7 @@ const mutation = commentId ? DELETE_COMMENT :  DELETE_POST;
  });
  return(
   <>
-    <Button as='div'
-        size="big"
-        className="Button"
-        floated="right"
-        onClick={()=> setConfirmOpen(true) }>
-          <DeleteForeverIcon />
-    </Button>
-
+   <Button icon circular content={<DeleteForeverIcon />} onClick={()=> setConfirmOpen(true)} floated="right"/>
      <Confirm
        open={conFirmOpen}
        onCancel={()=>setConfirmOpen(false)}

@@ -1,6 +1,6 @@
 import React,{useState, useRef} from 'react';
 import { useMutation} from '@apollo/client'
-import { TransitionGroup,  List,  } from 'semantic-ui-react';
+import { TransitionGroup} from 'semantic-ui-react';
 
 
 import {HOME_PAGE_POSTS_LIMIT} from "../constants/DataLimit"
@@ -35,20 +35,37 @@ const useStyles = makeStyles((theme) => ({
   resize: "none",
   outline: "none",
   },
-  addButton: {
+    addButton: {
     position: 'fixed',
     top:"0",
     right:"20vw",
     zIndex:"11",
     marginTop:"1rem"
   },
+  comment:{
+    display:"flex",
+    flexDirection:"row",
+    marginTop:"1rem",
+    aligncontent: "flex-end",
+    color:"gray",
+  },
+ flex1:{
+   width:"85%",
+   overflowWrap:"break-word"
+ },
+  flex2:{
+   width:"15%",
+ }
 }));
 
 
 
 function SinglePost({comments, match}){
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const commentInputRef = useRef(null)
+  const [comment, setComment] = useState('');
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -64,8 +81,6 @@ function SinglePost({comments, match}){
   const postId = match.params.postId
   const [{auth}] = useStore()
   const user = auth.user
-  const commentInputRef = useRef(null)
-  const [comment, setComment]= useState('');
   const variables = {
       postId,
       comment,
@@ -94,8 +109,7 @@ const Input = (
   <>
       <TextareaAutosize
                 aria-label="minimum height"
-                rowsMin={3} 
-                autoFocus
+                rowsMin={3}
                 placeholder="Reply"
                 name="comment"
                 className={classes.input}
@@ -108,48 +122,43 @@ const Input = (
 
 return (
     <>
-  {user && (
-    <div>
+        {user && ( <button onClick={handleClickOpen} className={classes.addButton}>
+                <AddCommentRoundedIcon/>
+                   </button>)}
 
-        <button variant="outlined" color="primary" onClick={handleClickOpen} className={classes.addButton}>
-            <AddCommentRoundedIcon/>
-        </button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogContent>
-             {Input}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            cancel
-          </Button>
-          <Button onClick={handleSubmit} color="primary" autoFocus>
-            Send
-          </Button>
-        </DialogActions>
-      </Dialog>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+          >
+            <DialogContent>
+                {Input}
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                cancel
+              </Button>
+              <Button onClick={handleSubmit} color="primary" autoFocus>
+                Send
+              </Button>
+            </DialogActions>
+          </Dialog>
 
-        <TransitionGroup>
-        <List divided relaxed>
-        {comments && comments.map(comment => (
-            <List.Item key={comment.id}>
-          <List.Content>
-            <List.Header className="PostComment">{comment.comment}</List.Header>
-            <List.Description >
-                  {user && user.username === comment.author.username &&
-                  <DeleteButton  commentId={comment.id}/> }
-            </List.Description>
-          </List.Content>
-        </List.Item>
-        ))}
-        </List>
-    </TransitionGroup>
-    </div>
-  )}
+            <TransitionGroup>
+
+
+          <div>
+            {comments && comments.map( comment =>(
+               <div key={comment.id} className={classes.comment}>
+                  <div className={classes.flex1}>
+                     {comment.comment}
+                  </div>
+                   {user && <div className={classes.flex2}>
+                      {user.username === comment.author.username &&
+                       <DeleteButton  commentId={comment.id}/> }
+                  </div>}
+               </div>
+            ))}
+          </div>
 
 
 
@@ -167,58 +176,21 @@ return (
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-       {/* {user && (  <>
-               <div className={classes.form}>
-                      <div>
-                          <button type="submit"  className="CommentBtn"  onClick={()=> setConfirmOpen(true)}>
-                            <SendRoundedIcon/>
-                          </button>
-                      </div>
-                </div>
-
-                <Confirm
-                  open={conFirmOpen}
-                  header='Reply on the post'
-                  content={Input}
-                  cancelButton='cancel'
-                  confirmButton={<SendRoundedIcon/>}
-                  centered
-                  onCancel={()=>setConfirmOpen(false)}
-                  onConfirm={handleSubmit}
-                  />
-
-                  <TransitionGroup>
-                      <List divided relaxed>
-                      {comments && comments.map(comment => (
-                          <List.Item key={comment.id}>
-                        <List.Content>
-                          <List.Header className="PostComment">{comment.comment}</List.Header>
-                          <List.Description >
-                                {user && user.username === comment.author.username &&
-                                <DeleteButton  commentId={comment.id}/> }
-                         </List.Description>
-                        </List.Content>
-                      </List.Item>
-                      ))}
-                      </List>
-                  </TransitionGroup>
-
-
-                  </>
-                  )} */}
+{/*
+            <List divided relaxed>
+            {comments && comments.map(comment => (
+                <List.Item key={comment.id}>
+              <List.Content>
+                <List.Header className={classes.comment}>{comment.comment}</List.Header>
+                <List.Description >
+                      {user && user.username === comment.author.username &&
+                      <DeleteButton  commentId={comment.id}/> }
+                </List.Description>
+              </List.Content>
+            </List.Item>
+            ))}
+            </List> */}
+        </TransitionGroup>
     </>
       )
 }

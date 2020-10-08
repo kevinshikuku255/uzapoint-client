@@ -225,15 +225,6 @@ background: inherit;
 #Cardd{
   margin-top: 3rem;
 }
-.PostComment{
-  margin-left: 3rem !important;
-}
-
-/* .CommentBtn{
-  outline: none !important;
-  color: #6d6dcc;
-  border-radius: 20%;
-} */
 
 .ui.fluid.card{
   outline: none !important;
@@ -304,11 +295,7 @@ background-color: #6d6dcc !important;
   /* color:#fd70c3; */
 }
 
-/* user profile styling*/
-.flexContainer{
-  display: flex;
-  flex-direction:column;
-}
+
 
 .flexContainer > div {
   margin-bottom: 10px;

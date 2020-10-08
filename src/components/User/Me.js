@@ -1,21 +1,63 @@
-import React,{useState} from 'react'
+import React from 'react'
 import {useQuery} from "@apollo/client"
-import { Rating,Grid, GridColumn,Icon,Menu } from 'semantic-ui-react'
+import { Grid,} from 'semantic-ui-react'
 import SkeletonPost from '../../components/SinglePostSkeleton';
 import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
 import shoes from "../shoes.jpeg"
-import UserSales from "./UserSales"
+import UserTabs from "./Tab"
 
-import { currentDate } from '../../Utils/date';
+
 import {GET_AUTH_USER} from "../../graphql/user";
+
+import Avatar from '@material-ui/core/Avatar';
+import CreateTwoToneIcon from '@material-ui/icons/CreateTwoTone';
+
 
 
 
 const useStyles = makeStyles((theme) => ({
   skeleton: {
     margin: theme.spacing(6.5,0,0,0),
-  }
+  },
+flexContainer:{
+  display:"flex",
+  flexDirection:"column",
+  marginTop:"2rem",
+},
+flex:{
+ marginBottom:"1rem",
+ marginTop:"3rem",
+ alignSelf:"center"
+},
+flex1:{
+ display:"flex",
+ marginBottom:"2rem",
+ paddingLeft:"3rem"
+},
+Dp:{
+  width:"20%",
+  marginLeft:"3px"
+},
+  large: {
+    width: theme.spacing(20),
+    height: theme.spacing(20),
+  },
+  footer:{
+  position: "fixed",
+  width: "100vw",
+  bottom: 0,
+  textAlign: "center",
+  backgroundColor:"white",
+  color:"gray"
+  },
+  edit:{
+  marginTop:"-1rem",
+  zIndex:"20"
+  },
+tabs:{
+  backgroundColor:"yellow",
+   margin: theme.spacing(0,-1.5,0,-1.5),
+}
 
 }));
 
@@ -23,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 /**
- *
  * About auth user...
  */
   const  UserAbout = () =>{
@@ -31,10 +72,6 @@ const useStyles = makeStyles((theme) => ({
   const {data, loading} = useQuery(GET_AUTH_USER,{
     fetchPolicy:"cache-first"
   });
-
-  const [active, setActive] = useState({ activeItem: 'items'})
-  const  handleItemClick = (e, { name }) => setActive({ activeItem: name })
-  const { activeItem } =active
 
 
  if(loading ){
@@ -45,19 +82,89 @@ const useStyles = makeStyles((theme) => ({
    )
  }
 
- const { phone,  username, followers, createdAt} = data.getAuthUser;
+ const {  username} = data.getAuthUser;
 
-const joinedDate = currentDate(createdAt).split(" ")
+// const joinedDate = currentDate(createdAt).split(" ")
  return (
   <div>
- <Grid className="Me">
+
+  <Grid>
+    <Grid.Column mobile={16} tablet={10} computer={7}>
+      <div className={classes.flexContainer}>
+{/**.......................................................................................................... */}
+          <div className={classes.flex}>
+              <div className={classes.Dp}>
+
+                    <Avatar alt={username} src={shoes} className={classes.large}/>
+                    <div className={classes.edit}> <CreateTwoToneIcon/></div>
+              </div>
+          </div>
+{/**.......................................................................................................... */}
+          <div className={classes.tabs}>
+              <div> <UserTabs/></div>
+          </div>
+    </div>
+
+    </Grid.Column>
+  </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ {/* <Grid className="Me">
     <GridColumn mobile={16} tablet={10} computer={7}>
      <Avatar  alt="logo" src={shoes} />
     </GridColumn>
- </Grid>
+ </Grid> */}
 
-
-  <div className="gridd">
+  {/* <div className="gridd">
     <div className="UserInfo">
        <div className="DpInfo">
          <b>{username}</b>
@@ -106,7 +213,7 @@ const joinedDate = currentDate(createdAt).split(" ")
       { activeItem === "items" ? <b>This feature will be added soon</b>
          : activeItem === "sales" ?  <UserSales/> : " " }
     </div>
-</div>
+</div> */}
 </div>
  )
 }

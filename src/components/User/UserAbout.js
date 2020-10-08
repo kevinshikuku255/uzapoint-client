@@ -1,78 +1,124 @@
 import React from 'react'
-import { Icon,Button } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
+import { Grid} from 'semantic-ui-react';
 
 
 import {makeStyles} from "@material-ui/core"
 import { currentDate } from '../../Utils/date';
 import images from "../shoes.jpeg";
 
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import Badge from '@material-ui/core/Badge';
+import Avatar from '@material-ui/core/Avatar';
+import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
+import PeopleAltRoundedIcon from '@material-ui/icons/PeopleAltRounded';
+import MonetizationOnRoundedIcon from '@material-ui/icons/MonetizationOnRounded';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 
 const useStyles = makeStyles((theme) => ({
-  card: {
-    minWidth: 300,
-    maxWidth:550,
+flexContainer:{
+  display:"flex",
+  flexDirection:"column",
+  marginTop:"2rem",
+  paddingLeft:"3rem"
+},
+flex1:{
+ display:"flex",
+ width:"100vw",
+ marginBottom:"2rem"
+},
+Dp:{
+  width:"20%",
+  marginLeft:"3px"
+},
+Icon:{
+  width:"10%",
+  marginLeft:"3px"
+},
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
   },
-  media: {
-    height: 190,
-  },
-
+  footer:{
+  position: "fixed",
+  width: "100vw",
+  bottom: 0,
+  textAlign: "center",
+  backgroundColor:"white",
+  color:"gray"
+  }
 }));
 
 /**
- *
  * About user...
  */
-  const  UserAbout = ({user}) =>{
+
+const  UserAbout = ({user}) =>{
   const   classes = useStyles();
   const {
         username,
         createdAt, posts,
-        phone, isOnline,
-        followers } = user;
+        phone,
+        followers, following } = user;
 const joinedDate = currentDate(createdAt).split(" ")
  return (
   <>
-  <div className="flexContainer">
-    <div>
-        <Card >
-              <CardMedia
-                className={classes.media}
-                image={images}
-                title="DpInfo"
-              />
-        </Card>
+  <Grid>
+    <Grid.Column mobile={16} tablet={10} computer={7}>
+      <div className={classes.flexContainer}>
+          <div className={classes.flex1}>
+              <div className={classes.Dp}>
+                    <Avatar alt={username} src={images} className={classes.large}/>
+              </div>
+              <div> <b>{`${username}`}</b> <br/> {`Joined ${joinedDate[0]}, ${joinedDate[2]}`} </div>
+              <hr/>
+          </div>
+{/**.......................................................................................................... */}
+          <div className={classes.flex1}>
+              <div className={classes.Icon}>
+                 <PhoneRoundedIcon/>
+              </div>
+              <div> <b>Contact</b> <br/> {phone} </div>
+          </div>
+{/**.......................................................................................................... */}
+          <div className={classes.flex1}>
+              <div className={classes.Icon}>
+                 <PeopleAltRoundedIcon/>
+              </div>
+              <div> <b>Followers</b> <br/> {followers.length} </div>
+          </div>
+{/**.......................................................................................................... */}
+          <div className={classes.flex1}>
+              <div className={classes.Icon}>
+                 <PeopleOutlineIcon/>
+              </div>
+              <div> <b>Following</b> <br/> {following.length} </div>
+          </div>
+{/**.......................................................................................................... */}
+          <div className={classes.flex1}>
+              <div className={classes.Icon}>
+                 <MonetizationOnRoundedIcon/>
+              </div>
+              <div> <b>Items Dispalyed - {posts.length}</b> <br/>
+                <Button icon circular content="View all  items "as={Link} to={`/userPosts/${username}`}/>
+               </div>
+          </div>
+{/**.......................................................................................................... */}
+          <div className={classes.flex1}>
+              <div className={classes.Icon}>
+                 <LocationOnIcon/>
+              </div>
+              <div> <b>Located </b> <br/> <div> <b>Coutry</b> : Kenya </div>
+               </div>
+          </div>
     </div>
-    <div className="UserInfo">
-       <div className="DpInfo">
-            {isOnline &&
-              <Badge badgeContent={"online"} color="secondary">
-                <b>{username}</b>
-              </Badge>
-            }
-              { !isOnline &&
-                <i>{username}</i>
-              }
-       </div>
-       <div>
-         <Button icon circular content={`Follow ${followers.length}`} />
-       </div>
-       <div>
-           <Button icon circular content={`Items ${posts.length}`} as={Link} to={`/userPosts/${username}`} />
-       </div>
-     </div>
+    </Grid.Column>
+  </Grid>
 
-    <div className="UserMeta">
-        <div> <Icon  name="phone"/> <b>{phone}</b> </div>
-        <div>
-         <Icon  name="calendar"/>{`Joined ${joinedDate[0]}, ${joinedDate[2]} `}
-        </div>
-    </div>
-</div>
+  <div className={classes.footer}>
+      <p className="copyWrite"> 2020 <br/> Kevin Shikuku production</p>
+  </div>
 </>
  )
 }

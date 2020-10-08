@@ -6,10 +6,10 @@ import React from 'react'
  */
 function UserSales() {
  return (
-  <div className="sales">
+  <>
     <b>No sales yet...</b> <br/>
     <i>this feature is comming soon..</i>
-  </div>
+  </>
  )
 }
 
