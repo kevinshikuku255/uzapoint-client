@@ -17,6 +17,7 @@ html,body {
   font-kerning: 2;
   font-weight: bold;
   color: black;
+  letter-spacing: -1px;
 }
 
 body{
