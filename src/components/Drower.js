@@ -11,7 +11,6 @@ import MailIcon from '@material-ui/icons/Mail';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import InfoTwoToneIcon from '@material-ui/icons/InfoTwoTone';
-import BorderColorTwoToneIcon from '@material-ui/icons/BorderColorTwoTone';
 import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
 import PhoneAndroidOutlinedIcon from '@material-ui/icons/PhoneAndroidOutlined';
 import Avatar from '@material-ui/core/Avatar';
