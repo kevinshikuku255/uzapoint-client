@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
   div:{
     margin: theme.spacing(4,0,0,13),
     textAlign:"centre"
+  },
+  h3:{
+    margin: theme.spacing(0,0,0,-4),
   }
 }));
 
@@ -83,6 +86,7 @@ export default function TemporaryDrawer() {
 
     <div className={classes.div}>
        <Avatar alt="logo" src={logo} className={classes.orange}/>
+       <h3 className={classes.h3}>windoshoppe</h3>
     </div>
      <List>
        <ListItem>

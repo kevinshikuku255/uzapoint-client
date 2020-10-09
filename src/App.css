@@ -6,6 +6,7 @@
   width: 100vw;
   max-width: 900px;
   padding: 1rem;
+  background-color: #e1e1e1;
 }
 
 html,body {
@@ -14,13 +15,16 @@ html,body {
   overflow-x: hidden;
   height: 100vh;
   width: 100vw;
+  font-kerning: 2;
+  font-weight: bold;
+  color: black;
 }
 
 body{
   scrollbar-width: none;
   margin: 0;
   font-family: sans-serif;
-  background-color: #000000,;
+  background-color: #000000;
 }
 .Menu{
   font-weight: bolder !important;
@@ -29,9 +33,7 @@ body{
   margin: 0 !important;
 }
 
-.HomeGrid{
-  margin-top: 4rem !important;
-}
+
 .HomeGridd{
  margin-top: 2rem !important;
 }
@@ -120,7 +122,7 @@ background: none !important;
 }
 .SubmitPostBtn{
   position: absolute;
-  top:-3rem;
+  top:-2rem;
   left: 65vw;
   z-index: 13;
   background-color: none !important;

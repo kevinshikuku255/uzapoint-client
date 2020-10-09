@@ -1,16 +1,16 @@
 import React from 'react'
 import {useQuery} from "@apollo/client"
-import { Grid,} from 'semantic-ui-react'
+import { Grid, Item} from 'semantic-ui-react'
 import SkeletonPost from '../../components/SinglePostSkeleton';
 import { makeStyles } from '@material-ui/core/styles';
 import shoes from "../shoes.jpeg"
-import UserTabs from "./Tab"
+import { Link } from "react-router-dom";
+
 
 
 import {GET_AUTH_USER} from "../../graphql/user";
 
 import Avatar from '@material-ui/core/Avatar';
-import CreateTwoToneIcon from '@material-ui/icons/CreateTwoTone';
 
 
 
@@ -50,15 +50,18 @@ Dp:{
   backgroundColor:"white",
   color:"gray"
   },
-  edit:{
-  marginTop:"-1rem",
-  zIndex:"20"
-  },
 tabs:{
-  backgroundColor:"yellow",
    margin: theme.spacing(0,-1.5,0,-1.5),
+   display:"flex",
+   flexDirection:"row"
+},
+tab:{
+  flexGrow:'1',
+  textAlign:"center"
+},
+link:{
+  color:"inherit"
 }
-
 }));
 
 
@@ -82,26 +85,34 @@ tabs:{
    )
  }
 
- const {  username, likes} = data.getAuthUser;
- console.log(likes)
+ const {  username, posts, followers} = data.getAuthUser;
 // const joinedDate = currentDate(createdAt).split(" ")
  return (
   <div>
-
   <Grid>
     <Grid.Column mobile={16} tablet={10} computer={7}>
       <div className={classes.flexContainer}>
 {/**.......................................................................................................... */}
           <div className={classes.flex}>
               <div className={classes.Dp}>
-
                     <Avatar alt={username} src={shoes} className={classes.large}/>
-                    <div className={classes.edit}> <CreateTwoToneIcon/></div>
               </div>
           </div>
 {/**.......................................................................................................... */}
           <div className={classes.tabs}>
-              <div> <UserTabs/></div>
+              <div className={classes.tab}>
+                <Item as={Link} to={`/userPosts/${username}`}  className={classes.link}>
+                    {posts.length}
+                     <p>posts</p>
+                </Item>
+              </div>
+              <div className={classes.tab}>
+                 <p>new conversations</p>
+              </div>
+              <div className={classes.tab}>
+                 <p>folowers</p>
+                 {followers.length}
+              </div>
           </div>
     </div>
 

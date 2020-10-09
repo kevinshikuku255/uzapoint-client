@@ -1,6 +1,6 @@
 {
-  "short_name": "Indoshop",
-  "name": "Indoshop",
+  "short_name": "Windoshoppe",
+  "name": "Windoshoppe",
   "icons": [
     {
       "src": "icon.png",
@@ -17,5 +17,6 @@
   "start_url": "http://localhost:3000/",
   "display": "standalone",
   "theme_color": "#6d6dcc",
+  "orientation":"potrait",
   "background_color": "#6d6dcc"
 }

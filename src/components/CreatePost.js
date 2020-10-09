@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import {Form, Input} from 'semantic-ui-react'
 import {useMutation} from "@apollo/client"
 
-
 import { HOME_PAGE_POSTS_LIMIT } from '../constants/DataLimit';
 import { useStore } from '../store';
 import PostImageUpload from "./post_imageUpload";

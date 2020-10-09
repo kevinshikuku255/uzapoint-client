@@ -1,12 +1,13 @@
 import React from 'react'
 import {useQuery}  from '@apollo/client'
-import {Grid, Transition,  GridColumn } from "semantic-ui-react";
+import {Transition} from "semantic-ui-react";
 import { makeStyles } from '@material-ui/core/styles';
 
 
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 import {GET_POSTS} from "../../graphql/post";
-import { useStore } from '../../store';
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import SkeletonPost from "../../components/Skeleton";
 import PostCard from "../../components/PostCard";
@@ -16,12 +17,19 @@ import PostCard from "../../components/PostCard";
 const useStyles = makeStyles((theme) => ({
   skeleton: {
     margin: theme.spacing(10,0,0,0),
-  }
+  },
+  card: {
+    minWidth: "100vw",
+    maxWidth:518,
+    margin:"auto",
+  },
+  container:{
+    margin: theme.spacing(0,-6,0,-7),
+  },
 }));
 
 const Home = () =>{
   const classes = useStyles();
-  const [{auth}] = useStore();
   const variables = {
     skip: 0,
     limit: HOME_PAGE_POSTS_LIMIT,
@@ -31,35 +39,51 @@ const Home = () =>{
     variables,
     });
 
+
 if(loading){
    return (
-      <div className={classes.skeleton}>
+
          <SkeletonPost />
-      </div>
+
    )
 }
 
 
 if(!data && !loading ){
    return(
-      <div className={classes.skeleton}>
-         <SkeletonPost />
-      </div>
+       <SkeletonPost />
    )
 }
  return (
-    <Grid className={ auth.user ? "HomeGrid" : "HomeGridd"} inverted>
-    <div style={
-       {color:"black",
-        position:"absolute",
-        top:"0",
-        left:"5vw",
-        marginTop:"0.2rem",
-        fontWeight: "bold",
-        fontSize:"1rem",
-        zIndex:"12", }
-       }>
-       </div>
+<>
+
+<div className={classes.card}>
+  <Card className={classes.container}>
+   <CardContent >
+      <Transition.Group >
+           { data && data.getPosts.posts.map( post =>
+               <div key={post.id} style={{marginBottom:15}}>
+                    <PostCard  post={post}/>
+               </div>)}
+      </Transition.Group>
+   </CardContent>
+</Card>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{/*
+
+    <Grid className={ "HomeGridd"} inverted>
         <GridColumn mobile={16} tablet={10} computer={8} className="HomeGridColumn">
             <Grid.Row >
                <Transition.Group >
@@ -71,7 +95,8 @@ if(!data && !loading ){
                </Transition.Group>
             </Grid.Row>
         </GridColumn>
-    </Grid>
+    </Grid> */}
+</>
  )
 }
 export default Home;

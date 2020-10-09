@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button } from 'semantic-ui-react';
+import { Button ,Grid} from 'semantic-ui-react';
 import { Link } from "react-router-dom";
-import { Grid} from 'semantic-ui-react';
+
 
 
 import {makeStyles} from "@material-ui/core"
@@ -101,7 +101,7 @@ const joinedDate = currentDate(createdAt).split(" ")
                  <MonetizationOnRoundedIcon/>
               </div>
               <div> <b>Items Dispalyed - {posts.length}</b> <br/>
-                <Button icon circular content="View all  items "as={Link} to={`/userPosts/${username}`}/>
+                <Button icon circular content="View all  items" as={Link} to={`/userPosts/${username}`}/>
                </div>
           </div>
 {/**.......................................................................................................... */}
