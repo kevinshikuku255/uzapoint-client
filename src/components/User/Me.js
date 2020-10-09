@@ -34,11 +34,7 @@ flex1:{
  marginBottom:"2rem",
  paddingLeft:"3rem"
 },
-Dp:{
-  width:"20%",
-  marginLeft:"3px"
-},
-  large: {
+large: {
     width: theme.spacing(20),
     height: theme.spacing(20),
   },
@@ -53,7 +49,9 @@ Dp:{
 tabs:{
    margin: theme.spacing(0,-1.5,0,-1.5),
    display:"flex",
-   flexDirection:"row"
+   flexDirection:"row",
+   backgroundColor:"whitesmoke",
+   borderRadius:"5px"
 },
 tab:{
   flexGrow:'1',
@@ -100,19 +98,19 @@ link:{
           </div>
 {/**.......................................................................................................... */}
           <div className={classes.tabs}>
-              <div className={classes.tab}>
-                <Item as={Link} to={`/userPosts/${username}`}  className={classes.link}>
-                    {posts.length}
-                     <p>posts</p>
-                </Item>
-              </div>
-              <div className={classes.tab}>
-                 <p>new conversations</p>
-              </div>
-              <div className={classes.tab}>
-                 <p>folowers</p>
-                 {followers.length}
-              </div>
+                <div className={classes.tab}>
+                  <Item as={Link} to={`/userPosts/${username}`}  className={classes.link}>
+                      {posts.length}
+                      <p>posts</p>
+                  </Item>
+                </div>
+                <div className={classes.tab}>
+                  <p>new conversations</p>
+                </div>
+                <div className={classes.tab}>
+                  <p>folowers</p>
+                  {followers.length}
+                </div>
           </div>
     </div>
 

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const content =  <div>
-                  <b>WindowShoppe is guided by basic principles:</b> <br/>
+                  <b>WindoShoppe is guided by basic principles:</b> <br/>
                    Passion for invention  and commitment for excellence.
                   <br/> <br/>
                   The website was created and is maintained to bring you closer to your cravings.  Here  dispose items for people to hit you up or Search for Items you love <br/><br/>
@@ -59,7 +59,7 @@ const AboutUs = () => {
     return(
     <>
     <div className={classes.paragraph}>
-      <h4>Windowshoppe </h4>
+      <h4>Windoshoppe </h4>
     </div>
       <Card className={classes.card}>
       <Accordion

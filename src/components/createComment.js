@@ -108,7 +108,6 @@ function SinglePost({comments, match}){
 const Input = (
   <>
       <TextareaAutosize
-                aria-label="minimum height"
                 rowsMin={3}
                 placeholder="Reply"
                 name="comment"

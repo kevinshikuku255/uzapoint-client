@@ -93,10 +93,6 @@ export default function TemporaryDrawer() {
          <ListItemIcon> <PersonOutlineTwoToneIcon /></ListItemIcon>
        <Link to="/Me"><ListItemText primary="Profile" /></Link>
        </ListItem>
-       <ListItem>
-         <ListItemIcon> <BorderColorTwoToneIcon /></ListItemIcon>
-        <Link to='/createPost'><ListItemText primary="Create Post" /></Link>
-       </ListItem>
      </List>
       <Divider/>
      <List>

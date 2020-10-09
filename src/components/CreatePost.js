@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {Form, Input} from 'semantic-ui-react'
+import {Input} from 'semantic-ui-react'
 import {useMutation} from "@apollo/client"
 
 import { HOME_PAGE_POSTS_LIMIT } from '../constants/DataLimit';
@@ -11,10 +11,57 @@ import Alert from '@material-ui/lab/Alert';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
 
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import {makeStyles} from "@material-ui/core";
+import Card from '@material-ui/core/Card';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 
+const useStyles = makeStyles((theme) => ({
+textArea:{
+  border:"none",
+  outline:"none",
+  resize:"none",
+  minWidth:"100%",
 
+},
+input:{
+  border:"none",
+  outline:"none",
+  backgraund:"none",
+  minWidth:"100%",
+},
+card: {
+    minWidth: 300,
+    maxWidth:518,
+    margin:"auto",
+    marginTop:"-2rem",
+  },
+flex:{
+ display:"flex",
+ flexDirection:"column",
+},
+description:{
+  flexGrow:"1",
+},
+price:{
+},
+actions:{
+ flexGrow:"1",
+ display:"flex",
+ flexDirection:"row",
+},
+action:{
+  flexGrow:'1',
+  textAlign:"center",
+},
+button:{
+  marginTop:"0.8rem"
+},
+status:{
+  textAlign:"center",
+}
+}))
 
 
 
@@ -23,6 +70,7 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
  */
 function PostForm(){
   const [{ auth }] = useStore();
+  const classes = useStyles();
   const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
@@ -63,7 +111,7 @@ const handleOnFocus = () =>{
 
 
  const values = { title, image, price, authorId: auth.user.id };
- const [createPost, {error, loading }] = useMutation(CREATE_POST,{
+ const [createPost, {loading }] = useMutation(CREATE_POST,{
     variables: values,
     onError(err){
       setErrors(err)
@@ -87,50 +135,59 @@ const handleOnFocus = () =>{
 
 
   return(
-  <>
-    <Form onSubmit={ handleSubmit } id="postForm" className={loading ? "loading": ""} >
-       <Form.Field >
-         <TextareaAutosize
-            aria-label="minimum height"
-            placeholder="Describe your item"
-            name='title'
-            onFocus={handleOnFocus}
-            onChange={hadleTitleChangen}
-            value={values.title}
-            error= {error} />
-           <button>
-              <SendRoundedIcon  className ="SubmitPostBtn"  />
-            </button>
+  < div className={classes.container}>
+<Card className={classes.card}>
+    <form onSubmit={ handleSubmit } id="postForm"  >
 
-       </Form.Field>
-         <Input
-          label="Ksh."
-          labelPosition='left corner'
-          placeholder='Price...'
-          focus={isFocused}
-          onFocus={handleOnFocus}
-          value={values.price}
-          onChange={handlePriceChange}
-        />
-
-      {
-          (
-            <>
-          <PostImageUpload  label="Photo"  handleChange={handlePostImageUpload} />
-           </>
-            )
-      }
-    </Form>
-    {errors  &&(
+      <div className={classes.flex}>
+        <div className={classes.description}>
+            <TextareaAutosize
+                placeholder="describe your item"
+                rowsMin={3}
+                name='describe your item to help people understand what you are selling'
+                onFocus={handleOnFocus}
+                onChange={hadleTitleChangen}
+                value={values.title}
+                className={classes.textArea}
+                />
+        </div>
+        <div className={classes.price}>
+            <Input
+              placeholder='price...'
+              focus={isFocused}
+              onFocus={handleOnFocus}
+              value={values.price}
+              onChange={handlePriceChange}
+              className={classes.input}
+            />
+        </div>
+        <div className={classes.actions}>
+           <div className={classes.action}>
+              <PostImageUpload  label="Photo"  handleChange={handlePostImageUpload} />
+           </div>
+           <div className={classes.action}>
+              <button className={classes.button}>
+                  {<SendRoundedIcon  className ="SubmitPostBtn"/> }
+              </button>
+           </div>
+        </div>
+      </div>
+    </form>
+</Card>
+    <div className={classes.status}>
+        {loading && <CircularProgress />}
+    {errors  && (
       <div className="ui error message" style={{marginBottom:20, }}>
           {errors.message}
       </div>
     )}
-    { !errors && !loading && warning &&
+     {!errors && !loading && warning &&
       <div className="warning" style={{marginBottom:20}}>
            <Alert severity="success">{warning}</Alert>
       </div>}
-  </>
+
+    </div>
+  </div>
   )
 };
 

@@ -47,8 +47,7 @@ const username = pathname.split("/")[2]
     },
     });
 
-
-const spiner =   <div className={classes.root}>
+ const spiner =   <div className={classes.root}>
                     <CircularProgress disableShrink />
                   </div>
     if(loading){
@@ -58,22 +57,21 @@ const spiner =   <div className={classes.root}>
 
  return (
    <>
-<div className={classes.root}>
-      <GridList cellHeight={180} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-           <ListSubheader component="div">{username}</ListSubheader>
-        </GridListTile >
-        {posts.map((post) => (
-          <GridListTile key={post.id}>
-            <img src={image} alt={post.id} />
-            <GridListTileBar
-              title={`Ksh. ${post.price}`}
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
-
+      <div className={classes.root}>
+            <GridList cellHeight={180} className={classes.gridList}>
+              <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+                <ListSubheader component="div">{username}</ListSubheader>
+              </GridListTile >
+              {posts.map((post) => (
+                <GridListTile key={post.id}>
+                  <img src={image} alt={post.id} />
+                  <GridListTileBar
+                    title={`Ksh. ${post.price}`}
+                  />
+                </GridListTile>
+              ))}
+            </GridList>
+      </div>
    </>
  )
 }

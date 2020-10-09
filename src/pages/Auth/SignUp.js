@@ -119,62 +119,62 @@ const renderErrors = apiError => {
 
  return (
 <div className={classes.container}>
-<Card className={classes.card}>
-         <CardHeader
-         avatar={
-              <Avatar  alt="logo" src={logo} />
-             }
-        title={
-            <Typography variant="h4">
-                Sign-up
-            </Typography>
-            }
-      />
-      <CardContent>
-          <Form onSubmit={handleSubmit} noValidate className={loading ? "loading": ""}>
-            <Form.Input
-            label="Username"
-            placeholder="Username"
-            name= "username"
-            type="text"
-            error={ !values.username && errors ? true : false}
-            value ={values.username}
-            onChange={handleChange}
-            />
+    <Card className={classes.card}>
+            <CardHeader
+            avatar={
+                  <Avatar  alt="logo" src={logo} />
+                }
+            title={
+                <Typography variant="h4">
+                    Sign-up
+                </Typography>
+                }
+          />
+          <CardContent>
+              <Form onSubmit={handleSubmit} noValidate className={loading ? "loading": ""}>
+                <Form.Input
+                label="Username"
+                placeholder="Username"
+                name= "username"
+                type="text"
+                error={ !values.username && errors ? true : false}
+                value ={values.username}
+                onChange={handleChange}
+                />
 
-            <Form.Input
-            label="Phone"
-            placeholder="Phone"
-            name= "phone"
-            type="phone"
-            error={ !values.phone && errors ? true : false}
-            value={values.phone}
-            onChange={handleChange}
-            />
+                <Form.Input
+                label="Phone"
+                placeholder="Phone"
+                name= "phone"
+                type="phone"
+                error={ !values.phone && errors ? true : false}
+                value={values.phone}
+                onChange={handleChange}
+                />
 
-            <Form.Input
-            label="Password"
-            placeholder="Password"
-            name= "password"
-            type="password"
-            error={!values.password && errors ? true : false}
-            value={values.password}
-            onChange={handleChange}
-            />
+                <Form.Input
+                label="Password"
+                placeholder="Password"
+                name= "password"
+                type="password"
+                error={!values.password && errors ? true : false}
+                value={values.password}
+                onChange={handleChange}
+                />
 
-          <Button type="submit" primary className={classes.button}>
-              Sign-up
-          </Button>
-          </Form>
-          { errors && (
-          <Alert severity="error" className={classes.alert}>{renderErrors(errors)}</Alert>
-          )}
+              <Button type="submit" primary className={classes.button}>
+                  Sign-up
+              </Button>
+              </Form>
+              { errors && (
+              <Alert severity="error" className={classes.alert}>{renderErrors(errors)}</Alert>
+              )}
 
-            <IconButton aria-label="settings">
-               <InfoTwoToneIcon/> <Link to="/about" ><h5 >About us</h5> </Link>
-            </IconButton>
-      </CardContent>
-</Card>
+                <IconButton aria-label="settings">
+                  <InfoTwoToneIcon/> <Link to="/about" ><h5 >About us</h5> </Link>
+                </IconButton>
+          </CardContent>
+    </Card>
 </div>
  );
 }
