@@ -6,7 +6,6 @@
   width: 100vw;
   max-width: 900px;
   padding: 1rem;
-  background-color: #e1e1e1;
 }
 
 html,body {
@@ -24,7 +23,6 @@ body{
   scrollbar-width: none;
   margin: 0;
   font-family: sans-serif;
-  background-color: #000000;
 }
 .Menu{
   font-weight: bolder !important;
