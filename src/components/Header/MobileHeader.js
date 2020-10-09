@@ -2,7 +2,7 @@ import React from 'react'
 import {useRouteMatch} from 'react-router-dom'
 
 import LoggedOutMenu from "./LoggedOutMenu"
-import LoggedInMenu from "./LoggedInMenu"
+import SignedInMenu from "./SignedInMenu"
 import OtherMenu from "./OtherMenu"
 
 
@@ -17,7 +17,7 @@ const exact = location.isExact;
 
 return (
   <div>
-    {auth.user  && exact ? <LoggedInMenu/> : <LoggedOutMenu/>}
+    {auth.user  && exact ? <SignedInMenu/> : <LoggedOutMenu/>}
     {auth.user && !exact && <OtherMenu/>}
   </div>
 )

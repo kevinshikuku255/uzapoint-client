@@ -9,7 +9,6 @@ import { CLEAR_AUTH_USER } from '../../store/auth';
  */
 const SignOut = () => {
   const [, dispatch] = useStore();
-
   const handleSignOut = () => {
     dispatch({ type: CLEAR_AUTH_USER });
     localStorage.removeItem("jwt");

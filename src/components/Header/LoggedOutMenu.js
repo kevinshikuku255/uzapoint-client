@@ -37,9 +37,9 @@ const menuBar = (
             active={activeItem === 'home'}
             onClick={handleItemClick}
             as ={Link}
-            to= '/'
+            to= '/Explore'
           ><HomeIcon/>
-          
+
           </Menu.Item>
           <Menu.Item/>
           <Menu.Item/>
@@ -55,7 +55,7 @@ const menuBar = (
             active={activeItem === 'home'}
             onClick={handleItemClick}
             as ={Link}
-            to= '/'
+            to= '/Explore'
           ><HomeIcon/></Menu.Item>
 
           <Menu.Item>

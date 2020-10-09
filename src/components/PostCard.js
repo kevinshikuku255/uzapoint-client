@@ -128,7 +128,7 @@ const extra = (
           <CardMedia
               className={classes.media}
               image={shoes}
-              title="post"
+              title={`${price} shillings`}
             />
           </Link>
      <CardContent>

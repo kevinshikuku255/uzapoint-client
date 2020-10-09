@@ -8,13 +8,11 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import HelpIcon from '@material-ui/icons/Help';
-import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
-import ThumbDown from '@material-ui/icons/ThumbDown';
-import ThumbUp from '@material-ui/icons/ThumbUp';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import UserSales from "./UserSales"
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -72,7 +70,6 @@ export default function UserTabs() {
           value={value}
           onChange={handleChange}
           variant="scrollable"
-          scrollButtons="on"
           indicatorColor="primary"
           textColor="primary"
           aria-label="scrollable force tabs example"
@@ -81,9 +78,6 @@ export default function UserTabs() {
           <Tab  icon={<FavoriteIcon />} {...a11yProps(1)} />
           <Tab  icon={<PersonPinIcon />} {...a11yProps(2)} />
           <Tab  icon={<HelpIcon />} {...a11yProps(3)} />
-          <Tab  icon={<ShoppingBasket />} {...a11yProps(4)} />
-          <Tab  icon={<ThumbDown />} {...a11yProps(5)} />
-          <Tab  icon={<ThumbUp />} {...a11yProps(6)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -93,18 +87,9 @@ export default function UserTabs() {
          <UserSales/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        More
+         Me
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Place holder
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Place holder
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Place holder
-      </TabPanel>
-      <TabPanel value={value} index={6}>
         Place holder
       </TabPanel>
     </div>

@@ -82,8 +82,8 @@ tabs:{
    )
  }
 
- const {  username} = data.getAuthUser;
-
+ const {  username, likes} = data.getAuthUser;
+ console.log(likes)
 // const joinedDate = currentDate(createdAt).split(" ")
  return (
   <div>

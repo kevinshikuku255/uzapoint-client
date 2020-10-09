@@ -83,7 +83,7 @@ const dispatchAction = (token) =>{
     localStorage.setItem('jwt',token);
     const decodedToken = jwtDecode(token);
     dispatchAction(decodedToken)
-    history.push("/");
+    history.push("/Me");
  },
  variables : values,
   onError(err){

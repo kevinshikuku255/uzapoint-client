@@ -56,9 +56,9 @@ if(!data && !loading ){
         left:"5vw",
         marginTop:"0.2rem",
         fontWeight: "bold",
+        fontSize:"1rem",
         zIndex:"12", }
        }>
-         { auth.user  ? <h3>Windoshoppe</h3> :""}
        </div>
         <GridColumn mobile={16} tablet={10} computer={8} className="HomeGridColumn">
             <Grid.Row >
