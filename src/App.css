@@ -6,7 +6,6 @@
   width: 100vw;
   max-width: 900px;
   padding: 1rem;
-  background-color: #5d5dd1;
 }
 
 html,body {
@@ -15,7 +14,6 @@ html,body {
   overflow-x: hidden;
   height: 100vh;
   width: 100vw;
- background-color: #5d5dd1;
 }
 
 body{
