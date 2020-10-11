@@ -149,7 +149,7 @@ const handleOnFocus = () =>{
                <div className={classes.flex}>
                   <div className={classes.description}>
                       {imgData &&   <div className={classes.previewBox}>
-                          <img className={classes.imgPreview} src={imgData} />
+                          <img className={classes.imgPreview} src={imgData} alt="imagePreview" />
                       </div>}
                       <TextareaAutosize
                           placeholder="Describe your item"
