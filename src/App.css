@@ -24,6 +24,7 @@ body{
   scrollbar-width: none;
   margin: 0;
   font-family: sans-serif;
+  background-color: #000000;
 }
 .Menu{
   font-weight: bolder !important;
@@ -92,41 +93,10 @@ background: none !important;
 
 }
 
-/* .ui.form textarea {
-    margin: 0;
-    -webkit-appearance: none;
-    padding: .78571429em 1em;
-    background:#00808007 !important;
-    border: none !important;
-    outline: 0;
-    color:rgb(0, 0, 0) !important;
-    border-radius: .28571429rem;
-    box-shadow: 0 0 0 0 transparent inset;
-    transition: color .1s ease,border-color .1s ease;
-    font-size: 1rem !important;
-    font-family: sans-serif;
-    font-weight: bold;
-    line-height: 1.2857;
-    resize: none !important;
-    outline: none !important;
-    overflow: hidden;
-} */
-/* #postForm{
-  width: 70%;
-  margin: auto;
-  margin-top: 4rem !important;
-} */
-
 .ui.form textarea {
   resize: none;
 }
-/* .SubmitPostBtn{
-  position: absolute;
-  top:-2rem;
-  left: 65vw;
-  z-index: 13;
-  background-color: none !important;
-} */
+
 
 i{
   font-size: 1.5rem;
@@ -257,13 +227,6 @@ background-color: #6d6dcc !important;
 }
 
 /* user about*/
-.sales{
-  font-size: x-large;
-  color: red;
-  font-weight: bolder;
-  text-align: center;
-  margin-top: 10rem;
-}
 .userBio{
   display: grid;
 }
@@ -313,6 +276,13 @@ background-color: #6d6dcc !important;
 .copyWrite{
  font-size: smaller;
  font-weight: bolder;
+}
+
+.priceInput{
+  background-color: red;
+  border: none;
+  background: none;
+  outline: none;
 }
 
 /** Media queries*/

@@ -1,12 +1,12 @@
 import React from "react";
-import MobileHeader from "./MobileHeader"
+import AppHeader from "./Header"
 
 
 
 
 const Header = () =>{
   return(
-    <MobileHeader/>
+    <AppHeader/>
   )
  }
 export default Header;

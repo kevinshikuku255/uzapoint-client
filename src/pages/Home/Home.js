@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     margin:"auto",
   },
   container:{
-    margin: theme.spacing(0,-6,0,-7),
+    margin: theme.spacing(-2,-6,0,-7),
   },
 }));
 
@@ -47,8 +47,6 @@ if(loading){
 
    )
 }
-
-
 if(!data && !loading ){
    return(
        <SkeletonPost />
@@ -62,7 +60,7 @@ if(!data && !loading ){
    <CardContent >
       <Transition.Group >
            { data && data.getPosts.posts.map( post =>
-               <div key={post.id} style={{marginBottom:15}}>
+               <div key={post.id} style={{marginBottom:-3}}>
                     <PostCard  post={post}/>
                </div>)}
       </Transition.Group>

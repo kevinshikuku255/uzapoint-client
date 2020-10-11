@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    position:"absolute", right:"0",
   },
   title: {
     flexGrow: 1,
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function TemporaryDrawer() {
+export default function AppDrawer() {
   const classes = useStyles();
   const [state, setState] = useState({
     right: false,
@@ -136,7 +137,7 @@ export default function TemporaryDrawer() {
 
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
             {list(anchor)}
-          </Drawer>
+            </Drawer>
         </React.Fragment>
       ))}
     </div>

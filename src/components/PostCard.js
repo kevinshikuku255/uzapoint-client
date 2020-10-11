@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   margin:"1rem"
   },
  acordion:{
-   marginTop: "-1rem",
+   marginTop: "-1.5rem",
  }
 }));
 
