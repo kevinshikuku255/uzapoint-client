@@ -17,7 +17,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
+
 
 
 
@@ -90,11 +90,6 @@ div:{
   },
 }));
 //..................................................................................
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
 
 
 
@@ -173,7 +168,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 {/* ...................................................................................................... */}
 
-      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+      <Dialog fullScreen open={open} onClose={handleClose} >
         <AppBar className={classes.appBar} >
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
