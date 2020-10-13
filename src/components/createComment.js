@@ -16,6 +16,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import AddCommentRoundedIcon from '@material-ui/icons/AddCommentRounded';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 
 
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   resize: "none",
   outline: "none",
   },
-    addButton: {
+ addButton: {
     position: 'fixed',
     top:"0",
     right:"20vw",
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   comment:{
     display:"flex",
     flexDirection:"row",
-    marginTop:"1rem",
+    marginTop:"0.2rem",
     aligncontent: "flex-end",
     color:"gray",
   },
@@ -65,6 +67,8 @@ function SinglePost({comments, match}){
   const [open, setOpen] = useState(false);
   const commentInputRef = useRef(null)
   const [comment, setComment] = useState('');
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
 
   const handleClickOpen = () => {
@@ -112,6 +116,7 @@ const Input = (
                 placeholder="Reply"
                 name="comment"
                 className={classes.input}
+                autoFocus
                 value={comment}
                 ref={commentInputRef}
                 onChange={ e => setComment(e.target.value)}
@@ -128,23 +133,22 @@ return (
           <Dialog
             open={open}
             onClose={handleClose}
+            fullScreen={fullScreen}
           >
-            <DialogContent>
+            <DialogContent >
                 {Input}
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} color="primary">
                 cancel
               </Button>
-              <Button onClick={handleSubmit} color="primary" autoFocus>
+              <Button onClick={handleSubmit} color="primary" autoFocus disabled={!comment}>
                 Send
               </Button>
             </DialogActions>
           </Dialog>
 
-            <TransitionGroup>
-
-
+        <TransitionGroup>
           <div>
             {comments && comments.map( comment =>(
                <div key={comment.id} className={classes.comment}>
@@ -158,37 +162,6 @@ return (
                </div>
             ))}
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/*
-            <List divided relaxed>
-            {comments && comments.map(comment => (
-                <List.Item key={comment.id}>
-              <List.Content>
-                <List.Header className={classes.comment}>{comment.comment}</List.Header>
-                <List.Description >
-                      {user && user.username === comment.author.username &&
-                      <DeleteButton  commentId={comment.id}/> }
-                </List.Description>
-              </List.Content>
-            </List.Item>
-            ))}
-            </List> */}
         </TransitionGroup>
     </>
       )

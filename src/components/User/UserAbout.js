@@ -1,12 +1,13 @@
 import React from 'react'
 import { Button ,Grid} from 'semantic-ui-react';
-import { Link } from "react-router-dom";
 
 
 
-import {makeStyles} from "@material-ui/core"
+
+import {makeStyles} from "@material-ui/core";
 import { currentDate } from '../../Utils/date';
 import images from "../shoes.jpeg";
+import UserPosts from "./AuthUserPosts"
 
 import Avatar from '@material-ui/core/Avatar';
 import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
@@ -16,7 +17,26 @@ import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 
+import Dialog from '@material-ui/core/Dialog';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
+
+
+
+
 const useStyles = makeStyles((theme) => ({
+  appBar: {
+    position: 'fixed',
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
+//.........................................
+
 flexContainer:{
   display:"flex",
   flexDirection:"column",
@@ -50,18 +70,39 @@ Icon:{
   }
 }));
 
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+
+
 /**
  * About user...
  */
 
 const  UserAbout = ({user}) =>{
   const   classes = useStyles();
+
+//.......................................................................
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const {
         username,
         createdAt, posts,
         phone,
         followers, following } = user;
 const joinedDate = currentDate(createdAt).split(" ")
+
+
  return (
   <>
   <Grid>
@@ -101,7 +142,7 @@ const joinedDate = currentDate(createdAt).split(" ")
                  <MonetizationOnRoundedIcon/>
               </div>
               <div> <b>Items Dispalyed - {posts.length}</b> <br/>
-                <Button icon circular content="View all  items" as={Link} to={`/userPosts/${username}`}/>
+                <Button icon circular content="View all  items" onClick={handleClickOpen}/>
                </div>
           </div>
 {/**.......................................................................................................... */}
@@ -113,6 +154,26 @@ const joinedDate = currentDate(createdAt).split(" ")
                </div>
           </div>
     </div>
+
+
+{/* ...................................................................................................... */}
+
+      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+        <AppBar className={classes.appBar} >
+          <Toolbar>
+            <Typography variant="h6" className={classes.title}>
+               {username}
+            </Typography>
+            <button  color="white" onClick={handleClose}>
+               <CloseIcon />
+            </button>
+          </Toolbar>
+        </AppBar>
+
+         <div>
+           <UserPosts username={username} posts={posts}/>
+         </div>
+      </Dialog>
     </Grid.Column>
   </Grid>
 

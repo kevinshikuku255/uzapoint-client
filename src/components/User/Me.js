@@ -4,63 +4,96 @@ import { Grid, Item} from 'semantic-ui-react'
 import SkeletonPost from '../../components/SinglePostSkeleton';
 import { makeStyles } from '@material-ui/core/styles';
 import shoes from "../shoes.jpeg"
-import { Link } from "react-router-dom";
-
+import UserPosts from "./UserPosts"
 
 
 import {GET_AUTH_USER} from "../../graphql/user";
-
 import Avatar from '@material-ui/core/Avatar';
+
+
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
+
 
 
 
 
 const useStyles = makeStyles((theme) => ({
-  skeleton: {
-    margin: theme.spacing(6.5,0,0,0),
+
+  appBar: {
+    position: 'fixed',
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
+
+//...............................................................
+skeleton: {
+  margin: theme.spacing(6.5,0,0,0),
   },
 flexContainer:{
   display:"flex",
   flexDirection:"column",
   marginTop:"2rem",
 },
-flex:{
- marginBottom:"1rem",
- marginTop:"3rem",
- alignSelf:"center"
-},
-flex1:{
- display:"flex",
- marginBottom:"2rem",
- paddingLeft:"3rem"
+bio:{
+ marginLeft:"3rem",
 },
 large: {
-    width: theme.spacing(20),
-    height: theme.spacing(20),
+    width: theme.spacing(10),
+    height: theme.spacing(10),
   },
+tabs:{
+   margin: theme.spacing(0,-1.5,0,-1.5),
+   display:"flex",
+   flexDirection:"row",
+   marginTop:"4rem",
+},
+tab1:{
+  flexGrow:'0.5',
+  alignItems:"center",
+  marginLeft:"3rem",
+  marginBottom:".05rem",
+},
+tab:{
+  flexGrow:'1',
+  textAlign:"center",
+  cursor:"pointer",
+  marginBottom:"0.5rem",
+},
+editProfile:{
+  flexGrow:"1",
+  backgroundColor:"gray",
+  textAlign:"center",
+  marginTop:"0.5rem",
+  borderRadius:"5px"
+},
+link:{
+  color:"inherit",
+},
+div:{
+ overFlow:"none",
+},
   footer:{
   position: "fixed",
   width: "100vw",
   bottom: 0,
   textAlign: "center",
   backgroundColor:"white",
-  color:"gray"
+  color:"gray",
   },
-tabs:{
-   margin: theme.spacing(0,-1.5,0,-1.5),
-   display:"flex",
-   flexDirection:"row",
-   backgroundColor:"whitesmoke",
-   borderRadius:"5px"
-},
-tab:{
-  flexGrow:'1',
-  textAlign:"center"
-},
-link:{
-  color:"inherit"
-}
 }));
+//..................................................................................
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 
 
@@ -70,6 +103,22 @@ link:{
  */
   const  UserAbout = () =>{
   const classes = useStyles();
+
+//.......................................................................
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
+
+
+
   const {data, loading} = useQuery(GET_AUTH_USER,{
     fetchPolicy:"cache-first"
   });
@@ -83,7 +132,7 @@ link:{
    )
  }
 
- const {  username, posts, followers} = data.getAuthUser;
+ const {  username, posts, phone, followers} = data.getAuthUser;
 // const joinedDate = currentDate(createdAt).split(" ")
  return (
   <div>
@@ -91,27 +140,56 @@ link:{
     <Grid.Column mobile={16} tablet={10} computer={7}>
       <div className={classes.flexContainer}>
 {/**.......................................................................................................... */}
-          <div className={classes.flex}>
-              <div className={classes.Dp}>
-                    <Avatar alt={username} src={shoes} className={classes.large}/>
-              </div>
-          </div>
-{/**.......................................................................................................... */}
+
           <div className={classes.tabs}>
-                <div className={classes.tab}>
-                  <Item as={Link} to={`/userPosts/${username}`}  className={classes.link}>
-                      {posts.length}
-                      <p>posts</p>
-                  </Item>
-                </div>
-                <div className={classes.tab}>
-                  <p>new conversations</p>
+                <div className={classes.tab1}>
+                  <Avatar alt={username} src={shoes} className={classes.large}/>
                 </div>
                 <div className={classes.tab}>
                   <p>folowers</p>
                   {followers.length}
                 </div>
+                <div className={classes.tab}>
+                  <Item   className={classes.link} onClick={handleClickOpen}>
+                      {posts.length}
+                      <p>posts</p>
+                  </Item>
+                </div>
           </div>
+
+
+
+          <div className={classes.bio}>
+                   <p style={{padding:"0", margin:"0"}}>{username}</p>
+                   <p style={{padding:"0", margin:"0"}}>{phone}</p>
+          </div>
+
+          <div className={classes.editProfile}>
+                <div>
+                  <b><button>Edit profile</button></b>
+                </div>
+          </div>
+
+
+{/* ...................................................................................................... */}
+
+      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+        <AppBar className={classes.appBar} >
+          <Toolbar>
+            <Typography variant="h6" className={classes.title}>
+               {username}
+            </Typography>
+            <Button color="inherit" onClick={handleClose}>
+               <CloseIcon />
+            </Button>
+          </Toolbar>
+        </AppBar>
+
+         <div className={classes.div}>
+           <UserPosts posts={posts}/>
+         </div>
+      </Dialog>
+
     </div>
 
     </Grid.Column>

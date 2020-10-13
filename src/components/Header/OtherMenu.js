@@ -5,19 +5,11 @@ import {Link} from "react-router-dom"
 import HomeIcon from '@material-ui/icons/Home';
 
 
-import { makeStyles } from '@material-ui/core/styles';
-const useStyles = makeStyles((theme) => ({
-  i: {
-  color:"pink",
-  fontSize: "small",
-  }
-}));
 
 
 
 
 function OtherMenu() {
- const classes = useStyles();
  const pathName = window.location.pathname;
  const path = pathName === "/" ? "home" : pathName.substr(1)
 
@@ -30,8 +22,9 @@ function OtherMenu() {
 
 
 const menuBar = (
+
   <Segment inverted className="Menu" >
-        <Menu inverted pointing secondary fluid className="menu">
+        <Menu  inverted pointing secondary>
            <Menu.Item
             name='home'
             active={activeItem === 'home'}
@@ -39,17 +32,17 @@ const menuBar = (
             as ={Link}
             to= '/'
           >
-           <HomeIcon/>
+             <HomeIcon/>
           </Menu.Item>
           <Menu.Item>
-            {title === "" && <i className={classes.i}>Explore Items</i> }
-            {title === "createPost" && <i className={classes.i}>Display an Item</i> }
-            {title === "serch" && <i className={classes.i} >Search</i> }
-            {title === "about" && <i className={classes.i} >About us</i> }
-            {title === "Me" && <i className={classes.i} >Profile</i> }
+                {title === "" && <i>Explore Items</i> }
+                {title === "createPost" && <i>Display an Item</i> }
+                {title === "serch" && <i>Search</i> }
+                {title === "about" && <i >About us</i> }
+                {title === "Me" && <i>Profile</i> }
           </Menu.Item>
         </Menu>
-      </Segment>
+   </Segment>
       )
 
     return menuBar;

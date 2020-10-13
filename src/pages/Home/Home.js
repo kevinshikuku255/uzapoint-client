@@ -18,10 +18,9 @@ const useStyles = makeStyles((theme) => ({
   skeleton: {
     margin: theme.spacing(10,0,0,0),
   },
-  card: {
-    minWidth: "100vw",
-    maxWidth:518,
-    margin:"auto",
+    card: {
+    maxWidth:550,
+    margin: theme.spacing(2,-1.6,0,-0.6),
   },
   container:{
     margin: theme.spacing(-2,-6,0,-7),
@@ -60,7 +59,7 @@ if(!data && !loading ){
    <CardContent >
       <Transition.Group >
            { data && data.getPosts.posts.map( post =>
-               <div key={post.id} style={{marginBottom:-3}}>
+               <div key={post.id} style={{marginBottom:-30}}>
                     <PostCard  post={post}/>
                </div>)}
       </Transition.Group>
@@ -69,31 +68,6 @@ if(!data && !loading ){
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-{/*
-
-    <Grid className={ "HomeGridd"} inverted>
-        <GridColumn mobile={16} tablet={10} computer={8} className="HomeGridColumn">
-            <Grid.Row >
-               <Transition.Group >
-               { data && data.getPosts.posts.map( post =>
-                  <Grid.Column key={post.id} style={{marginBottom:15}}  >
-                     <PostCard  post={post}/>
-                  </Grid.Column>
-                  )}
-               </Transition.Group>
-            </Grid.Row>
-        </GridColumn>
-    </Grid> */}
 </>
  )
 }

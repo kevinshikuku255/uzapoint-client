@@ -40,7 +40,7 @@ actions:{
 },
 action:{
   flexGrow:'1',
-  textAlign:"center",
+  textAlign:"start",
 },
 textArea:{
   border:"none",
@@ -79,51 +79,21 @@ function PostForm(){
   const [imgData, setImgData] = useState(null);
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
+
   const [isFocused, setIsFocused] = useState(false);
   const [errors, setErrors] = useState('');
   const [warning, setWarning] = useState('');
 
 
+// console.log(image)
 
- const handleReset = () => {
-    setTitle('');
-    setImage('');
-    setErrors('');
-    setPrice('')
-  };
-
-const handleOnFocus = () =>{
-   setIsFocused(true);
-   setWarning("")}
-
-
-/**
- * handles post image upload !
- */
- const handlePostImageUpload = e => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    if (file.size >= MAX_POST_IMAGE_SIZE) {
-         throw new Error( `File size should be less then ${MAX_POST_IMAGE_SIZE / 3000000}MB`)
-    }
-   setImage(file);
-   const reader = new FileReader();
-      reader.addEventListener("load", () => {
-        setImgData(reader.result);
-      });
-    reader.readAsDataURL(e.target.files[0]);
-
-    e.target.value = null;
-  };
-
-
+// console.log(imgData)
 
 
  const values = { title, image, price, authorId: auth.user.id };
  const [createPost, {loading }] = useMutation(CREATE_POST,{
     variables: values,
-    onError(err){
+      onError(err){
       setErrors(err)
     },
     refetchQueries:[{query:GET_POSTS, variables:{
@@ -133,23 +103,54 @@ const handleOnFocus = () =>{
 });
 
 
+/**
+ * handles post image upload !
+ */
+ const handlePostImageUpload = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size >= MAX_POST_IMAGE_SIZE) {
+         throw new Error( `File size should be less then ${MAX_POST_IMAGE_SIZE / 3000000}MB`)
+    }
+
+
+   const preview = URL.createObjectURL(e.target.files[0])
+   setImgData(preview);
+   setImage(e.target.files[0]);
+  };
+
+
+/**
+ * Handles change
+ */
   const hadleTitleChangen = e => setTitle(e.target.value);
   const handlePriceChange = e => setPrice(e.target.value);
 
   const handleSubmit = async (e) => {
      e.preventDefault();
      createPost();
+     setWarning("sent");
      handleReset();
-     setWarning("sent")
   };
+ const handleOnFocus = () =>{
+      setIsFocused(true);
+      setWarning("")
+      setErrors('');
+   };
 
+ const handleReset = () => {
+        setImage('');
+        setErrors('');
+        setPrice('')
+        setImgData(null)
+  };
 
   return(
 <>
                <div className={classes.flex}>
                   <div className={classes.description}>
                       {imgData &&   <div className={classes.previewBox}>
-                          <img className={classes.imgPreview} src={imgData} alt="imagePreview" />
+                          <img className={classes.imgPreview} src={imgData} alt="preview" />
                       </div>}
                       <TextareaAutosize
                           placeholder="Describe your item"
@@ -176,6 +177,7 @@ const handleOnFocus = () =>{
                     <div className={classes.action}>
                         <PostImageUpload  label="Photo"  handleChange={handlePostImageUpload} />
                     </div>
+
                     <div className={classes.action}>
                         <button className={classes.button} onClick={ handleSubmit }>
                             {<SendRoundedIcon  className ="SubmitPostBtn"/> }

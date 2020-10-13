@@ -27,7 +27,7 @@ body{
 }
 .Menu{
   font-weight: bolder !important;
-  background-color: #6d6dcc !important;
+  background-color:#3f51b5 !important;
   padding: 0 !important;
   margin: 0 !important;
 }
@@ -39,11 +39,7 @@ body{
 .HomeGridColumn{
  margin: auto;
 }
-/* .LoadingBtn{
-  margin: auto !important;
-  outline: none !important;
-  background: none !important;
-} */
+
 button{
   outline: none;
   border: none;

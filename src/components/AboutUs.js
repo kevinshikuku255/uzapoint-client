@@ -16,7 +16,13 @@ const useStyles = makeStyles((theme) => ({
   },
   paragraph:{
      margin: theme.spacing(8,1,0,1),
-    overflowWrap:"break-word"
+     overflowWrap:"break-word"
+  },
+  h4:{
+    color:"skyBlue",
+    fontSize:"2rem",
+    fontStyle:"italic",
+    fontStretch:"condensed",
   }
 }));
 
@@ -38,7 +44,8 @@ const panels = [
   {
     key: 2,
     title:"CONTACT US",
-    content: "For any Info, Advertising, Reports or Contributions on Quality of our service Call or WhatsApp: 0740253367 your support to us will be apreciated"
+    content: "For any Info, Advertising, Reports or Contributions" +
+             "on Quality of our service Call or WhatsApp: 0740253367 your support to us will be apreciated"
   },
   {
     key: 3,
@@ -59,7 +66,7 @@ const AboutUs = () => {
     return(
     <>
     <div className={classes.paragraph}>
-      <h4>Windoshoppe </h4>
+      <h4 className={classes.h4}>Windoshoppe </h4>
     </div>
       <Card className={classes.card}>
       <Accordion

@@ -8,7 +8,7 @@ import OtherMenu from "./OtherMenu"
 
 import { useStore } from '../../store';
 
-function MobileHeader() {
+function Header() {
 const location = useRouteMatch();
 
 
@@ -23,4 +23,4 @@ return (
 )
 
 }
-export default MobileHeader
+export default Header;

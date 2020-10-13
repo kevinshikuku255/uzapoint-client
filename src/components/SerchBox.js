@@ -1,56 +1,56 @@
 import React from 'react'
-import { Accordion } from 'semantic-ui-react'
-import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
+// import {useQuery} from "@apollo/client"
 
+// import  {useDebounce} from "../Utils/useDebounce"
+// import { SEARCH_USERS } from '../graphql/user';
 
 
 
 const useStyles = makeStyles((theme) => ({
-  card: {
-    minWidth: 300,
-    maxWidth:518,
-  },
-  media: {
-    height: 190,
-  },
-  paragraph:{
-     margin: theme.spacing(8,1,0,1),
+  root:{
+     margin: theme.spacing(5,1,0,1),
     overflowWrap:"break-word"
   }
 }));
 
 
 
-
-const panels = [
-  {
-    key: 1,
-    title:" Search",
-    content: "This feature will be added soon... You will be able to serch throught items and find what you want."
-  },
-]
-
-
-
 const AboutUs = () => {
   const classes = useStyles();
-    return(
-    <>
+  // const [searchQuery, setsearchQuery] = useState("")
+  // const [search, setSearch] = useState("")
 
-    <div className={classes.paragraph}>
-      <h4>Windowshop </h4>
+// Debounce search query value
+// const debounceSearchQuery = useDebounce(searchQuery, 500);
+
+  // const {data, loading} = useQuery(SEARCH_USERS, {
+  //   variables:{
+  //      searchQuery: "v"
+  //   }
+  // });
+
+  // console.log(data)
+  // const handleChange = (e) =>{
+  //      e.preventDefault();
+  //     searchQuery( e.target.value);
+  // };
+
+
+
+    return(
+    <div className={classes.root}>
+      {/* <input
+        type="Search"
+        className={classes.search}
+        placeholder="Search a user"
+        value={searchQuery}
+        onChange={handleChange}
+      /> */}
+
+ <h3 style={{color:"red"}}>This feature is coming soon</h3>
+
     </div>
-      <Card className={classes.card}>
-      <Accordion
-        defaultActiveIndex={[0]}
-        panels={panels}
-        exclusive={false}
-        fluid
-      />
-      </Card>
-    </>
     )
 }
-
 export default AboutUs;

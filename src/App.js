@@ -6,7 +6,6 @@ import * as Routes from "./store/routes";
 
 
 
-import AuthRoute  from "./Utils/authRoute";
 import SignIn  from "./pages/Auth/SignIn";
 import SignUp  from "./pages/Auth/SignUp";
 import Header  from "./components/Header";
@@ -37,15 +36,14 @@ function App() {
              <div className=" ui container">
                   <Header/>
                   <Switch>
-                        <AuthRoute exact path='/login' component={SignIn}/>
-                        <AuthRoute exact path='/register' component={SignUp}/>
+                        <Route exact path='/login' component={SignIn}/>
+                        <Route exact path='/register' component={SignUp}/>
                         <Route exact path="/Explore" component={Explore}/>
                         <Route exact path="/posts/:postId" component={Routes.SinglePost}/>
                         <Route exact path="/profile/:id" component={Routes.Profile}/>
                         <Route exact path="/me" component={Routes.Me}/>
                         <Route exact path="/about" component={AboutUs}/>
                         <Route exact path="/userPosts/:username" component={Routes.UserPosts}/>
-
                   </Switch>
                   </div>
               </Suspense>

@@ -29,13 +29,8 @@ import Typography from '@material-ui/core/Typography';
 
 
 const useStyles = makeStyles((theme) => ({
-  card: {
-    minWidth: 300,
-    maxWidth:550,
-    margin: theme.spacing(0,0,0,0),
-  },
   media: {
-    height: 190,
+    height: 200,
   },
   paragraph:{
      margin: theme.spacing(2,1,0,1),
