@@ -5,9 +5,6 @@ import {GET_USER_POSTS} from "../../graphql/user"
 import image from "../shoes.jpeg"
 
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
@@ -23,13 +20,23 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     marginTop:"4.5rem"
   },
-  gridList: {
-    width: 600,
-  },
-i: {
-  color:"black",
-  fontSize: "small",
-  zIndex:"10"
+flex:{
+  marginTop:"4.5rem",
+  maxWidth: 558,
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent:"center",
+},
+flexItem:{
+  backgroundColor: "#f1f1f1",
+  maxWidth: "100px",
+  maxHeight: "100px",
+  margin:"1px",
+  textalign:" center",
+},
+img:{
+  width:"100%",
+  height:"100%",
 }
 }));
 
@@ -47,24 +54,21 @@ const  UserPosts = ({username}) => {
   });
 
    const spiner =   <div className={classes.root}>
-                    <CircularProgress disableShrink /> </div>
+                      <CircularProgress disableShrink />
+                    </div>
     if(loading){ return spiner }
 
     const posts = data.getUserPosts.posts;
 
  return (
    <>
-      <div className={classes.root}>
-            <GridList cellHeight={180} className={classes.gridList}>
-              {posts.map((post) => (
-                <GridListTile key={post.id}>
-                  <img src={image} alt={post.id} />
-                  <GridListTileBar
-                    title={`Ksh. ${post.price}`}
-                  />
-                </GridListTile>
-              ))}
-            </GridList>
+
+      <div className={classes.flex}>
+          {posts.map((post,index) => (
+              <div className={classes.flexItem} key={index}>
+                    <img src={image} alt={post.id} className={classes.img} />
+              </div>
+          ))}
       </div>
    </>
  )

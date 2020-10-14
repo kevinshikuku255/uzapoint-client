@@ -5,17 +5,8 @@ import {Link} from "react-router-dom"
 import HomeIcon from '@material-ui/icons/Home';
 
 
-import { makeStyles } from '@material-ui/core/styles';
-const useStyles = makeStyles((theme) => ({
-  i: {
-  color:"rgb(255, 192, 225)",
-  fontSize: "small",
-  }
-}));
-
 
 function LoggedOutMenu() {
- const classes = useStyles();
  const pathName = window.location.pathname;
  const path = pathName === "/" ? "home" : pathName.substr(1)
 
@@ -39,12 +30,10 @@ const menuBar = (
             as ={Link}
             to= '/Explore'
           ><HomeIcon/>
-
-          </Menu.Item>
-          <Menu.Item/>
-          <Menu.Item/>
-          <Menu.Item >
-             <i className={classes.i}>About us</i>
+            </Menu.Item>
+            <Menu.Item/>
+            <Menu.Item >
+             <i>About us</i>
           </Menu.Item>
    </Menu>
  </Segment>
@@ -59,9 +48,9 @@ const menuBar = (
           ><HomeIcon/></Menu.Item>
 
           <Menu.Item>
-            {title === "" && <i className={classes.i} >Explore Items</i> }
-            {title === "login" && <i className={classes.i} >Login</i> }
-            {title === "register" && <i className={classes.i} >Create account</i> }
+            {title === "Explore" && <i> Explore Items</i> }
+            {title === "login" && <i> Login</i> }
+            {title === "register" && <i> Create account</i> }
           </Menu.Item>
 
           <Menu.Menu position='right' className="Menu_Menu">

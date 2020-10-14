@@ -71,7 +71,6 @@ Icon:{
 }));
 
 
-
 /**
  * About user...
  */
@@ -152,7 +151,8 @@ const joinedDate = currentDate(createdAt).split(" ")
 
 
 {/* ...................................................................................................... */}
-      <Dialog fullScreen open={open} onClose={handleClose}>
+
+      <Dialog fullScreen open={open} onClose={handleClose} >
         <AppBar className={classes.appBar} >
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
@@ -164,9 +164,10 @@ const joinedDate = currentDate(createdAt).split(" ")
           </Toolbar>
         </AppBar>
 
-         <div>
-           <UserPosts username={username} posts={posts}/>
-         </div>
+        <div>
+            <UserPosts username={username} posts={posts}/>
+        </div>
+
       </Dialog>
     </Grid.Column>
   </Grid>

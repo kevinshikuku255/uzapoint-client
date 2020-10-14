@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 flex:{
  display:"flex",
  flexDirection:"column",
- marginTop:"3rem",
+ marginTop:"4.5rem",
 maxWidth:518,
 },
 description:{
@@ -63,7 +63,6 @@ imgPreview:{
     width:"5rem",
     height:"5rem",
 },
-
 }))
 
 
@@ -84,10 +83,6 @@ function PostForm(){
   const [errors, setErrors] = useState('');
   const [warning, setWarning] = useState('');
 
-
-// console.log(image)
-
-// console.log(imgData)
 
 
  const values = { title, image, price, authorId: auth.user.id };

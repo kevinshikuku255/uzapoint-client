@@ -45,14 +45,13 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     overflow: "hidden",
     textAlign:"centre"
-
   },
   li:{
   display: "inline",
   margin:"1rem"
   },
  acordion:{
-   marginTop: "-1.5rem",
+   marginTop: "-1.2rem",
  }
 }));
 

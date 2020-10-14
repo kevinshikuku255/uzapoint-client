@@ -13,11 +13,10 @@ import AboutUs from  "./components/AboutUs";
 import Explore from "./pages/Home/Explore"
 
 
-
-
 // Prefetch  components
   Routes.Me.load()
   Routes.UserPosts.load()
+  Routes.Profile.load()
 
 function App() {
   return (
@@ -29,8 +28,10 @@ function App() {
                                             width:"100vw",
                                             justifyContent:"center",
                                             alignItems: "center",
-                                            backgroundColor: "#6d6dcc"
+                                            backgroundColor: "skyBlue",
+                                            fontSize:"10rem"
                                           }}>
+                                <h1>...</h1>
 
                                </div>}>
              <div className=" ui container">
@@ -45,7 +46,7 @@ function App() {
                         <Route exact path="/about" component={AboutUs}/>
                         <Route exact path="/userPosts/:username" component={Routes.UserPosts}/>
                   </Switch>
-                  </div>
+             </div>
               </Suspense>
           </Router>
 </>

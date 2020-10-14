@@ -39,8 +39,8 @@ postMarkup:{
  justifyContent:"spaceAround",
  alignItems:"center",
  marginTop:"-1rem",
- marginBottom:"1rem"
-},
+ marginBottom:"1rem",
+}
 }));
 
 
@@ -51,8 +51,7 @@ function SinglePost({history, match}){
   const [{auth}] = useStore()
   const user = auth.user
 
-  const {data, loading, error} = useQuery(GET_POST,
-          { variables:{id: postId} })
+  const {data, loading, error} = useQuery(GET_POST, { variables:{id: postId} })
 
 
 
@@ -113,7 +112,7 @@ return (
         />
      <div variant="body1" className={classes.paragraph}>
          {postMarkup} <br/>
-{/**..................................................... */}
+{/**............................................................................................ */}
        <div className={classes.postMarkup}>
           <div style={{flexGrow:"1"}}>
           {timeAgo(createdAt)}
@@ -122,8 +121,9 @@ return (
             {`Ksh. ${price}`}
           </div>
      </div>
-{/**..................................................... */}
-         <b>{`=> ${title}`}</b>
+{/**................................................................................................ */}
+         <b>{title}</b>
+         <hr/>
      </div>
 </Card>
   <Grid>

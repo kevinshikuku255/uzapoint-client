@@ -25,17 +25,12 @@ import { useTheme } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles((theme) => ({
-  form: {
-    position:"fixed",
-    top:"0",
-    zIndex:"12",
-    width:"50vw",
-    margin: theme.spacing(2,0,0,20),
-  },
+
   input:{
   border:"none",
   resize: "none",
   outline: "none",
+  width:"100%",
   },
  addButton: {
     position: 'fixed',
@@ -166,25 +161,4 @@ return (
     </>
       )
 }
-
-
-
 export default SinglePost;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

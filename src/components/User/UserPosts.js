@@ -1,45 +1,43 @@
 import React from 'react'
 
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-
 import image from "../shoes.jpeg"
 
 
 
 
 const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    marginTop:"5rem"
-  },
-  gridList: {
-    width: 600,
-  },
+flex:{
+  marginTop:"4.5rem",
+  maxWidth: 558,
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent:"center",
+},
+flexItem:{
+  backgroundColor: "#f1f1f1",
+  maxWidth: "100px",
+  maxHeight: "100px",
+  margin:"1px",
+  textalign:" center",
+},
+img:{
+  width:"100%",
+  height:"100%",
+}
 }));
-
 
 const  UserPosts = ({posts}) =>{
 const classes = useStyles();
 
-
-
  return (
    <>
-      <div className={classes.root}>
-            <GridList cellHeight={180} className={classes.gridList}>
-              {posts.map((post) => (
-                <GridListTile key={post.id}>
-                  <img src={image} alt={post.id} />
-                  <GridListTileBar title={`Ksh. ${post.price}`}/>
-                </GridListTile>
-              ))}
-            </GridList>
+      <div className={classes.flex}>
+        {posts.map((post,index) => (
+            <div className={classes.flexItem} key={index}>
+                  <img src={image} alt={post.id} className={classes.img} />
+            </div>
+        ))}
       </div>
    </>
  )

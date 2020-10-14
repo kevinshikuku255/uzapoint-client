@@ -74,9 +74,6 @@ editProfile:{
   marginTop:"0.5rem",
   borderRadius:"5px"
 },
-link:{
-  color:"inherit",
-},
 div:{
  overFlow:"none",
 },
@@ -145,7 +142,7 @@ div:{
                   {followers.length}
                 </div>
                 <div className={classes.tab}>
-                  <Item   className={classes.link} onClick={handleClickOpen}>
+                  <Item  onClick={handleClickOpen}>
                       {posts.length}
                       <p>posts</p>
                   </Item>
@@ -168,25 +165,24 @@ div:{
 
 {/* ...................................................................................................... */}
 
-      <Dialog fullScreen open={open} onClose={handleClose} >
-        <AppBar className={classes.appBar} >
-          <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-               {username}
-            </Typography>
-            <Button color="inherit" onClick={handleClose}>
-               <CloseIcon />
-            </Button>
-          </Toolbar>
-        </AppBar>
+        <Dialog fullScreen open={open} onClose={handleClose}>
+          <AppBar className={classes.appBar} >
+            <Toolbar>
+              <Typography variant="h6" className={classes.title}>
+                {username}
+              </Typography>
+              <Button color="inherit" onClick={handleClose}>
+                <CloseIcon />
+              </Button>
+            </Toolbar>
+          </AppBar>
 
-         <div className={classes.div}>
-           <UserPosts posts={posts}/>
-         </div>
-      </Dialog>
+          <div className={classes.div}>
+            <UserPosts posts={posts}/>
+          </div>
+        </Dialog>
 
     </div>
-
     </Grid.Column>
   </Grid>
 

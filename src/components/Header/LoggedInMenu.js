@@ -1,18 +1,20 @@
-import React from 'react';
+import React,{useState} from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 
 import Drower from "../Drower"
-import Home from "../../pages/Home"
+import Home from "../../pages/Home/Explore"
 import SearchBox from "../SerchBox"
 import CreatePost from "../CreatePost"
+
+
+
+
 
 
 
@@ -28,9 +30,9 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={4}>
+        <div>
           {children}
-        </Box>
+        </div>
       )}
     </div>
   );
@@ -55,8 +57,7 @@ function a11yProps(index) {
  * New tabed menu
  */
 export default function LoggedInMenu() {
-  const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -77,15 +78,15 @@ export default function LoggedInMenu() {
           <Tab icon={<SearchIcon />} {...a11yProps(2)} />
           <Drower/>
         </Tabs>
-
       </AppBar>
-        <TabPanel value={value} index={0} dir={theme.direction}>
+
+        <TabPanel value={value} index={0} >
            <Home/>
         </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
+        <TabPanel value={value} index={1} >
            <CreatePost/>
         </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
+        <TabPanel value={value} index={2} >
            <SearchBox/>
         </TabPanel>
     </div>
