@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 
 
+/* ------------------------------- use styles ------------------------------- */
 const useStyles = makeStyles((theme) => ({
   card: {
     minWidth: 300,
@@ -32,14 +33,15 @@ skeleton:{
 }));
 
 
+//* ---------------------------- explore component --------------------------- */
 const Expolore = () =>{
    const classes = useStyles();
-  const variables = {
+   const variables = {
     skip: 0,
     limit: HOME_PAGE_POSTS_LIMIT,
   };
 
- const { data,loading} = useQuery(GET_POSTS, {variables});
+ const { data,loading} = useQuery(GET_POSTS,{variables});
 
 if(loading){
    return <div className={classes.skeleton}><SkeletonPost/></div>
@@ -54,13 +56,14 @@ if( !loading && !data){
 const { posts} = data.getPosts
  return (
 <>
-<Card className={classes.card}>
 
+
+<Card className={classes.card}>
         <GridColumn>
             <Grid.Row >
                <Transition.Group >
                { data && posts.map( post =>
-                  <Grid.Column key={post.id} style={{marginBottom:"-12px"}} u >
+                  <Grid.Column key={post.id} style={{marginBottom:"-12px"}}>
                      <PostCard  post={post}/>
                   </Grid.Column>
                   )}
@@ -69,7 +72,6 @@ const { posts} = data.getPosts
         </GridColumn>
 
 </Card>
-
 </>
  )
 }

@@ -1,11 +1,10 @@
-import React,{useState, useRef} from 'react';
+import React,{useState, useRef, useEffect} from 'react';
 import { useMutation} from '@apollo/client'
 import { TransitionGroup} from 'semantic-ui-react';
 
 
-import {HOME_PAGE_POSTS_LIMIT} from "../constants/DataLimit"
 import {CREATE_COMMENT} from "../graphql/comment"
-import {GET_POSTS} from "../graphql/post"
+import { GET_POST} from "../graphql/post"
 import { useStore } from '../store';
 import DeleteButton from './DeleteButton';
 
@@ -39,12 +38,14 @@ const useStyles = makeStyles((theme) => ({
     zIndex:"11",
     marginTop:"1rem"
   },
-  comment:{
+ comment:{
     display:"flex",
     flexDirection:"row",
-    marginTop:"0.2rem",
+    marginTop:"1rem",
     aligncontent: "flex-end",
-    color:"gray",
+    color:"black",
+    backgroundColor:"#ededed",
+    padding:"0px",
   },
  flex1:{
    width:"85%",
@@ -87,22 +88,28 @@ function SinglePost({comments, match}){
   };
 
 
-  const [submitCommnet] = useMutation(CREATE_COMMENT,{
+  const [submitCommnet,{ loading, data}] = useMutation(CREATE_COMMENT,{
      variables,
-     refetchQueries:[{query:GET_POSTS, variables:{
-          skip: 0,
-          limit: HOME_PAGE_POSTS_LIMIT,
+
+     refetchQueries:[{query:GET_POST, variables:{
+          id:postId
     }}]
-  })
+  });
+
+
 
 
   const handleSubmit = async (e) => {
      e.preventDefault();
      submitCommnet();
-     setComment("")
-     handleClose()
+     handleClose();
+    //  setComment("")
   };
 
+
+useEffect(() => {
+ data && !loading && setComment("")
+},[data, loading])
 
 const Input = (
   <>
@@ -145,6 +152,13 @@ return (
 
         <TransitionGroup>
           <div>
+
+           {!data &&  loading && <div className={classes.comment}>
+                                      <div className={classes.flex1}>
+                                        {comment}
+                                      </div>
+                               </div>}
+
             {comments && comments.map( comment =>(
                <div key={comment.id} className={classes.comment}>
                   <div className={classes.flex1}>

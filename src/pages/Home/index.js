@@ -3,7 +3,7 @@ import Home from "./Home"
 
 
 /**
- * this are posts
+ * This are posts
  */
 const HomeOrExplorePosts = () =>{
 

@@ -5,7 +5,7 @@ import 'semantic-ui-css/semantic.min.css';
 import * as Routes from "./store/routes";
 
 
-
+/* --------------------------------- routes --------------------------------- */
 import SignIn  from "./pages/Auth/SignIn";
 import SignUp  from "./pages/Auth/SignUp";
 import Header  from "./components/Header";
@@ -13,7 +13,7 @@ import AboutUs from  "./components/AboutUs";
 import Explore from "./pages/Home/Explore"
 
 
-// Prefetch  components
+/* -------------------------- Prefetch  components -------------------------- */
   Routes.Me.load()
   Routes.UserPosts.load()
   Routes.Profile.load()
@@ -35,6 +35,7 @@ function App() {
 
                                </div>}>
              <div className=" ui container">
+
                   <Header/>
                   <Switch>
                         <Route exact path='/login' component={SignIn}/>

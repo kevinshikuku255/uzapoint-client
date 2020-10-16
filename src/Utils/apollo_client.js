@@ -14,14 +14,6 @@ import { getMainDefinition } from 'apollo-utilities';
 
 
 
-//TODO: createUploadLink
-//TODO: WebSocketLink
-//TODO: onError
-//TODO: setContext
-//TODO: createAuthLink
-//TODO: RetryLink
-//TODO: NormalizedCacheObject,
-
 
 const createAuthLink = () =>  setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -37,9 +29,8 @@ const createAuthLink = () =>  setContext((_, { headers }) => {
 
 const HundleRetry = () => new RetryLink();
 
-/**
- * Helper functions that handles error cases
- */
+
+//* ---------------- Helper functions that handles error cases --------------- */
 const handleErrors = () => {
  return onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -56,18 +47,38 @@ const handleErrors = () => {
 
 
 
-
-
-
+// Creates a new Apollo Client
 /**
- * Creates a new Apollo Client
- *
  * @param {string} apiUrl, GraphQL api url
  * @param {string} websocketApiUrl, GraphQL WebSocket api url
  */
 
 export const createApolloClient = (apiUrl, websocketApiUrl) => {
-  const cache = new InMemoryCache();
+  const cache = new InMemoryCache(
+    {
+    typePolicies: {
+        Query: {
+          fields: {
+             PostPayload:{
+                read: (existing, {toRefrence, args}) => {
+                  const postRef = toRefrence({__typename:"PostPayload", id: args.id})
+                  return existing ?? postRef
+                }
+             }
+          }
+        },
+        UserPayload:{
+          keyFields:["id"]
+        },
+       PostPayload:{
+          keyFields:["id"]
+      },
+       CommentPayload:{
+          keyFields:["id"]
+      }
+    }
+  }
+);
 
 const init = async () => {
       await persistCache({
@@ -86,7 +97,7 @@ const init = async () => {
   const uploadLink = createUploadLink({ uri: apiUrl }); // Upload link also creates an HTTP link
 
 
-  // Create WebSocket link
+//* -------------------------- Create WebSocket link ------------------------- */
 const authToken = localStorage.getItem('jwt');
 const wsLink = new WebSocketLink({
     uri: websocketApiUrl,
@@ -99,7 +110,7 @@ const wsLink = new WebSocketLink({
     },
   });
 
-  // Temporary fix for early websocket closure resulting in websocket connections not being instantiated
+   //Temporary fix for early websocket closure resulting in websocket connections not being instantiated
   wsLink.subscriptionClient.maxConnectTimeGenerator.duration = () =>
     wsLink.subscriptionClient.maxConnectTimeGenerator.max;
 

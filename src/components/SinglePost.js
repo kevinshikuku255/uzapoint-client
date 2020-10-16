@@ -40,6 +40,13 @@ postMarkup:{
  alignItems:"center",
  marginTop:"-1rem",
  marginBottom:"1rem",
+ paddingLeft:"1rem"
+},
+commentLength:{
+  color:"#3f51b5",
+  fontSize:"1.5rem",
+  padding:"0",
+  marginTop:"-2rem"
 }
 }));
 
@@ -88,10 +95,11 @@ function SinglePost({history, match}){
        <div className={classes.postMarkup}>
 
         <div style={{flexGrow:"1"}}>
-         {`Likes: ${likes.length}`}
+
+         {timeAgo(createdAt)}
         </div>
         <div  style={{flexGrow:"1"}}>
-          {`Replies: ${comments.length}`}
+          {`Ksh. ${price}`}
         </div>
       { user && <div  style={{flexGrow:"1"}}>
             {user.username === author.username  &&
@@ -111,25 +119,21 @@ return (
           title={user.username}
         />
      <div variant="body1" className={classes.paragraph}>
-         {postMarkup} <br/>
+         {postMarkup}
 {/**............................................................................................ */}
        <div className={classes.postMarkup}>
           <div style={{flexGrow:"1"}}>
-          {timeAgo(createdAt)}
-          </div>
-          <div  style={{flexGrow:"1"}}>
-            {`Ksh. ${price}`}
+            {title}
           </div>
      </div>
 {/**................................................................................................ */}
-         <b>{title}</b>
          <hr/>
      </div>
 </Card>
   <Grid>
 
     <Grid.Column mobile={16} tablet={10} computer={7}>
-              <br/> <p>Replies</p>
+              <br/> <p className={classes.commentLength}> comments {comments.length} - Likes {likes.length}</p>
                <CreateCommnet match={match} comments={comments} />
     </Grid.Column>
   </Grid>

@@ -112,7 +112,7 @@ div:{
 
 
   const {data, loading} = useQuery(GET_AUTH_USER,{
-    fetchPolicy:"cache-first"
+    fetchPolicy:"cache-and-network"
   });
 
 
