@@ -27,10 +27,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const content =  <div>
-                  The website was created and is maintained to bring you closer to your cravings.  Here  dispose items for people to hit you up or Search for Items you love <br/><br/>
-                  <p>We are obsessed to bring you closser to the best.</p>
-                </div>
+const content =  (
+           <>
+              <div>
+                  <p> Are you trying sell or just disposing your old items? Quite sure you have expericed (Unnoticed ) posts on Facebook, Intagram,Twitter or WhatsApp status to your target customers.</p>
+
+                  <p style={{color:"blue"}}>Windoshoppe is here bring relevance to your posts. Take a photo of an Item, give it a description with its price and post it on Windoshoppe and make your target customers reach you fast.</p>
+                  <p style={{color:"lightBlue"}} >Make extra cash with Windoshoppe</p>
+             </div>
+          </>
+                )
 
 const panels = [
   {

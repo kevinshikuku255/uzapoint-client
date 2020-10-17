@@ -12,7 +12,7 @@ import UserPosts from "./AuthUserPosts"
 import Avatar from '@material-ui/core/Avatar';
 import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
 import PeopleAltRoundedIcon from '@material-ui/icons/PeopleAltRounded';
-import MonetizationOnRoundedIcon from '@material-ui/icons/MonetizationOnRounded';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
@@ -133,7 +133,7 @@ const joinedDate = currentDate(createdAt).split(" ")
 {/**.......................................................................................................... */}
           <div className={classes.flex1}>
               <div className={classes.Icon}>
-                 <MonetizationOnRoundedIcon/>
+                 <ShoppingBasketIcon/>
               </div>
               <div> <b>Items Dispalyed - {posts.length}</b> <br/>
                 <Button icon circular content="View all  items" onClick={handleClickOpen}/>

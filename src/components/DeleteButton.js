@@ -5,8 +5,7 @@ import {Confirm} from 'semantic-ui-react'
 import {useMutation} from '@apollo/client'
 import {GET_POSTS, DELETE_POST} from "../graphql/post"
 import {DELETE_COMMENT} from "../graphql/comment"
-import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
-
+import CloseSharpIcon from '@material-ui/icons/CloseSharp';
 
 
 const useStyles = makeStyles( () => ({
@@ -48,10 +47,11 @@ const mutation = commentId ? DELETE_COMMENT :  DELETE_POST;
   <>
 
     <button onClick={()=> setConfirmOpen(true)}  className={classes.button}>
-      <HighlightOffTwoToneIcon className={classes.icon}/>
+      <CloseSharpIcon className={classes.icon}/>
     </button>
      <Confirm
        open={conFirmOpen}
+       content="confirm you want to delete"
        onCancel={()=>setConfirmOpen(false)}
        onConfirm={deletePostOrMutation}
       />

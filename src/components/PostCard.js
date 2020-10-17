@@ -24,6 +24,11 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Typography from '@material-ui/core/Typography';
 
 
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import PhoneIcon from '@material-ui/icons/Phone';
+
+
 
 
 
@@ -59,14 +64,28 @@ const useStyles = makeStyles((theme) => ({
 
 
 /**
- *
  * This is a post...
  */
 const Postcard = ({post}) => {
  const classes = useStyles();
+ const [activeIndex, setActiveIndex] =useState();
+
+ const [anchorEl, setAnchorEl] = useState(null);
+ const open = Boolean(anchorEl);
+
  const {id , author, likes, price, title, comments, createdAt} = post
 
-  const [activeIndex, setActiveIndex] =useState()
+
+/* -------------------------------------------------------------------------- */
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+/* -------------------------------------------------------------------------- */
+
 
  const handleClick = (e, titleProps) => {
     const { index } = titleProps
@@ -76,24 +95,26 @@ const Postcard = ({post}) => {
     setActiveIndex(newIndex)
   }
 
+
+
 const extra = (
   <>
- <div className={classes.extra}>
- <ul className={classes.ul}>
-     <li className={classes.li}>
-        <LikeButton user={author} postId={id} likes={likes}/>
-     </li>
-     <li className={classes.li}>
-      <Button  as={Link} to={`/posts/${id}`} size="tiny" circular>
-      <Icon name="comment" />{comments.length}
-      </Button>
-     </li>
-   <li className={classes.li}>
-      <b>{`Ksh. ${price}`}</b>
-   </li>
- </ul>
- </div>
-</>
+    <div className={classes.extra}>
+      <ul className={classes.ul}>
+          <li className={classes.li}>
+              <LikeButton user={author} postId={id} likes={likes}/>
+          </li>
+          <li className={classes.li}>
+            <Button  as={Link} to={`/posts/${id}`} size="tiny" circular>
+            <Icon name="comment" />{comments.length}
+            </Button>
+          </li>
+        <li className={classes.li}>
+            <b>{`Ksh. ${price}`}</b>
+        </li>
+      </ul>
+    </div>
+ </>
 );
 
    return(
@@ -105,13 +126,37 @@ const extra = (
               <Avatar  alt="post" src={images} />
           </Link>  }
          action={
-            <IconButton aria-label="settings">
+          <>
+            <IconButton aria-label="more"
+                         aria-haspopup="true"
+                         onClick={handleMenu}
+                         >
               <MoreVertIcon />
             </IconButton>
+{/* -------------------------------------------------------------------------- */}
+                <Menu
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}><PhoneIcon/>{author.phone}</MenuItem>
+                </Menu>
+          </>
         }
 
+
+
         title={
-            <Typography variant="h5">
+            <Typography variant="h6">
                 {author.username}
             </Typography>
             }
@@ -133,7 +178,7 @@ const extra = (
             onClick={handleClick}
           >
             <Icon name='dropdown' />
-               Item Description
+               Item description
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 0}>
 

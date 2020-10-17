@@ -14,8 +14,10 @@ import SkeletonPost from "../components/SinglePostSkeleton"
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-
 import CardMedia from '@material-ui/core/CardMedia';
+import CardHeader from '@material-ui/core/CardHeader';
+
+
 
 
 
@@ -44,9 +46,12 @@ postMarkup:{
 },
 commentLength:{
   color:"#3f51b5",
-  fontSize:"1.5rem",
+  fontSize:"1.2rem",
   padding:"0",
-  marginTop:"-2rem"
+  marginTop:"-1rem"
+},
+actioButton:{
+  marginBottom:"-120rem",
 }
 }));
 
@@ -86,7 +91,7 @@ function SinglePost({history, match}){
      return <div>Error!</div>;
    }
 
-  const{ id ,author, comments, createdAt, title, price, likes} =  data.getPost
+  const { id ,author, comments, createdAt, title, price, likes} =  data.getPost
 
 
 
@@ -94,17 +99,15 @@ function SinglePost({history, match}){
         postMarkup = (
        <div className={classes.postMarkup}>
 
-        <div style={{flexGrow:"1"}}>
-
-         {timeAgo(createdAt)}
-        </div>
-        <div  style={{flexGrow:"1"}}>
-          {`Ksh. ${price}`}
-        </div>
-      { user && <div  style={{flexGrow:"1"}}>
-            {user.username === author.username  &&
-           <DeleteButton id={id} callback={deletePostCallback}/>}
-        </div>}
+            <div style={{flexGrow:"1"}}>
+                {timeAgo(createdAt)}
+            </div>
+            <div  style={{flexGrow:"1"}}>
+                {`Ksh. ${price}`}
+            </div>
+            <div style={{flexGrow:"1"}}>
+                {`Likes ${likes.length}`}
+            </div>
      </div>
         )
 
@@ -112,28 +115,38 @@ function SinglePost({history, match}){
 
 return (
     <>
-<Card className={classes.card}>
-       <CardMedia
-          className={classes.media}
-          image={shoes}
-          title={user.username}
-        />
-     <div variant="body1" className={classes.paragraph}>
-         {postMarkup}
-{/**............................................................................................ */}
-       <div className={classes.postMarkup}>
-          <div style={{flexGrow:"1"}}>
-            {title}
-          </div>
-     </div>
-{/**................................................................................................ */}
-         <hr/>
-     </div>
-</Card>
-  <Grid>
+  <Card className={classes.card}>
+          <CardHeader
 
+          action={
+              <div className={classes.actioButton}>
+               { user.username === author.username  &&
+                <DeleteButton id={id} callback={deletePostCallback} />}
+             </div>
+          }
+        />
+        <CardMedia
+            className={classes.media}
+            image={shoes}
+            title={user.username}
+          />
+      <div variant="body1" className={classes.paragraph}>
+          {postMarkup}
+  {/**............................................................................................ */}
+        <div className={classes.postMarkup}>
+            <div style={{flexGrow:"1"}}>
+              {title}
+            </div>
+      </div>
+  {/**................................................................................................ */}
+          <hr/>
+      </div>
+  </Card>
+
+
+  <Grid>
     <Grid.Column mobile={16} tablet={10} computer={7}>
-              <br/> <p className={classes.commentLength}> comments {comments.length} - Likes {likes.length}</p>
+              <br/> <p className={classes.commentLength}> comments {comments.length}</p>
                <CreateCommnet match={match} comments={comments} />
     </Grid.Column>
   </Grid>

@@ -103,7 +103,7 @@ function SinglePost({comments, match}){
      e.preventDefault();
      submitCommnet();
      handleClose();
-    //  setComment("")
+
   };
 
 
@@ -166,7 +166,8 @@ return (
                   </div>
                    {user && <div className={classes.flex2}>
                       {user.username === comment.author.username &&
-                       <DeleteButton  commentId={comment.id}/> }
+                         <DeleteButton  commentId={comment.id}/> 
+                       }
                   </div>}
                </div>
             ))}

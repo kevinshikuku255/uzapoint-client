@@ -6,7 +6,6 @@
   width: 100vw;
   max-width: 900px;
   padding: 1rem;
-  background-color: #e1e1e1;
 }
 
 html,body {
@@ -17,7 +16,6 @@ html,body {
   width: 100vw;
   font-kerning: 2;
   font-weight: bold;
-  color: #ededed;
 }
 
 body{
