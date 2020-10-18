@@ -5,7 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
-import BorderColorIcon from '@material-ui/icons/BorderColor';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 
 import Drower from "../Drower"
 import Home from "../../pages/Home/Explore"
@@ -73,9 +73,9 @@ export default function LoggedInMenu() {
           indicatorColor="primary"
           variant="standard"
         >
-          <Tab icon={<HomeIcon />} {...a11yProps(0)} />
-          <Tab icon={<BorderColorIcon />} {...a11yProps(1)} />
-          <Tab icon={<SearchIcon />} {...a11yProps(2)} />
+          <Tab icon={<HomeIcon/>} {...a11yProps(0)} />
+          <Tab icon={<AddAPhotoIcon/>} {...a11yProps(1)} />
+          <Tab  icon={<SearchIcon/>} {...a11yProps(2)} />
           <Drower/>
         </Tabs>
       </AppBar>

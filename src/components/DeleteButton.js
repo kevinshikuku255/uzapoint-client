@@ -51,7 +51,10 @@ const mutation = commentId ? DELETE_COMMENT :  DELETE_POST;
     </button>
      <Confirm
        open={conFirmOpen}
-       content="confirm you want to delete"
+       content="Confirm you want to delete"
+       centered
+       cancelButton="Cancel"
+       confirmButton="Delete"
        onCancel={()=>setConfirmOpen(false)}
        onConfirm={deletePostOrMutation}
       />

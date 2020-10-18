@@ -53,6 +53,10 @@ const useStyles = makeStyles((theme) => ({
  },
   flex2:{
    width:"15%",
+ },
+ i:{
+   color:"red",
+   fontSize:"0.9rem"
  }
 }));
 
@@ -155,7 +159,7 @@ return (
 
            {!data &&  loading && <div className={classes.comment}>
                                       <div className={classes.flex1}>
-                                        {comment}
+                                        {comment} <p className={classes.i}>sending...</p>
                                       </div>
                                </div>}
 
@@ -166,7 +170,7 @@ return (
                   </div>
                    {user && <div className={classes.flex2}>
                       {user.username === comment.author.username &&
-                         <DeleteButton  commentId={comment.id}/> 
+                         <DeleteButton  commentId={comment.id}/>
                        }
                   </div>}
                </div>

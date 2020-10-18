@@ -74,7 +74,7 @@ function PostForm(){
   const [{ auth }] = useStore();
   const classes = useStyles();
 
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
   const [imgData, setImgData] = useState(null);
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
@@ -127,16 +127,18 @@ function PostForm(){
      setWarning("sent");
      handleReset();
   };
+
  const handleOnFocus = () =>{
       setIsFocused(true);
-      setWarning("")
+      setWarning('')
       setErrors('');
    };
 
  const handleReset = () => {
-        setImage('');
+        setImage(null);
         setErrors('');
         setPrice('')
+        setTitle('')
         setImgData(null)
   };
 

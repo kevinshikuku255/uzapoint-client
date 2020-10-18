@@ -7,7 +7,6 @@ import CreateCommnet from "./createComment"
 import {GET_POST} from "../graphql/post"
 import { timeAgo } from '../Utils/date';
 import { useStore } from '../store';
-import DeleteButton from './DeleteButton';
 import shoes from "./shoes.jpeg"
 import SkeletonPost from "../components/SinglePostSkeleton"
 
@@ -15,7 +14,7 @@ import SkeletonPost from "../components/SinglePostSkeleton"
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardHeader from '@material-ui/core/CardHeader';
+
 
 
 
@@ -40,7 +39,6 @@ postMarkup:{
  flexDirection:"row",
  justifyContent:"spaceAround",
  alignItems:"center",
- marginTop:"-1rem",
  marginBottom:"1rem",
  paddingLeft:"1rem"
 },
@@ -57,7 +55,7 @@ actioButton:{
 
 
 
-function SinglePost({history, match}){
+function SinglePost({match}){
   const classes = useStyles();
   const postId = match.params.postId
   const [{auth}] = useStore()
@@ -67,9 +65,6 @@ function SinglePost({history, match}){
 
 
 
- function deletePostCallback(){
-    history.push("/")
-  }
 
    if (loading) {
      return(
@@ -91,7 +86,7 @@ function SinglePost({history, match}){
      return <div>Error!</div>;
    }
 
-  const { id ,author, comments, createdAt, title, price, likes} =  data.getPost
+  const { comments, createdAt, title, price, likes} =  data.getPost
 
 
 
@@ -116,15 +111,6 @@ function SinglePost({history, match}){
 return (
     <>
   <Card className={classes.card}>
-          <CardHeader
-
-          action={
-              <div className={classes.actioButton}>
-               { user.username === author.username  &&
-                <DeleteButton id={id} callback={deletePostCallback} />}
-             </div>
-          }
-        />
         <CardMedia
             className={classes.media}
             image={shoes}
@@ -135,7 +121,7 @@ return (
   {/**............................................................................................ */}
         <div className={classes.postMarkup}>
             <div style={{flexGrow:"1"}}>
-              {title}
+               {title}
             </div>
       </div>
   {/**................................................................................................ */}

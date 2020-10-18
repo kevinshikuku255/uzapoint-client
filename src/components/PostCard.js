@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import shoes from "./shoes.jpeg"
 import images from "./images.jpeg"
 import  LikeButton  from './LikeButton';
+import DeleteButton from './DeleteButton';
+import { useStore } from '../store';
 
 
 
@@ -67,15 +69,20 @@ const useStyles = makeStyles((theme) => ({
  * This is a post...
  */
 const Postcard = ({post}) => {
- const classes = useStyles();
- const [activeIndex, setActiveIndex] =useState();
+const classes = useStyles();
+const [activeIndex, setActiveIndex] =useState();
+
+const [{auth}] = useStore()
+const user = auth.user
 
  const [anchorEl, setAnchorEl] = useState(null);
  const open = Boolean(anchorEl);
 
- const {id , author, likes, price, title, comments, createdAt} = post
 
 
+ const {id , author, image, likes, price, title, comments, createdAt} = post
+
+  console.log(image)
 /* -------------------------------------------------------------------------- */
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -148,11 +155,14 @@ const extra = (
                   open={open}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}><PhoneIcon/>{author.phone}</MenuItem>
+                  <MenuItem onClick={handleClose}><PhoneIcon/> {author.phone}</MenuItem>
+               {user.username === author.username  &&
+                  <MenuItem onClick={handleClose}>
+                       Delete <DeleteButton id={id} />
+                  </MenuItem>}
                 </Menu>
           </>
         }
-
 
 
         title={
@@ -183,7 +193,7 @@ const extra = (
           <Accordion.Content active={activeIndex === 0}>
 
             <Typography variant="body1" className={classes.paragraph}>
-                 <b>{title}</b>
+                 {title}
             </Typography>
           </Accordion.Content>
           </Accordion>
