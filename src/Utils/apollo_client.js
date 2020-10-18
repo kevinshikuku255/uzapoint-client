@@ -56,6 +56,7 @@ const handleErrors = () => {
 export const createApolloClient = (apiUrl, websocketApiUrl) => {
   const cache = new InMemoryCache(
     {
+/* -------------------------------------------------------------------------- */
     typePolicies: {
         Query: {
           fields: {
@@ -78,7 +79,9 @@ export const createApolloClient = (apiUrl, websocketApiUrl) => {
       }
     }
   }
+/* -------------------------------------------------------------------------- */
 );
+
 
 const init = async () => {
       await persistCache({
@@ -126,8 +129,12 @@ const wsLink = new WebSocketLink({
   );
 
   init()
+/* -------------------------------------------------------------------------- */
   return new ApolloClient({
     link: ApolloLink.from([errorLink, authLink, retryLink, terminatingLink]),
+    fetchOptions: {
+      mode: 'no-cors',
+    },
     cache :cache,
   });
 }
