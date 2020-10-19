@@ -82,7 +82,8 @@ const user = auth.user
 
  const {id , author, image, likes, price, title, comments, createdAt} = post
 
-  console.log(image)
+ const postImage = image ? image : shoes;
+ const avator = author.image ?  author.image : images;
 /* -------------------------------------------------------------------------- */
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -130,7 +131,7 @@ const extra = (
          <CardHeader
          avatar={
           <Link to={`profile/${author.id}`} onMouseOver={Profile.load}>
-              <Avatar  alt="post" src={images} />
+              <Avatar  alt="post" src={avator} />
           </Link>  }
          action={
           <>
@@ -176,7 +177,7 @@ const extra = (
           <Link to={`/posts/${id}`}>
           <CardMedia
               className={classes.media}
-              image={shoes}
+              image={postImage}
               title={`${price} shillings`}
             />
           </Link>

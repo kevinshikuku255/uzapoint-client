@@ -86,9 +86,10 @@ function SinglePost({match}){
      return <div>Error!</div>;
    }
 
-  const { comments, createdAt, title, price, likes} =  data.getPost
+  const { comments, image, createdAt, title, price, likes} =  data.getPost
 
 
+ const postImage = image ? image : shoes;
 
  let postMarkup;
         postMarkup = (
@@ -113,7 +114,7 @@ return (
   <Card className={classes.card}>
         <CardMedia
             className={classes.media}
-            image={shoes}
+            image={postImage}
             title={user.username}
           />
       <div variant="body1" className={classes.paragraph}>

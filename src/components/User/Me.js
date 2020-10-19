@@ -3,8 +3,8 @@ import {useQuery} from "@apollo/client"
 import { Grid, Item} from 'semantic-ui-react'
 import SkeletonPost from '../../components/SinglePostSkeleton';
 import { makeStyles } from '@material-ui/core/styles';
-import shoes from "../shoes.jpeg"
 import UserPosts from "./UserPosts"
+import logo from "../images.jpeg"
 
 
 import {GET_AUTH_USER} from "../../graphql/user";
@@ -72,7 +72,9 @@ editProfile:{
   backgroundColor:"gray",
   textAlign:"center",
   marginTop:"0.5rem",
-  borderRadius:"5px"
+  borderRadius:"5px",
+  padding:"0.1rem 0",
+  border:"1px solid black"
 },
 div:{
  overFlow:"none",
@@ -124,7 +126,8 @@ div:{
    )
  }
 
- const {  username, posts, phone, followers} = data.getAuthUser;
+ const {  username, image, posts, phone, followers} = data.getAuthUser;
+ const avator = image ? image : logo;
 // const joinedDate = currentDate(createdAt).split(" ")
  return (
   <div>
@@ -135,7 +138,7 @@ div:{
 
           <div className={classes.tabs}>
                 <div className={classes.tab1}>
-                  <Avatar alt={username} src={shoes} className={classes.large}/>
+                  <Avatar alt={username} src={avator} className={classes.large}/>
                 </div>
                 <div className={classes.tab}>
                   <p>folowers</p>
