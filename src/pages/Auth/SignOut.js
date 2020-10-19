@@ -19,7 +19,7 @@ const SignOut = () => {
     <>
 
 <button onClick={handleSignOut}>
-   <p style={{color:"skyblue"}}>Log out</p>
+   <p style={{color:"#3f51b5"}}>Log out</p>
 </button>
    </>
   );

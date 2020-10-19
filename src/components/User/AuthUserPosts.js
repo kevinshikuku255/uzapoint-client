@@ -62,11 +62,10 @@ const  UserPosts = ({username}) => {
 
  return (
    <>
-
       <div className={classes.flex}>
           {posts.map((post,index) => (
               <div className={classes.flexItem} key={index}>
-                    <img src={image} alt={post.id} className={classes.img} />
+                    <img src={post.image ? post.image : image} alt={post.id} className={classes.img} />
               </div>
           ))}
       </div>

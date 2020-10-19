@@ -133,7 +133,7 @@ return (
 
   <Grid>
     <Grid.Column mobile={16} tablet={10} computer={7}>
-              <br/> <p className={classes.commentLength}> comments {comments.length}</p>
+              <br/> <p className={classes.commentLength}> Comments - {comments.length}</p>
                <CreateCommnet match={match} comments={comments} />
     </Grid.Column>
   </Grid>

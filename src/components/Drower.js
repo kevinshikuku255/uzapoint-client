@@ -13,8 +13,8 @@ import InfoTwoToneIcon from '@material-ui/icons/InfoTwoTone';
 import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
 import Avatar from '@material-ui/core/Avatar';
 import { lightBlue} from '@material-ui/core/colors';
-import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
 import SettingsIcon from '@material-ui/icons/Settings';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
 
 import SignOut from "../pages/Auth/SignOut"
@@ -50,8 +50,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop:"5rem",
   },
   div:{
-    paddngTop:"2rem",
-    marginTop:"0.1rem",
+    border:"1px solid gray",
     backgroundColor: lightBlue[500],
     display:"flex",
     alignItems:"center",
@@ -119,7 +118,7 @@ const avator = auth.user.image ? auth.user.image : logo;
        </ListItem>
        <ListItem>
          <ListItemIcon> <SettingsIcon/></ListItemIcon>
-       <Link to="/Me"><ListItemText primary="settings" /></Link>
+          <ListItemText primary="settings" />
        </ListItem>
      </List>
 {/* -------------------------------------------------------------------------- */}
@@ -134,7 +133,7 @@ const avator = auth.user.image ? auth.user.image : logo;
             <ListItemText primary="Windoshoppe"/>
        </ListItem>
        <ListItem>
-          <ListItemIcon> <ExitToAppTwoToneIcon/> </ListItemIcon>
+          <ListItemIcon> <PowerSettingsNewIcon/> </ListItemIcon>
           <ListItemText primary={<SignOut/>}/>
        </ListItem>
        <ListItem>

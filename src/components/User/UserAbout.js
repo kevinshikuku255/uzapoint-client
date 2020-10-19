@@ -106,7 +106,7 @@ const joinedDate = currentDate(createdAt).split(" ")
               <div className={classes.Dp}>
                     <Avatar alt={username} src={images} className={classes.large}/>
               </div>
-              <div> <b>{`${username}`}</b> <br/> {`Joined ${joinedDate[0]}, ${joinedDate[2]}`} </div>
+              <div> <b style={{textTransform: "capitalize"}}>{`${username}`}</b> <br/> {`Joined ${joinedDate[0]}, ${joinedDate[2]}`} </div>
               <hr/>
           </div>
 {/**.......................................................................................................... */}
@@ -156,7 +156,7 @@ const joinedDate = currentDate(createdAt).split(" ")
         <AppBar className={classes.appBar} >
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
-               {username}
+               <p style={{textTransform: "capitalize"}}> {username} </p>
             </Typography>
             <button  color="white" onClick={handleClose}>
                <CloseIcon />

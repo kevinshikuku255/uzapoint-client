@@ -15,6 +15,9 @@ const userPayload = `
   createdAt
 `;
 
+
+
+
 /**
  * Gets specific user by id
  */
@@ -123,6 +126,7 @@ export const GET_AUTH_USER = gql`
       posts {
         id
         price
+        image
       }
       following {
         id

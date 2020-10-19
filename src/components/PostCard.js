@@ -167,7 +167,7 @@ const extra = (
 
 
         title={
-            <Typography variant="h6">
+            <Typography variant="h6" style={{textTransform: "capitalize"}}>
                 {author.username}
             </Typography>
             }

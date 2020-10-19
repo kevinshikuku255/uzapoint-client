@@ -155,7 +155,7 @@ div:{
 
 
           <div className={classes.bio}>
-                   <p style={{padding:"0", margin:"0"}}>{username}</p>
+                   <p style={{padding:"0", margin:"0",textTransform: "capitalize",}}>{username}</p>
                    <p style={{padding:"0", margin:"0"}}>{phone}</p>
           </div>
 
@@ -172,7 +172,7 @@ div:{
           <AppBar className={classes.appBar} >
             <Toolbar>
               <Typography variant="h6" className={classes.title}>
-                {username}
+                 <p style={{textTransform: "capitalize"}}> {username} </p>
               </Typography>
               <Button color="inherit" onClick={handleClose}>
                 <CloseIcon />
