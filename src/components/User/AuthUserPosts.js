@@ -2,7 +2,7 @@ import React from 'react'
 import {useQuery}  from '@apollo/client'
 
 import {GET_USER_POSTS} from "../../graphql/user"
-import image from "../shoes.jpeg"
+import Detail from "./Detail"
 
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -59,13 +59,12 @@ const  UserPosts = ({username}) => {
     if(loading){ return spiner }
 
     const posts = data.getUserPosts.posts;
-
  return (
    <>
       <div className={classes.flex}>
-          {posts.map((post,index) => (
-              <div className={classes.flexItem} key={index}>
-                    <img src={post.image ? post.image : image} alt={post.id} className={classes.img} />
+          {posts.map((post) => (
+              <div className={classes.flexItem} key={post.id}>
+                    <Detail post={post}/>
               </div>
           ))}
       </div>
