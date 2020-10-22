@@ -132,9 +132,6 @@ const wsLink = new WebSocketLink({
 /* -------------------------------------------------------------------------- */
   return new ApolloClient({
     link: ApolloLink.from([errorLink, authLink, retryLink, terminatingLink]),
-    fetchOptions: {
-      mode: 'no-cors',
-    },
     cache :cache,
   });
 }
