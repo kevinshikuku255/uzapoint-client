@@ -49,11 +49,11 @@ const handleErrors = () => {
 
 // Creates a new Apollo Client
 /**
- * @param {string} apiUrl, GraphQL api url
+ * @param {string} API_URL, GraphQL api url
  * @param {string} websocketApiUrl, GraphQL WebSocket api url
  */
 
-export const createApolloClient = (apiUrl, websocketApiUrl) => {
+export const createApolloClient = (API_URL, websocketApiUrl) => {
   const cache = new InMemoryCache(
     {
 /* -------------------------------------------------------------------------- */
@@ -93,11 +93,11 @@ const init = async () => {
 
 
 
-
+/* -------------------------------links------------------------------------------- */
   const errorLink = handleErrors();
   const authLink = createAuthLink();
   const retryLink = HundleRetry();
-  const uploadLink = createUploadLink({ uri: apiUrl }); // Upload link also creates an HTTP link
+  const uploadLink = createUploadLink({ uri: API_URL }); // Upload link also creates an HTTP link
 
 
 //* -------------------------- Create WebSocket link ------------------------- */
