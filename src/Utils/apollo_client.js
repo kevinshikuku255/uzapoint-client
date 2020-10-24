@@ -134,6 +134,6 @@ const wsLink = new WebSocketLink({
     link: ApolloLink.from([errorLink, authLink, retryLink, terminatingLink]),
     cache :cache,
   // Enable sending cookies over cross-origin requests
-   credentials: 'omit'
+   credentials: 'include'
   });
 }
