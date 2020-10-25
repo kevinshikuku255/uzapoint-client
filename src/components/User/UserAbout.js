@@ -5,7 +5,7 @@ import { Button ,Grid} from 'semantic-ui-react';
 
 
 import {makeStyles} from "@material-ui/core";
-import { currentDate } from '../../Utils/date';
+import { currentDate} from '../../Utils/date';
 import images from "../shoes.jpeg";
 import UserPosts from "./AuthUserPosts"
 
@@ -97,6 +97,7 @@ const  UserAbout = ({user}) =>{
 const joinedDate = currentDate(createdAt).split(" ")
 
 
+
  return (
   <>
   <Grid>
@@ -106,7 +107,7 @@ const joinedDate = currentDate(createdAt).split(" ")
               <div className={classes.Dp}>
                     <Avatar alt={username} src={images} className={classes.large}/>
               </div>
-              <div> <b style={{textTransform: "capitalize"}}>{`${username}`}</b> <br/> {`Joined ${joinedDate[0]}, ${joinedDate[2]}`} </div>
+              <div> <b style={{textTransform: "capitalize"}}>{`${username}`}</b> <br/> {`Joined ${joinedDate[0]} ${joinedDate[1]}, ${joinedDate[2]}`} </div>
               <hr/>
           </div>
 {/**.......................................................................................................... */}

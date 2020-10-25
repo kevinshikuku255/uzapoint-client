@@ -1,6 +1,6 @@
 import React,{useState} from "react"
 import {  Icon,Button} from "semantic-ui-react"
-import { timeAgo } from '../Utils/date';
+import { timeAgo, weekDay } from '../Utils/date';
 import { Link } from "react-router-dom";
 import shoes from "./shoes.jpeg"
 import images from "./images.jpeg"
@@ -29,6 +29,7 @@ import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import PhoneIcon from '@material-ui/icons/Phone';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 
 
 
@@ -81,6 +82,10 @@ const user = auth.user
 
 
  const {id , author, image, likes, price, title, comments, createdAt} = post
+
+ const weekday = weekDay(createdAt)
+
+
 
  const postImage = image ? image : shoes;
  const avator = author.image ?  author.image : images;
@@ -157,6 +162,7 @@ const extra = (
                   onClose={handleClose}
                 >
                   <MenuItem onClick={handleClose}><PhoneIcon/> {author.phone}</MenuItem>
+                  <MenuItem onClick={handleClose}> <CalendarTodayIcon/>{weekday} </MenuItem>
                {user.username === author.username  &&
                   <MenuItem onClick={handleClose}>
                        Delete <DeleteButton id={id} />

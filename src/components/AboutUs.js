@@ -30,13 +30,17 @@ const useStyles = makeStyles((theme) => ({
 const content =  (
            <>
               <div>
-                  <p> Are you trying sell or just disposing your old items? Quite sure you have expericed (Unnoticed ) posts on Facebook, Intagram,Twitter or WhatsApp status to your target customers.</p>
+                  <p> Are you trying sell or just disposing your old items? Quite sure you have expericed (Unnoticed ) posts on Facebook, Instagram,Twitter or WhatsApp status to your target customers.</p>
 
                   <p style={{color:"blue"}}>Windoshoppe is here bring relevance to your posts. Take a photo of an Item, give it a description with its price and post it on Windoshoppe and make your target customers reach you fast.</p>
-                  <p style={{color:"lightBlue"}} >Make extra cash with Windoshoppe</p>
+                  <p >Make extra cash with Windoshoppe</p>
              </div>
           </>
                 )
+
+
+
+
 
 const panels = [
   {
@@ -48,7 +52,7 @@ const panels = [
     key: 2,
     title:"CONTACT US",
     content: "For any Info, Advertising, Reports or Contributions" +
-             "on Quality of our service Call or WhatsApp: 0740253367 your support to us will be apreciated"
+             " on Quality of our service Call or WhatsApp: 0740253367 your feedback will be apreciated"
   },
   {
     key: 3,

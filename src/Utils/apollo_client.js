@@ -21,6 +21,7 @@ const createAuthLink = () =>  setContext((_, { headers }) => {
   // return the headers to the context so httpLink can read them
   return {
     headers: {
+      // ...headers,
       Authorization: token ? token : "",
       accept: 'application/json',
     }
@@ -56,7 +57,7 @@ const handleErrors = () => {
 export const createApolloClient = (API_URL, websocketApiUrl) => {
   const cache = new InMemoryCache(
     {
-/* -------------------------------------------------------------------------- */
+/* -------------------------------type policies------------------------------------------- */
     typePolicies: {
         Query: {
           fields: {
@@ -93,7 +94,7 @@ const init = async () => {
 
 
 
-/* -------------------------------links------------------------------------------- */
+
   const errorLink = handleErrors();
   const authLink = createAuthLink();
   const retryLink = HundleRetry();
@@ -133,7 +134,5 @@ const wsLink = new WebSocketLink({
   return new ApolloClient({
     link: ApolloLink.from([errorLink, authLink, retryLink, terminatingLink]),
     cache :cache,
-  // Enable sending cookies over cross-origin requests
-   credentials: 'include'
   });
 }

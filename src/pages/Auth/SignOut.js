@@ -4,6 +4,7 @@ import React from 'react';
 import { useStore} from '../../store';
 import { CLEAR_AUTH_USER } from '../../store/auth';
 
+
 /**
  * Component that signsOut the user
  */

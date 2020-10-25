@@ -91,7 +91,6 @@ div:{
 //..................................................................................
 
 
-
 /**
  * About auth user...
  */
@@ -126,8 +125,9 @@ div:{
    )
  }
 
- const {  username, image, posts, phone, followers} = data.getAuthUser;
+ const {  username, image, posts, phone,likes, followers} = data.getAuthUser;
  const avator = image ? image : logo;
+ console.log(likes.length)
 // const joinedDate = currentDate(createdAt).split(" ")
  return (
   <div>

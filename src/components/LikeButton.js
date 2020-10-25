@@ -1,12 +1,15 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import { Icon, Button } from "semantic-ui-react"
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {useMutation} from "@apollo/client";
+import { Icon, Button } from "semantic-ui-react";
 import { useStore } from '../store';
 
-// import { CREATE_LIKE, DELETE_LIKE } from '../graphql/like';
+import { CREATE_LIKE, DELETE_LIKE } from '../graphql/like';
+import { GET_POST } from '../graphql/post';
+
 
 function LikeButton( { user, postId, likes} ){
-      // const [liked] = useState(false);
+
       const  [{auth}]  = useStore();
 
       const hasLiked = likes.find(
@@ -15,38 +18,45 @@ function LikeButton( { user, postId, likes} ){
 
 
   // Detect which mutation to use
-  // const operation = hasLiked ? 'delete' : 'create';
-  // const options = {
-  //   create: {
-  //     mutation: CREATE_LIKE,
-  //     variables: { postId, userId: auth.user.id },
-  //   },
-  //   delete: {
-  //     mutation: DELETE_LIKE,
-  //     variables: { id: hasLiked ? hasLiked.id : null },
-  //   },
-  // };
+  const operation = hasLiked ? 'delete' : 'create';
+  const options = {
+    create: {
+      mutation: CREATE_LIKE,
+      variables: { postId, userId: auth.user.id },
+    },
+    delete: {
+      mutation: DELETE_LIKE,
+      variables: { id: hasLiked ? hasLiked.id : null },
+    },
+  };
 
-
+const [createLike, {data, loading}] = useMutation(options[operation].mutation,{
+      variables: { ...options[operation].variables},
+      refetchQueries:[{query:GET_POST, variables:{
+          id:postId
+    }}]
+})
 
 
 
 
 
 //...........................................button logic ...................
- const likeButton = user ? (
-     hasLiked ? (
-       <Button color="teal"  size="tiny" onClick={"j"} circular>
-            <Icon name="thumbs up outline"/>
+let likeButton;
+
+likeButton = user ? (
+     hasLiked || (!data && loading) ? (
+       <Button color="teal"  size="tiny" onClick={createLike} circular>
+            <Icon name="thumbs up outline"/> {likes.length}
        </Button>
      ):(
-       <Button color="teal" basic size="tiny" circular>
-            <Icon name="thumbs up outline" />
+       <Button color="teal" basic size="tiny" onClick={createLike} circular>
+            <Icon name="thumbs up outline" /> {likes.length}
        </Button>
      )
  ):(
-    <Button as={Link} to='/login' color="teal" basic size="tiny" circular>
-        <Icon name="thumbs up outline"/>
+    <Button as={Link} to='/login' color="teal" basic size="tiny" onClick={createLike} circular>
+        <Icon name="thumbs up outline"/> {likes.length}
     </Button>
  )
 

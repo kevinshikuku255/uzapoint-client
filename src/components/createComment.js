@@ -1,7 +1,7 @@
 import React,{useState, useRef, useEffect} from 'react';
 import { useMutation} from '@apollo/client'
 import { TransitionGroup} from 'semantic-ui-react';
-
+import { Image } from 'semantic-ui-react'
 
 import {CREATE_COMMENT} from "../graphql/comment"
 import { GET_POST} from "../graphql/post"
@@ -18,6 +18,7 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
+import logo from "./images.jpeg"
 
 
 
@@ -45,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
     aligncontent: "flex-end",
     color:"black",
     backgroundColor:"#ededed",
-    padding:"0px",
+    padding:"3px",
+    borderRadius:"3px"
   },
  flex1:{
    width:"85%",
@@ -166,7 +168,13 @@ return (
             {comments && comments.map( comment =>(
                <div key={comment.id} className={classes.comment}>
                   <div className={classes.flex1}>
-                     {comment.comment}
+
+                      <div>
+                        <Image src={logo} avatar />
+                        <span>{comment.author.username}</span>
+                      </div>
+                      {comment.comment}
+
                   </div>
                    {user && <div className={classes.flex2}>
                       {user.username === comment.author.username &&

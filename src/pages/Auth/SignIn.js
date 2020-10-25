@@ -77,13 +77,13 @@ const dispatchAction = (token) =>{
 /**
  * useMutation hook
  */
- let [signInUser,{ loading}] = useMutation(SIGN_IN, {
+ let [signInUser,{loading}] = useMutation(SIGN_IN, {
   update(_, {data}){
     const token = data.signin.token
     localStorage.setItem('jwt',token);
     const decodedToken = jwtDecode(token);
     dispatchAction(decodedToken)
-    history.push("/Me");
+    history.push("/");
  },
  variables : values,
   onError(err){
@@ -97,7 +97,6 @@ const dispatchAction = (token) =>{
       signInUser();
       setErrors('');
   };
-
 
 
 /**
@@ -176,6 +175,3 @@ const renderErrors = apiError => {
  );
 }
 export default SignIn;
-
-
-

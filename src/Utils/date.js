@@ -5,7 +5,11 @@
  */
 export const timeAgo = unixTimestamp => {
   const date = new Date(parseInt(unixTimestamp));
-
+  const time = date.toLocaleString('en-US', {
+  hour: 'numeric',
+  minute: 'numeric',
+  hour12: false,
+});
 
 
 
@@ -33,8 +37,10 @@ export const timeAgo = unixTimestamp => {
 
   interval = Math.floor(seconds / 3600);
   if (interval >= 1) {
-    return interval + ' hours ago';
+    return  'Dispalyed at - ' + time
+     //interval + ' hours ago';
   }
+
 
   interval = Math.floor(seconds / 60);
   if (interval >= 1) {
@@ -47,8 +53,6 @@ export const timeAgo = unixTimestamp => {
   }
   return  'just now';
 };
-
-
 
 /**
  * Converts unix timestamp to current date
@@ -71,9 +75,8 @@ export const currentDate = unixTimestamp => {
     'Nov',
     'Dec',
   ];
-
   const month = months[date.getMonth()];
-  const day = date.getDay();
+  const day = date.getDate()
   const year = date.getFullYear();
   const time = date.toLocaleString('en-US', {
     hour: 'numeric',
@@ -83,3 +86,58 @@ export const currentDate = unixTimestamp => {
 
   return `${month} ${day} ${year} ${time}`;
 };
+
+
+
+
+
+/**
+ * Creates day of the week and date
+ *
+ * @param {string} day unix timestamp
+ */
+export const  weekDay =  (unixTimestamp) => {
+  const date = new Date(parseInt(unixTimestamp));
+  const day = date.getDay(); // mon,Tue,Wed,Thur, Fri... in string
+  const year = date.getFullYear();
+  const months = [
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+  ];
+
+  const month = months[date.getMonth()];
+
+  const intDay = date.getDate()
+   if(day === 0){
+      return `Sun ${intDay}/${month}/${year}`
+    }
+    if(day === 1){
+      return `Mon ${intDay}/${month}/${year}`
+    }
+    if(day === 2){
+    return `Tue ${intDay}/${month}/${year}`
+   }
+      if(day === 3){
+      return `Wed ${intDay}/${month}/${year}`
+    }
+    if(day === 4){
+      return `Thur ${intDay}/${month}/${year}`
+    }
+    if(day === 5){
+      return `Fri ${intDay}/${month}/${year}`
+    }
+    if(day === 6){
+      return `Sat ${intDay}/${month}/${year}`
+    }
+    return day
+}

@@ -1,11 +1,23 @@
 import gql from 'graphql-tag';
 
+// /**
+//  * Creates a like
+//  */
+// export const CREATE_LIKE = gql`
+//   mutation($input: CreateLikeInput!) {
+//     createLike(input: $input) {
+//       id
+//     }
+//   }
+// `;
+
+
 /**
  * Creates a like
  */
 export const CREATE_LIKE = gql`
-  mutation($input: CreateLikeInput!) {
-    createLike(input: $input) {
+  mutation($postId:ID!, $userId:ID!){
+    createLike(userId:$userId, postId:$postId ){
       id
     }
   }
@@ -15,8 +27,8 @@ export const CREATE_LIKE = gql`
  * Deletes a like
  */
 export const DELETE_LIKE = gql`
-  mutation($input: DeleteLikeInput!) {
-    deleteLike(input: $input) {
+  mutation($id: ID!) {
+    deleteLike(id: $id) {
       id
     }
   }

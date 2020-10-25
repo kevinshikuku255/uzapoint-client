@@ -119,12 +119,13 @@ return (
           />
       <div variant="body1" className={classes.paragraph}>
           {postMarkup}
+          <hr/>
   {/**............................................................................................ */}
         <div className={classes.postMarkup}>
             <div style={{flexGrow:"1"}}>
                {title}
             </div>
-      </div>
+        </div>
   {/**................................................................................................ */}
           <hr/>
       </div>
