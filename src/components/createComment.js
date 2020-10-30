@@ -1,32 +1,35 @@
 import React,{useState, useRef, useEffect} from 'react';
-import { useMutation} from '@apollo/client'
+import { useMutation} from '@apollo/client';
 import { TransitionGroup} from 'semantic-ui-react';
-import { Image } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react';
 
-import {CREATE_COMMENT} from "../graphql/comment"
-import { GET_POST} from "../graphql/post"
+import {CREATE_COMMENT} from "../graphql/comment";
+import { GET_POST } from '../graphql/post';
 import { useStore } from '../store';
 import DeleteButton from './DeleteButton';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+import IconButton from '@material-ui/core/IconButton';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddCommentRoundedIcon from '@material-ui/icons/AddCommentRounded';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
-import logo from "./images.jpeg"
+import logo from "./images.jpeg";
 
 
 
 
 
-const useStyles = makeStyles((theme) => ({
-
-  input:{
+const useStyles = makeStyles(() => ({
+input:{
   border:"none",
   resize: "none",
   outline: "none",
@@ -53,10 +56,10 @@ const useStyles = makeStyles((theme) => ({
    width:"85%",
    overflowWrap:"break-word"
  },
-  flex2:{
+flex2:{
    width:"15%",
  },
- i:{
+i:{
    color:"red",
    fontSize:"0.9rem"
  }
@@ -71,7 +74,8 @@ function SinglePost({comments, match}){
   const [comment, setComment] = useState('');
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
+  const [anchorEl, setAnchorEl] = useState(null);
+  const anchirOpen = Boolean(anchorEl);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -80,7 +84,15 @@ function SinglePost({comments, match}){
   const handleClose = () => {
     setOpen(false);
   };
+/* -------------------------------------------------------------------------- */
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
+  const handleAchorClose = () => {
+    setAnchorEl(null);
+  };
+/* -------------------------------------------------------------------------- */
 
 
 
@@ -96,14 +108,11 @@ function SinglePost({comments, match}){
 
   const [submitCommnet,{ loading, data}] = useMutation(CREATE_COMMENT,{
      variables,
-
-     refetchQueries:[{query:GET_POST, variables:{
+     refetchQueries:[
+       {query:GET_POST, variables:{
           id:postId
     }}]
   });
-
-
-
 
   const handleSubmit = async (e) => {
      e.preventDefault();
@@ -158,7 +167,6 @@ return (
 
         <TransitionGroup>
           <div>
-
            {!data &&  loading && <div className={classes.comment}>
                                       <div className={classes.flex1}>
                                         {comment} <p className={classes.i}>sending...</p>
@@ -170,16 +178,41 @@ return (
                   <div className={classes.flex1}>
 
                       <div>
-                        <Image src={logo} avatar />
+                        <Image src={logo} avatar/>
                         <span>{comment.author.username}</span>
                       </div>
                       {comment.comment}
 
                   </div>
-                   {user && <div className={classes.flex2}>
-                      {user.username === comment.author.username &&
-                         <DeleteButton  commentId={comment.id}/>
-                       }
+                   {user.username === comment.author.username && <div className={classes.flex2}>
+
+                      <IconButton aria-label="more"
+                                  aria-haspopup="true"
+                                  onClick={handleMenu}
+                                  >
+                        <MoreVertIcon />
+                      </IconButton>
+{/* -------------------------------------------------------------------------- */}
+                      <Menu
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        open={anchirOpen}
+                        onClose={handleAchorClose}
+                      >
+                    {user &&
+                        <MenuItem onClick={handleAchorClose}>
+                            <DeleteButton postId={postId} commentId={comment.id}/>
+                  {/* <button onClick={deleteMutation}> {deleting ? "Deletting": deleted ? "Deleted" : "Delete" } </button> */}
+                        </MenuItem>}
+                      </Menu>
                   </div>}
                </div>
             ))}

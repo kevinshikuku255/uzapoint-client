@@ -141,25 +141,4 @@ return (
     </>
       )
 }
-
-
-
 export default SinglePost;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

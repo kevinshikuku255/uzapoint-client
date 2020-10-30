@@ -278,6 +278,18 @@ background-color: #6d6dcc !important;
   outline: none;
 }
 
+
+.userPosts{
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.userPosts::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+
 /** Media queries*/
 
 /* Extra small devices (phones, 600px and down) */

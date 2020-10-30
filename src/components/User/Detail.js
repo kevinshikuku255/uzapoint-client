@@ -1,20 +1,43 @@
 import React,{useState} from 'react'
+import {useMutation} from '@apollo/client'
 
-import { Image } from 'semantic-ui-react'
-import image from "../shoes.jpeg"
+import shoes from "../shoes.jpeg";
+import images from "../images.jpeg";
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
+import {DELETE_POST, GET_POSTS} from "../../graphql/post"
+import {GET_AUTH_USER, GET_USER_POSTS} from '../../graphql/user';
+import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+
+
+
+
+/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+import {  Icon,Button, Accordion} from "semantic-ui-react"
+import { timeAgo, weekDay } from '../../Utils/date';
+import { Link } from "react-router-dom";
+
+import  LikeButton  from '../LikeButton';
+import { useStore } from '../../store';
+
+
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import PhoneIcon from '@material-ui/icons/Phone';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
 
 
 
+/* -------------------------------------------------------------------------- */
 const useStyles = makeStyles((theme) => ({
  appBar: {
     position: 'fixed',
@@ -31,18 +54,34 @@ img:{
   width:"100px",
   height:"100px",
 },
-div:{
-  marginTop:"2.8rem"
+card:{
+  marginTop:"2rem"
 },
 /* -------------------------------------------------------------------------- */
-  card: {
-    minWidth: 300,
-    maxWidth:518,
-    margin: theme.spacing(8,-1.5,0,-1.5),
-  },
   media: {
-    height: 190,
+    height: 200,
   },
+  paragraph:{
+     margin: theme.spacing(2,1,0,1),
+     overflowWrap:"break-word"
+  },
+extra:{
+  display:"flex",
+},
+  ul:{
+    listStyleType: "none",
+    margin: 0,
+    padding: 0,
+    overflow: "hidden",
+    textAlign:"centre"
+  },
+  li:{
+  display: "inline",
+  margin:"1rem"
+  },
+ acordion:{
+   marginTop: "-1.2rem",
+ },
 }));
 
 
@@ -51,57 +90,162 @@ div:{
  * post detail
  */
 const Detail = ({post}) => {
+/* -------------------------------------------------------------------------- */
 const classes = useStyles();
-//.......................................................................
-  const [open, setOpen] = useState(false);
-   const handleClickOpen = () => {
-    setOpen(true);
+const [activeIndex, setActiveIndex] =useState();
+
+
+const [{auth}] = useStore()
+const user = auth.user
+
+ const [anchorEl, setAnchorEl] = useState(null);
+ const open = Boolean(anchorEl);
+
+
+ const {id , author, image, likes, price, title, comments, createdAt} = post
+ const [deleteMutation, {loading, data}] = useMutation(DELETE_POST,{
+        variables:{
+         id,
+        },
+        refetchQueries:[
+          { query:GET_POSTS,
+           variables:{
+             skip:0,
+             limit:HOME_PAGE_POSTS_LIMIT
+           }},
+           { query:GET_USER_POSTS,
+            variables:{
+             username:user.username,
+             skip:0,
+             limit:HOME_PAGE_POSTS_LIMIT
+            }},
+           {query:GET_AUTH_USER}
+          ]
+})
+ const weekday = weekDay(createdAt)
+
+ const postImage = image ? image : shoes;
+//  const avator = author.image ?  author.image : images;
+/* -------------------------------------------------------------------------- */
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setAnchorEl(null);
   };
+/* -------------------------------------------------------------------------- */
 
+
+ const handleClick = (e, titleProps) => {
+    const { index } = titleProps
+
+    const newIndex = activeIndex === index ? -1 : index
+
+    setActiveIndex(newIndex)
+  }
+
+
+
+const extra = (
+  <>
+    <div className={classes.extra}>
+      <ul className={classes.ul}>
+          <li className={classes.li}>
+              <LikeButton user={author} postId={post.id} likes={likes}/>
+          </li>
+          <li className={classes.li}>
+            <Button  as={Link} to={`/posts/${id}`} size="tiny" circular>
+            <Icon name="comment" />{comments.length}
+            </Button>
+          </li>
+        <li className={classes.li}>
+            <b>{`Ksh. ${price}`}</b>
+        </li>
+      </ul>
+    </div>
+ </>
+);
+
+/* -------------------------------------------------------------------------- */
  return (
   <>
+<Card className={classes.card} >
+         <CardHeader
+         avatar={
+              <Avatar  alt="post" src={images} />
+           }
+         action={
+          <>
+            <IconButton aria-label="more"
+                         aria-haspopup="true"
+                         onClick={handleMenu}
+                         >
+              <MoreVertIcon />
+            </IconButton>
+{/* -------------------------------------------------------------------------- */}
+                <Menu
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}><PhoneIcon/> {author.phone}</MenuItem>
+                  <MenuItem onClick={handleClose}> <CalendarTodayIcon/>{weekday} </MenuItem>
+               {user.username === author.username  &&
+                  <MenuItem >
+                      <div>
+                        <Button color="pink" onClick={deleteMutation}  size="tiny" circular>
+                            { loading ? "Deleting..." : data ? "Deleted !" : "Delete"}
+                        </Button>
+                    </div>
+                  </MenuItem>}
+                </Menu>
+          </>
+        }
+        title={
+            <Typography variant="h6" style={{textTransform: "capitalize"}}>
+                {author.username}
+            </Typography>
+            }
+        subheader={timeAgo(createdAt)}
+      />
+          <CardMedia
+              className={classes.media}
+              image={postImage}
+              title={`${price} shillings`}
+            />
+     <CardContent>
+        <Accordion className={classes.acordion}>
+          <Accordion.Title
+            active={activeIndex === 0}
+            index={0}
+            onClick={handleClick}
+          >
+            <Icon name='dropdown' />
+               Item description
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 0}>
 
-    <div className={classes.flexItem}>
-        <Image src={post.image ? post.image : image } alt={post.price} onClick={handleClickOpen} fluid />
- {/* ...................................................................................................... */}
-      <Dialog fullScreen open={open} onClose={handleClose}>
-          <AppBar className={classes.appBar} >
-            <Toolbar>
-              <Typography variant="h6" className={classes.title}>
-                 <p style={{textTransform: "capitalize"}}> {`Ksh. ${post.price}`} </p>
-              </Typography>
-              <Button color="inherit" onClick={handleClose}>
-                <CloseIcon />
-              </Button>
-            </Toolbar>
-          </AppBar>
+            <Typography variant="body1" className={classes.paragraph}>
+                 {title}
+            </Typography>
+          </Accordion.Content>
+          </Accordion>
+          { extra }
+          <hr/>
+      </CardContent>
+</Card>
 
-
-          <Card className={classes.card}>
-                <CardMedia
-                    className={classes.media}
-                    image={post.image ? post.image : image }
-                    title={"user.username"}
-                  />
-          </Card>
-
-
-
-
-          {/* <div className={classes.div}>
-            <img src={post.image ? post.image : image }
-                 alt={post.id}
-                 className={classes.gridList}  />
-          </div> */}
-        </Dialog>
-    </div>
   </>
  )
 }
-
 export default Detail;
-

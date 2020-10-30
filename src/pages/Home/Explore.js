@@ -1,6 +1,6 @@
 import React from 'react'
 import {useQuery}  from '@apollo/client'
-import {Grid, Transition,  GridColumn } from "semantic-ui-react"
+import {Grid, Transition,  GridColumn } from "semantic-ui-react";
 
 
 import {GET_POSTS} from "../../graphql/post"

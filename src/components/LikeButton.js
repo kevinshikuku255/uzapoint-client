@@ -17,7 +17,7 @@ function LikeButton( { user, postId, likes} ){
       );
 
 
-  // Detect which mutation to use
+//..............Detect which mutation to use...............................//
   const operation = hasLiked ? 'delete' : 'create';
   const options = {
     create: {
@@ -39,42 +39,29 @@ const [createLike, {data, loading}] = useMutation(options[operation].mutation,{
 
 
 
-
-
-//...........................................button logic ...................
+//..........................button logic ........................................//
 let likeButton;
 
-likeButton = user ? (
-     hasLiked || (!data && loading) ? (
-       <Button color="teal"  size="tiny" onClick={createLike} circular>
-            <Icon name="thumbs up outline"/> {likes.length}
-       </Button>
-     ):(
-       <Button color="teal" basic size="tiny" onClick={createLike} circular>
-            <Icon name="thumbs up outline" /> {likes.length}
-       </Button>
-     )
- ):(
-    <Button as={Link} to='/login' color="teal" basic size="tiny" onClick={createLike} circular>
-        <Icon name="thumbs up outline"/> {likes.length}
-    </Button>
- )
-
-  return(
-  <>
-    {likeButton}
-  </>
+  likeButton = auth.user ? (
+      hasLiked || (loading && !data) ? (
+        <Button color="teal"  size="tiny" onClick={createLike} circular>
+              <Icon name="thumbs up outline"/> {likes.length}
+        </Button>
+      ):(
+        <Button color="teal" basic size="tiny" onClick={createLike} circular>
+              <Icon name="thumbs up outline" /> {likes.length}
+        </Button>
+      )
+  ):(
+      <Button as={Link} to='/login' color="teal" basic size="tiny" circular>
+          <Icon name="thumbs up outline"/> {likes.length}
+      </Button>
   )
 
+    return(
+    <>
+      {likeButton}
+    </>
+    )
 }
-
 export default LikeButton;
-
-
-
-
-
-
-
-
-

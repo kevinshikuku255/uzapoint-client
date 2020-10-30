@@ -5,12 +5,6 @@
  */
 export const timeAgo = unixTimestamp => {
   const date = new Date(parseInt(unixTimestamp));
-  const time = date.toLocaleString('en-US', {
-  hour: 'numeric',
-  minute: 'numeric',
-  hour12: false,
-});
-
 
 
  const seconds = Math.floor((new Date() - date) / 1000);
@@ -19,32 +13,41 @@ export const timeAgo = unixTimestamp => {
   let interval = Math.floor(seconds / 31536000);
 
 
-  if (interval >= 1) {
-    return interval + 'years ago';
+  if (interval === 1) {
+    return interval + 'year ago';
+  }else if(interval > 1){
+    return interval + "years ago"
   }
 
   interval = Math.floor(seconds / 2628002.88);
-  if (interval >= 1) {
-
-    return interval + 'months ago';
+  if (interval === 1) {
+    return interval + 'month ago';
+  }else if(interval >1){
+    return interval + "months ago"
   }
 
   interval = Math.floor(seconds / 86400);
-  if (interval >= 1) {
+  if (interval === 1) {
+    return interval + ' day ago';
+  }else if(interval > 1){
     return interval + ' days ago';
   }
 
 
   interval = Math.floor(seconds / 3600);
-  if (interval >= 1) {
-    return  'Dispalyed at - ' + time
-     //interval + ' hours ago';
+  if (interval === 1) {
+    return  interval + "hr ago";
+  }else if(interval > 1){
+    return  interval + "hrs ago";
   }
 
 
+
   interval = Math.floor(seconds / 60);
-  if (interval >= 1) {
-    return interval + 'mins ago';
+  if (interval === 1) {
+    return interval + 'min ago';
+  }else if(interval > 1){
+     return interval + "mins ago"
   }
 
   interval = Math.floor(seconds / 5);

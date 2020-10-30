@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button ,Grid} from 'semantic-ui-react';
-
+import { useStore } from '../../store';
 
 
 
@@ -71,13 +71,13 @@ Icon:{
 }));
 
 
+
 /**
  * About user...
  */
-
 const  UserAbout = ({user}) =>{
   const   classes = useStyles();
-
+  const [{auth}] = useStore()
 //.......................................................................
   const [open, setOpen] = React.useState(false);
 
@@ -131,13 +131,13 @@ const joinedDate = currentDate(createdAt).split(" ")
               </div>
               <div> <b>Following</b> <br/> {following.length} </div>
           </div>
-{/**.......................................................................................................... */}
+{/**.................................hapa......................................................................... */}
           <div className={classes.flex1}>
               <div className={classes.Icon}>
                  <ShoppingBasketIcon/>
               </div>
               <div> <b>Items Dispalyed - {posts.length}</b> <br/>
-                <Button icon circular content="View all  items" onClick={handleClickOpen}/>
+               { auth.user.username !== username && <Button icon circular content="View all  items" onClick={handleClickOpen}/>}
                </div>
           </div>
 {/**.......................................................................................................... */}
@@ -165,7 +165,7 @@ const joinedDate = currentDate(createdAt).split(" ")
           </Toolbar>
         </AppBar>
 
-        <div>
+        <div className="userPosts">
             <UserPosts username={username} posts={posts}/>
         </div>
 

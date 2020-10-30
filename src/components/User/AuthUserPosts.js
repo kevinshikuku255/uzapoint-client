@@ -1,16 +1,17 @@
-import React from 'react'
-import {useQuery}  from '@apollo/client'
+import React from 'react';
+import {useQuery}  from '@apollo/client';
+import {Grid, Transition,  GridColumn } from "semantic-ui-react";
 
-import {GET_USER_POSTS} from "../../graphql/user"
-import Detail from "./Detail"
+import {GET_USER_POSTS} from "../../graphql/user";
+import Detail from "./Detail";
 
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Card from '@material-ui/core/Card';
 
 
 
-
-
+/* ---------------useStyles---------------------------------------------------- */
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -20,24 +21,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     marginTop:"4.5rem"
   },
-flex:{
-  marginTop:"4.5rem",
-  maxWidth: 558,
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent:"center",
-},
-flexItem:{
-  backgroundColor: "#f1f1f1",
-  maxWidth: "100px",
-  maxHeight: "100px",
-  margin:"1px",
-  textalign:" center",
-},
-img:{
-  width:"100%",
-  height:"100%",
-}
+  card: {
+    minWidth: 300,
+    maxWidth:518,
+    margin: theme.spacing(5,0,0,0),
+    overflow:"hidden",
+  }
 }));
 
 
@@ -58,21 +47,24 @@ const  UserPosts = ({username}) => {
                     </div>
     if(loading){ return spiner }
 
-    const posts = data.getUserPosts.posts;
+    const {posts, count} = data.getUserPosts;
+
  return (
    <>
-      <div className={classes.flex}>
-          {posts.map((post) => (
-              <div className={classes.flexItem} key={post.id}>
-                    <Detail post={post}/>
-              </div>
-          ))}
-      </div>
+<Card className={classes.card}>
+        <GridColumn>
+            <Grid.Row >
+               <Transition.Group >
+                {posts.map( post =>
+                  <Grid.Column key={post.id} style={{marginBottom:"-12px"}}>
+                      <Detail count={count} post={post}/>
+                  </Grid.Column>
+                  )}
+               </Transition.Group>
+            </Grid.Row>
+        </GridColumn>
+</Card>
    </>
  )
 }
-
 export default UserPosts;
-
-
-

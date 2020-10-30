@@ -1,24 +1,22 @@
 import React from 'react'
 import {useQuery} from "@apollo/client"
-import { Grid, Item} from 'semantic-ui-react'
+
+import { Grid, Item,Image} from 'semantic-ui-react'
 import SkeletonPost from '../../components/SinglePostSkeleton';
-import { makeStyles } from '@material-ui/core/styles';
 import UserPosts from "./UserPosts"
 import logo from "../images.jpeg"
-
-
+import shoes from "../shoes.jpeg"
 import {GET_AUTH_USER} from "../../graphql/user";
+import EditProfile from "../EditProfile"
+
+import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-
-
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
-
-
 
 
 
@@ -41,6 +39,9 @@ flexContainer:{
   display:"flex",
   flexDirection:"column",
   marginTop:"2rem",
+  width: "100%",
+  height: "100%",
+  overflow: "hidden"
 },
 bio:{
  marginLeft:"3rem",
@@ -64,22 +65,16 @@ tab1:{
 tab:{
   flexGrow:'1',
   textAlign:"center",
-  cursor:"pointer",
   marginBottom:"0.5rem",
 },
 editProfile:{
   flexGrow:"1",
-  backgroundColor:"gray",
+  backgroundColor:"whitesmoke",
   textAlign:"center",
-  marginTop:"0.5rem",
   borderRadius:"5px",
-  padding:"0.1rem 0",
-  border:"1px solid black"
+  height:"5px"
 },
-div:{
- overFlow:"none",
-},
-  footer:{
+footer:{
   position: "fixed",
   width: "100vw",
   bottom: 0,
@@ -109,9 +104,6 @@ div:{
   };
 
 
-
-
-
   const {data, loading} = useQuery(GET_AUTH_USER,{
     fetchPolicy:"cache-and-network"
   });
@@ -125,10 +117,10 @@ div:{
    )
  }
 
- const {  username, image, posts, phone,likes, followers} = data.getAuthUser;
+ const {  username, image, posts, phone, followers} = data.getAuthUser;
  const avator = image ? image : logo;
- console.log(likes.length)
 // const joinedDate = currentDate(createdAt).split(" ")
+
  return (
   <div>
   <Grid>
@@ -141,38 +133,56 @@ div:{
                   <Avatar alt={username} src={avator} className={classes.large}/>
                 </div>
                 <div className={classes.tab}>
-                  <p>folowers</p>
                   {followers.length}
+                  <Button color="inherit">Clients</Button>
                 </div>
                 <div className={classes.tab}>
                   <Item  onClick={handleClickOpen}>
                       {posts.length}
-                      <p>posts</p>
+                      <Button color="inherit">Posts</Button>
                   </Item>
+                </div>
+                <div className={classes.tab}>
+                  {followers.length}
+                  <Button color="inherit">folowing</Button>
                 </div>
           </div>
 
 
 
           <div className={classes.bio}>
-                   <p style={{padding:"0", margin:"0",textTransform: "capitalize",}}>{username}</p>
+                   <p style={{padding:"0", margin:"0",textTransform: "capitalize"}}>{username}</p>
                    <p style={{padding:"0", margin:"0"}}>{phone}</p>
           </div>
 
+{/* ---------------------------here----------------------------------------------- */}
           <div className={classes.editProfile}>
-                <div>
-                  <b><button>Edit profile</button></b>
-                </div>
+                 <EditProfile/>
           </div>
 
-
+          <div>
+             <table style={{margin:"auto"}}>
+                 <tbody>
+                  {posts.map( post => (
+                     <tr key={post.id}  onClick={handleClickOpen} >
+                        <td style={{textAlign:"center"}}>
+                          <div>
+                          <Image src={shoes} size='small'/>
+                          </div>
+                        </td>
+                        {<td>{`Ksh. ${post.price}`}</td>}
+                     </tr>
+                  ))}
+             </tbody>
+             </table>
+          </div>
 {/* ...................................................................................................... */}
 
         <Dialog fullScreen open={open} onClose={handleClose}>
           <AppBar className={classes.appBar} >
             <Toolbar>
               <Typography variant="h6" className={classes.title}>
-                 <p style={{textTransform: "capitalize"}}> {username} </p>
+                 <span style={{textTransform: "capitalize"}}> {username}</span>
               </Typography>
               <Button color="inherit" onClick={handleClose}>
                 <CloseIcon />
@@ -180,7 +190,7 @@ div:{
             </Toolbar>
           </AppBar>
 
-          <div className={classes.div}>
+          <div className="userPosts">
             <UserPosts posts={posts}/>
           </div>
         </Dialog>
@@ -188,115 +198,7 @@ div:{
     </div>
     </Grid.Column>
   </Grid>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- {/* <Grid className="Me">
-    <GridColumn mobile={16} tablet={10} computer={7}>
-     <Avatar  alt="logo" src={shoes} />
-    </GridColumn>
- </Grid> */}
-
-  {/* <div className="gridd">
-    <div className="UserInfo">
-       <div className="DpInfo">
-         <b>{username}</b>
-       </div>
-       <div>
-         <button>{`Followers ${followers.length}`}</button>
-       </div>
-       <div>
-         <Icon name="bell"/>
-       </div>
-     </div>
-
-    <div className="userBio" >
-          <div>User Bio information: </div>
-    </div>
-    <div>{<Rating icon='heart' defaultRating={1} maxRating={3} />} </div>
-    <div> <p>{`Phone: ${phone} `}</p> </div>
-    <div className="UserMeta">
-        <div>
-          <Icon name="cloud"/>{"Nairobi,Ke"}
-        </div>
-        <div>
-         <Icon  name="calendar"/>{`Joined ${joinedDate[0]}, ${joinedDate[2]}`}
-        </div>
-    </div>
-    <div>
-        <Menu pointing secondary>
-          <Menu.Item
-            name='items'
-            active={activeItem === 'items'}
-            onClick={handleItemClick}
-          />
-          <Menu.Item
-            name='messages'
-            active={activeItem === 'messages'}
-            onClick={handleItemClick}
-          />
-          <Menu.Item
-            name='sales'
-            active={activeItem === 'sales'}
-            onClick={handleItemClick}
-          />
-        </Menu>
-    </div>
-    <div>
-      { activeItem === "items" ? <b>This feature will be added soon</b>
-         : activeItem === "sales" ?  <UserSales/> : " " }
-    </div>
-</div> */}
 </div>
  )
 }
-
 export default UserAbout;

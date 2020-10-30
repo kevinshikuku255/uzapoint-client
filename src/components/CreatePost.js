@@ -2,11 +2,15 @@ import React,{useState} from 'react';
 import {Input} from 'semantic-ui-react'
 import {useMutation} from "@apollo/client"
 
-import { HOME_PAGE_POSTS_LIMIT } from '../constants/DataLimit';
+
 import { useStore } from '../store';
 import PostImageUpload from "./post_imageUpload";
+
 import { MAX_POST_IMAGE_SIZE } from '../constants/ImageSize';
-import {CREATE_POST, GET_POSTS} from "../graphql/post"
+import {CREATE_POST, GET_POSTS} from "../graphql/post";
+import {GET_AUTH_USER} from '../graphql/user';
+import { HOME_PAGE_POSTS_LIMIT } from '../constants/DataLimit';
+
 import Alert from '@material-ui/lab/Alert';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
 
@@ -17,7 +21,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 flex:{
  display:"flex",
  flexDirection:"column",
@@ -91,10 +95,13 @@ function PostForm(){
       onError(err){
       setErrors(err)
     },
-    refetchQueries:[{query:GET_POSTS, variables:{
+    refetchQueries:[
+      { query:GET_POSTS, variables:{
           skip: 0,
           limit: HOME_PAGE_POSTS_LIMIT,
-    }}]
+       }},
+      { query:GET_AUTH_USER}
+       ]
 });
 
 
@@ -124,7 +131,7 @@ function PostForm(){
   const handleSubmit = async (e) => {
      e.preventDefault();
      createPost();
-     setWarning("sent");
+     setWarning("Item displayed!");
      handleReset();
   };
 
@@ -199,6 +206,4 @@ function PostForm(){
 </>
   )
 };
-
-
 export default PostForm;

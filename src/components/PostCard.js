@@ -165,7 +165,7 @@ const extra = (
                   <MenuItem onClick={handleClose}> <CalendarTodayIcon/>{weekday} </MenuItem>
                {user.username === author.username  &&
                   <MenuItem onClick={handleClose}>
-                       Delete <DeleteButton id={id} />
+                      <DeleteButton id={id} />
                   </MenuItem>}
                 </Menu>
           </>
@@ -212,6 +212,4 @@ const extra = (
 
    )
 }
-
-
 export default Postcard;

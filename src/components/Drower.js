@@ -13,7 +13,6 @@ import InfoTwoToneIcon from '@material-ui/icons/InfoTwoTone';
 import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
 import Avatar from '@material-ui/core/Avatar';
 import { lightBlue} from '@material-ui/core/colors';
-import SettingsIcon from '@material-ui/icons/Settings';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
 
@@ -22,6 +21,7 @@ import logo from "./logo.png"
 import shoes from "./shoes.jpeg"
 import Install from "./Install";
 import { useStore } from "../store";
+
 
 
 
@@ -71,12 +71,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-
-
-
-
-
-
 export default function AppDrawer() {
   const classes = useStyles();
   const [{auth}] = useStore();
@@ -115,10 +109,6 @@ const avator = auth.user.image ? auth.user.image : logo;
        <ListItem>
          <ListItemIcon> <PersonOutlineTwoToneIcon /></ListItemIcon>
        <Link to="/Me"><ListItemText primary="Profile" /></Link>
-       </ListItem>
-       <ListItem>
-         <ListItemIcon> <SettingsIcon/></ListItemIcon>
-          <ListItemText primary="settings" />
        </ListItem>
      </List>
 {/* -------------------------------------------------------------------------- */}
