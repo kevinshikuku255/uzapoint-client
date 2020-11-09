@@ -14,9 +14,8 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "http://localhost:3000/",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#6d6dcc",
-  "orientation":"potrait",
   "background_color": "#6d6dcc"
 }
