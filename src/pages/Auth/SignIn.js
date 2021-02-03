@@ -1,62 +1,45 @@
-import React, {useState} from 'react'
-import { Button, Form } from "semantic-ui-react"
-import {useMutation} from '@apollo/client'
-import {Link} from "react-router-dom"
-import jwtDecode  from 'jwt-decode'
-
+import React, {useState} from 'react';
+import {useMutation} from '@apollo/client';
+import {Link} from "react-router-dom";
+import jwtDecode  from 'jwt-decode';
+import Avatar from '@material-ui/core/Avatar';
+import { makeStyles } from '@material-ui/core/styles';
+import {useHistory} from "react-router-dom";
 
 import { SIGN_IN } from '../../graphql/user';
 import { useStore } from '../../store';
 import { SET_AUTH_USER } from '../../store/auth';
+import Header from "../../components/Header/loggedOut";
+import Footer from "../../components/Footer";
 
 
-import logo from "./logo.png"
 
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import Alert from '@material-ui/lab/Alert';
+import Logo from "../../Assets/logo.png";
 
 
 const useStyles = makeStyles((theme) => ({
-  card: {
-    minWidth: 300,
-    maxWidth:518,
-    margin:"auto",
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
   },
-  container:{
- margin: theme.spacing(7,0,0,0),
-  },
-  footer:{
-  position: "fixed",
-  width: "100vw",
-  bottom: 0,
-  textAlign: "center",
-  backgroundColor:"white"
-  }
 }));
 
 
 
 
-/**
- *
- * lets existing user in
- */
-function SignIn({history}) {
-  const classes = useStyles();
+
+
+
+/** Logs in existing user */
+function SignIn() {
+  const history = useHistory();
   const [values, setValues] = useState({ phoneOrUsername: '', password: '' });
   const [errors, setErrors] = useState('');
   const [, dispatch] = useStore();
+  const classes = useStyles();
 
 
-  /**
- * submit hundler
- */
+/**submit hundler */
   const handleChange = e => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
@@ -74,9 +57,7 @@ const dispatchAction = (token) =>{
 
 
 
-/**
- * useMutation hook
- */
+/**useMutation hook */
  let [signInUser,{loading}] = useMutation(SIGN_IN, {
   update(_, {data}){
     const token = data.signin.token
@@ -99,9 +80,7 @@ const dispatchAction = (token) =>{
   };
 
 
-/**
- * api errors
- */
+/**api errors */
 const renderErrors = apiError => {
     let errorMessage;
     if (errors) {
@@ -112,66 +91,59 @@ const renderErrors = apiError => {
     }
     if (errorMessage) {
       return (
-         <div>{errorMessage}</div>
+        <i>{errorMessage}</i>
       );
     }
     return null;
   };
 
  return (
-<div className={classes.container}>
+<>
+<header>
+<Header/>
+</header>
+<div className="signInContainer">
+      <div>
+        <div className="signInLogo">
+          <Link to="/windoshoppe" > <Avatar alt="logo" src={Logo} className={classes.large}/> </Link> <span>Windoshoppe</span>
+        </div>
+        <form onSubmit={handleSubmit}  className="signInForm" >
 
-<Card className={classes.card}>
-         <CardHeader
-         avatar={
-              <Avatar  alt="logo" src={logo} />
-             }
-        title={
-            <Typography variant="h4">
-                Login
-            </Typography>
-            }
-      />
-      <CardContent>
-        <Form onSubmit={handleSubmit} noValidate className={loading ? "loading": ""} >
-          <Form.Input
-          label="Phone / Username"
-          placeholder="PhoneOrUsername"
-          name= "phoneOrUsername"
-          type="text"
-          error={ !values.phoneOrUsername && errors ? true : false}
-          value ={values.phoneOrUsername}
-          onChange={handleChange}
-          />
-
-          <Form.Input
-          label="Password"
-          placeholder="Password"
-          name= "password"
-          type="password"
-          error={!values.password && errors ? true : false}
-          value={values.password}
-          onChange={handleChange}
-          />
-
-        <Button type="submit" primary>
-            Login
-        </Button>
-        </Form>
-        { errors.length > 0  && (
-              <Alert severity="error">{renderErrors(errors)}</Alert>
+           {errors.length > 0  && (
+              <p className="error">{renderErrors(errors)}</p>
             )}
-        <IconButton aria-label="settings">
-            <Link to="/register"> <h5>Create account instead !!</h5> </Link>
-        </IconButton>
-      </CardContent>
-</Card>
 
-  <div  className={classes.footer}>
-      <p className="copyWrite"> 2020 <br/> Kevin Shikuku production</p>
-  </div>
+            {loading ? <p className='loading'>Logging in ...</p> :
+            <>
+            <input
+            placeholder="PhoneOrUsername"
+            name= "phoneOrUsername"
+            type="text"
+            value ={values.phoneOrUsername}
+            onChange={handleChange}
+            className="signInInput"
+            />
+            <input
+            placeholder="Password"
+            name= "password"
+            type="password"
+            value={values.password}
+            onChange={handleChange}
+            className="signInInput"
+            />
+            <button type="submit" className="signInButton">  Login </button>
+            </>
+            }
 
+
+        </form>
+        <p style={{textAlign:"center"}}>Dont have an accout yet? <Link to="/signup" className="Link" > Create</Link></p> <br/>
+            <p><Link to="/aboutus" className="Link" > About us </Link></p>
+      </div>
+      <Footer/>
 </div>
+</>
  );
 }
 export default SignIn;
+

@@ -1,56 +1,43 @@
-import React, {useState} from 'react'
-import { Button, Form,  } from "semantic-ui-react"
-import {useMutation} from '@apollo/client'
+import React, {useState} from 'react';
+import {useMutation} from '@apollo/client';
+import jwtDecode  from 'jwt-decode';
+import {useHistory} from "react-router-dom"
+import Avatar from '@material-ui/core/Avatar';
 import {Link} from "react-router-dom"
-import jwtDecode  from 'jwt-decode'
+
+
 
 import { SET_AUTH_USER } from '../../store/auth';
 import { useStore } from '../../store';
 import { SIGN_UP } from '../../graphql/user';
-import logo from "./logo.png"
+import Logo from "../../Assets/logo.png";
+import Header from "../../components/Header/loggedOut";
+import Footer from "../../components/Footer"
+import './Auth.css'
 
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import Alert from '@material-ui/lab/Alert';
 
-import InfoTwoToneIcon from '@material-ui/icons/InfoTwoTone';
 
 
 const useStyles = makeStyles((theme) => ({
-  card: {
-    minWidth: 300,
-    maxWidth:518,
-    margin:"auto",
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
   },
- container:{
-   margin: theme.spacing(7,0,0,0),
-  },
-  alert:{
-    margin: theme.spacing(1,0,0,0),
-  }
 }));
 
 
 
 
-/**
- *
- * lets new user in
- */
-function SignUp({history}) {
+/** Lets new user  in*/
+function SignUp() {
   const classes = useStyles();
+  const history = useHistory()
   const [errors, setErrors] = useState("");
-  const [, dispatch] = useStore();
-  const [values, setValues] = useState( {fullName: '', username: '', phone: '',  password: ''});
+  const [ , dispatch] = useStore();
+  const [values, setValues] = useState( {username: '', phone: '',  password: '', confirmPassword: ''});
 
-/**
- * change hundler...
- */
+/** change hundler... */
   const handleChange = e => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
@@ -70,10 +57,9 @@ const dispatchAction = (token) =>{
 
 
 
-/**
- * useMutation hook
- */
+/** useMutation hook */
  let [signUpUser,{ loading}] = useMutation(SIGN_UP,{
+
   update(_, result){
     const token = result.data.signup.token;
     const decodedToken = jwtDecode(token);
@@ -82,13 +68,16 @@ const dispatchAction = (token) =>{
     history.push("/");
  },
  variables : values,
-  onError(err){
-      setErrors(err.message)
+   onError(err){
+     setErrors(err.graphQLErrors)
   },
    });
 
 
 
+
+
+/**Handle form submit */
   const handleSubmit = (e) => {
        e.preventDefault();
        signUpUser();
@@ -97,85 +86,88 @@ const dispatchAction = (token) =>{
 
 
 
-/**
- * api errors
- */
+
+
+
+/**api errors */
 const renderErrors = apiError => {
     let errorMessage;
     if (errors) {
-      errorMessage = errors;
+      errorMessage = errors[0].message;
     }
     else if (apiError) {
       errorMessage = apiError.message;
     }
     if (errorMessage) {
       return (
-         <div>{errorMessage}</div>
+         <i>{errorMessage}</i>
       );
     }
     return null;
   };
 
 
+
+
  return (
-<div className={classes.container}>
-    <Card className={classes.card}>
-            <CardHeader
-            avatar={
-                  <Avatar  alt="logo" src={logo} />
-                }
-            title={
-                <Typography variant="h4">
-                    Sign-up
-                </Typography>
-                }
-          />
-          <CardContent>
-              <Form onSubmit={handleSubmit} noValidate className={loading ? "loading": ""}>
-                <Form.Input
-                label="Username"
-                placeholder="Username"
+<>
+<header>
+<Header/>
+</header>
+<div className="signInContainer">
+      <div>
+        <div className="signInLogo">
+          <Link to="/windoshoppe" > <Avatar alt="logo" src={Logo} className={classes.large}/> </Link> <span>Windoshoppe</span>
+        </div>
+        <form onSubmit={handleSubmit}  className="signInForm" >
+        { errors.length > 0  && (
+              <p className="error" >{renderErrors(errors)}</p>
+            )}
+
+            {loading ? <p className='loading' >Creating your account..</p>:
+             <>
+                <input
+                placeholder="Create username"
                 name= "username"
                 type="text"
-                error={ !values.username && errors ? true : false}
                 value ={values.username}
                 onChange={handleChange}
+                className="signInInput"
                 />
-
-                <Form.Input
-                label="Phone"
-                placeholder="Phone"
+                <input
+                placeholder="phone number"
                 name= "phone"
-                type="phone"
-                error={ !values.phone && errors ? true : false}
+                type="text"
                 value={values.phone}
                 onChange={handleChange}
+                className="signInInput"
                 />
-
-                <Form.Input
-                label="Password"
-                placeholder="Password"
-                name= "password"
+                <input
+                placeholder="Create password"
+               name= "password"
                 type="password"
-                error={!values.password && errors ? true : false}
                 value={values.password}
                 onChange={handleChange}
+                className="signInInput"
                 />
+                <input
+                placeholder="confirm your password"
+                name= "confirmPassword"
+                type="password"
+                value={values.confirmPassword}
+                onChange={handleChange}
+                className="signInInput"
+                />
+               <button type="submit" className="signInButton">  Login </button>
+             </>
+            }
+        </form>
+        <p><Link to="/aboutus" className="Link" > About us </Link></p>
 
-              <Button type="submit" primary className={classes.button}>
-                  Sign-up
-              </Button>
-              </Form>
-              { errors && (
-              <Alert severity="error" className={classes.alert}>{renderErrors(errors)}</Alert>
-              )}
-
-                <IconButton aria-label="settings">
-                  <InfoTwoToneIcon/> <Link to="/about" ><h5 >About us</h5> </Link>
-                </IconButton>
-          </CardContent>
-    </Card>
+      </div>
 </div>
+<Footer/>
+</>
  );
 }
 

@@ -1,21 +1,30 @@
 {
-  "short_name": "Windoshoppe",
-  "name": "Windoshoppe",
+  "short_name": "windoshoppe",
+  "name": "windoshoppe",
   "icons": [
     {
-      "src": "icon.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "logo96.png",
+      "sizes": "96x96",
+      "type": "image/png"
     },
     {
-      "src": "icon.png",
+      "src": "logo144.png",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "sizes": "144x144"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
-  "theme_color": "#6d6dcc",
-  "background_color": "#6d6dcc"
+  "theme_color": "#2ceaff",
+  "background_color": "#2ceaff"
 }

@@ -1,0 +1,99 @@
+.postCard{
+ display: flex;
+ flex-wrap: nowrap;
+ padding: 1rem 0;
+ flex-direction: column;
+ border-top: 2px solid black;
+}
+/* -------------------------------------------------------------------------- */
+
+.B{
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.B h4{
+  text-transform: capitalize;
+}
+.B p{
+  font-size: smaller;
+  font-weight:lighter;
+}
+
+.cardAcations{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 5px;
+  padding: 1rem 0;
+  border-bottom: 1px solid gray;
+}
+
+/* -------------------------------------------------------------------------- */
+.cardMedia{
+ flex: content;
+ cursor: pointer;
+}
+
+.itemTitle, .itemPrice{
+  margin: 0 1rem 0.5rem 1rem;
+}
+
+
+.itemPrice .priceInfo{
+  display: flex;
+}
+
+.priceInfo{
+  margin-left: 1rem;
+}
+.priceInfo p{
+  margin-left: 2rem;
+  text-decoration: line-through;
+  font-weight: lighter;
+}
+
+.itemStats{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: .5rem;
+  align-items: center;
+  margin: 0 3px ;
+  border-bottom: 1px solid gray;
+}
+
+.moreBtn{
+  cursor: pointer;
+}
+
+
+
+
+
+/* ------------------------------Media Queries-------------------------------------------- */
+@media(min-width:48em){
+
+.postCard{
+ display: flex;
+ flex-wrap: nowrap;
+ padding: 1rem 1rem;
+ font-size: small;
+ flex-direction: column;
+ border: 2px solid rgb(202, 202, 202);
+ border-radius: 10px;
+}
+
+.cardAcations{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 5px;
+  padding: .5rem 0;
+  border-bottom: 1px solid gray;
+}
+.itemTitle, .itemPrice{
+  margin: .5rem .5rem .5rem .5rem;
+}
+
+}

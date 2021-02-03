@@ -1,0 +1,80 @@
+.container{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    margin-top:3rem;
+    margin-left:5vw;
+    margin-right:5vw;
+    margin-bottom:3rem;
+}
+
+
+
+.contactCard{
+    margin-bottom: 2rem;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.contact_us{
+    display:inline-block;
+}
+
+.policyCard, .infoCard, .aboutCard, .moreInfoCard, .noteCard{
+    margin-top:2rem;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.info_app-about{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: .5rem;
+}
+
+.info_app-about div{
+ margin-left: 2rem;
+}
+
+.info_app-about div p{
+    color: rgb(55, 55, 130);
+}
+
+.contact_us{
+    display: flex;
+    align-items: center;
+}
+
+.notice{
+    display:flex;
+    flex-direction:row;
+}
+
+.call_us{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+/* -------------------------------App infor component------------------------------------------- */
+.app_Info_component{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: skyblue;
+}
+
+.app_info_bar{
+  position: fixed;
+  padding:1rem ;
+  top:0;
+  width: 100vw;
+  background-color:none;
+}
+
+.app_info_bar p{
+  display:inline-block;
+  left: 0;
+  color:blue;
+}

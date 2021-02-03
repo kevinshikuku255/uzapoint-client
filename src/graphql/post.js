@@ -1,8 +1,6 @@
 import gql from 'graphql-tag';
 
-/**
- * Records to select from post comments
- */
+/** Records to select from post comments */
 export const postCommentsPayload = `
   comments {
     id
@@ -15,9 +13,7 @@ export const postCommentsPayload = `
   }
 `;
 
-/**
- * Records to select from post author
- */
+/** Records to select from post author */
 export const postAuthorPayload = `
   author {
     id
@@ -51,9 +47,7 @@ export const postAuthorPayload = `
   }
 `;
 
-/**
- * Records to select from post likes
- */
+/** Records to select from post likes */
 export const postLikesPayload = `
   likes {
     id
@@ -62,17 +56,18 @@ export const postLikesPayload = `
   }
 `;
 
-/**
- * Creates a post
- */
+
+/** Creates a post */
 export const CREATE_POST = gql`
   mutation(
         $title:String,
+        $description:String,
         $price:String,
         $image: Upload,
-        $authorId: ID!
+        $authorId: ID!,
+        $crossedPrice:String
   ) {
-    createPost(title:$title, price:$price, image:$image, authorId:$authorId) {
+    createPost(title:$title, description:$description, price:$price, crossedPrice:$crossedPrice, image:$image, authorId:$authorId) {
       id
     }
   }
@@ -80,9 +75,7 @@ export const CREATE_POST = gql`
 
 
 
-/**
- * Gets all posts from followed users
- */
+/** Gets all posts from followed users */
 export const GET_FOLLOWED_POSTS = gql`
   query($userId: String!, $skip: Int, $limit: Int) {
     getFollowedPosts(userId: $userId, skip: $skip, limit: $limit) {
@@ -90,7 +83,10 @@ export const GET_FOLLOWED_POSTS = gql`
       posts {
         id
         title
+        description
+        features
         price
+        crossedPrice
         image
         imagePublicId
         createdAt
@@ -102,9 +98,7 @@ export const GET_FOLLOWED_POSTS = gql`
   }
 `;
 
-/**
- * Gets all available posts
- */
+/**Gets all available posts */
 export const GET_POSTS = gql`
   query( $skip: Int, $limit: Int) {
     getPosts( skip: $skip, limit: $limit)
@@ -113,7 +107,11 @@ export const GET_POSTS = gql`
       posts {
         id
         title
+        description
+        features
         price
+        location
+        crossedPrice
         image
         createdAt
         ${postAuthorPayload}
@@ -124,15 +122,17 @@ export const GET_POSTS = gql`
   }
 `;
 
-/**
- * Gets specific post by id
- */
+/** Gets specific post by id */
 export const GET_POST = gql`
   query($id: ID!) {
     getPost(id: $id) {
       id
       title
+      description
+      features
       price
+      location
+      crossedPrice
       image
       createdAt
       ${postAuthorPayload}
@@ -142,9 +142,29 @@ export const GET_POST = gql`
   }
 `;
 
+
 /**
- * Deletes a post
+ * Searches posts by title or description or price
  */
+export const SEARCH_POSTS = gql`
+  query($searchQuery: String!) {
+    searchPosts(searchQuery: $searchQuery) {
+      id
+      title
+      description
+      features
+      location
+      price
+      crossedPrice
+      image
+      imagePublicId
+      createdAt
+    }
+  }
+`;
+
+
+/** Deletes a post */
 export const DELETE_POST = gql`
   mutation($id: ID! $imagePublicId:String) {
     deletePost(id: $id imagePublicId:$imagePublicId) {

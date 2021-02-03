@@ -1,0 +1,111 @@
+@keyframes loading {
+  0%,25% {
+    background-color: rgb(184, 184, 184);
+  }
+  50%,75%{
+    background-color: rgb(169, 169, 169);
+  }
+
+  100% {
+   background-color: rgb(175, 175, 175);
+  }
+}
+
+
+
+.skeleton-item{
+ content: "";
+ width: 100vw;
+ padding: .5rem 0;
+ margin-top: 3.5rem;
+ border-bottom: .5px solid rgb(218, 215, 215);
+ border-top: .5px solid rgb(220, 220, 220);
+ border-radius: 10px;
+ top: 0;
+ background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
+}
+
+
+.skeleton-header{
+ display: flex;
+ margin-left: 2rem;
+}
+
+
+.skeleton-img{
+ width: 3rem;
+ height: 3rem;
+ border-radius: 50%;
+  animation: loading 2s infinite linear;
+}
+
+.skeleton_more{
+ margin-left: .3rem;
+ margin-top: auto;
+}
+.skeleton-name{
+  margin-bottom: 7px;
+  width: 7rem;
+  height: .3rem;
+ animation: loading 2s infinite linear;
+}
+
+.skeleton-time{
+ margin-bottom: 7px;
+  width: 3rem;
+  height: .2rem;
+ animation: loading 2s infinite linear;
+}
+
+.skeleton-media{
+ height: 17rem;
+ width: 100vw;
+  animation: loading 2s infinite linear;
+ margin-top: 5px;
+}
+
+.skeleton-button{
+ width: 80vw;
+ height: .6rem;
+ animation: loading 2s infinite linear;
+ margin-left: .5vw;
+ margin-top: 10px;
+}
+
+.skeleton-button1{
+ width: 87vw;
+ height: .6rem;
+ animation: loading 2s infinite linear;
+ margin-left: .5vw;
+ margin-top: 10px;
+}
+
+.skeleton-button2{
+ width: 90vw;
+ height: .6rem;
+ animation: loading 2s infinite linear;
+ margin-left: .5vw;
+ margin-top: 10px;
+}
+
+
+/* ----------------------------------Search---------------------------------------- */
+.search{
+ margin-top: 3.5rem;
+}
+.search-item{
+ height: 4rem;
+ margin-top: 0;
+ width: 100vw;
+ display: flex;
+}
+
+.search-img{
+ flex: 1;
+ background-color: gray;
+}
+
+.search_more{
+ flex: 2;
+ background-color: green;
+}

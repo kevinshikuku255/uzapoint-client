@@ -79,7 +79,7 @@ export const currentDate = unixTimestamp => {
     'Dec',
   ];
   const month = months[date.getMonth()];
-  const day = date.getDate()
+  const day = date.getDate();
   const year = date.getFullYear();
   const time = date.toLocaleString('en-US', {
     hour: 'numeric',

@@ -1,0 +1,150 @@
+.profileContainer{
+ margin-top: 3rem;
+ margin-bottom: 3rem;
+ display: flex;
+ flex-direction: column;
+ width: 100vw;
+}
+
+.avator{
+ margin-left: 1rem;
+ display: flex;
+ align-items: center;
+}
+
+.avator :first-child{
+ margin-left: .3rem;
+ text-transform: capitalize;
+ font-weight: bolder;
+ font-family: serif;
+ font-size: large;
+}
+
+.avator :last-child{
+ margin-left: .3rem;
+ font-family: serif;
+ font-size:smaller;
+}
+
+/* ------------------------------profileContact-------------------------------------------- */
+.profileContact, .items{
+ margin: 1rem;
+ padding: 1rem 0 ;
+ border-top: 1px solid gray;
+ /* border-bottom: 1px solid gray; */
+}
+
+.location{
+ margin: 1rem;
+ padding: 1rem 0 ;
+ border-top: 1px solid gray;
+}
+
+.profileContact ul{
+ display: flex;
+ justify-content: space-around;
+ align-items: center;
+}
+
+.profileContact ul li{
+ list-style-type: none;
+ text-align: center;
+ margin: .5rem .5rem;
+ font-size: large;
+ font-weight: bolder;
+}
+.items ul{
+   margin: 0;
+   padding: 0;
+}
+ .items ul li{
+   list-style-type: none;
+   font-size: large;
+   font-weight: bolder;
+   display: inline-block;
+   margin-left: 1rem;
+ }
+
+ a{
+ cursor: pointer;
+ color: #6a00fff5;
+}
+
+/* -------------------------------------------------------------------------- */
+
+
+button{
+ border: none;
+ background-color: #8080fd;
+ padding: 5px;
+ display: block;
+ width: 5rem;
+ outline: none;
+ border-radius: 8px;
+ box-shadow: 1px 2px 8px gray;
+ cursor: pointer;
+}
+
+/* .followButton{
+ flex: 0.9;
+ display: flex;
+ justify-content:flex-end;
+} */
+
+/* -------------------------------------------------------------------------- */
+.prifileGrid{
+ margin-top: 3.5rem;
+ display: flex;
+ flex-direction: column;
+}
+
+
+.profile_description, .joine_date{
+ max-width: 100vw;
+ margin: 0 1rem;
+ padding: 1rem 0;
+ word-wrap: break-word;
+}
+
+.description p{
+  font-weight: bolder;
+  font-family: serif;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------------------------------Media queries------------------------------------------- */
+@media(min-width:48em){
+
+.profileContainer{
+ margin: 3.5rem auto 10rem auto;
+ width: 35vw;
+ font-size: small;
+}
+
+ .prifileGrid{
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ align-items: center;
+ flex-direction: row;
+}
+}
+
+.coverImg img{
+  max-height: 7rem;
+}

@@ -4,8 +4,8 @@ import gql from 'graphql-tag';
  * Creates a following between two users
  */
 export const CREATE_FOLLOW = gql`
-  mutation($input: CreateFollowInput!) {
-    createFollow(input: $input) {
+  mutation($userId:ID!, $followerId:ID!) {
+    createFollow(userId: $userId, followerId: $followerId) {
       id
     }
   }
@@ -15,8 +15,8 @@ export const CREATE_FOLLOW = gql`
  * deletes a following
  */
 export const DELETE_FOLLOW = gql`
-  mutation($input: DeleteFollowInput!) {
-    deleteFollow(input: $input) {
+  mutation($id: ID!) {
+    deleteFollow(id: $id) {
       id
     }
   }

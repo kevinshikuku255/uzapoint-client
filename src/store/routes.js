@@ -1,10 +1,10 @@
-import {lazy} from "@loadable/component";
+// import {lazy} from "@loadable/component";
 
 
 
-export const UserPosts  =lazy( () => import("../components/User/UserPosts"))
-export const Me  = lazy( () => import("../components/User/Me"))
-export const Profile  = lazy( () => import("../pages/Profile/Profile"))
-export const SinglePost  = lazy( () => import("../components/SinglePost"))
+// export const UserPosts  =lazy( () => import("../components/User/UserPosts"))
+// export const Me  = lazy( () => import("../components/User/Me"))
+// export const Profile  = lazy( () => import("../pages/Profile/Profile"))
+// export const SinglePost  = lazy( () => import("../components/SinglePost"))
 
 

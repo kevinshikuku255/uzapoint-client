@@ -7,11 +7,15 @@ import { postCommentsPayload, postAuthorPayload, postLikesPayload} from './post'
 const userPayload = `
   id
   username
+  fullname
   phone
+  email
   image
   imagePublicId
   coverImage
   coverImagePublicId
+  location
+  businessdescription
   createdAt
 `;
 
@@ -19,21 +23,34 @@ const userPayload = `
 
 
 /**
- * Gets specific user by id
+ * Gets specific user by username
  */
 export const GET_USER = gql`
-  query( $id: ID) {
-    getUser( id: $id) {
+  query( $username: String) {
+    getUser( username: $username) {
       ${userPayload}
       isOnline
       posts {
         id
+        title
+        description
+        features
+        price
+        crossedPrice
+        imagePublicId
+        image
+        createdAt
+        ${postAuthorPayload}
+        ${postCommentsPayload}
+        ${postLikesPayload}
       }
       following {
         id
+        user
       }
       followers {
         id
+        user
       }
       notifications {
         id
@@ -65,9 +82,12 @@ export const GET_USER_POSTS = gql`
       posts {
         id
         title
+        description
+        features
         price
-        image
+        crossedPrice
         imagePublicId
+        image
         createdAt
         ${postAuthorPayload}
         ${postCommentsPayload}
@@ -97,10 +117,11 @@ export const GET_AUTH_USER = gql`
         }
         comment {
           id
-          post {
-            id
-            image
-          }
+          #  Error -- Field "post" must not have a selection since type "ID" has no subfields.
+          # post {
+          #   id
+          #   image
+          # }
         }
         like {
           id
@@ -125,8 +146,13 @@ export const GET_AUTH_USER = gql`
       }
       posts {
         id
+        title
+        description
         price
+        crossedPrice
         image
+        imagePublicId
+        createdAt
       }
       following {
         id
@@ -134,6 +160,7 @@ export const GET_AUTH_USER = gql`
       }
       followers {
         id
+        user
       }
     }
   }
@@ -156,6 +183,7 @@ export const GET_USERS = gql`
         }
         followers {
           id
+          user
         }
         notifications {
           id
@@ -200,11 +228,12 @@ export const UPLOAD_PHOTO = gql`
  * Sign up user
  */
  export const SIGN_UP =  gql `
- mutation( $username:String! $phone:String! $password:String! ){
+ mutation( $username:String! $phone:String! $password:String! $confirmPassword: String!){
       signup(
       username:$username
       phone:$phone
       password:$password
+      confirmPassword:$confirmPassword
      ) {
        token
      }
@@ -227,6 +256,20 @@ export const SIGN_IN =  gql `
 `;
 
 
+/** Edits user profile */
+export const EDIT_USER_PROFILE = gql`
+ mutation($id:ID $fullname:String $email:String $location:String $businessdescription:String){
+   editUserProfile(
+     id:$id
+     fullname:$fullname
+     email:$email
+     location:$location
+     businessdescription:$businessdescription
+   ){
+     token
+   }
+ }
+`;
 
 
 /**

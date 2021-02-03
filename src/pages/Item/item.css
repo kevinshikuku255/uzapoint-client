@@ -1,0 +1,114 @@
+.itemCard{
+ display: flex;
+ flex-wrap: nowrap;
+ flex-direction: column;
+}
+
+/* -------------------------------------------------------------------------- */
+
+
+.cardMedia{
+ flex: content;
+ cursor: pointer;
+}
+
+
+.cardTitle{
+ flex: 2rem;
+ margin:0 1rem;
+ padding-bottom: 1rem;
+ border-bottom: 1px solid #80808020;
+}
+
+.item_price{
+ margin:1rem 0 0 1rem;
+}
+ .item_price ul{
+  margin-left: .5rem;
+ }
+
+ .item_price ul li:last-child{
+   text-decoration: line-through;
+   margin-left: 5px;
+   color: gray;
+ }
+
+.item_price ul li{
+ list-style-type: none;
+}
+
+
+
+.itemDescription, .itemlocation, .itemFeatures, .itemComments{
+ padding:  1rem;
+ border-top: 1px solid #80808025;
+}
+
+.itemBtns{
+display: flex;
+justify-content: space-around;
+padding: 1rem 0;
+border-top: 1px solid #80808021;
+border-bottom: 1px solid #8080802f;
+}
+
+
+.itemStats{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 3px ;
+}
+
+.createComment{
+  width: 100vw;
+}
+
+.deleteButn{
+  position: absolute;
+  left: 0;
+  margin-left: auto;
+}
+
+
+
+
+/* -------------------------------------------------------------------------- */
+@media(min-width:48em){
+ .itemCard{
+ margin-top: 4rem;
+ margin: 3.5rem 0 0 20vw;
+ padding: 0 1rem 10px 0;
+ width: 40vw;
+ font-size: smaller;
+ border-right: 1px solid black;
+}
+
+.itemCard .itemComments{
+  position: absolute;
+  top: 0;
+  /* right: 0; */
+  margin-top: 6rem;
+  margin-left: 45vw;
+  max-width: 30vw;
+  border-top:none;
+}
+
+
+.itemDescription, .itemlocation, .itemFeatures, .itemComments{
+ padding:  .4rem;
+}
+.cardTitle{
+ flex: 2rem;
+ margin:0;
+ padding-bottom: 0;
+ border-bottom: 1px solid gray;
+}
+
+
+.createComment{
+  width: 100vw;
+}
+}
+
+
