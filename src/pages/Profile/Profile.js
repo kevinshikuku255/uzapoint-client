@@ -24,7 +24,7 @@ const  useStyles = makeStyles((theme) => ({
 
 
 /* ------------------------------------------------------------------------------ */
-/** ..AuthProfile component........................... */
+/** AuthProfile component */
 function AuthProfile() {
    const classes = useStyles();
    const history = useHistory();

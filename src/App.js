@@ -11,8 +11,8 @@ import Search from "./pages/Search/index";
 import Profile from "./pages/UserInfor/profile";
 import UserItems from "./pages/UserInfor/items";
 import Item from "./pages/Item/item";
-import AuthProfile from "./pages/Profile/profile";
-import EditProfile from "./pages/Profile/editProfile"
+import AuthProfile from "./pages/Profile/Profile";
+import EditProfile from "./pages/Profile/editProfile";
 import AuthUserSingleItem from "./pages/Profile/item";
 import AppInfo from "./pages/windoshoppe/appInfo";
 
