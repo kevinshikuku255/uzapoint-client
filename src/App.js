@@ -11,12 +11,11 @@ import Search from "./pages/Search/index";
 import Profile from "./pages/UserInfor/profile";
 import UserItems from "./pages/UserInfor/items";
 import Item from "./pages/Item/item";
-import AuthProfile from "./pages/Profile/profile";
+import AuthProfileComponent from "./pages/Profile/AuthUserProfile";
 import EditProfile from "./pages/Profile/editProfile"
 import AuthUserSingleItem from "./pages/Profile/item";
 import AppInfo from "./pages/windoshoppe/appInfo";
 import People from "./pages/People/People";
-
 
 function App() {
   return (
@@ -36,7 +35,7 @@ function App() {
               <Route exact path='/item/:id' component={Item}/>
               <Route exact path='/item/:id' component={Item}/>
 
-              <Route exact path='/profile/:username' component={AuthProfile}/>
+              <Route exact path='/profile/:username' component={AuthProfileComponent}/>
               <Route exact path='/profile/:username/editprofile' component={EditProfile}/>
               <Route exact path='/:username/:id' component={AuthUserSingleItem}/>
 
