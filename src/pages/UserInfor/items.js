@@ -5,6 +5,7 @@ import { GET_USER_POSTS } from '../../graphql/user';
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import Postgrid from "../../components/PostGrid/postGrid";
 import {useRouteMatch} from 'react-router-dom';
+import {LinearProg, SkeletonPost,SkeletonBar2 } from "../../components/Skeleton/skeleton";
 
 /**User items */
 function UserItems() {
@@ -20,15 +21,34 @@ const variables = {
 
  const { data,loading} = useQuery(GET_USER_POSTS,{ variables });
 
+let loader;
  if(loading){
-   return <h1>Loading...</h1>
+   return(
+     <div>
+       <RouteHeader tag={` 0 Items`}/>
+       <LinearProg/>
+       <SkeletonPost/>
+       <SkeletonBar2/><br/>
+
+       <SkeletonPost/>
+       <SkeletonBar2/><br/>
+
+       <SkeletonPost/>
+       <SkeletonBar2/><br/>
+
+       <SkeletonPost/>
+       <SkeletonBar2/><br/>
+       
+       <SkeletonPost/>
+       <SkeletonBar2/><br/>
+       <h1>Loading...</h1>
+     </div>
+   )
  }
 
  const {posts, count} = data.getUserPosts;
 
- return (
-  <>
-  <RouteHeader tag={` ${count} items`}/>
+const main = (
   <div className="prifileGrid">
           { data && posts.map( post =>
             <div className="ProfileGridcard" key={post.id}>
@@ -36,6 +56,12 @@ const variables = {
             </div>
             )}
   </div>
+)
+
+ return (
+  <>
+  <RouteHeader tag={` ${count} items`}/>
+  {loading ? loader : main}
   </>
  )
 }

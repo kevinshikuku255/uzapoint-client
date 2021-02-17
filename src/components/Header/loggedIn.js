@@ -4,7 +4,7 @@ import {useStore} from "../../store";
 import   "./header.css";
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined';
 import Home from '@material-ui/icons/Home';
-
+import Routes from "../../store/routes";
 
 
 
@@ -12,32 +12,8 @@ import Home from '@material-ui/icons/Home';
 const LoggedIn = () => {
  const history = useHistory()
  const path = history.location.pathname
- const [{auth}] = useStore()
-
- const backHome = () =>{
-    history.push('/')
- }
-const sell = () => {
-   history.push('./sell')
-}
- const search = () =>{
-    history.push('/search')
- }
- const AboutUs = () =>{
-    history.push('/aboutus')
- }
- const toPrile = () =>{
-    history.push(`/profile/${auth.user.username}`)
- }
- const toAppInfo = () =>{
-    history.push(`/windoshoppe`)
- }
- const settings = () =>{
-    history.push(`/profile/${auth.user.username}/editprofile`)
- }
- const toProfile = () =>{
-    history.push(`/profile/${auth.user.username}`)
- }
+ const [{auth}] = useStore();
+ const {sell, backHome, search, toPrile, AboutUs, toAppInfo,settings,toProfile,toPeople} = Routes()
 
 
 
@@ -62,6 +38,7 @@ return(
               <li onClick={sell}> Sell</li>
               <li onClick={toProfile}> My profile</li>
               <li onClick={settings}> Edit Profile </li>
+              <li onClick={toPeople}> People </li>
               <li onClick={AboutUs}> About Us </li>
               <li onClick={toAppInfo}> App info </li>
         </ul>

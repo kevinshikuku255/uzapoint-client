@@ -4,7 +4,7 @@ import {useQuery}  from '@apollo/client';
 import Avatar from '@material-ui/core/Avatar';
 import {Email, PhoneAndroid, LocationOn, WhatsApp} from '@material-ui/icons';
 
-import OtherHeader from "../../components/Header/otherHeader";
+import RouteHeader from "../../components/Header/routeHeader";
 import logo from "../../Assets/logo.png";
 import cover from "../../Assets/cover.jpg"
 import  './profile.css'
@@ -13,6 +13,8 @@ import {GET_USER } from '../../graphql/user';
 import CustomFooter from "../../components/Footer/customFooter"
 import { weekDay } from '../../Utils/date';
 import { makeStyles } from '@material-ui/core/styles';
+import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {LinearProg} from "../../components/Skeleton/skeleton";
 const  useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(7),
@@ -27,7 +29,8 @@ const  Profile = ()  => {
  const path = useRouteMatch();
  const classes = useStyles();
  const name = path.params.username.split(':').pop();
- const history = useHistory()
+ const history = useHistory();
+ UsedocumentTitle("Profile")
 //  const path = history.location.pathname
 
 
@@ -37,10 +40,18 @@ const  Profile = ()  => {
    }
  });
 
-if(loading){
-  return <h5>Loading ...</h5>
-}
-
+/** Loading section */
+      let loader;
+      if(loading){
+         return (
+         loader =
+            <div>
+               <RouteHeader tag={"username"}/>
+               <LinearProg/>
+               <h1>Loading...</h1>
+            </div>
+         )
+      }
 const {username, fullname,location, posts, businessdescription, phone, email, image, coverImage, createdAt} = data.getUser;
 
 const avator = image ?  image : logo;
@@ -53,13 +64,12 @@ const weekday = weekDay(createdAt)
     history.push(`/profile/:${username}/items`)
  }
 
-
 /* -------------------------------------------------------------------------- */
 
 
- return (
+const main =
  <>
-   <OtherHeader tag={username}/>
+
    <div className="profileContainer">
      <div className="coverImg"> <img  width="100%" alt="cover" height="100vh" src={coverImg}/> </div>
      <div className="avator">
@@ -108,9 +118,22 @@ const weekday = weekDay(createdAt)
         </ul>
       </div>
    </div>
-   <CustomFooter name={username}/>
+
  </>
- )
+
+
+
+
+ return (
+  <>
+     <RouteHeader tag={username}/>
+     <main>
+       {loading ? loader : main}
+     </main>
+     <CustomFooter name={username}/>
+  </>
+
+)
 }
 
 export default Profile

@@ -1,28 +1,22 @@
 import React from 'react';
 
 import Other from "../../components/Header/otherHeader";
+import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 import "./sell.css";
+import PostForm from "../../components/CreateItem/CreateItem";
 
-
-
-
-
-
-import { useStore } from '../../store';
 
 /**Sell component */
 function Sell() {
-        const [{auth}] = useStore();
-
-console.log(auth)
+        UsedocumentTitle("Sell")
 
 
 
     return (
    <>
-     <Other tag="Sell"/>
+     <Other tag="Display an item to sell"/>
      <div className="sellContainer">
-       <h1>Happy selling</h1>
+       <PostForm/>
      </div>
    </>
     )

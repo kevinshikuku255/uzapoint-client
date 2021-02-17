@@ -1,19 +1,15 @@
 import React from "react";
-import {useHistory} from "react-router-dom";
 import   "./header.css";
 
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
+import Routes from "../../store/routes";
 
 
 
 /**ProfileHeader Header... */
 const ProfileHeader = ({tag}) => {
-const history = useHistory();
+const { backHome, } = Routes()
 
-const backHome = () =>{
-   history.push('/')
-
-}
 
 return(
 <>

@@ -1,30 +1,23 @@
 import React from "react";
-import {useHistory} from "react-router-dom";
 import   "./header.css";
 
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
+import Routes from "../../store/routes";
 
 
 
 /**RouteHeader  */
 const RouteHeader = ({tag}) => {
-const history = useHistory();
+const {goBack}= Routes()
 
-
-
-
-const backHome = () =>{
-   history.goBack()
-}
 
 return(
 <>
  <div className="othertHeader">
-   <div className="loggedOutTab">
-      <p onClick={backHome}><span className="logo"><ArrowBackIos/></span></p>
-      <p><span className="logo"> {tag} </span></p>
-   </div>
-
+      <div className="loggedOutTab">
+         <p onClick={goBack}><span className="logo"><ArrowBackIos/></span></p>
+         <p><span className="logo"> {tag} </span></p>
+      </div>
  </div>
 </>
 )

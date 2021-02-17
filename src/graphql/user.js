@@ -176,6 +176,10 @@ export const GET_USERS = gql`
       users {
         id
         username
+        location
+        businessdescription
+        phone
+        email
         image
         following {
           id

@@ -1,10 +1,11 @@
 import React from 'react';
 import RouteHeader from "../../components/Header/routeHeader";
 import Postgrid from "../../components/PostGrid/postGrid";
-
+import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 /**AuthUser items */
 function UserItems({posts}) {
 const count = posts.length;
+UsedocumentTitle("Items")
 
  return (
   <>

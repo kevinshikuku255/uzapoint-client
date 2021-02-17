@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {useMutation} from '@apollo/client';
 import jwtDecode  from 'jwt-decode';
-import {useHistory} from "react-router-dom"
 import Avatar from '@material-ui/core/Avatar';
 import {Link} from "react-router-dom"
+import CircularProgress from  "@material-ui/core/CircularProgress";
 
 
 
@@ -12,7 +12,9 @@ import { useStore } from '../../store';
 import { SIGN_UP } from '../../graphql/user';
 import Logo from "../../Assets/logo.png";
 import Header from "../../components/Header/loggedOut";
-import Footer from "../../components/Footer"
+import Footer from "../../components/Footer";
+import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import Routes from "../../store/routes";
 import './Auth.css'
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -32,10 +34,11 @@ const useStyles = makeStyles((theme) => ({
 /** Lets new user  in*/
 function SignUp() {
   const classes = useStyles();
-  const history = useHistory()
   const [errors, setErrors] = useState("");
   const [ , dispatch] = useStore();
   const [values, setValues] = useState( {username: '', phone: '',  password: '', confirmPassword: ''});
+  UsedocumentTitle("SignUp");
+    const {backHome, toAppInfo} = Routes()
 
 /** change hundler... */
   const handleChange = e => {
@@ -65,7 +68,7 @@ const dispatchAction = (token) =>{
     const decodedToken = jwtDecode(token);
     localStorage.setItem('jwt',token);
     dispatchAction(decodedToken)
-    history.push("/");
+    backHome();
  },
  variables : values,
    onError(err){
@@ -74,17 +77,12 @@ const dispatchAction = (token) =>{
    });
 
 
-
-
-
 /**Handle form submit */
   const handleSubmit = (e) => {
        e.preventDefault();
        signUpUser();
        setErrors("")
   };
-
-
 
 
 
@@ -108,23 +106,33 @@ const renderErrors = apiError => {
 
 
 
+let loader;
+if(loading){
+  return(
+    <div>
+      <Header/>
+      <div className='loader'>
+        <CircularProgress/>
+        <p>prepairing...</p>
+      </div>
+    </div>
+  )
+}
 
- return (
-<>
-<header>
-<Header/>
-</header>
+
+const main = (
+
 <div className="signInContainer">
       <div>
         <div className="signInLogo">
-          <Link to="/windoshoppe" > <Avatar alt="logo" src={Logo} className={classes.large}/> </Link> <span>Windoshoppe</span>
+          <span onClick={toAppInfo} > <Avatar alt="logo" src={Logo} className={classes.large}/> </span>
+          <p>windoshoppe</p>
         </div>
+
         <form onSubmit={handleSubmit}  className="signInForm" >
         { errors.length > 0  && (
               <p className="error" >{renderErrors(errors)}</p>
             )}
-
-            {loading ? <p className='loading' >Creating your account..</p>:
              <>
                 <input
                 placeholder="Create username"
@@ -160,12 +168,19 @@ const renderErrors = apiError => {
                 />
                <button type="submit" className="signInButton">  Login </button>
              </>
-            }
+
         </form>
         <p><Link to="/aboutus" className="Link" > About us </Link></p>
 
       </div>
 </div>
+
+)
+
+ return (
+<>
+<Header/>
+ {loading ? loader : main}
 <Footer/>
 </>
  );

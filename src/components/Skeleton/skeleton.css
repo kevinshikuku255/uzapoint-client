@@ -1,13 +1,13 @@
 @keyframes loading {
   0%,25% {
-    background-color: rgb(184, 184, 184);
+    background-color: #eee5e5d4;
   }
   50%,75%{
-    background-color: rgb(169, 169, 169);
+    background-color: #dcd2d2c4;
   }
 
   100% {
-   background-color: rgb(175, 175, 175);
+   background-color: #e2d8d8a1;
   }
 }
 
@@ -22,7 +22,7 @@
  border-top: .5px solid rgb(220, 220, 220);
  border-radius: 10px;
  top: 0;
- background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
+ background: linear-gradient(to right, #ffffff3c, #ffffff3d, #ffffff54);
 }
 
 
@@ -59,9 +59,9 @@
 
 .skeleton-media{
  height: 17rem;
- width: 100vw;
-  animation: loading 2s infinite linear;
- margin-top: 5px;
+ width: 98vw;
+ animation: loading 2s infinite linear;
+ margin:5px 1vw ;
 }
 
 .skeleton-button{
@@ -89,6 +89,80 @@
 }
 
 
+/* -------------------------------------------------------------------------- */
+.SkeletonPost{
+ height: 17rem;
+ width: 98vw;
+ animation: loading 2s infinite linear;
+ margin:1vw;
+}
+
+.SkeletonButtons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.SkeletonButton{
+  width: 3.5rem;
+  height: 2rem;
+  border-radius: 5px;
+  animation: loading 2s infinite linear;
+
+}
+
+.SkeletonBar1, .SkeletonBar2, .SkeletonBar3, .SkeletonBar4, .SkeletonBar5, .SkeletonBar6{
+  width: 80vw;
+  height: 1rem;
+  margin-top: .5rem;
+  border-radius: 3px;
+  animation: loading 2s infinite linear;
+}
+.SkeletonBar2{
+  width: 70vw;
+  height: .8rem;
+}
+.SkeletonBar3{
+  width: 60vw;
+  height: .6rem;
+}
+.SkeletonBar3{
+  width: 50vw;
+  height: .4rem;
+}
+.SkeletonBar4{
+  width: 40vw;
+  height: .2rem;
+}
+.SkeletonBar5{
+  width: 30vw;
+  height: .1rem;
+}
+.SkeletonBar6{
+  width: 20vw;
+  height: .1rem;
+}
+
+.linearProg{
+  margin-top: 3.09rem;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ----------------------------------Search---------------------------------------- */
 .search{
  margin-top: 3.5rem;
@@ -109,3 +183,39 @@
  flex: 2;
  background-color: green;
 }
+
+.person{
+  height: 6rem;
+  width: 98vw;
+  margin-top: 1rem;
+  background-color: #d8d8d8a8;
+  border-radius: 10px;
+  padding-top: 1rem;
+}
+.personImg{
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  background-color: gray;
+  margin: 0rem .5rem  0 2rem;
+}
+.personName{
+  width: 10vw;
+  height: .4rem;
+  background-color: gray;
+  margin-bottom: .5rem;
+}
+
+.personPhone{
+  width: 6vw;
+  height: .2rem;
+  background-color: gray;
+}
+.personDiv{
+  display: flex;
+
+}
+.meta{
+  margin-top: auto;
+}
+

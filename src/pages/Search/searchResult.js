@@ -14,14 +14,17 @@ function SerchResult({post}) {
  }
 
  return (
+<>
   <div className="post_result" onClick={toPost}>
        <img width="30%" src={image || shoes} alt={post.title} />
        <div className="post_result_detais">
-         <p>{title}</p>
          <p>{`Ksh. ${price}`}</p>
        </div>
        <p className="post_result_time">{timeAgo(createdAt)}</p>
   </div>
+  <p>{title}</p>
+  <hr/>
+</>
  )
 }
 

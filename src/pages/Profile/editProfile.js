@@ -1,8 +1,7 @@
 import React,{useState,useContext} from 'react';
 import {useMutation} from "@apollo/client";
-import {TextareaAutosize, Avatar} from '@material-ui/core';
+import {TextareaAutosize, Avatar, CircularProgress} from '@material-ui/core';
 import jwtDecode  from 'jwt-decode';
-import {useHistory} from "react-router-dom";
 import {LocationOn, BusinessCenter, EmailOutlined, AccountCircleRounded, EditOutlined} from '@material-ui/icons';
 
 
@@ -11,9 +10,11 @@ import icon from "../../Assets/icon.png";
 import {EDIT_USER_PROFILE, GET_AUTH_USER }from "../../graphql/user";
 import { SET_AUTH_USER } from '../../store/auth';
 import  {AuthUserContext} from "../../Utils/authUserContext";
+import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useStore } from '../../store';
+import Routes from "../../store/routes";
 const  useStyles = makeStyles((theme) => ({
   small: {
     width: theme.spacing(15),
@@ -26,7 +27,8 @@ const  useStyles = makeStyles((theme) => ({
 /** Edit profile component */
 function EditProfile() {
    const classes = useStyles();
-   const history = useHistory();
+   const {goBack} = Routes();
+   UsedocumentTitle("Edit Profile")
    const [{auth}] = useStore();
    const [ , dispatch] = useStore();
    const [errors, setErrors] = useState("");
@@ -59,7 +61,7 @@ const dispatchAction = (token) =>{
         localStorage.removeItem("jwt");
         localStorage.setItem('jwt',token);
         dispatchAction(decodedToken)
-        history.goBack()
+        goBack()
     },
      variables:values,
      refetchQueries:[
@@ -100,25 +102,42 @@ const renderErrors = apiError => {
   };
 
 
-      /** Loading section */
-      let loader
-      if(value.loading){
-        loader = icon
-        return loader
-      }
+  /** Loading section */
+  let loader
+  if(value.loading){
+    loader = icon
+    return loader
+  }
 
    const {  username, image } = value.data.getAuthUser;
    const  avator = image ? image : icon;
 
+  let load;
+  if(loading){
+    return(
+      loader =
+      <div className="edit_profile_loader">
+      <RouteHeader tag={"Edit Profile"}/>
+      <div className="edit_profile_avator">
+        <Avatar alt="avator" src={ username || avator} className={classes.small}/>
+        <h2 style={{textTransform:"capitalize"}} >{username}</h2>
+      </div>
+       <div className="edit_profile_spinner">
+         <CircularProgress/>
+         <h3>editing...</h3>
+       </div>
+      </div>
+    )
+  }
  return (
   <div>
     <RouteHeader tag={"Edit Profile"}/>
     <main>
       <div className="edit_profile_avator">
         <Avatar alt="avator" src={loader || avator} className={classes.small}/>
-        <h2>{username}</h2>
+        <h2  style={{textTransform:"capitalize"}}  >{username}</h2>
       </div>
-      {loading ? <p>Loading ......</p> :
+      {loading ? load :
 
       <form onSubmit={handleSubmit}>
 

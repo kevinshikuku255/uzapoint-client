@@ -5,6 +5,7 @@ import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 
 import OtherHeader from "../../components/Header/otherHeader";
 import Footer from "../../components/Footer";
+import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 import  './about.css'
 
 
@@ -17,7 +18,7 @@ import  './about.css'
 
 /**About windoshoppe */
 const AboutUs = () => {
-
+UsedocumentTitle("AboutUs")
 const content =  (
            <div className="aboutUsDescription">
               <ul>
@@ -59,7 +60,7 @@ const content =  (
       <div className="aboutCard">
           <h1 className="heading"> NOTICE: </h1>
           <div className="notice">
-            <DirectionsWalkIcon/>
+            <p style={{color:"gold"}}><DirectionsWalkIcon/></p>
             {" "}
             <p style={{color:"deeppink"}}> Happy selling and Buying </p>
           </div>

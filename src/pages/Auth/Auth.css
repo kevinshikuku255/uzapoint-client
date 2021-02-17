@@ -39,8 +39,7 @@ width: 80vw;
  display: flex;
  align-items: center;
  font-weight: bolder;
- font-style: oblique;
- font-size: x-large;
+ font-size: xx-large;
  cursor: pointer;
  justify-content: center;
 }
@@ -50,16 +49,25 @@ width: 80vw;
  text-align: center;
 }
 
-.loading{
+.loader{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  margin-top: 3rem;
+}
+
+.loader h5{
  color:rgb(13, 255, 0);
  font-weight: bolder;
  text-align: center;
  margin: 4rem 0 4rem 0;
- animation-name: loading;
+ animation-name: load;
  animation-duration: 2s;
  animation-iteration-count: infinite;
 }
-@keyframes loading{
+@keyframes load{
   0%   {color:#232b23;}
   25%  {color:#3bc434;}
   50%  {color:#41723e;}

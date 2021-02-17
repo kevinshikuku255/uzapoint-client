@@ -8,6 +8,8 @@ import {GET_POST} from "../../graphql/post";
 import shoes from "../../Assets/shoes.jpeg";
 import Comments from "../../components/Comment/comments";
 import CreateComment from "../../components/CreateCommnet/createComment";
+import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {LinearProg} from "../../components/Skeleton/skeleton";
 
 import { weekDay } from '../../Utils/date';
 
@@ -15,21 +17,31 @@ import { weekDay } from '../../Utils/date';
 /** Auth user single item */
 function AuthUserSingleItem() {
  const history = useHistory();
+ UsedocumentTitle("Item")
  const ID = history.location.pathname.split("/").pop();
 
 
 const {data, loading} = useQuery(GET_POST, {variables:{id:ID}});
 
-if(loading){
-  return(  <h1>Loading....</h1> )
-}
+  let loader;
+  if(loading){
+    return(
+        loader =
+          <div>
+            <RouteHeader tag={"Product details"}/>
+            <LinearProg/>
+            <br/> <br/>
+            <h1>Loading...</h1>
+          </div>
+    )
+  }
 
 const {id, title, description, likes,comments, image,price, crossedPrice, features, location, createdAt} = data.getPost;
 const weekday = weekDay(createdAt)
 
- return (
+const main = (
+
   <div>
-    <RouteHeader tag={"Product details"}/>
     <div className="auth_user_item_media">
       <img width="100%" alt={title} src={image || shoes}/>
       <div><b>{weekday}</b></div>
@@ -78,6 +90,14 @@ const weekday = weekDay(createdAt)
 
     </div>
   </div>
+
+)
+
+ return (
+<>
+<RouteHeader tag={"Product details"}/>
+{loading ? loader : main}
+</>
  )
 }
 

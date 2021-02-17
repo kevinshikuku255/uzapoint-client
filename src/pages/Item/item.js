@@ -13,6 +13,8 @@ import Accordian from "../../components/Acordion/Accordian";
 import CreateComment from "../../components/CreateCommnet/createComment";
 import {useStore} from "../../store";
 import DeleteButton from "../../components/Delete/Delete";
+import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {LinearProg} from "../../components/Skeleton/skeleton";
 
 
 
@@ -21,7 +23,7 @@ function Item() {
  const path = useRouteMatch();
  const [{auth}] = useStore();
  const _id = path.params.id.split(':').pop();
-
+ UsedocumentTitle("Item")
 
  const { data,loading} = useQuery(GET_POST,{
    variables:{
@@ -29,9 +31,21 @@ function Item() {
    }
  });
 
-if(loading){
- return <h1>Loading...</h1>
-}
+
+
+  let loader;
+  if(loading){
+    return(
+        loader =
+          <div>
+            <RouteHeader tag={"username"}/>
+            <LinearProg/>
+            <br/> <br/>
+            <h1>Loading...</h1>
+          </div>
+    )
+  }
+
 
 const {id , author, image,likes, price,crossedPrice, title, description,location, comments, features, createdAt} = data.getPost;
 const weekday = weekDay(createdAt)
@@ -39,9 +53,8 @@ const weekday = weekDay(createdAt)
 const postImage = image ? image : shoes;
 
 
- return (
+const main = (
   <>
-  <RouteHeader tag={author.username}/>
     <div className="itemCard">
         <div className="cardMedia" > <img alt={auth.username} height="50%" width="100%" src={postImage}/> </div>
 
@@ -100,6 +113,15 @@ const postImage = image ? image : shoes;
           </div>
         </div>
     </div>
+  </>
+
+)
+
+
+ return (
+  <>
+  <RouteHeader tag={author.username}/>
+  {loading ? loader : main}
   </>
  )
 }

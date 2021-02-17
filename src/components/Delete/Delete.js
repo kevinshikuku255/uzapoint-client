@@ -1,19 +1,18 @@
 import React from 'react';
 import {useMutation} from '@apollo/client';
-import {useHistory} from "react-router-dom";
 
 import {GET_POSTS, DELETE_POST} from "../../graphql/post";
 import {DELETE_COMMENT} from "../../graphql/comment";
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
+import Routes from "../../store/routes";
 
 
 
 
-
-
+/** Delete button component */
 function DeleteButton({id,commentId}){
+ const {backHome}  = Routes()
 
- const history = useHistory()
 
 
 //..................... dynamic muation ......................
@@ -32,15 +31,12 @@ const _id = id || commentId;
          }
  });
 
- const backHome = () =>{
-    if(id){
-        history.push('/')
-    }
- }
 
 const hundleDelete = () => {
     deletePostOrCommentMutation();
-    backHome();
+    if(id){
+        backHome();
+    }
 }
 
  return(

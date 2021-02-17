@@ -2,23 +2,16 @@ import React from "react";
 import {useHistory} from "react-router-dom";
 import   "./header.css";
 import HomeIcon from '@material-ui/icons/Home';
+import Routes from "../../store/routes";
 
 /**Logged out Header... */
 const LoggedOut = () => {
 const history = useHistory()
-const path = history.location.pathname
+const path = history.location.pathname;
+const {signup, Login, backHome, } = Routes()
 
-const backHome = () =>{
-   history.push('/')
-}
 
-const signup = () =>{
-   history.push('/signup')
-}
 
-const Login = () =>{
-   history.push('/signin')
-}
 
 
 return(

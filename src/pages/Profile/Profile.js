@@ -10,6 +10,8 @@ import Footer from "../../components/Footer/index";
 import ProfileHeader from "../../components/Header/profileHeader";
 import Info from "../windoshoppe/info";
 import Items from "./items";
+import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {LinearProg} from "../../components/Skeleton/skeleton";
 
 
 import './profile.css';
@@ -24,18 +26,26 @@ const  useStyles = makeStyles((theme) => ({
 
 
 /* ------------------------------------------------------------------------------ */
-/** AuthProfile component */
+/** ..AuthProfile component........................... */
 function AuthProfile() {
    const classes = useStyles();
    const history = useHistory();
    const [tab, setTab] = useState(0);
    const {data, loading} = useContext(AuthUserContext);
-
+   UsedocumentTitle("Profile")
 
 /** Loading section */
-if(loading){
-   return (<h1>Loading...</h1>)
-}
+      let loader;
+      if(loading){
+         return (
+         loader =
+            <div>
+               <ProfileHeader tag={"username"}/>
+               <LinearProg/>
+               <h1>Loading...</h1>
+            </div>
+         )
+      }
 
 
  const {  username,image, email, phone, fullname, businessdescription, posts,coverImage} = data.getAuthUser;
@@ -83,11 +93,12 @@ const main =
        {tab === 1 && <Items posts={posts}/>}
        {tab === 2 && <Info/> }
      </>
+
  return (
   <>
      <ProfileHeader tag={username}/>
      <main>
-       {main}
+       {loading ? loader : main}
      </main>
      <Footer/>
   </>

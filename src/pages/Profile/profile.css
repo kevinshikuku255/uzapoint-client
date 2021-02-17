@@ -85,6 +85,16 @@ h4{
     margin-top: 2rem;
   }
 
+.edit_profile_loader{
+  margin-top: 4rem;
+}
+.edit_profile_spinner{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 30vh;
+}
 
 /* -----------------------------single Item--------------------------------------------- */
 .auth_user_item_bar{
@@ -101,7 +111,7 @@ h4{
   color:blue;
 }
 .auth_user_item_media{
-  margin-top: 4rem;
+  margin-top: 4.5rem;
 }
 
 

@@ -4,13 +4,16 @@ import {Link} from "react-router-dom";
 import jwtDecode  from 'jwt-decode';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
-import {useHistory} from "react-router-dom";
+import CircularProgress from  "@material-ui/core/CircularProgress"
+
 
 import { SIGN_IN } from '../../graphql/user';
 import { useStore } from '../../store';
 import { SET_AUTH_USER } from '../../store/auth';
 import Header from "../../components/Header/loggedOut";
 import Footer from "../../components/Footer";
+import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import Routes from "../../store/routes";
 
 
 
@@ -32,11 +35,12 @@ const useStyles = makeStyles((theme) => ({
 
 /** Logs in existing user */
 function SignIn() {
-  const history = useHistory();
   const [values, setValues] = useState({ phoneOrUsername: '', password: '' });
   const [errors, setErrors] = useState('');
   const [, dispatch] = useStore();
   const classes = useStyles();
+  UsedocumentTitle("SignIn");
+  const {backHome, toAppInfo} = Routes();
 
 
 /**submit hundler */
@@ -64,7 +68,7 @@ const dispatchAction = (token) =>{
     localStorage.setItem('jwt',token);
     const decodedToken = jwtDecode(token);
     dispatchAction(decodedToken)
-    history.push("/");
+    backHome()
  },
  variables : values,
   onError(err){
@@ -97,15 +101,27 @@ const renderErrors = apiError => {
     return null;
   };
 
- return (
-<>
-<header>
-<Header/>
-</header>
+
+let loader;
+if(loading){
+  return(
+    <div>
+      <Header/>
+      <div className='loader'>
+        <CircularProgress/>
+        <p>Preparing...</p>
+      </div>
+    </div>
+  )
+}
+
+const main = (
+
 <div className="signInContainer">
       <div>
         <div className="signInLogo">
-          <Link to="/windoshoppe" > <Avatar alt="logo" src={Logo} className={classes.large}/> </Link> <span>Windoshoppe</span>
+          <span onClick={toAppInfo} > <Avatar alt="logo" src={Logo} className={classes.large}/> </span>
+          <p>windoshoppe</p>
         </div>
         <form onSubmit={handleSubmit}  className="signInForm" >
 
@@ -140,9 +156,19 @@ const renderErrors = apiError => {
         <p style={{textAlign:"center"}}>Dont have an accout yet? <Link to="/signup" className="Link" > Create</Link></p> <br/>
             <p><Link to="/aboutus" className="Link" > About us </Link></p>
       </div>
-      <Footer/>
+
 </div>
-</>
+
+)
+
+
+
+ return (
+  <>
+    <Header/>
+    {loading ? loader : main}
+    <Footer/>
+  </>
  );
 }
 export default SignIn;

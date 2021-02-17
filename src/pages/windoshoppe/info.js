@@ -1,6 +1,4 @@
 import React from 'react';
-import {useHistory} from "react-router-dom"
-
 
 import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
@@ -9,29 +7,23 @@ import InfoOutlined from '@material-ui/icons/InfoOutlined';
 import People from '@material-ui/icons/People';
 import FileCopyOutlined from '@material-ui/icons/FileCopyOutlined';
 import NoteAddOutlined from '@material-ui/icons/NoteAddOutlined'
-import QuestionAnswerOutlined from '@material-ui/icons/QuestionAnswerOutlined'
-
+import QuestionAnswerOutlined from '@material-ui/icons/QuestionAnswerOutlined';
+import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import Routes from "../../store/routes";
 import  './about.css'
-
-
-
-
-
 
 
 
 
 /** App information */
 const Info = () => {
-const history = useHistory();
+UsedocumentTitle("Info")
+const {toAppInfo} = Routes()
 
-const toAppInfo = () => {
-    history.push("/windoshoppe")
-}
 
-    return(
+return(
 <>
-<div className="container" style={{marginTop:"5rem"}}>
+<div className="container" style={{marginTop:"7rem"}}>
 
 <div>
 

@@ -14,8 +14,8 @@ import  "./postcard.css"
 import { makeStyles } from '@material-ui/core/styles';
 const  useStyles = makeStyles((theme) => ({
   large: {
-    width: theme.spacing(8),
-    height: theme.spacing(8),
+    width: theme.spacing(6),
+    height: theme.spacing(6),
   },
 }));
 
@@ -30,11 +30,11 @@ const Postcard = ({post}) => {
       const history = useHistory();
 
        const {id , author, image,likes, price,crossedPrice, title, description, comments, createdAt} = post;
-       const weekday = weekDay(createdAt)
+       const weekday = weekDay(createdAt);
 
 
        const postImage = image ? image : shoes;
-       const avator = author.image ?  author.image : images;
+       const avator = author.image  ?  author.image : images;
 
 
       const toProfile = () =>{

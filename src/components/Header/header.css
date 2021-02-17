@@ -6,7 +6,6 @@
   background-color: #2ceaff;
   width: 100vw;
   height: 3rem;
-  box-shadow: 1px 1px 4px black;
   transform: all .3s;
 }
 
@@ -38,8 +37,9 @@
 
 .logo{
   float: left;
-  display: block;
-  font-size: x-large;
+  display: flex;
+  justify-content: center;
+  font-size: large;
   font-weight: bolder;
   font-family: sans-serif;
   margin-top: .5rem;
@@ -48,6 +48,10 @@
   cursor: pointer;
   text-transform: capitalize;
 }
+.logo:hover{
+  color: white;
+}
+
 .loggedInHeader .menu {
   background:linear-gradient(#2ceaff, rgb(240, 142, 142));
   color: rgb(0, 0, 0);
