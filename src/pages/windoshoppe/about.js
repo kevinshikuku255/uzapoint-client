@@ -3,7 +3,7 @@ import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 
-import OtherHeader from "../../components/Header/otherHeader";
+import RouteHeader from "../../components/Header/routeHeader";
 import Footer from "../../components/Footer";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 import  './about.css'
@@ -29,7 +29,7 @@ const content =  (
                 )
     return(
 <>
-<OtherHeader tag={"windoshoppe"}/>
+<RouteHeader tag={"windoshoppe"}/>
 <div className="container">
 
 <div>

@@ -62,7 +62,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: skyblue;
+    background-color: #2ceaff;
 }
 
 .app_info_bar{
@@ -76,5 +76,5 @@
 .app_info_bar p{
   display:inline-block;
   left: 0;
-  color:blue;
+  color:rgb(0, 0, 0);
 }

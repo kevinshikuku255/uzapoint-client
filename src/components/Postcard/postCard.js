@@ -2,11 +2,8 @@ import React from "react"
 import {useHistory} from "react-router-dom";
 import Avatar from '@material-ui/core/Avatar';
 
-
-
 import { timeAgo, weekDay } from '../../Utils/date';
-import shoes from "../../Assets/shoes.jpeg"
-import images from "../../Assets/logo.png";
+import shoes from "../../Assets/netlify.jpg"
 import Accordian from "../../components/Acordion/Accordian";
 import LikeButton from "../../components/Like/Like";
 import  "./postcard.css"
@@ -34,7 +31,7 @@ const Postcard = ({post}) => {
 
 
        const postImage = image ? image : shoes;
-       const avator = author.image  ?  author.image : images;
+       const avator = author.image  ?  author.image : null;
 
 
       const toProfile = () =>{

@@ -40,7 +40,7 @@ return(
            <p>0740253367</p>
             <div className="contact_us">
               <a href="tel:0740253367"><PhoneAndroidIcon/></a>
-              <p>Call</p>
+              <p>Call Me</p>
             </div>
             <div className="contact_us">
               <a href="tel:0740253367"><WhatsAppIcon/> </a>
@@ -57,7 +57,7 @@ return(
            </div>
         </div>
 
-        <p>We dont claim any direct responsibilty for content published on our platform. Users are warned to be careful on who the get into transuction with. Content on manupilation, intimidation and descrimination  are not allowed.</p>
+        <p>We dont claim any direct responsibilty for content published on our platform. Users are warned to be careful on who they get into transuction with. Content on manupilation, intimidation and descrimination  are not allowed.</p>
       </div>
 
       <div className="infoCard">

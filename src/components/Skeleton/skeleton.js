@@ -1,6 +1,7 @@
 import React from 'react';
 import './skeleton.css';
-import LinearProgress from  "@material-ui/core/LinearProgress";
+import {LinearProgress, CircularProgress} from  "@material-ui/core";
+import RouteHeader from "../Header/routeHeader";
 
 
 /** Skeleton post*/
@@ -89,6 +90,24 @@ export const LinearProg = () => {
     </div>
   )
 }
+
+/** Circular prog ********************************************************************************** */
+export const CircularProg = () => {
+  return(
+    <div className="linearProg">
+      <CircularProgress/>
+    </div>
+  )
+}
+
+/** loading indicator */
+export const LoadingIndicator = () => {
+       return(
+        <div className="loader">
+            <RouteHeader tag={"Name"}/>
+            <CircularProgress/>
+          </div>);
+   }
 
 
 /** Skeleton search*/

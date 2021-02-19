@@ -4,14 +4,13 @@ import Avatar from '@material-ui/core/Avatar';
 import { InfoOutlined, ImageOutlined } from "@material-ui/icons";
 
 import {AuthUserContext} from "../../Utils/authUserContext";
-import icon from "../../Assets/icon.png";
-import cover from "../../Assets/cover.jpg";
+import cover from "../../Assets/bg.jpg";
 import Footer from "../../components/Footer/index";
 import ProfileHeader from "../../components/Header/profileHeader";
 import Info from "../windoshoppe/info";
 import Items from "./items";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import {LinearProg} from "../../components/Skeleton/skeleton";
+import { LoadingIndicator } from "../../components/Skeleton/skeleton";
 
 
 import './profile.css';
@@ -21,6 +20,7 @@ const  useStyles = makeStyles((theme) => ({
     width: theme.spacing(6),
     height: theme.spacing(6),
     marginLeft:0,
+    backgroundColor:"#2ceaff"
   },
 }));
 
@@ -37,14 +37,8 @@ function AuthProfileComponent() {
 /** Loading section */
       let loader;
       if(loading){
-         return (
-         loader =
-            <div>
-               <ProfileHeader tag={"username"}/>
-               <LinearProg/>
-               <h1>Loading...</h1>
-            </div>
-         )
+         return ( <LoadingIndicator/>)
+
       }
 
 
@@ -59,7 +53,7 @@ const main =
      <>
             <div className="topBar">
                   <div>
-                     <Avatar alt="avator" onClick={() => setTab(0)} src={image || icon} className={classes.small}/>
+                     <Avatar alt="avator" onClick={() => setTab(0)} src={image || "W"} className={classes.small}/>
                   </div>
                   <div onClick={() => setTab(1)}>
                      <ImageOutlined/>

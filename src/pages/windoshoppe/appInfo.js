@@ -1,6 +1,6 @@
 import React from 'react';
-import icon from "../../Assets/icon.png"
-import {ArrowBackIos} from '@material-ui/icons';
+import { ArrowBack} from '@material-ui/icons';
+import { Avatar} from '@material-ui/core';
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 import Routes from "../../store/routes";
 import './about.css';
@@ -13,18 +13,18 @@ function AppInfo() {
 
     return (
     <>
-    <div style={{color:"mintcream"}} >
+    <div >
         <div className="app_info_bar" >
-            <p style={{cursor:"pointer"}} onClick={goBack}> <ArrowBackIos/> </p>
+            <p style={{cursor:"pointer"}} onClick={goBack}> <ArrowBack/> </p>
         </div>
         <div className="app_Info_component">
             <h1>Windoshoppe</h1>
             <p>version 0.1.0</p>
             <p>By kevin shikuku </p>
-            <img src={icon} alt="icon" width="50rem" height="50rem"/>
-            <i> &copy;2020-2021 windoshoppe </i>
+            <Avatar sizes="xx-large" >W</Avatar>
+            <i> copywright 2020-2021 windoshoppe </i>
             <br/> <br/> <br/> <br/>
-            <p>for support</p>
+            <p>To support development of this application</p>
             <p>M-pesa: 0740253367</p>
 
         </div>

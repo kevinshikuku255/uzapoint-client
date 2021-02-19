@@ -10,7 +10,7 @@ import CircularProgress from  "@material-ui/core/CircularProgress";
 import { SET_AUTH_USER } from '../../store/auth';
 import { useStore } from '../../store';
 import { SIGN_UP } from '../../graphql/user';
-import Logo from "../../Assets/logo.png";
+import Logo from "../../Assets/logo144.png";
 import Header from "../../components/Header/loggedOut";
 import Footer from "../../components/Footer";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
@@ -113,7 +113,8 @@ if(loading){
       <Header/>
       <div className='loader'>
         <CircularProgress/>
-        <p>prepairing...</p>
+        <p>creating your account ...</p>
+        <Footer/>
       </div>
     </div>
   )
@@ -124,8 +125,8 @@ const main = (
 
 <div className="signInContainer">
       <div>
-        <div className="signInLogo">
-          <span onClick={toAppInfo} > <Avatar alt="logo" src={Logo} className={classes.large}/> </span>
+        <div onClick={toAppInfo}  className="signInLogo">
+          <span> <Avatar alt="logo" src={Logo} className={classes.large}/> </span>
           <p>windoshoppe</p>
         </div>
 
@@ -138,6 +139,7 @@ const main = (
                 placeholder="Create username"
                 name= "username"
                 type="text"
+                autoFocus
                 value ={values.username}
                 onChange={handleChange}
                 className="signInInput"
@@ -152,7 +154,7 @@ const main = (
                 />
                 <input
                 placeholder="Create password"
-               name= "password"
+                name= "password"
                 type="password"
                 value={values.password}
                 onChange={handleChange}
@@ -170,7 +172,7 @@ const main = (
              </>
 
         </form>
-        <p><Link to="/aboutus" className="Link" > About us </Link></p>
+          <Link to="/aboutus" className="Link" > <button>About us</button> </Link>
 
       </div>
 </div>

@@ -17,7 +17,7 @@ import Routes from "../../store/routes";
 
 
 
-import Logo from "../../Assets/logo.png";
+import Logo from "../../Assets/logo144.png";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -109,7 +109,8 @@ if(loading){
       <Header/>
       <div className='loader'>
         <CircularProgress/>
-        <p>Preparing...</p>
+        <p>Preparing to signin ...</p>
+        <Footer/>
       </div>
     </div>
   )
@@ -119,8 +120,8 @@ const main = (
 
 <div className="signInContainer">
       <div>
-        <div className="signInLogo">
-          <span onClick={toAppInfo} > <Avatar alt="logo" src={Logo} className={classes.large}/> </span>
+        <div  onClick={toAppInfo}  className="signInLogo">
+          <span> <Avatar alt="logo" src={Logo} className={classes.large}/> </span>
           <p>windoshoppe</p>
         </div>
         <form onSubmit={handleSubmit}  className="signInForm" >
@@ -129,12 +130,13 @@ const main = (
               <p className="error">{renderErrors(errors)}</p>
             )}
 
-            {loading ? <p className='loading'>Logging in ...</p> :
+            {
             <>
             <input
             placeholder="PhoneOrUsername"
             name= "phoneOrUsername"
             type="text"
+            autoFocus
             value ={values.phoneOrUsername}
             onChange={handleChange}
             className="signInInput"
@@ -154,7 +156,7 @@ const main = (
 
         </form>
         <p style={{textAlign:"center"}}>Dont have an accout yet? <Link to="/signup" className="Link" > Create</Link></p> <br/>
-            <p><Link to="/aboutus" className="Link" > About us </Link></p>
+            <Link to="/aboutus" className="Link" > <button>About us</button> </Link>
       </div>
 
 </div>

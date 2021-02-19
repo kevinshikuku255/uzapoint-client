@@ -14,7 +14,7 @@ import CreateComment from "../../components/CreateCommnet/createComment";
 import {useStore} from "../../store";
 import DeleteButton from "../../components/Delete/Delete";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import {LinearProg} from "../../components/Skeleton/skeleton";
+import {LoadingIndicator} from "../../components/Skeleton/skeleton";
 
 
 
@@ -35,16 +35,10 @@ function Item() {
 
   let loader;
   if(loading){
-    return(
-        loader =
-          <div>
-            <RouteHeader tag={"username"}/>
-            <LinearProg/>
-            <br/> <br/>
-            <h1>Loading...</h1>
-          </div>
-    )
+    return (<LoadingIndicator/>)
   }
+
+
 
 
 const {id , author, image,likes, price,crossedPrice, title, description,location, comments, features, createdAt} = data.getPost;

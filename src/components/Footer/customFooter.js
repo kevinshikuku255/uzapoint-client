@@ -5,7 +5,7 @@ import React from 'react'
 function CustomFooter({name}) {
  return (
   <div className="footer">
-    <h6> <span style={{color:"red"}}> copyright: {name}</span></h6>
+    <h6 style={{fontWeight:"lighter"}} > <span style={{color:"red"}}> copyright: {name}</span></h6>
 
   </div>
  )

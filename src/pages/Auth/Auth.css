@@ -12,16 +12,15 @@ width: 80vw;
 
 .signInInput{
  display: block;
- border: none;
+ border-bottom: 2px solid rgba(38, 38, 230, 0.857);
  margin-top: 2rem;
- padding: 4px;
- border-radius: 8px;
+ padding: 6px 0 0 0;
  outline: none;
  font-size: large;
  height: 2em;
  width: 100%;
  color: black;
- background-color: rgb(209, 209, 209);
+ background-color: none;
 }
 
 .signInButton{

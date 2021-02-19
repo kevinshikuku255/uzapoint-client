@@ -3,28 +3,29 @@ import {useRouteMatch, useHistory} from 'react-router-dom';
 import {useQuery}  from '@apollo/client';
 import Avatar from '@material-ui/core/Avatar';
 import {Email, PhoneAndroid, LocationOn, WhatsApp} from '@material-ui/icons';
+import { makeStyles } from '@material-ui/core/styles';
 
 import RouteHeader from "../../components/Header/routeHeader";
-import logo from "../../Assets/logo.png";
 import cover from "../../Assets/cover.jpg"
 import  './profile.css'
 
 import {GET_USER } from '../../graphql/user';
 import CustomFooter from "../../components/Footer/customFooter"
 import { weekDay } from '../../Utils/date';
-import { makeStyles } from '@material-ui/core/styles';
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import {LinearProg} from "../../components/Skeleton/skeleton";
+import {LoadingIndicator} from "../../components/Skeleton/skeleton";
+
 const  useStyles = makeStyles((theme) => ({
   large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
+    width: theme.spacing(6),
+    height: theme.spacing(6),
+    backgroundColor:"#2ceaff"
   },
 }));
 
 
 
-/**Profile page */
+/** Profile page */
 const  Profile = ()  => {
  const path = useRouteMatch();
  const classes = useStyles();
@@ -43,18 +44,13 @@ const  Profile = ()  => {
 /** Loading section */
       let loader;
       if(loading){
-         return (
-         loader =
-            <div>
-               <RouteHeader tag={"username"}/>
-               <LinearProg/>
-               <h1>Loading...</h1>
-            </div>
-         )
+         return (<LoadingIndicator/>)
       }
+
+
 const {username, fullname,location, posts, businessdescription, phone, email, image, coverImage, createdAt} = data.getUser;
 
-const avator = image ?  image : logo;
+const avator = image ?  image : null;
 const coverImg = coverImage ? coverImage : cover;
 const weekday = weekDay(createdAt)
 

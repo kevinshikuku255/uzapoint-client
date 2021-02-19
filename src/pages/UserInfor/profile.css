@@ -110,6 +110,13 @@ button{
   font-family: serif;
 }
 
+.user_loader{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 30vh;
+}
 
 
 
