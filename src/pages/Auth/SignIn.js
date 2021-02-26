@@ -17,7 +17,7 @@ import Routes from "../../store/routes";
 
 
 
-import Logo from "../../Assets/logo144.png";
+import Logo from "../../Assets/icon.png";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -133,16 +133,15 @@ const main = (
             {
             <>
             <input
-            placeholder="PhoneOrUsername"
+            placeholder="phone/username"
             name= "phoneOrUsername"
             type="text"
-            autoFocus
             value ={values.phoneOrUsername}
             onChange={handleChange}
             className="signInInput"
             />
             <input
-            placeholder="Password"
+            placeholder="password"
             name= "password"
             type="password"
             value={values.password}

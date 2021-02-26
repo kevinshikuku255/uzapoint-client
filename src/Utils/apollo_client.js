@@ -61,11 +61,11 @@ export const createApolloClient = (API_URL, websocketApiUrl) => {
     typePolicies: {
         Query: {
           fields: {
-             PostPayload:{
-                read: (existing, {toRefrence, args}) => {
-                  const postRef = toRefrence({__typename:"PostPayload", id: args.id})
-                  return existing ?? postRef
-                }
+             getPaginatedPosts:{
+                merge: true
+             },
+             getUserPosts: {
+               merge: true
              }
           }
         },

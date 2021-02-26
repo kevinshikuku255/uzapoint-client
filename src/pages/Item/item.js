@@ -4,7 +4,7 @@ import {useQuery}  from '@apollo/client';
 
 import {GET_POST } from '../../graphql/post';
 import RouteHeader from "../../components/Header/routeHeader";
-import shoes from "../../Assets/shoes.jpeg";
+import shoes from "../../Assets/netlify.jpg";
 import LikeButton from "../../components/Like/Like";
 import { weekDay} from '../../Utils/date';
 import Comments from "../../components/Comment/comments";

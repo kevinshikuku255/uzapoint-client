@@ -4,8 +4,8 @@ import {useStore} from "../../store"
 
 
 import { weekDay } from '../../Utils/date';
-import shoes from "../../Assets/shoes.jpeg"
-import  "./postGrid.css"
+import shoes from "../../Assets/netlify.jpg";
+import  "./postGrid.css";
 
 
 /** This is a user post grid component */

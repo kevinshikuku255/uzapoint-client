@@ -122,6 +122,36 @@ export const GET_POSTS = gql`
   }
 `;
 
+
+/**Gets all available posts */
+export const GET_PAGINATED_POSTS = gql`
+  query( $after: String, $limit: Int) {
+    getPaginatedPosts( after: $after, limit: $limit)
+     {
+      count
+      cursor
+      hasMore
+      posts {
+        id
+        title
+        description
+        features
+        price
+        location
+        crossedPrice
+        image
+        createdAt
+        ${postAuthorPayload}
+        ${postCommentsPayload}
+        ${postLikesPayload}
+      }
+    }
+  }
+`;
+
+
+
+
 /** Gets specific post by id */
 export const GET_POST = gql`
   query($id: ID!) {

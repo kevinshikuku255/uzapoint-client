@@ -1,5 +1,5 @@
 import React from 'react';
-import shoes from "../../Assets/shoes.jpeg";
+import shoes from "../../Assets/netlify.jpg";
 import {useHistory} from "react-router-dom";
 import { timeAgo } from '../../Utils/date';
 

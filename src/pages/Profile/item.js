@@ -5,7 +5,7 @@ import {LocationOn} from '@material-ui/icons';
 import RouteHeader from "../../components/Header/routeHeader";
 
 import {GET_POST} from "../../graphql/post";
-import shoes from "../../Assets/shoes.jpeg";
+import shoes from "../../Assets/netlify.jpg";
 import Comments from "../../components/Comment/comments";
 import CreateComment from "../../components/CreateCommnet/createComment";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";

@@ -6,7 +6,7 @@ import {Email, PhoneAndroid, LocationOn, WhatsApp} from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 import RouteHeader from "../../components/Header/routeHeader";
-import cover from "../../Assets/cover.jpg"
+import cover from "../../Assets/bg.jpg"
 import  './profile.css'
 
 import {GET_USER } from '../../graphql/user';

@@ -54,7 +54,7 @@ const content =  (
 
       <div className="aboutCard">
         <h1 className="heading" style={{color:"#d02a2a"}}>DISCLAIMER</h1>
-        <p>We dont claim any direct responsibilty for content published on our platform. Users are warned to be  <br/>careful on who the get into transuction with. Content on manupilation, intimidation and descrimination  are not allowed.</p>
+        <p>We dont claim any direct responsibilty for content published on our platform. Users are warned to be  <br/>careful on who they get into transuction with. Content on manupilation, intimidation and descrimination  are not allowed.</p>
       </div>
 
       <div className="aboutCard">

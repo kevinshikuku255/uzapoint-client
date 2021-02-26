@@ -1,12 +1,13 @@
 import React from 'react';
 import {useQuery}  from '@apollo/client';
 import {Skeleton,LinearProg} from "../../components/Skeleton/skeleton";
+import { Waypoint} from "react-waypoint";
 
 import  "./home.css";
 import Header from "../../components/Header";
 import PostCard from "../../components/Postcard/postCard";
 
-import {GET_POSTS} from "../../graphql/post";
+import { GET_PAGINATED_POSTS} from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 
@@ -19,11 +20,11 @@ function Home() {
         UsedocumentTitle("Home");
 
         const variables = {
-          skip: 0,
+          after: null,
           limit: HOME_PAGE_POSTS_LIMIT,
         };
 
-        const { data,loading } = useQuery(GET_POSTS,{variables});
+        const { data,loading, fetchMore } = useQuery(GET_PAGINATED_POSTS,{variables});
 
  const skeleton = (
   <>
@@ -57,18 +58,40 @@ function Home() {
     )
   }
 
-const { posts} = data.getPosts;
+const { posts, cursor} = data.getPaginatedPosts;
 
-  const main = (
+console.log(posts)
+  const main = data && (
   <div className="homeContainer">
-          { data && posts.map( post =>
+          { data && posts.map( (post, i) =>
             <div className="card" key={post.id}>
-                { <PostCard  post={post}/>}
+                  { <PostCard  post={post}/>}
+                  { data && i === posts.length - 10 &&
+                    <Waypoint onEnter={
+                      () => fetchMore({
+                        variables:{
+                          after: cursor,
+                          limit: HOME_PAGE_POSTS_LIMIT
+                      },
+                      updateQuery:(pv,{fetchMoreResult}) => {
+                        if(!fetchMoreResult){
+                          return pv
+                        }
+                        return {
+                          getPaginatedPosts:{
+                           __typename: "PostsConnection",
+                           posts: [ ...pv.getPaginatedPosts.posts, ...fetchMoreResult.getPaginatedPosts.posts ],
+                           hasMore: fetchMoreResult.getPaginatedPosts.hasMore,
+                           cursor: fetchMoreResult.getPaginatedPosts.cursor
+                          }
+                        }
+                      }
+                  })} />
+                  }
             </div>
             )}
   </div>
   )
-
 
  return (
 <>

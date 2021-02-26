@@ -10,7 +10,7 @@ import CircularProgress from  "@material-ui/core/CircularProgress";
 import { SET_AUTH_USER } from '../../store/auth';
 import { useStore } from '../../store';
 import { SIGN_UP } from '../../graphql/user';
-import Logo from "../../Assets/logo144.png";
+import Logo from "../../Assets/icon.png";
 import Header from "../../components/Header/loggedOut";
 import Footer from "../../components/Footer";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
@@ -136,16 +136,15 @@ const main = (
             )}
              <>
                 <input
-                placeholder="Create username"
+                placeholder="username"
                 name= "username"
                 type="text"
-                autoFocus
                 value ={values.username}
                 onChange={handleChange}
                 className="signInInput"
                 />
                 <input
-                placeholder="phone number"
+                placeholder="phone"
                 name= "phone"
                 type="text"
                 value={values.phone}
@@ -153,7 +152,7 @@ const main = (
                 className="signInInput"
                 />
                 <input
-                placeholder="Create password"
+                placeholder="password"
                 name= "password"
                 type="password"
                 value={values.password}
@@ -161,7 +160,7 @@ const main = (
                 className="signInInput"
                 />
                 <input
-                placeholder="confirm your password"
+                placeholder="confirm password"
                 name= "confirmPassword"
                 type="password"
                 value={values.confirmPassword}
