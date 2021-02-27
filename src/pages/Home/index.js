@@ -63,9 +63,7 @@ const { posts, cursor} = data.getPaginatedPosts;
   <div className="homeContainer">
           { posts.map( (post, i) =>
             <div className="card" key={post.id}>
-                  {`${i} - ${post.title}`}
-                  <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-                  {/* { <PostCard  post={post}/>} */}
+                  { <PostCard  post={post}/>}
                   {i === posts.length - 10 &&
                     <Waypoint onEnter={
                       () => fetchMore({
