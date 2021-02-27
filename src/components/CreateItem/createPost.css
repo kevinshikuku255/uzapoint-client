@@ -76,3 +76,18 @@
  right: 0;
   font-size: larger;
 }
+
+
+.displayBtn{
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.displayBtn button{
+  background: none;
+  padding:0.4rem 1rem;
+  border-radius: 20px;
+  border: 2px solid gray;
+}

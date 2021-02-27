@@ -7,7 +7,6 @@ import DeleteButton from "../Delete/Delete";
 /** List of comments */
 function Comments({comment}) {
  const [{auth}] = useStore();
- console.log(comment)
  return (
   <div className="commentWrapper">
     <div> <b>{`${comment.author.username}:`}</b>  </div>

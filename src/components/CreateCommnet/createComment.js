@@ -62,10 +62,9 @@ useEffect(() => {
             <form onSubmit={handleSubmit} className="form">
                 <TextareaAutosize
                           rowsMin={3}
-                          placeholder="Leave  a review / comment on the item"
+                          placeholder="comment/review the product"
                           name="comment"
                           className="input"
-                          autoFocus
                           value={comment}
                           ref={commentInputRef}
                           onChange={ e => setComment(e.target.value)}

@@ -8,9 +8,9 @@
   background: #b5b5b533;
   outline:none;
   min-width:90vw;
-  font-size: large;
-  font-weight: lighter;
+  font-size: smaller;
   margin-right: 1rem;
+  border-radius: 5px;
   font-family: sans-serif;
   }
 

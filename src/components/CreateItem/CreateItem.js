@@ -6,7 +6,7 @@ import { useStore } from '../../store';
 import PostImageUpload from "./PostImageUpload";
 
 import { MAX_POST_IMAGE_SIZE } from '../../constants/ImageSize';
-import {CREATE_POST, GET_POSTS} from "../../graphql/post";
+import {CREATE_POST,GET_PAGINATED_POSTS} from "../../graphql/post";
 import {GET_AUTH_USER} from '../../graphql/user';
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
@@ -23,16 +23,45 @@ import Close from '@material-ui/icons/Close';
  */
 function PostForm(){
   const [{ auth }] = useStore();
-  const [image, setImage] = useState(null);
-  const [imgData, setImgData] = useState(null);
-
-  const [values, setValues] = useState({title:"", description:"", price:"" ,crossedPrice:"", image, authorId: auth.user.id});
-
-
+  const [image, setImage] = useState('');
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [crossedPrice, setCrossedPrice] = useState('');
+  const [description, setDescription] = useState('');
   const [errors, setErrors] = useState('');
   const [warning, setWarning] = useState('');
 
 
+   const handleReset = () => {
+    setTitle('');
+    setImage('');
+    setErrors('');
+    setPrice('');
+    setCrossedPrice('');
+    setDescription('')
+  };
+
+
+
+/** handles post image upload ! */
+ const handlePostImageUpload = e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        if (file.size >= MAX_POST_IMAGE_SIZE) {
+            throw new Error( `File size should be less then ${MAX_POST_IMAGE_SIZE / 3000000}MB`)
+        }
+      previewFile(file)
+  };
+
+const previewFile = (file) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+      setImage(reader.result);
+      }
+}
+
+const values = { title, description, price ,crossedPrice, image, authorId: auth.user.id}
 
  const [createPost, { loading }] = useMutation(CREATE_POST,{
     variables: values,
@@ -40,58 +69,26 @@ function PostForm(){
       setErrors(err)
     },
     refetchQueries:[
-      { query:GET_POSTS, variables:{
-          skip: 0,
+      { query:GET_PAGINATED_POSTS, variables:{
+          after: null,
           limit: HOME_PAGE_POSTS_LIMIT,
        }},
       { query:GET_AUTH_USER}
        ]
 });
 
-
-/** handles post image upload ! */
- const handlePostImageUpload = e => {
-    const file = e.target.files[0];
-    if (!file) return;
-    if (file.size >= MAX_POST_IMAGE_SIZE) {
-         throw new Error( `File size should be less then ${MAX_POST_IMAGE_SIZE / 3000000}MB`)
-    }
-   const preview = URL.createObjectURL(e.target.files[0])
-   setImgData(preview);
-   setImage(e.target.files[0]);
-  };
+const hadleTitleChangen = e => setTitle(e.target.value);
+const handlePriceChange = e => setPrice(e.target.value);
+const handleCrossedPriceChange = e => setCrossedPrice(e.target.value);
+const handleDescriptionChnage = e => setDescription(e.target.value)
 
 
-  const hundleChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value});
- };
-
-
-
-
-  const handleSubmit = async (e) => {
-     e.preventDefault();
-     createPost();
-     setWarning("Item displayed!");
-     handleReset();
-  };
-
- const handleOnFocus = () =>{
-      setWarning('')
-      setErrors('');
-   };
-
- const handleReset = () => {
-        setImage(null);
-        setErrors('');
-        setValues({})
-        setImgData(null)
-  };
-
- const resetImg = () => {
-   setImage(null)
-   setImgData(null)
- }
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    createPost();
+    handleReset();
+    setWarning("Item displayed successfully!");
+};
 
 /** Loading spinnner */
   let loader;
@@ -110,14 +107,14 @@ const form = (
  <form onSubmit={handleSubmit}>
 
     <div className="create_post_wrapper">
-           {imgData && (
+           {image && (
 
            <>
             <div  className="image_preview">
-               <img  src={imgData} alt="preview" />
+               <img  src={image} alt="preview" />
             </div>
             <div className="floating_button">
-              <p onClick={resetImg} className="p" > <Close/> </p>
+              <p onClick={ () => setImage("") } className="p" > <Close/> </p>
             </div>
            </>
            )}
@@ -129,8 +126,7 @@ const form = (
             placeholder="Name"
             name="title"
             rows="1"
-            onChange={hundleChange}
-            onFocus={handleOnFocus}
+            onChange={hadleTitleChangen}
             value={values.title}
             className="title"
           />
@@ -141,8 +137,7 @@ const form = (
                placeholder="Describe your item"
                rowsMin={2}
                name='description'
-               onFocus={handleOnFocus}
-               onChange={hundleChange}
+               onChange={handleDescriptionChnage}
                value={values.description}
                className="description"
                />
@@ -151,32 +146,27 @@ const form = (
 
        <div className="price_input">
            <input
-             placeholder='Current price'
+             placeholder='price'
              name="price"
-             onFocus={handleOnFocus}
              value={values.price}
-             onChange={hundleChange}
+             onChange={handlePriceChange}
              className="priceInput"
            /> <br/>
            <input
              placeholder='price before'
              name="crossedPrice"
-             onFocus={handleOnFocus}
              value={values.crossedPrice}
-             onChange={hundleChange}
+             onChange={handleCrossedPriceChange}
              className="priceInput"
            />
            <PostImageUpload  label="Photo"  handleChange={handlePostImageUpload} />
        </div>
 
-       <div className="">
-
-         <div className="">
-             <button className="" onClick={ handleSubmit }>
+         <div className="displayBtn">
+             <button onClick={ handleSubmit }>
                  Display
              </button>
          </div>
-       </div>
      </div>
  </form>
 )
@@ -188,7 +178,7 @@ const error = (
 )
 
 
-const alert = (
+const message = (
   <div className="display_item_alert" >
     {warning}
   </div>
@@ -199,7 +189,7 @@ const alert = (
 
    {loading ? loader : form}
    {errors && error}
-   {!error && !loading && alert}
+   {warning &&  message}
 
 </>
   )

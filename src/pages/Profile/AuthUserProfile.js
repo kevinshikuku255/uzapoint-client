@@ -1,9 +1,11 @@
-import React,{useState, useContext} from 'react';
+import React,{useState} from 'react';
 import {useHistory} from "react-router-dom";
+import {useQuery} from "@apollo/client";
+import {GET_AUTH_USER} from "../../graphql/user";
+
 import Avatar from '@material-ui/core/Avatar';
 import { InfoOutlined, ImageOutlined } from "@material-ui/icons";
 
-import {AuthUserContext} from "../../Utils/authUserContext";
 import cover from "../../Assets/bg.jpg";
 import Footer from "../../components/Footer/index";
 import ProfileHeader from "../../components/Header/profileHeader";
@@ -31,8 +33,9 @@ function AuthProfileComponent() {
    const classes = useStyles();
    const history = useHistory();
    const [tab, setTab] = useState(0);
-   const {data, loading} = useContext(AuthUserContext);
    UsedocumentTitle("Profile")
+
+   const {data, loading} = useQuery(GET_AUTH_USER);
 
 /** Loading section */
       let loader;
@@ -40,7 +43,6 @@ function AuthProfileComponent() {
          return ( <LoadingIndicator/>)
 
       }
-
 
  const {  username,image, email, phone, fullname, businessdescription, posts,coverImage} = data.getAuthUser;
 

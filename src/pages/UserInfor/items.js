@@ -54,6 +54,7 @@ const main = (
           { data && posts.map( (post, i) =>
             <div className="ProfileGridcard" key={post.id}>
                 { <Postgrid  post={post} count={count}/>}
+                {<hr/>}
                   { data && i === posts.length - 10 &&
                     <Waypoint onEnter={
                       () => fetchMore({
@@ -75,6 +76,7 @@ const main = (
                         }
                       }
                   })} />
+
                   }
             </div>
             )}

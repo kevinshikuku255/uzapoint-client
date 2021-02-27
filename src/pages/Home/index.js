@@ -59,14 +59,14 @@ function Home() {
   }
 
 const { posts, cursor} = data.getPaginatedPosts;
-
-console.log(posts)
-  const main = data && (
+  const main =  posts && (
   <div className="homeContainer">
-          { data && posts.map( (post, i) =>
+          { posts.map( (post, i) =>
             <div className="card" key={post.id}>
-                  { <PostCard  post={post}/>}
-                  { data && i === posts.length - 10 &&
+                  {`${i} - ${post.title}`}
+                  <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+                  {/* { <PostCard  post={post}/>} */}
+                  {i === posts.length - 10 &&
                     <Waypoint onEnter={
                       () => fetchMore({
                         variables:{
@@ -74,6 +74,7 @@ console.log(posts)
                           limit: HOME_PAGE_POSTS_LIMIT
                       },
                       updateQuery:(pv,{fetchMoreResult}) => {
+                        console.log(fetchMoreResult)
                         if(!fetchMoreResult){
                           return pv
                         }
@@ -97,8 +98,8 @@ console.log(posts)
 <>
   <Header/>
   {loading && loader}
-  {!loading && data && main}
-  {(!loading && !data) ? loader : main}
+  {data && !loading  && main}
+  {(!loading && !data) && loader }
 </>
  )
 }
