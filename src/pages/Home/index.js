@@ -72,7 +72,6 @@ const { posts, cursor} = data.getPaginatedPosts;
                           limit: HOME_PAGE_POSTS_LIMIT
                       },
                       updateQuery:(pv,{fetchMoreResult}) => {
-                        console.log(fetchMoreResult)
                         if(!fetchMoreResult){
                           return pv
                         }

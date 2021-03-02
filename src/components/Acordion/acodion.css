@@ -4,12 +4,11 @@
  align-items: center;
  margin: 0 1rem;
  cursor: pointer;
- font-family: serif;
- font-weight: bolder;
+
 }
 
 
 .description{
-font-family: sans-serif;
-font-weight: lighter;
+font-family: serif;
+ font-weight: bolder;
 }

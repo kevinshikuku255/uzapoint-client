@@ -4,7 +4,6 @@ import {useQuery}  from '@apollo/client';
 
 import {GET_POST } from '../../graphql/post';
 import RouteHeader from "../../components/Header/routeHeader";
-import shoes from "../../Assets/netlify.jpg";
 import LikeButton from "../../components/Like/Like";
 import { weekDay} from '../../Utils/date';
 import Comments from "../../components/Comment/comments";
@@ -14,7 +13,7 @@ import CreateComment from "../../components/CreateCommnet/createComment";
 import {useStore} from "../../store";
 import DeleteButton from "../../components/Delete/Delete";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import {LoadingIndicator} from "../../components/Skeleton/skeleton";
+import {SkeletonPost, SkeletonBar2} from "../../components/Skeleton/skeleton";
 
 
 
@@ -35,22 +34,30 @@ function Item() {
 
   let loader;
   if(loading){
-    return (<LoadingIndicator/>)
+    return (
+    <>
+    <RouteHeader tag="product details"/>
+    <br/> <br/>
+    <SkeletonPost/>
+    <SkeletonBar2/>
+    </>
+    )
   }
 
 
 
 
-const {id , author, image,likes, price,crossedPrice, title, description,location, comments, features, createdAt} = data.getPost;
+const {id , author, image,likes, price,crossedPrice, title, description, features,location, comments, createdAt} = data.getPost;
 const weekday = weekDay(createdAt)
 
-const postImage = image ? image : shoes;
 
-
-const main = (
+ const itemFeatures = features && features.split("#")
+ const main = (
   <>
     <div className="itemCard">
-        <div className="cardMedia" > <img alt={auth.username} height="50%" width="100%" src={postImage}/> </div>
+        <div className="cardMedia" >
+          {image ? <img alt={auth.username} height="50%" width="100%" src={image}/> : <SkeletonPost/>}
+       </div>
 
         <div className="itemStats">
           <p>{likes.length} likes</p>
@@ -59,8 +66,8 @@ const main = (
         </div>
         <div className="itemBtns">
           <LikeButton likes={likes} postId={id}/>
-          <button>Comment</button>
           { (auth.user.username === author.username) && <DeleteButton id={id}/>}
+          <button style={{opacity:"-1"}} >Comment</button>
         </div>
 
         <div className="cardTitle"> <p style={{fontWeight:"bolder"}} >Name:</p> {title}</div>
@@ -88,7 +95,12 @@ const main = (
         {features &&
         <div className="itemFeatures">
           <p style={{fontWeight:"bolder"}}>Item features:</p>
-          {features}
+            <ul>
+              {itemFeatures.map((item, i) => (
+                 <li key={i} >{item}</li>
+              ))}
+            </ul>
+
         </div>
         }
 
@@ -114,7 +126,7 @@ const main = (
 
  return (
   <>
-  <RouteHeader tag={author.username}/>
+  <RouteHeader tag={"product details"}/>
   {loading ? loader : main}
   </>
  )

@@ -50,11 +50,12 @@
 
 .display_item_alert{
   display: flex;
+  font-size: large;
   align-items: center;
   flex-direction: column;
   justify-content: center;
   margin-top: 5rem;
-  color: rgb(94, 255, 0);
+  color: rgb(4, 0, 255);
 }
 
 .display_item_error{

@@ -25,7 +25,56 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(7),
     height: theme.spacing(7),
   },
-}));
+  signInContainer:{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: theme.spacing(8, 0, 3, 0),
+    width: "100vw",
+  },
+  signInLogo:{
+    display: "flex",
+    alignItems: "center",
+    fontWeight: "bolder",
+    fontSize: "xx-large",
+    cursor: "pointer",
+    justifyContent: "center",
+  },
+  signInForm:{
+    width: "80vw"
+  },
+  signInInput:{
+      display: "block",
+      border:"none",
+      borderBottom:" 2px solid rgba(38, 38, 230, 0.857)",
+      marginTop: "2rem",
+      padding: "6px 0 0 0",
+      outline: "none",
+      fontSize: "large",
+      height: "2em",
+      width: "100%",
+      color: "black",
+      backgroundColor: "none",
+  },
+  aboutUs:{
+    color:"blue",
+    padding: theme.spacing(0 ,.5),
+    borderRadius:"5px",
+    cursor:"pointer",
+    fontSize:"1rem"
+  },
+  signInButton:{
+      border: "none",
+      backgroundColor: "rgb(155, 69, 69)",
+      padding: "10px",
+      width: "7rem",
+      outline: "none",
+      borderRadius: "18px",
+      boxShadow: "none",
+      cursor: "pointer",
+      margin:" 2rem 0  2rem 30% ",
+  }
+}))
 
 
 
@@ -118,13 +167,13 @@ if(loading){
 
 const main = (
 
-<div className="signInContainer">
+<div className={classes.signInContainer}>
       <div>
-        <div  onClick={toAppInfo}  className="signInLogo">
+        <div  onClick={toAppInfo}  className={classes.signInLogo}>
           <span> <Avatar alt="logo" src={Logo} className={classes.large}/> </span>
           <p>windoshoppe</p>
         </div>
-        <form onSubmit={handleSubmit}  className="signInForm" >
+        <form onSubmit={handleSubmit}  className={classes.signInForm} >
 
            {errors.length > 0  && (
               <p className="error">{renderErrors(errors)}</p>
@@ -138,24 +187,26 @@ const main = (
             type="text"
             value ={values.phoneOrUsername}
             onChange={handleChange}
-            className="signInInput"
+            className={classes.signInInput}
             />
+
             <input
             placeholder="password"
             name= "password"
             type="password"
             value={values.password}
             onChange={handleChange}
-            className="signInInput"
+            className={classes.signInInput}
             />
-            <button type="submit" className="signInButton">  Login </button>
+            <button type="submit" className={classes.signInButton}>  Login </button>
             </>
             }
 
 
         </form>
         <p style={{textAlign:"center"}}>Dont have an accout yet? <Link to="/signup" className="Link" > Create</Link></p> <br/>
-            <Link to="/aboutus" className="Link" > <button>About us</button> </Link>
+
+        <Link to="/aboutus"> <p className={classes.aboutUs} >About us</p> </Link>
       </div>
 
 </div>

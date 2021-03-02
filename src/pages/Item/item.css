@@ -2,6 +2,7 @@
  display: flex;
  flex-wrap: nowrap;
  flex-direction: column;
+ margin-top: 3.2rem;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -44,7 +45,11 @@
  border-top: 1px solid #80808025;
 }
 
-.itemBtns{
+.itemFeatures ul{
+  margin-left: 3rem;
+  font-weight: bolder;
+}
+.itemBtns {
 display: flex;
 justify-content: space-around;
 padding: 1rem 0;

@@ -10,37 +10,47 @@ export const Skeleton = () => {
     <div className="skeleton-item">
        <div className="skeleton-content">
            <div className="skeleton-header">
-               <div className="skeleton-img" />
+               <div className="skeleton-img"/>
                <div className="skeleton_more">
                    <p className="skeleton-name" />
                    <p className="skeleton-time" />
                </div>
            </div>
 
-          <p className="skeleton-media"/>
+          <div className="skeleton-media">Windoshoppe</div>
            <div className="skeleton-action">
                 <p className="skeleton-button"/>
                 <p className="skeleton-button1"/>
                 <p className="skeleton-button2"/>
-                <p className="skeleton-email" />
            </div>
        </div>
     </div>
   );
 };
 
-/* --------------------------SkeletonImage------------------------------------------------ */
+/** --------------------------SkeletonImage------------------------------------------------ */
 export const SkeletonImage = () => {
   return(
-    <div className="skeleton-img" />
+    <div className="skeleton-img"></div>
   )
 }
 
+export const SkeletonAvator = ({name}) => {
+  return(
+    <div className="skeleton-avator">{name}</div>
+  )
+}
+
+export const SkeletonSmallAvator = ({name}) => {
+  return(
+    <div className="skeleton-small-avator">{name}</div>
+  )
+}
 
 /* ----------------------------SkeletonPost---------------------------------------------- */
 export const SkeletonPost = () => {
   return(
-    <p className="SkeletonPost"/>
+    <p className="SkeletonPost">Windoshoppe</p>
   )
 }
 
@@ -77,6 +87,7 @@ export const SkeletonBar2 = () => {
    <div>
       <p className="SkeletonBar1"/>
       <p className="SkeletonBar2"/>
+      <p className="SkeletonBar3"/>
    </div>
   )
 }

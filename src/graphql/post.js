@@ -63,11 +63,12 @@ export const CREATE_POST = gql`
         $title:String,
         $description:String,
         $price:String,
+        $features: String
         $image: Upload,
         $authorId: ID!,
         $crossedPrice:String
   ) {
-    createPost(title:$title, description:$description, price:$price, crossedPrice:$crossedPrice, image:$image, authorId:$authorId) {
+    createPost(title:$title, description:$description, features:$features, price:$price, crossedPrice:$crossedPrice, image:$image, authorId:$authorId) {
       id
     }
   }

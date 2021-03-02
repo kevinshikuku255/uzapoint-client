@@ -1,31 +1,96 @@
-import React,{useState,useContext} from 'react';
+import React,{useState} from 'react';
+import {useRouteMatch} from 'react-router-dom';
 import {useMutation} from "@apollo/client";
+import {useQuery} from "@apollo/client";
 import {TextareaAutosize, Avatar, CircularProgress} from '@material-ui/core';
 import jwtDecode  from 'jwt-decode';
-import {LocationOn, BusinessCenter, EmailOutlined, AccountCircleRounded, EditOutlined} from '@material-ui/icons';
+import {LocationOn, BusinessCenter, EmailOutlined, AccountCircleRounded} from '@material-ui/icons';
 
-
+import {SkeletonAvator, Skeleton} from "../../components/Skeleton/skeleton";
 import RouteHeader from "../../components/Header/routeHeader";
-import icon from "../../Assets/icon.png";
-import {EDIT_USER_PROFILE, GET_AUTH_USER }from "../../graphql/user";
-import { SET_AUTH_USER } from '../../store/auth';
-import  {AuthUserContext} from "../../Utils/authUserContext";
+import {EDIT_USER_PROFILE, GET_AUTH_USER, GET_USER  }from "../../graphql/user";
+import { SET_AUTH_USER} from '../../store/auth';
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useStore } from '../../store';
 import Routes from "../../store/routes";
+
+
+
+/* -------------------------------------------------------------------------- */
 const  useStyles = makeStyles((theme) => ({
   small: {
     width: theme.spacing(15),
     height: theme.spacing(15),
   },
+main:{
+ margin: "4rem 0 2rem 0",
+ display: "flex",
+ justifyContent: "center",
+ alignItems:"center",
+ flexDirection: "column",
+},
+edit_profile_avator:{
+ display: "flex",
+ alignItems: "center",
+ justifyContent: "center",
+ flexDirection: "column",
+ margin: "2rem",
+ cursor: "pointer",
+},
+edit_profile_spinner:{
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  alignDtems: "center",
+  height: "50vh",
+},
+edit_profile_textarea:{
+  border:"none",
+  resize: "none",
+  background: "#e8e8e8aa",
+  outline:"none",
+  width:"calc(100vw - 30vw)",
+  padding:theme.spacing(1,2),
+  borderRadius: "5px",
+  marginRight: "1rem",
+  },
+ edit_input:{
+ display: "flex",
+ flexDirection: "row",
+ margin: "0 0 2rem 0",
+},
+edit_icon:{
+  margin: "1rem"
+},
+input:{
+  borderRadius:"5px",
+  border:"1px solid gray",
+  outline:"none",
+  width:"calc(100vw - 30vw)",
+  padding:theme.spacing(1,2)
+},
+submit_btn:{
+    marginLeft: "auto",
+    marginRight: "2rem",
+    marginTop: "2rem",
+    padding:theme.spacing(1,2),
+    border:"none",
+    borderRadius:"5px",
+    outline:"none",
+    boxShadow:"1px 1px 4px gray",
+    background:"none"
+}
 }));
+/* -------------------------------------------------------------------------- */
 
 
 
 /** Edit profile component */
 function EditProfile() {
+   const path = useRouteMatch();
+   const routeName = path.params.username
    const classes = useStyles();
    const {goBack} = Routes();
    UsedocumentTitle("Edit Profile")
@@ -33,9 +98,15 @@ function EditProfile() {
    const [ , dispatch] = useStore();
    const [errors, setErrors] = useState("");
    const userId = auth.user.id;
-   const value = useContext(AuthUserContext);
+  //  const value = useContext(AuthUserContext);
    const [values, setValues] = useState({ fullname:"", location:"", email:"", businessdescription:"", id:userId});
 
+
+ const { data,loading:authuserLoading} = useQuery(GET_USER,{
+   variables:{
+     username:routeName
+   }
+ });
 
 /** change hundler... */
   const handleChange = e => {
@@ -73,10 +144,6 @@ const dispatchAction = (token) =>{
       });
 
 
-
-
-
-
   const handleSubmit = async (e) => {
      e.preventDefault();
      submitUser();
@@ -104,27 +171,32 @@ const renderErrors = apiError => {
 
   /** Loading section */
   let loader
-  if(value.loading){
-    loader = icon
+  if(authuserLoading){
+    loader = (
+      <>
+      <RouteHeader tag={"Edit Profile"}/>
+      <Skeleton/>
+    </>
+    )
     return loader
   }
 
-   const {  username, image } = value.data.getAuthUser;
-   const  avator = image ? image : icon;
+   const {  username, image } = data.getUser;
+
 
   let load;
   if(loading){
     return(
       loader =
-      <div className="edit_profile_loader">
+      <div className={classes.main}>
       <RouteHeader tag={"Edit Profile"}/>
-      <div className="edit_profile_avator">
-        <Avatar alt="avator" src={ username || avator} className={classes.small}/>
+      <div className={classes.edit_profile_avator}>
+        {image ? <Avatar alt="avator" src={ image } className={classes.small}/> : <SkeletonAvator name={username}/>}
         <h2 style={{textTransform:"capitalize"}} >{username}</h2>
       </div>
-       <div className="edit_profile_spinner">
+       <div className={classes.edit_profile_spinner}>
          <CircularProgress/>
-         <h3>editing...</h3>
+         <h3>Editing...</h3>
        </div>
       </div>
     )
@@ -132,9 +204,9 @@ const renderErrors = apiError => {
  return (
   <div>
     <RouteHeader tag={"Edit Profile"}/>
-    <main>
-      <div className="edit_profile_avator">
-        <Avatar alt="avator" src={loader || avator} className={classes.small}/>
+    <main className={classes.main}>
+      <div className={classes.edit_profile_avator}>
+        {image ? <Avatar src={image} className={classes.small}/> : <SkeletonAvator name={username}/> }
         <h2  style={{textTransform:"capitalize"}}  >{username}</h2>
       </div>
       {loading ? load :
@@ -142,67 +214,67 @@ const renderErrors = apiError => {
       <form onSubmit={handleSubmit}>
 
         { errors.length > 0  && (
-              <p className="error" >{renderErrors(errors)}</p>
+              <p style={{color:"red"}} >{renderErrors(errors)}</p>
             )}
-
-            <div className="edit_input">
-                <div className="edit_icon"> <AccountCircleRounded/> </div>
-                <div className="edit_details">
+            <br/>
+            <div className={classes.edit_input}>
+                <div className={classes.edit_icon}> <AccountCircleRounded/> </div>
+                <div className={classes.edit_details}>
                   <h3>Fullname</h3>
                   <input
+                     className={classes.input}
                      type="text"
                      placeholder="Add your fullname"
                      name="fullname"
                      onChange={handleChange}
                      value={values.fullname}/>
-                   <EditOutlined/>
                 </div>
             </div>
 
-            <div className="edit_input">
-                <div className="edit_icon"> <EmailOutlined/> </div>
-                <div className="edit_details">
+            <div className={classes.edit_input}>
+                <div className={classes.edit_icon}> <EmailOutlined/> </div>
+                <div className={classes.edit_details}>
                   <h3>Email adress</h3>
                   <input
+                     className={classes.input}
                      type="email"
                      placeholder="Add youremail adress"
                      name="email"
                      onChange={handleChange}
                      value={values.email}/>
-                  <EditOutlined/>
                 </div>
             </div>
 
-            <div className="edit_input">
-                <div className="edit_icon"> <BusinessCenter/> </div>
-                <div className="edit_details">
+            <div className={classes.edit_input}>
+                <div className={classes.edit_icon}> <BusinessCenter/> </div>
+                <div className={classes.edit_details}>
                   <h3>Business description</h3>
                   <TextareaAutosize
-                        className="edit_profile_textarea"
+                        className={classes.edit_profile_textarea}
                         type="text"
                         name="businessdescription"
                         onChange={handleChange}
                         placeholder="Add your Business description"
                         value={values.businessdescription}
-                        rowsMin={3}/>
+                        rowsMin={2}/>
                 </div>
             </div>
 
 
-            <div className="edit_input">
-                <div className="edit_icon"> <LocationOn/> </div>
-                <div className="edit_details">
+            <div className={classes.edit_input}>
+                <div className={classes.edit_icon}> <LocationOn/> </div>
+                <div className={classes.edit_details}>
                   <h3>Location</h3>
                   <input
                      type="text"
+                     className={classes.input}
                      placeholder="Add your location"
                      onChange={handleChange}
                      name="location"
                      value={values.location}/>
-                   <EditOutlined/>
                 </div>
             </div>
-            <button type="submit" className="submit_btn">Submit</button>
+            <button type="submit" className={classes.submit_btn}>Submit</button>
       </form>
       }
 

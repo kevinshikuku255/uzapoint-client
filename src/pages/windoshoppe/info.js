@@ -31,7 +31,7 @@ return(
           <div className='info_app-about'>
             <People/>
             <div>
-                <h4>Contact us</h4>
+                <h4>Contact windoshoppe incase of;</h4>
                 <p>Questions? Need help?</p>
             </div>
           </div>
@@ -49,17 +49,6 @@ return(
          </div>
       </div>
 
-      <div className="policyCard">
-        <div className='info_app-about'>
-          <FileCopyOutlined/>
-           <div>
-              <h4>Terms and usage policy</h4>
-           </div>
-        </div>
-
-        <p>We dont claim any direct responsibilty for content published on our platform. Users are warned to be careful on who they get into transuction with. Content on manupilation, intimidation and descrimination  are not allowed.</p>
-      </div>
-
       <div className="infoCard">
         <div className='info_app-about'>
           <InfoOutlined/>
@@ -74,6 +63,17 @@ return(
                   <li>Incase you're intrested of someone's product Call or WhatsApp the Number on their Bio.</li>
               </ul>
           </div>
+      </div>
+
+      <div className="policyCard">
+        <div className='info_app-about'>
+          <FileCopyOutlined/>
+           <div>
+              <h4>Terms and usage policy</h4>
+           </div>
+        </div>
+
+        <p>We dont claim any direct responsibilty for content published on our platform. Users are warned to be careful on who they get into transuction with. Content on manupilation, intimidation and descrimination  are not allowed.</p>
       </div>
 
 

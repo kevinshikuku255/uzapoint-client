@@ -13,7 +13,7 @@ import {GET_USER } from '../../graphql/user';
 import CustomFooter from "../../components/Footer/customFooter"
 import { weekDay } from '../../Utils/date';
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import {LoadingIndicator} from "../../components/Skeleton/skeleton";
+import {SkeletonBar2, SkeletonPost} from "../../components/Skeleton/skeleton";
 
 const  useStyles = makeStyles((theme) => ({
   large: {
@@ -44,7 +44,13 @@ const  Profile = ()  => {
 /** Loading section */
       let loader;
       if(loading){
-         return (<LoadingIndicator/>)
+         return (
+           <>
+            <RouteHeader tag={"username"}/>
+            <SkeletonPost/>
+            <SkeletonBar2/>
+           </>
+         )
       }
 
 
@@ -52,7 +58,8 @@ const {username, fullname,location, posts, businessdescription, phone, email, im
 
 const avator = image ?  image : null;
 const coverImg = coverImage ? coverImage : cover;
-const weekday = weekDay(createdAt)
+const weekday = weekDay(createdAt);
+const internationalPhone = phone && `+254${phone.substring(1)}`;
 
 
 /* ------------------ Route links functions-------------------------------------------------------- */
@@ -75,16 +82,13 @@ const main =
               <p> Phone: {phone}</p>
               {email && <p> Email: {email}</p>}
           </div>
-          {/* <div className="followButton">
-             <button>Follow</button>
-          </div> */}
      </div>
 
      <div className="profileContact" >
         <p style={{fontWeight:"bolder"}}>Contact information:</p>
         <ul>
            <a href={`tel:${phone}`} ><li> <PhoneAndroid/> <p>Direct call</p></li></a>
-           <a href={`https://api.whatsapp.com/send?phone=${phone}`}> <li> <WhatsApp/> <p>WhatsApp</p></li> </a>
+           <a href={`https://api.whatsapp.com/send?phone=${internationalPhone}`}> <li> <WhatsApp/> <p>WhatsApp</p></li> </a>
            <a href={`mailto:${email ? email : ""}`}> <li> <Email/> <p>Email</p> </li> </a>
         </ul>
      </div>

@@ -28,6 +28,7 @@ function PostForm(){
   const [price, setPrice] = useState('');
   const [crossedPrice, setCrossedPrice] = useState('');
   const [description, setDescription] = useState('');
+  const [features, setFeatures] = useState('');
   const [errors, setErrors] = useState('');
   const [warning, setWarning] = useState('');
 
@@ -39,6 +40,7 @@ function PostForm(){
     setPrice('');
     setCrossedPrice('');
     setDescription('')
+    setFeatures('')
   };
 
 
@@ -61,7 +63,7 @@ const previewFile = (file) => {
       }
 }
 
-const values = { title, description, price ,crossedPrice, image, authorId: auth.user.id}
+const values = { title, description, price ,crossedPrice, image, features, authorId: auth.user.id}
 
  const [createPost, { loading }] = useMutation(CREATE_POST,{
     variables: values,
@@ -77,10 +79,11 @@ const values = { title, description, price ,crossedPrice, image, authorId: auth.
        ]
 });
 
-const hadleTitleChangen = e => setTitle(e.target.value);
+const hadleTitleChange = e => setTitle(e.target.value);
+const hadleFeaturesChange = e => setFeatures(e.target.value);
 const handlePriceChange = e => setPrice(e.target.value);
 const handleCrossedPriceChange = e => setCrossedPrice(e.target.value);
-const handleDescriptionChnage = e => setDescription(e.target.value)
+const handleDescriptionChange = e => setDescription(e.target.value)
 
 
 const handleSubmit = async (e) => {
@@ -126,7 +129,7 @@ const form = (
             placeholder="Name"
             name="title"
             rows="1"
-            onChange={hadleTitleChangen}
+            onChange={hadleTitleChange}
             value={values.title}
             className="title"
           />
@@ -137,8 +140,18 @@ const form = (
                placeholder="Describe your item"
                rowsMin={2}
                name='description'
-               onChange={handleDescriptionChnage}
+               onChange={handleDescriptionChange}
                value={values.description}
+               className="description"
+               />
+       </div>
+        <div >
+           <TextareaAutosize
+               placeholder="separet product features by  ( # ) "
+               rowsMin={3}
+               name='features'
+               onChange={hadleFeaturesChange}
+               value={values.features}
                className="description"
                />
        </div>
@@ -189,7 +202,7 @@ const message = (
 
    {loading ? loader : form}
    {errors && error}
-   {warning &&  message}
+   {!errors && warning &&  message}
 
 </>
   )

@@ -1,5 +1,5 @@
 .profileContainer{
- margin-bottom: 3rem;
+ margin-top: -1rem;
  display: flex;
  flex-direction: column;
  width: 100vw;
@@ -84,11 +84,6 @@ button{
  cursor: pointer;
 }
 
-/* .followButton{
- flex: 0.9;
- display: flex;
- justify-content:flex-end;
-} */
 
 /* -------------------------------------------------------------------------- */
 .prifileGrid{

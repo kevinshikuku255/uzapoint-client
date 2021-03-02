@@ -1,18 +1,17 @@
 import React,{useState} from 'react';
-import {useHistory} from "react-router-dom";
+import {useRouteMatch, useHistory} from 'react-router-dom';
 import {useQuery} from "@apollo/client";
-import {GET_AUTH_USER} from "../../graphql/user";
+import { GET_USER} from "../../graphql/user";
 
 import Avatar from '@material-ui/core/Avatar';
 import { InfoOutlined, ImageOutlined } from "@material-ui/icons";
 
-import cover from "../../Assets/bg.jpg";
 import Footer from "../../components/Footer/index";
 import ProfileHeader from "../../components/Header/profileHeader";
 import Info from "../windoshoppe/info";
 import Items from "./items";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import { LoadingIndicator } from "../../components/Skeleton/skeleton";
+import { SkeletonPost, Skeleton } from "../../components/Skeleton/skeleton";
 
 
 import './profile.css';
@@ -24,27 +23,45 @@ const  useStyles = makeStyles((theme) => ({
     marginLeft:0,
     backgroundColor:"#2ceaff"
   },
+  edit_profile_btn:{
+  color:"blue",
+  cursor:"pinter",
+  textAlign:"center",
+  margin:theme.spacing(2,0),
+  fontSize:"2rem"
+  }
 }));
 
 
 /* ------------------------------------------------------------------------------ */
 /** ..AuthProfile component........................... */
 function AuthProfileComponent() {
+    const path = useRouteMatch();
    const classes = useStyles();
    const history = useHistory();
+   const name = path.params.username.split(':').pop();
    const [tab, setTab] = useState(0);
    UsedocumentTitle("Profile")
 
-   const {data, loading} = useQuery(GET_AUTH_USER);
+
+ const { data,loading} = useQuery(GET_USER,{
+   variables:{
+     username:name
+   }
+ });
 
 /** Loading section */
       let loader;
       if(loading){
-         return ( <LoadingIndicator/>)
-
+         return (
+            <>
+            <ProfileHeader tag={"username"}/>
+            <Skeleton/>
+           </>
+         )
       }
-
- const {  username,image, email, phone, fullname, businessdescription, posts,coverImage} = data.getAuthUser;
+console.log(data)
+ const {  username,image, email, phone, fullname, businessdescription, posts,coverImage} = data.getUser;
 
  const toEditProfile = () =>{
    history.push(`/profile/${username}/editprofile`)
@@ -55,7 +72,7 @@ const main =
      <>
             <div className="topBar">
                   <div>
-                     <Avatar alt="avator" onClick={() => setTab(0)} src={image || "W"} className={classes.small}/>
+                     <Avatar alt="avator" onClick={() => setTab(0)} src={image || ""} className={classes.small}/>
                   </div>
                   <div onClick={() => setTab(1)}>
                      <ImageOutlined/>
@@ -71,19 +88,29 @@ const main =
 
        { tab === 0 &&
         <div className="profile_Infor">
-            <img height="100rem" alt="cover" width="100%" src={coverImage || cover}/>
+            { coverImage ?  <img height="100rem" alt="cover" width="100%" src={coverImage}/> : <SkeletonPost/> }
             <div className="bioData">
                <h2>{fullname}</h2>
                <p>{username}</p> <br/>
 
+               { email && phone &&
+               <>
                <h3>My business contacts</h3>
                <p>{email}</p>
                <p>{ phone}</p> <br/>
+               </>
+               }
 
-               <h3>My business decription</h3>
+               { businessdescription &&
+               <>
+                <h3>My business decription</h3>
                <p>{businessdescription}</p>
+               </>
+               }
             </div>
-            <button onClick={toEditProfile} className="edit_profile_btn">Edit Profile</button>
+            <div className={classes.edit_profile_btn}>
+               <p onClick={toEditProfile} className={classes.p}>Edit Profile</p>
+            </div>
        </div>
        }
        {tab === 1 && <Items posts={posts}/>}

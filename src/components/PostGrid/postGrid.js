@@ -2,9 +2,8 @@ import React from 'react';
 import {useHistory} from "react-router-dom";
 import {useStore} from "../../store"
 
-
+import { SkeletonPost} from "../../components/Skeleton/skeleton";
 import { weekDay } from '../../Utils/date';
-import shoes from "../../Assets/netlify.jpg";
 import  "./postGrid.css";
 
 
@@ -16,8 +15,6 @@ const  Postgrid = ({post})  => {
       const weekday = weekDay(createdAt)
 
 
-      const postImage = image ? image : shoes;
-
       const toSingleItem = () =>{
           history.push(`/${auth.user.username}/${id}`)
         }
@@ -27,7 +24,9 @@ const  Postgrid = ({post})  => {
  return (
   <>
     <div className="media_wrapper">
-        <div className="media"> <img width="100%" alt={id} onClick={toSingleItem} height="100%" src={postImage}/> </div>
+        <div className="media">
+            {image ? <img width="100%" alt={id} onClick={toSingleItem} height="100%" src={image}/> : <SkeletonPost/>}
+          </div>
         <div className="prices">
            <p><b>{`Ksh ${price}`}</b></p>
            <p className="crossed_price" >{`Ksh ${crossedPrice}`}</p>

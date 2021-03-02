@@ -20,8 +20,8 @@ function AppInfo() {
             <h1>Windoshoppe</h1>
             <p>version 0.1.0</p>
             <p>By kevin shikuku </p>
-            <i> copywright 2020-2021 windoshoppe </i>
-            <br/> <br/> 
+            <i> &copy; 2020-2021 windoshoppe </i>
+            <br/> <br/>
             <p>To support development of this application</p>
             <p>M-pesa: 0740253367</p>
 
