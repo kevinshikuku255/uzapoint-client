@@ -2,9 +2,10 @@ import React from 'react';
 import {useHistory} from "react-router-dom";
 import {useQuery} from "@apollo/client";
 import RouteHeader from "../../components/Header/routeHeader";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import {GET_POST} from "../../graphql/post";
-import shoes from "../../Assets/netlify.jpg";
+// import shoes from "../../Assets/netlify.jpg";
 import Comments from "../../components/Comment/comments";
 import CreateComment from "../../components/CreateCommnet/createComment";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
@@ -35,14 +36,22 @@ const {data, loading} = useQuery(GET_POST, {variables:{id:ID}});
     )
   }
 
-const {id, title, description, likes,comments, image,price, crossedPrice, features, createdAt} = data.getPost;
+const {id,  description, likes,comments, image,price, crossedPrice, features, createdAt} = data.getPost;
 const weekday = weekDay(createdAt)
 const itemFeatures = features && features.split("#")
 
 const main = (
   <div>
     <div className="auth_user_item_media">
-      <img width="100%" alt={title} src={image || shoes}/>
+            {image ? <LazyLoadImage
+              alt="alt_tag"
+              src={image}
+              effect="blur"
+              width="100%"
+              height="50%"
+            /> : <SkeletonPost/>}
+
+      {/* <img width="100%" alt={title} src={image || shoes}/> */}
       <div className="auth_user__item_info">
         <b>{weekday}</b>
         <p>{`Likes: ${likes.length}`}</p>

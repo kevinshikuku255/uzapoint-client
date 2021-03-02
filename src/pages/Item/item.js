@@ -1,6 +1,7 @@
 import React from 'react';
 import {useRouteMatch} from 'react-router-dom';
 import {useQuery}  from '@apollo/client';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import {GET_POST } from '../../graphql/post';
 import RouteHeader from "../../components/Header/routeHeader";
@@ -56,7 +57,16 @@ const weekday = weekDay(createdAt)
   <>
     <div className="itemCard">
         <div className="cardMedia" >
-          {image ? <img alt={auth.username} height="50%" width="100%" src={image}/> : <SkeletonPost/>}
+
+            {image ? <LazyLoadImage
+              alt="alt_tag"
+              src={image}
+              effect="blur"
+              width="100%"
+              height="50%"
+            /> : <SkeletonPost/>}
+
+          {/* {image ? <img alt={auth.username} height="50%" width="100%" src={image}/> : <SkeletonPost/>} */}
        </div>
 
         <div className="itemStats">

@@ -1,6 +1,7 @@
 import React from 'react';
 import {useHistory} from "react-router-dom";
 import {useStore} from "../../store"
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { SkeletonPost} from "../../components/Skeleton/skeleton";
 import { weekDay } from '../../Utils/date';
@@ -25,7 +26,16 @@ const  Postgrid = ({post})  => {
   <>
     <div className="media_wrapper">
         <div className="media">
-            {image ? <img width="100%" alt={id} onClick={toSingleItem} height="100%" src={image}/> : <SkeletonPost/>}
+            {image ? <LazyLoadImage
+              alt="alt_tag"
+              onClick={toSingleItem}
+              src={image}
+              effect="blur"
+              width="100%"
+              height="50%"
+            /> : <SkeletonPost/>}
+
+            {/* {image ? <img width="100%" alt={id} onClick={toSingleItem} height="100%" src={image}/> : <SkeletonPost/>} */}
           </div>
         <div className="prices">
            <p><b>{`Ksh ${price}`}</b></p>

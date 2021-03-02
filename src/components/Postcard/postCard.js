@@ -2,6 +2,7 @@ import React from "react"
 import {useHistory} from "react-router-dom";
 import { timeAgo } from '../../Utils/date';
 import {SkeletonSmallAvator, SkeletonPost} from "../../components/Skeleton/skeleton";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import  "./postcard.css"
 
 import { makeStyles , Avatar} from '@material-ui/core';
@@ -51,7 +52,14 @@ const Postcard = ({post}) => {
             </div>
         </div>
         <div className="cardMedia" onClick={toPost}>
-            {image ? <img height="50%" width="100%" aria-label={title} src={image}/> : <SkeletonPost/>}
+            {image ? <LazyLoadImage
+              alt="alt_tag"
+              src={image}
+              effect="blur"
+              width="100%"
+              height="50%"
+            /> : <SkeletonPost/>}
+            {/* {image ? <img height="50%" width="100%" aria-label={title} src={image}/> : <SkeletonPost/>} */}
         </div>
 
         <div className="itemStats">
