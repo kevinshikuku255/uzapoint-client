@@ -49,6 +49,7 @@ const main = (
               effect="blur"
               width="100%"
               height="50%"
+              placeholder={<skeletonPost/>}
             /> : <SkeletonPost/>}
 
       {/* <img width="100%" alt={title} src={image || shoes}/> */}
