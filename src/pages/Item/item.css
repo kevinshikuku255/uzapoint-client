@@ -50,11 +50,8 @@
   font-weight: bolder;
 }
 .itemBtns {
-display: flex;
-justify-content: space-around;
-padding: 1rem 0;
-border-top: 1px solid #80808021;
-border-bottom: 1px solid #8080802f;
+margin-left: auto;
+padding: 1rem;
 }
 
 

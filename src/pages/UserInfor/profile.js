@@ -6,7 +6,6 @@ import {Email, PhoneAndroid, LocationOn, WhatsApp} from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 import RouteHeader from "../../components/Header/routeHeader";
-import cover from "../../Assets/bg.jpg"
 import  './profile.css'
 
 import {GET_USER } from '../../graphql/user';
@@ -20,7 +19,8 @@ const  useStyles = makeStyles((theme) => ({
     width: theme.spacing(6),
     height: theme.spacing(6),
     backgroundColor:"#2ceaff"
-  },
+  }
+
 }));
 
 
@@ -54,12 +54,11 @@ const  Profile = ()  => {
       }
 
 
-const {username, fullname,location, posts, businessdescription, phone, email, image, coverImage, createdAt} = data.getUser;
+const {username, fullname,location, posts, businessdescription, phonenumber, email, image, createdAt} = data.getUser;
 
 const avator = image ?  image : null;
-const coverImg = coverImage ? coverImage : cover;
 const weekday = weekDay(createdAt);
-const internationalPhone = phone && `+254${phone.substring(1)}`;
+const internationalPhone = phonenumber && `+254${phonenumber.substring(1)}`;
 
 
 /* ------------------ Route links functions-------------------------------------------------------- */
@@ -73,13 +72,12 @@ const internationalPhone = phone && `+254${phone.substring(1)}`;
 const main =
  <>
 
-   <div className="profileContainer">
-     <div className="coverImg"> <img  width="100%" alt="cover" height="100vh" src={coverImg}/> </div>
+   <div className="profile_container">
      <div className="avator">
           <Avatar alt="logo" src={avator} className={classes.large}/>
           <div>
               <p>{fullname ? fullname : username}</p>
-              <p> Phone: {phone}</p>
+              <p> Phone: {phonenumber}</p>
               {email && <p> Email: {email}</p>}
           </div>
      </div>
@@ -87,7 +85,7 @@ const main =
      <div className="profileContact" >
         <p style={{fontWeight:"bolder"}}>Contact information:</p>
         <ul>
-           <a href={`tel:${phone}`} ><li> <PhoneAndroid/> <p>Direct call</p></li></a>
+           <a href={`tel:${phonenumber}`} ><li> <PhoneAndroid/> <p>Direct call</p></li></a>
            <a href={`https://api.whatsapp.com/send?phone=${internationalPhone}`}> <li> <WhatsApp/> <p>WhatsApp</p></li> </a>
            <a href={`mailto:${email ? email : ""}`}> <li> <Email/> <p>Email</p> </li> </a>
         </ul>
@@ -106,10 +104,11 @@ const main =
      </div>
 
 
+      {location &&
       <div className="location">
         <p className="bold">Direction:</p>
-        <p><LocationOn/></p> <p>{location ? location : "Tom Moya University Collage"}</p>
-      </div>
+        <p><LocationOn/></p> <p>{location}</p>
+      </div>}
 
       <div className="items" >
         <ul>

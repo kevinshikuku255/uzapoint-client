@@ -1,15 +1,14 @@
 import React,{useState} from 'react';
 import  "./createPost.css";
-import PostImageUpload from "./PostImageUpload";
+
 
 import {useMutation} from "@apollo/client"
 import {useStore } from '../../store';
-import {MAX_POST_IMAGE_SIZE } from '../../constants/ImageSize';
-import {CREATE_POST,GET_PAGINATED_POSTS} from "../../graphql/post";
+import {CREATE_BUY,GET_PAGINATED_BUYS} from "../../graphql/buy";
 import {GET_AUTH_USER} from '../../graphql/user';
 import {HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import {CircularProgress, TextareaAutosize} from '@material-ui/core';
-import {Close} from '@material-ui/icons';
+
 
 
 
@@ -17,12 +16,10 @@ import {Close} from '@material-ui/icons';
 /**
  * create post component
  */
-function PostForm(){
+function PurchaseForm(){
   const [{ auth }] = useStore();
-  const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
-  const [price, setPrice] = useState('');
-  const [crossedPrice, setCrossedPrice] = useState('');
+  const [pricerange, setPricerange] = useState('');
   const [description, setDescription] = useState('');
   const [features, setFeatures] = useState('');
   const [errors, setErrors] = useState('');
@@ -32,43 +29,23 @@ function PostForm(){
 
    const handleReset = () => {
     setTitle('');
-    setImage('');
     setErrors('');
-    setPrice('');
-    setCrossedPrice('');
+    setPricerange('');
     setDescription('')
     setFeatures('')
   };
 
 
 
-/** handles post image upload ! */
- const handlePostImageUpload = e => {
-        const file = e.target.files[0];
-        if (!file) return;
-        if (file.size >= MAX_POST_IMAGE_SIZE) {
-            throw new Error( `File size should be less then ${MAX_POST_IMAGE_SIZE / 3000000}MB`)
-        }
-      previewFile(file)
-  };
+const values = { title, description, pricerange , features, authorId: auth.user.id}
 
-const previewFile = (file) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-      setImage(reader.result);
-      }
-}
-
-const values = { title, description, price ,crossedPrice, image, features, authorId: auth.user.id}
-
- const [createPost, { loading }] = useMutation(CREATE_POST,{
+ const [createBuy, { loading }] = useMutation(CREATE_BUY,{
     variables: values,
       onError(err){
       setErrors(err)
     },
     refetchQueries:[
-      { query:GET_PAGINATED_POSTS, variables:{
+      { query:GET_PAGINATED_BUYS, variables:{
           after: null,
           limit: HOME_PAGE_POSTS_LIMIT,
        }},
@@ -78,16 +55,15 @@ const values = { title, description, price ,crossedPrice, image, features, autho
 
 const hadleTitleChange = e => setTitle(e.target.value);
 const hadleFeaturesChange = e => setFeatures(e.target.value);
-const handlePriceChange = e => setPrice(e.target.value);
-const handleCrossedPriceChange = e => setCrossedPrice(e.target.value);
+const handlePriceChange = e => setPricerange(e.target.value);
 const handleDescriptionChange = e => setDescription(e.target.value)
 
 
 const handleSubmit = async (e) => {
     e.preventDefault();
-    createPost();
+    createBuy();
     handleReset();
-    setWarning("Item displayed successfully!");
+    setWarning("Request displayed successfully!");
 };
 
 /** Loading spinnner */
@@ -96,35 +72,21 @@ const handleSubmit = async (e) => {
     return loader = (
       <div className="display_item_loader">
         <CircularProgress/>
-        <h1>Displaying your item ...</h1>
+        <h1>displaying your purchase request...</h1>
 
       </div>
     )
   }
-
-const postImagePrevew =
-   (<div className="image_preview">
-      {image && (
-      <>
-          <div>
-            <img  src={image} width="100%" alt="preview" />
-          </div>
-      </>
-      )}
-   </div>)
-
 
 /** Display item form */
 const form = (
  <form onSubmit={handleSubmit}>
 
    <div className="create_post_wrapper">
-   {image && <p onClick={ () => setImage("") } className="close" > <Close/> </p>}
-   <br/>
    <div className="post_description">
        <div>
           <TextareaAutosize
-            placeholder="name"
+            placeholder="what do you want to buy?"
             name="title"
             rows="1"
             onChange={hadleTitleChange}
@@ -145,7 +107,7 @@ const form = (
        </div>
         <div >
            <TextareaAutosize
-               placeholder="separet product features by  #  "
+               placeholder="separet specific features by  #  "
                rowsMin={2}
                name='features'
                onChange={hadleFeaturesChange}
@@ -155,30 +117,19 @@ const form = (
        </div>
        <div className="price_input">
            <input
-             placeholder='price'
-             name="price"
-             value={values.price}
+             placeholder='price range'
+             name="pricerange"
+             value={values.pricerange}
              style={{color:"blue"}}
              onChange={handlePriceChange}
              className="priceInput"
            /> <br/>
-           <input
-             placeholder='price before'
-             name="crossedPrice"
-             style={{color:"red"}}
-             value={values.crossedPrice}
-             onChange={handleCrossedPriceChange}
-             className="priceInput"
-           />
-       </div>
-       <div className="photo_input">
-          <PostImageUpload  label="Photo"  handleChange={handlePostImageUpload}/>
        </div>
    </div>
-
+         <br/>
          <div className="displayBtn">
              <button onClick={ handleSubmit }>
-                 Display
+                 Send
              </button>
          </div>
      </div>
@@ -200,7 +151,6 @@ const message = (
 
   return(
 <>
-   {postImagePrevew}
    {loading ? loader : form}
    {errors && error}
    {!errors && warning &&  message}
@@ -208,4 +158,4 @@ const message = (
 </>
   )
 };
-export default PostForm;
+export default PurchaseForm;

@@ -1,5 +1,5 @@
-.profileContainer{
- margin-top: -1rem;
+.profile_container{
+  margin-top: 3.2rem;
  display: flex;
  flex-direction: column;
  width: 100vw;

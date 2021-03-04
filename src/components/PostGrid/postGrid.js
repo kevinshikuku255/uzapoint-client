@@ -5,6 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { SkeletonPost} from "../../components/Skeleton/skeleton";
 import { weekDay } from '../../Utils/date';
+import DeleteButton from "../Delete/Delete"
 import  "./postGrid.css";
 
 
@@ -12,7 +13,7 @@ import  "./postGrid.css";
 const  Postgrid = ({post})  => {
       const history = useHistory();
       const [{auth}] = useStore();
-      const { id, image, crossedPrice, price, title,  createdAt} = post;
+      const { id, image, author, crossedPrice, price, title,  createdAt} = post;
       const weekday = weekDay(createdAt)
 
 
@@ -20,27 +21,23 @@ const  Postgrid = ({post})  => {
           history.push(`/${auth.user.username}/${id}`)
         }
 
-
-
  return (
   <>
     <div className="media_wrapper">
-        <div className="media">
+        <div className="media" onClick={toSingleItem}>
             {image ? <LazyLoadImage
               alt="alt_tag"
-              onClick={toSingleItem}
               src={image}
               effect="blur"
               width="100%"
               height="50%"
             /> : <SkeletonPost/>}
-
-            {/* {image ? <img width="100%" alt={id} onClick={toSingleItem} height="100%" src={image}/> : <SkeletonPost/>} */}
           </div>
         <div className="prices">
            <p><b>{`Ksh ${price}`}</b></p>
-           <p className="crossed_price" >{`Ksh ${crossedPrice}`}</p>
-           <button>Edit</button>
+           {crossedPrice && <p className="crossed_price" >{`Ksh ${crossedPrice}`}</p>}
+           {(auth.user.username ===  author.username) && <DeleteButton id={id}/>}
+
         </div>
 
         <div className="grid_post_title">

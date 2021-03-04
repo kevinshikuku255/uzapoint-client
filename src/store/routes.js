@@ -14,6 +14,12 @@ const route = {
      sell: () => {
       return history.push('./sell')
    },
+    buy: () => {
+      return history.push('./buy')
+   },
+    buyers: () => {
+      return history.push('./buyers')
+   },
     search:  () =>{
        history.push('/search')
     },

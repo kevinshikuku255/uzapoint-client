@@ -1,38 +1,31 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import {useQuery}  from '@apollo/client';
 import {Skeleton,LinearProg} from "../../components/Skeleton/skeleton";
 import { Waypoint} from "react-waypoint";
 
-import  "./home.css";
-import Header from "../../components/Header";
-import PostCard from "../../components/Postcard/postCard";
+import  "./buyers.css";
+import RouteHeader from "../../components/Header/routeHeader";
+import Buycard from "../../components/Postcard/buyCard";
 
-import { GET_PAGINATED_POSTS} from "../../graphql/post";
+import { GET_PAGINATED_BUYS} from "../../graphql/buy";
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import { useAnalytics } from 'use-analytics';
 
 
 
 
 
-/**Home componen */
-function Home() {
+
+/** Buyer component */
+function Buyers() {
         UsedocumentTitle("Home");
-        const {track} = useAnalytics()
-
-
-      useEffect(() => {
-        console.log(track("landed to home page"))
-      },[track])
 
         const variables = {
           after: null,
           limit: HOME_PAGE_POSTS_LIMIT,
         };
 
-        const { data,loading, fetchMore } = useQuery(GET_PAGINATED_POSTS,{variables});
-
+        const { data,loading, fetchMore } = useQuery(GET_PAGINATED_BUYS,{variables});
         const skeleton = (
           <>
             <Skeleton/>
@@ -48,7 +41,7 @@ function Home() {
         if(loading){
           return loader = (
             <div>
-              <Header/>
+              <RouteHeader/>
               <LinearProg/>
               {skeleton}
             </div>
@@ -58,20 +51,22 @@ function Home() {
         if(!loading && !data){
           return loader = (
             <div>
-              <Header/>
+              <RouteHeader/>
               <LinearProg/>
               {skeleton}
             </div>
           )
         }
 
-const { posts, cursor} = data.getPaginatedPosts;
-  const main =  posts && (
+const { buys, cursor} = data.getPaginatedBuys;
+console.log(data)
+console.log(buys.length -10)
+  const main =  buys && (
   <div className="homeContainer">
-          { posts.map( (post, i) =>
-            <div className="card" key={post.id}>
-                  { <PostCard  post={post}/>}
-                  {i === posts.length - 10 &&
+          { buys.map( (buy, i) =>
+            <div className="card" key={buy.id}>
+                  { <Buycard  buy={buy}/>}
+                  {i === buys.length - 10 &&
                     <Waypoint onEnter={
                       () => fetchMore({
                         variables:{
@@ -83,11 +78,11 @@ const { posts, cursor} = data.getPaginatedPosts;
                           return pv
                         }
                         return {
-                          getPaginatedPosts:{
-                           __typename: "PostsConnection",
-                           posts: [ ...pv.getPaginatedPosts.posts, ...fetchMoreResult.getPaginatedPosts.posts ],
-                           hasMore: fetchMoreResult.getPaginatedPosts.hasMore,
-                           cursor: fetchMoreResult.getPaginatedPosts.cursor
+                          getPaginatedBuys:{
+                           __typename: "BuysConnection",
+                           buys: [ ...pv.getPaginatedBuys.buys, ...fetchMoreResult.getPaginatedBuys.buys ],
+                           hasMore: fetchMoreResult.getPaginatedBuys.hasMore,
+                           cursor: fetchMoreResult.getPaginatedBuys.cursor
                           }
                         }
                       }
@@ -100,7 +95,7 @@ const { posts, cursor} = data.getPaginatedPosts;
 
  return (
 <>
-  <Header/>
+  <RouteHeader tag={"People want to buy"}/>
   {loading && loader}
   {data && !loading  && main}
   {(!loading && !data) && loader }
@@ -108,4 +103,4 @@ const { posts, cursor} = data.getPaginatedPosts;
  )
 }
 
-export default Home;
+export default Buyers;

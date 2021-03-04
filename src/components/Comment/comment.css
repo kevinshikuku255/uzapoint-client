@@ -6,7 +6,7 @@
   border-radius: 10px;
 }
 
-.delete_btn button{
-  margin:1rem .5rem .5rem auto;
-  padding: 5px;
+.delete_btn{
+margin-left: 78%;
+margin-bottom: .3rem;
 }

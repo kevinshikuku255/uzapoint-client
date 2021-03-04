@@ -1,12 +1,8 @@
 import React, {useState} from 'react';
 import {useMutation} from '@apollo/client';
 import {Link} from "react-router-dom";
-import jwtDecode  from 'jwt-decode';
-import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from  "@material-ui/core/CircularProgress"
-
-
+import {CircularProgress, Avatar} from  "@material-ui/core"
 import { SIGN_IN } from '../../graphql/user';
 import { useStore } from '../../store';
 import { SET_AUTH_USER } from '../../store/auth';
@@ -14,10 +10,9 @@ import Header from "../../components/Header/loggedOut";
 import Footer from "../../components/Footer";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 import Routes from "../../store/routes";
-
-
-
 import Logo from "../../Assets/icon.png";
+import jwtDecode  from 'jwt-decode';
+
 
 
 const useStyles = makeStyles((theme) => ({

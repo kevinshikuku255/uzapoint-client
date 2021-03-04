@@ -11,7 +11,7 @@ import ProfileHeader from "../../components/Header/profileHeader";
 import Info from "../windoshoppe/info";
 import Items from "./items";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import { SkeletonPost, Skeleton } from "../../components/Skeleton/skeleton";
+import {  Skeleton } from "../../components/Skeleton/skeleton";
 
 
 import './profile.css';
@@ -60,8 +60,7 @@ function AuthProfileComponent() {
            </>
          )
       }
-console.log(data)
- const {  username,image, email, phone, fullname, businessdescription, posts,coverImage} = data.getUser;
+ const {  username,image, email, phonenumber, fullname, businessdescription, posts} = data.getUser;
 
  const toEditProfile = () =>{
    history.push(`/profile/${username}/editprofile`)
@@ -88,16 +87,16 @@ const main =
 
        { tab === 0 &&
         <div className="profile_Infor">
-            { coverImage ?  <img height="100rem" alt="cover" width="100%" src={coverImage}/> : <SkeletonPost/> }
+            {/* { coverImage ?  <img height="100rem" alt="cover" width="100%" src={coverImage}/> : <SkeletonPost/> } */}
             <div className="bioData">
                <h2>{fullname}</h2>
                <p>{username}</p> <br/>
 
-               { email && phone &&
+               { email && phonenumber &&
                <>
                <h3>My business contacts</h3>
                <p>{email}</p>
-               <p>{ phone}</p> <br/>
+               <p>{ phonenumber}</p> <br/>
                </>
                }
 

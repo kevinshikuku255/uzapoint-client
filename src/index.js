@@ -9,6 +9,34 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import {AuthUserProvider} from "./Utils/authUserContext";
+import { AnalyticsProvider } from 'use-analytics';
+import googleAnalytics from '@analytics/google-analytics'
+
+
+import Analytics from 'analytics';
+/* Initialize analytics & load plugins */
+
+/** my custom plugin */
+const myPlugin = {
+    name:"my_custon_plugin",
+    page: ({payload}) => {
+      console.log("page view fired", payload)
+    },
+    track: ({payload}) => {
+      console.log("track event", payload)
+    }
+  }
+
+const analytics = Analytics({
+  app: 'windoshoppe',
+  plugins: [
+     myPlugin,
+     googleAnalytics({
+      trackingId: '1504G-QDX26EEZTX75290',
+    })
+  ]
+})
+
 
 
 // GraphQL HTTP URL
@@ -25,6 +53,7 @@ const apolloClient = createApolloClient(API_URL, websocketApiUrl);
 
 ReactDOM.render(
   <React.StrictMode>
+    <AnalyticsProvider instance={analytics}>
     <ApolloProvider client={apolloClient}>
       <ApolloHooksProvider client={apolloClient}>
           <StoreProvider>
@@ -36,6 +65,7 @@ ReactDOM.render(
           </StoreProvider>
       </ApolloHooksProvider>
     </ApolloProvider>
+    </AnalyticsProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

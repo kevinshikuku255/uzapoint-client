@@ -2,11 +2,11 @@ import React,{useState} from 'react';
 import {useRouteMatch} from 'react-router-dom';
 import {useMutation} from "@apollo/client";
 import {useQuery} from "@apollo/client";
-import {TextareaAutosize, Avatar, CircularProgress} from '@material-ui/core';
+import {TextareaAutosize, CircularProgress} from '@material-ui/core';
 import jwtDecode  from 'jwt-decode';
 import {LocationOn, BusinessCenter, EmailOutlined, AccountCircleRounded} from '@material-ui/icons';
 
-import {SkeletonAvator, Skeleton} from "../../components/Skeleton/skeleton";
+import { Skeleton} from "../../components/Skeleton/skeleton";
 import RouteHeader from "../../components/Header/routeHeader";
 import {EDIT_USER_PROFILE, GET_AUTH_USER, GET_USER  }from "../../graphql/user";
 import { SET_AUTH_USER} from '../../store/auth';
@@ -101,8 +101,7 @@ function EditProfile() {
   //  const value = useContext(AuthUserContext);
    const [values, setValues] = useState({ fullname:"", location:"", email:"", businessdescription:"", id:userId});
 
-
- const { data,loading:authuserLoading} = useQuery(GET_USER,{
+ const { loading:authuserLoading} = useQuery(GET_USER,{
    variables:{
      username:routeName
    }
@@ -125,14 +124,14 @@ const dispatchAction = (token) =>{
 
 
 /** Use mutation */
-  let [submitUser,{loading   }] = useMutation(EDIT_USER_PROFILE,{
+  let [submitUser,{ loading }] =  useMutation(EDIT_USER_PROFILE,{
       update(_, result){
         const token = result.data.editUserProfile.token;
         const decodedToken = jwtDecode(token);
         localStorage.removeItem("jwt");
+        localStorage.removeItem("apollo-cache-persist");
         localStorage.setItem('jwt',token);
         dispatchAction(decodedToken)
-        goBack()
     },
      variables:values,
      refetchQueries:[
@@ -148,6 +147,7 @@ const dispatchAction = (token) =>{
      e.preventDefault();
      submitUser();
      setErrors("");
+     goBack();
   };
 
 
@@ -181,7 +181,7 @@ const renderErrors = apiError => {
     return loader
   }
 
-   const {  username, image } = data.getUser;
+   const   username  = auth.user.username;
 
 
   let load;
@@ -191,7 +191,7 @@ const renderErrors = apiError => {
       <div className={classes.main}>
       <RouteHeader tag={"Edit Profile"}/>
       <div className={classes.edit_profile_avator}>
-        {image ? <Avatar alt="avator" src={ image } className={classes.small}/> : <SkeletonAvator name={username}/>}
+        {/* {image ? <Avatar alt="avator" src={ image } className={classes.small}/> : <SkeletonAvator name={username}/>} */}
         <h2 style={{textTransform:"capitalize"}} >{username}</h2>
       </div>
        <div className={classes.edit_profile_spinner}>
@@ -206,7 +206,7 @@ const renderErrors = apiError => {
     <RouteHeader tag={"Edit Profile"}/>
     <main className={classes.main}>
       <div className={classes.edit_profile_avator}>
-        {image ? <Avatar src={image} className={classes.small}/> : <SkeletonAvator name={username}/> }
+        {/* {image ? <Avatar src={image} className={classes.small}/> : <SkeletonAvator name={username}/> } */}
         <h2  style={{textTransform:"capitalize"}}  >{username}</h2>
       </div>
       {loading ? load :

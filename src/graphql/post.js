@@ -18,7 +18,7 @@ export const postAuthorPayload = `
   author {
     id
     username
-    phone
+    phonenumber
     image
     following {
       id

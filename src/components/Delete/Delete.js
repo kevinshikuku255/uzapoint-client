@@ -1,17 +1,27 @@
 import React from 'react';
 import {useMutation} from '@apollo/client';
+import { makeStyles } from '@material-ui/core/styles';
 
 import {GET_POSTS, DELETE_POST} from "../../graphql/post";
 import {DELETE_COMMENT} from "../../graphql/comment";
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import Routes from "../../store/routes";
+const useStyles = makeStyles((theme) => ({
+  btn:{
+    border:"none",
+    outline:"none",
+    borderRadius:"5px",
+    padding:".2rem 1rem"
+  }
+}))
 
 
 
 
 /** Delete button component */
 function DeleteButton({id,commentId}){
- const {backHome}  = Routes()
+ const {backHome}  = Routes();
+ const classes = useStyles();
 
 
 
@@ -41,8 +51,8 @@ const hundleDelete = () => {
 
  return(
   <>
-        <button style={{backgroundColor:"#c25454"}} onClick={hundleDelete}>
-         {loading ? "Deleting..." : data ? "Deleted" : "Delete"}
+        <button style={{backgroundColor:"#c25454"}} className={classes.btn} onClick={hundleDelete}>
+            {loading ? "Deleting..." : data ? "Deleted" : "Delete"}
         </button>
   </>
    )

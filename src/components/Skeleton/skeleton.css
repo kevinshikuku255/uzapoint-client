@@ -173,6 +173,16 @@
 
 }
 
+.SkeletonPostCard{
+  height: 15rem;
+  background-color: rgba(0, 255, 255, 0.33);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: medium;
+  font-family: sans-serif;
+  padding: 0 .4rem 0 1.4rem;
+}
 
 
 

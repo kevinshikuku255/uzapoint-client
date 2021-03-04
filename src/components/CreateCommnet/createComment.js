@@ -1,28 +1,29 @@
 import React,{useState, useRef, useEffect} from 'react';
 import { useMutation} from '@apollo/client';
 import './createComment.css';
-
-
 import {CREATE_COMMENT} from "../../graphql/comment";
 import { GET_POST } from '../../graphql/post';
 import { useStore } from '../../store';
-
-
-
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-
-
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles((theme) => ({
+  btn:{
+    border:"none",
+    outline:"none",
+    borderRadius:"5px",
+    padding:".2rem 1rem"
+  }
+}))
 
 /**
  * create comment component
  */
-function CreateComment({postId, comments}) {
-  const commentInputRef = useRef(null)
+function CreateComment({postId}) {
+  const commentInputRef = useRef(null);
+   const classes = useStyles();
   const [comment, setComment] = useState('');
 
-
 /* -------------------------------------------------------------------------- */
-
   const [{auth}] = useStore()
   const user = auth.user
   const variables = {
@@ -69,7 +70,7 @@ useEffect(() => {
                           ref={commentInputRef}
                           onChange={ e => setComment(e.target.value)}
                           />
-            <button disabled={!comment ? true : false}>
+            <button disabled={!comment ? true : false} className={classes.btn}  >
               {loading ? "Sending..." : data ? "Sent!" : "Send"}
             </button>
             </form>

@@ -11,8 +11,6 @@ import Comments from "../../components/Comment/comments";
 import "./item.css"
 import Accordian from "../../components/Acordion/Accordian";
 import CreateComment from "../../components/CreateCommnet/createComment";
-import {useStore} from "../../store";
-import DeleteButton from "../../components/Delete/Delete";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 import {SkeletonPost, SkeletonBar2} from "../../components/Skeleton/skeleton";
 
@@ -21,7 +19,6 @@ import {SkeletonPost, SkeletonBar2} from "../../components/Skeleton/skeleton";
 /**single Item component */
 function Item() {
  const path = useRouteMatch();
- const [{auth}] = useStore();
  const _id = path.params.id.split(':').pop();
  UsedocumentTitle("Item")
 
@@ -48,7 +45,7 @@ function Item() {
 
 
 
-const {id , author, image,likes, price,crossedPrice, title, description, features,location, comments, createdAt} = data.getPost;
+const {id , image,likes, price,crossedPrice, title, description, features,location, comments, createdAt} = data.getPost;
 const weekday = weekDay(createdAt)
 
 
@@ -76,8 +73,7 @@ const weekday = weekDay(createdAt)
         </div>
         <div className="itemBtns">
           <LikeButton likes={likes} postId={id}/>
-          { (auth.user.username === author.username) && <DeleteButton id={id}/>}
-          <button style={{opacity:"-1"}} >Comment</button>
+          {/* { (auth.user.username === author.username) && <DeleteButton id={id}/>} */}
         </div>
 
         <div className="cardTitle"> <p style={{fontWeight:"bolder"}} >Name:</p> {title}</div>
@@ -143,36 +139,3 @@ const weekday = weekDay(createdAt)
 }
 
 export default Item;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

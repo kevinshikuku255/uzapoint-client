@@ -1,14 +1,14 @@
 import React from 'react';
 import shoes from "../../Assets/netlify.jpg";
 import {useHistory} from "react-router-dom";
-import { timeAgo } from '../../Utils/date';
+import {ShareRounded}  from "@material-ui/icons";
+
 
 
 /** Search result */
 function SerchResult({post}) {
  const history = useHistory();
- const { id, title, price, image, createdAt} = post;
-
+ const { id, title, price, image} = post;
  const toPost = () =>{
     history.push(`/item/${id}`)
  }
@@ -20,7 +20,7 @@ function SerchResult({post}) {
        <div className="post_result_detais">
          <p>{`Ksh. ${price}`}</p>
        </div>
-       <p className="post_result_time">{timeAgo(createdAt)}</p>
+       <p className="post_result_time"><ShareRounded/></p>
   </div>
   <p>{title}</p>
   <hr/>

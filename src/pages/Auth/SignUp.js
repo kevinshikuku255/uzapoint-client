@@ -85,7 +85,7 @@ function SignUp() {
   const classes = useStyles();
   const [errors, setErrors] = useState("");
   const [ , dispatch] = useStore();
-  const [values, setValues] = useState( {username: '', phone: '',  password: '', confirmPassword: ''});
+  const [values, setValues] = useState( {username: '', phonenumber: '',  password: '', confirmPassword: ''});
   UsedocumentTitle("SignUp");
     const {backHome, toAppInfo} = Routes()
 
@@ -194,9 +194,9 @@ const main = (
                 />
                 <input
                 placeholder="phone"
-                name= "phone"
+                name= "phonenumber"
                 type="text"
-                value={values.phone}
+                value={values.phonenumber}
                 onChange={handleChange}
                 className={classes.signInInput}
                 />

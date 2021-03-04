@@ -17,8 +17,6 @@ const  useStyles = makeStyles((theme) => ({
 
 
 
-
-
 /**This is a post... */
 const Postcard = ({post}) => {
       const classes = useStyles();

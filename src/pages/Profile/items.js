@@ -11,10 +11,10 @@ UsedocumentTitle("Items")
   <>
   <RouteHeader tag={` ${count} items`}/>
   <div className="auth_prifile_grid">
-          { posts.length && posts.map( post =>
-            <div className="ProfileGridcard" key={post.id}>
+          { posts && posts.map( (post) =>
+            (<div className="ProfileGridcard" key={post.id}>
                 { <Postgrid  post={post} count={count}/>}
-            </div>
+            </div>)
             )}
   </div>
   </>

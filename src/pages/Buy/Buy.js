@@ -2,7 +2,7 @@ import React from 'react';
 
 import Other from "../../components/Header/otherHeader";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import PostForm from "../../components/CreateItem/CreateItem";
+import PurchaseForm from "../../components/CreateItem/CreateBuy";
 
 
 /**Sell component */
@@ -13,9 +13,9 @@ function Sell() {
 
     return (
    <>
-     <Other tag="Display an item to sell"/>
-     <div style={{marginTop:"3rem"}}>
-       <PostForm/>
+     <Other tag="Describe your choice"/>
+     <div style={{marginTop:"3rem"}} >
+       <PurchaseForm/>
      </div>
    </>
     )

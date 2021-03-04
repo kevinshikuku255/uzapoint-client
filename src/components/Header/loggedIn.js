@@ -13,7 +13,7 @@ const LoggedIn = () => {
  const history = useHistory()
  const path = history.location.pathname
  const [{auth}] = useStore();
- const {sell, backHome, search, toPrile, AboutUs, toAppInfo,settings,toProfile,toPeople} = Routes()
+ const {sell, backHome, search, toPrile,buyers, AboutUs, toAppInfo,settings,toProfile, buy,  toPeople} = Routes()
 
 
 
@@ -36,9 +36,15 @@ return(
 
         <ul className="menu">
               <li onClick={sell}> Sell</li>
+              <li onClick={buy}> Buy </li>
+              <li onClick={buyers}> Buyers </li>
+              <li onClick={toPeople}> People </li>
+
+              <br/>
               <li onClick={toProfile}> My profile</li>
               <li onClick={settings}> Edit Profile </li>
-              <li onClick={toPeople}> People </li>
+
+              <br/>
               <li onClick={AboutUs}> About Us </li>
               <li onClick={toAppInfo}> App info </li>
         </ul>

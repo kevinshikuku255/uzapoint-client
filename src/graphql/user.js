@@ -8,7 +8,7 @@ const userPayload = `
   id
   username
   fullname
-  phone
+  phonenumber
   email
   image
   imagePublicId
@@ -178,7 +178,7 @@ export const GET_USERS = gql`
         username
         location
         businessdescription
-        phone
+        phonenumber
         email
         image
         following {
@@ -232,10 +232,10 @@ export const UPLOAD_PHOTO = gql`
  * Sign up user
  */
  export const SIGN_UP =  gql `
- mutation( $username:String! $phone:String! $password:String! $confirmPassword: String!){
+ mutation( $username:String! $phonenumber:String! $password:String! $confirmPassword: String!){
       signup(
       username:$username
-      phone:$phone
+      phonenumber:$phonenumber
       password:$password
       confirmPassword:$confirmPassword
      ) {
@@ -291,7 +291,7 @@ export const REQUEST_PASSWORD_RESET = gql`
  * Verify reset password token
  */
 export const VERIFY_RESET_PASSWORD_TOKEN = gql`
-  query($phone: String!, $token: String!) {
+  query($phonenumber: String!, $token: String!) {
     verifyResetPasswordToken(phone: $phone, token: $token) {
       message
     }

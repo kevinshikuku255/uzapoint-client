@@ -54,6 +54,14 @@ export const SkeletonPost = () => {
   )
 }
 
+/* ----------------------------SkeletonPost---------------------------------------------- */
+export const SkeletonBuyersCard = ({title}) => {
+  return(
+    <p className="SkeletonPostCard">{title}</p>
+  )
+}
+
+
 
 /* ----------------------------SkeletonButtons---------------------------------------------- */
 export const SkeletonButtons = () => {

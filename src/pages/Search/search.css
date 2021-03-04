@@ -32,6 +32,7 @@ input{
   position: absolute;
   right: 0;
   margin-top: auto;
+  margin-right: 1rem;
 }
 
 p{

@@ -4,7 +4,6 @@ import {useHistory} from "react-router-dom";
 import icon from "../../Assets/icon.png";
 import "./people.css";
 
-
 import { makeStyles } from '@material-ui/core/styles';
 const  useStyles = makeStyles((theme) => ({
   large: {
@@ -14,7 +13,7 @@ const  useStyles = makeStyles((theme) => ({
 }));
 
 function Person({person}) {
- const {username, image, email, phone, location, businessdescription} = person;
+ const {username, image, email, phonenumber, location, businessdescription} = person;
  const history = useHistory();
  const classes = useStyles();
 
@@ -30,7 +29,7 @@ function Person({person}) {
          <div className="person_contact">
             <h4>{username}</h4>
             <p>{email}</p>
-            <p>{phone}</p>
+            <p>{phonenumber}</p>
          </div>
       </div>
       <div className="peron_more" >
