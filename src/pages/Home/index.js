@@ -31,7 +31,10 @@ function Home() {
           limit: HOME_PAGE_POSTS_LIMIT,
         };
 
-        const { data,loading, fetchMore } = useQuery(GET_PAGINATED_POSTS,{variables});
+        const { data,loading, fetchMore } = useQuery(GET_PAGINATED_POSTS,{
+          variables,
+          fetchPolicy:"cache-and-network"
+          });
 
         const skeleton = (
           <>
@@ -49,7 +52,6 @@ function Home() {
           return loader = (
             <div>
               <Header/>
-              <LinearProg/>
               {skeleton}
             </div>
           )
@@ -79,6 +81,7 @@ const { posts, cursor} = data.getPaginatedPosts;
                           limit: HOME_PAGE_POSTS_LIMIT
                       },
                       updateQuery:(pv,{fetchMoreResult}) => {
+                        console.log(fetchMoreResult)
                         if(!fetchMoreResult){
                           return pv
                         }

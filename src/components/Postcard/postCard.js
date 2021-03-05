@@ -15,8 +15,6 @@ const  useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
 /**This is a post... */
 const Postcard = ({post}) => {
       const classes = useStyles();
@@ -50,14 +48,16 @@ const Postcard = ({post}) => {
             </div>
         </div>
         <div className="cardMedia" onClick={toPost}>
-            {image ? <LazyLoadImage
+            {image ?
+            <LazyLoadImage
               alt="alt_tag"
               src={image}
               effect="blur"
               width="100%"
               height="50%"
-            /> : <SkeletonPost/>}
-            {/* {image ? <img height="50%" width="100%" aria-label={title} src={image}/> : <SkeletonPost/>} */}
+              placeholder={<SkeletonPost/>}
+            />
+            : <SkeletonPost/>}
         </div>
 
         <div className="itemStats">

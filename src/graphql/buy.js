@@ -1,17 +1,6 @@
 import gql from 'graphql-tag';
 
-/** Records to select from buy comments */
-export const buyCommentsPayload = `
-  comments {
-    id
-    comment
-    author {
-      id
-      username
-      image
-    }
-  }
-`;
+
 
 /** Records to select from buy author */
 export const buyAuthorPayload = `

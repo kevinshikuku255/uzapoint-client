@@ -52,17 +52,20 @@
  font-size: large;
  font-weight: bolder;
 }
-.items ul{
+.items{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.items div{
    margin: 0;
    padding: 0;
-}
- .items ul li{
-   list-style-type: none;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
    font-size: large;
-   font-weight: bolder;
-   display: inline-block;
-   margin-left: 1rem;
- }
+}
 
  a{
  cursor: pointer;
@@ -87,7 +90,7 @@ button{
 
 /* -------------------------------------------------------------------------- */
 .prifileGrid{
- margin-top: 3rem;
+ margin-top: 3.2rem;
  display: flex;
  flex-direction: column;
 }
@@ -112,8 +115,6 @@ button{
   align-items: center;
   height: 30vh;
 }
-
-
 
 
 

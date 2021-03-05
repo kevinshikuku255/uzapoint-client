@@ -14,6 +14,7 @@ const Buyers = React.lazy( () => import("./pages/Buyers/Buyers"));
 const Search = React.lazy( () => import("./pages/Search/index"));
 const Profile = React.lazy( () => import("./pages/UserInfor/profile"));
 const UserItems = React.lazy( () => import( "./pages/UserInfor/items"));
+const UserBuys = React.lazy( () => import( "./pages/UserInfor/buys"));
 const Item = React.lazy( () => import( "./pages/Item/item"));
 const BuyItem = React.lazy( () => import( "./pages/Item/buy"));
 const AuthProfileComponent = React.lazy( () => import( "./pages/Profile/AuthUserProfile"));
@@ -59,6 +60,7 @@ function App() {
 
                   <Route exact path="/:username" component={Profile}/>
                   <Route exact path="/profile/:username/items" component={UserItems}/>
+                  <Route exact path="/profile/:username/buys" component={UserBuys}/>
                   <Route exact path='/item/:id' component={Item}/>
                   <Route exact path='/buyitem/:id' component={BuyItem}/>
 

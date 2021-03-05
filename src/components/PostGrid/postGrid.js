@@ -31,6 +31,7 @@ const  Postgrid = ({post})  => {
               effect="blur"
               width="100%"
               height="50%"
+              placeholder={<SkeletonPost/>}
             /> : <SkeletonPost/>}
           </div>
         <div className="prices">

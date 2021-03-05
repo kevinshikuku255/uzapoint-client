@@ -1,15 +1,16 @@
 import React from 'react';
 import {useQuery}  from '@apollo/client';
 import RouteHeader from "../../components/Header/routeHeader";
-import { GET_USER_POSTS } from '../../graphql/user';
+import { GET_USER_BUYS } from '../../graphql/user';
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
-import Postgrid from "../../components/PostGrid/postGrid";
+import Buygrid from "../../components/PostGrid/buyGrid";
 import {useRouteMatch} from 'react-router-dom';
 import { Waypoint} from "react-waypoint";
 import {LinearProg, SkeletonPost,SkeletonBar2 } from "../../components/Skeleton/skeleton";
 
+
 /**User items */
-function UserItems() {
+function UserBuys() {
 
 const location = useRouteMatch();
 const username = location.params.username.split(':').pop()
@@ -20,7 +21,8 @@ const variables = {
 };
 
 
- const { data,loading, fetchMore} = useQuery(GET_USER_POSTS,{ variables });
+ const { data,loading, fetchMore}= useQuery(GET_USER_BUYS,{variables});
+
 
 let loader;
  if(loading){
@@ -43,15 +45,15 @@ let loader;
    )
  }
 
- const {posts, count, cursor} = data.getUserPosts;
+ const {buys, count, cursor} = data.getUserBuys;
 
 const main = (
-  <div className="prifileGrid">
-          { data && posts.map( (post, i) =>
-            <div className="ProfileGridcard" key={`${post.id}${i}`}>
-                { <Postgrid  post={post} count={count}/>}
+  <div className="prifilebuyGrid">
+          { data && buys.map( (buy, i) =>
+            <div className="ProfileGridcard" key={buy.id}>
+                { <Buygrid  buy={buy} count={count}/>}
                 {<hr/>}
-                  { data && i === posts.length - 10 &&
+                  { data && i === buys.length - 10 &&
                     <Waypoint onEnter={
                       () => fetchMore({
                         variables:{
@@ -63,11 +65,11 @@ const main = (
                           return pv
                         }
                         return {
-                          getUserPosts:{
+                          getUserBuys:{
                            __typename: "userPostConnection",
-                           posts: [ ...pv.getUserPosts.posts, ...fetchMoreResult.getUserPosts.posts ],
-                           hasMore: fetchMoreResult.getUserPosts.hasMore,
-                           cursor: fetchMoreResult.getUserPosts.cursor
+                           buys: [ ...pv.getUserBuys.buys, ...fetchMoreResult.getUserBuys.buys ],
+                           hasMore: fetchMoreResult.getUserBuys.hasMore,
+                           cursor: fetchMoreResult.getUserBuys.cursor
                           }
                         }
                       }
@@ -87,4 +89,4 @@ const main = (
  )
 }
 
-export default UserItems;
+export default UserBuys;

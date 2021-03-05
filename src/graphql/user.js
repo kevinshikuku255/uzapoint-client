@@ -98,6 +98,27 @@ export const GET_USER_POSTS = gql`
 `;
 
 /**
+ * Gets user posts
+ */
+export const GET_USER_BUYS = gql`
+  query($username: String!, $skip: Int, $limit: Int) {
+    getUserBuys(username: $username, skip: $skip, limit: $limit) {
+      count
+      buys {
+        id
+        title
+        description
+        features
+        pricerange
+        createdAt
+        ${postAuthorPayload}
+      }
+    }
+  }
+`;
+
+
+/**
  * Gets authenticated user
  */
 export const GET_AUTH_USER = gql`

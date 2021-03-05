@@ -4,12 +4,10 @@ import {useQuery}  from '@apollo/client';
 import Avatar from '@material-ui/core/Avatar';
 import {Email, PhoneAndroid, LocationOn, WhatsApp} from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-
 import RouteHeader from "../../components/Header/routeHeader";
 import  './profile.css'
 
-import {GET_USER } from '../../graphql/user';
-import CustomFooter from "../../components/Footer/customFooter"
+import {GET_USER, GET_USER_BUYS } from '../../graphql/user';
 import { weekDay } from '../../Utils/date';
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 import {SkeletonBar2, SkeletonPost} from "../../components/Skeleton/skeleton";
@@ -41,6 +39,16 @@ const  Profile = ()  => {
    }
  });
 
+ const {data:user_buys, loading:loading_buys} = useQuery(GET_USER_BUYS,{
+          variables:{
+            username:name,
+            skip:0,
+            limit:0
+          }
+ });
+
+const buys_count = !loading_buys ? user_buys.getUserBuys.count : 0
+
 /** Loading section */
       let loader;
       if(loading){
@@ -56,6 +64,7 @@ const  Profile = ()  => {
 
 const {username, fullname,location, posts, businessdescription, phonenumber, email, image, createdAt} = data.getUser;
 
+
 const avator = image ?  image : null;
 const weekday = weekDay(createdAt);
 const internationalPhone = phonenumber && `+254${phonenumber.substring(1)}`;
@@ -66,6 +75,9 @@ const internationalPhone = phonenumber && `+254${phonenumber.substring(1)}`;
     history.push(`/profile/:${username}/items`)
  }
 
+ const buysLink = () =>{
+    history.push(`/profile/:${username}/buys`)
+ }
 /* -------------------------------------------------------------------------- */
 
 
@@ -77,13 +89,14 @@ const main =
           <Avatar alt="logo" src={avator} className={classes.large}/>
           <div>
               <p>{fullname ? fullname : username}</p>
-              <p> Phone: {phonenumber}</p>
+              {phonenumber && <p>  {`phone:${phonenumber}` }</p>}
               {email && <p> Email: {email}</p>}
           </div>
      </div>
 
      <div className="profileContact" >
         <p style={{fontWeight:"bolder"}}>Contact information:</p>
+        <p>{internationalPhone}</p>
         <ul>
            <a href={`tel:${phonenumber}`} ><li> <PhoneAndroid/> <p>Direct call</p></li></a>
            <a href={`https://api.whatsapp.com/send?phone=${internationalPhone}`}> <li> <WhatsApp/> <p>WhatsApp</p></li> </a>
@@ -111,10 +124,16 @@ const main =
       </div>}
 
       <div className="items" >
-        <ul>
-            <li>Items displayed {`${posts.length}`}</li>
-            <li onClick={itemsLink}> <button>See all</button></li>
-        </ul>
+        <div>
+            <p>Selling {`${posts.length}`} items</p>
+            <p onClick={itemsLink}>
+               { !posts.length ? <button disabled >See all</button> : <button >See all</button> }
+            </p>
+        </div>
+        <div>
+            <p>Buying  {`${buys_count}`} items</p>
+            <p onClick={buysLink}> <button>See all</button></p>
+        </div>
       </div>
    </div>
 
@@ -129,7 +148,6 @@ const main =
      <main>
        {loading ? loader : main}
      </main>
-     <CustomFooter name={username}/>
   </>
 
 )

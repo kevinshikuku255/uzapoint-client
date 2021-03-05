@@ -33,19 +33,26 @@ return(
             <div>
                 <h4>Contact windoshoppe incase of;</h4>
                 <p>Questions? Need help?</p>
+                <p>Want to advertise?</p>
             </div>
           </div>
 
          <div className="call_us">
            <p>0740253367</p>
-            <div className="contact_us">
-              <a href="tel:0740253367"><PhoneAndroidIcon/></a>
-              <p>Call Me</p>
-            </div>
-            <div className="contact_us">
-              <a href="tel:0740253367"><WhatsAppIcon/> </a>
-              <p>WhatsApp</p>
-            </div>
+           <a href={`https://api.whatsapp.com/send?phone=+254740253367`}>
+              <div className="contact_us">
+                <a href="tel:0740253367"><PhoneAndroidIcon/></a>
+                <p>Call Me</p>
+              </div>
+           </a>
+
+            <a href={`https://api.whatsapp.com/send?phone=+254740253367`}>
+                <div className="contact_us">
+                  <WhatsAppIcon/>
+                  <p>WhatsApp</p>
+                </div>
+            </a>
+
          </div>
       </div>
 
