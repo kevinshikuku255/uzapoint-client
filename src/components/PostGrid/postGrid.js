@@ -2,6 +2,7 @@ import React from 'react';
 import {useHistory} from "react-router-dom";
 import {useStore} from "../../store"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Netlify from "../../Assets/netlify.jpg"
 
 import { SkeletonPost} from "../../components/Skeleton/skeleton";
 import { weekDay } from '../../Utils/date';
@@ -14,7 +15,8 @@ const  Postgrid = ({post})  => {
       const history = useHistory();
       const [{auth}] = useStore();
       const { id, image, author, crossedPrice, price, title,  createdAt} = post;
-      const weekday = weekDay(createdAt)
+      const weekday = weekDay(createdAt);
+      const Image = image || Netlify;
 
 
       const toSingleItem = () =>{
@@ -25,14 +27,14 @@ const  Postgrid = ({post})  => {
   <>
     <div className="media_wrapper">
         <div className="media" onClick={toSingleItem}>
-            {image ? <LazyLoadImage
+            <LazyLoadImage
               alt="alt_tag"
-              src={image}
+              src={Image}
               effect="blur"
               width="100%"
               height="50%"
               placeholder={<SkeletonPost/>}
-            /> : <SkeletonPost/>}
+            />
           </div>
         <div className="prices">
            <p><b>{`Ksh ${price}`}</b></p>
@@ -43,7 +45,13 @@ const  Postgrid = ({post})  => {
 
         <div className="grid_post_title">
             <p>{weekday}</p>
-            <p>{title}</p>
+            <br/>
+            { title &&
+              <>
+                <b>Name:</b>
+                <p>{title}</p>
+              </>
+            }
         </div>
     </div>
   </>

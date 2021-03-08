@@ -1,9 +1,7 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
-import {useStore} from "../../store";
 import   "./header.css";
-import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined';
-import Home from '@material-ui/icons/Home';
+import {InfoOutlined, People, SearchTwoTone, Settings, Person, ShoppingBasketOutlined} from '@material-ui/icons';
 import Routes from "../../store/routes";
 
 
@@ -12,8 +10,7 @@ import Routes from "../../store/routes";
 const LoggedIn = () => {
  const history = useHistory()
  const path = history.location.pathname
- const [{auth}] = useStore();
- const {sell, backHome, search, toPrile,buyers, AboutUs, toAppInfo,settings,toProfile, buy,  toPeople} = Routes()
+ const {sell, search,buyers, AboutUs, toAppInfo,settings,toProfile, buy,  toPeople} = Routes()
 
 
 
@@ -21,12 +18,8 @@ return(
 <>
  <div className="loggedInHeader" style={{ transform : path === "/" ? "translate(0vw)" : "translate(100vw)"} } >
     <div className="loggedInTabs">
-         { (path === "/" && auth.user) ?
-         <p onClick={toPrile} ><span  className="logo"> <AccountCircleOutlined/> </span></p> :
-         <p onClick={backHome}><span className="logo"> <Home/> </span></p>}
+         <p > <span className="logo">Windoshoppe</span></p>
 
-         <p onClick={sell} ><span className="logo">sell</span></p>
-         <p onClick={search} ><span className="logo">search</span></p>
     </div>
 
     <input className="menu_btn" type="checkbox" id="loggedIn_menu_btn"/>
@@ -35,18 +28,20 @@ return(
     </label>
 
         <ul className="menu">
-              <li onClick={sell}> Sell</li>
-              <li onClick={buy}> Buy </li>
-              <li onClick={buyers}> Buyers </li>
-              <li onClick={toPeople}> People </li>
+             {/* <div className="emptyDiv"/> */}
+              <li onClick={sell}> SELL</li>
+              <li onClick={buy}> BUY </li>
+              <li onClick={buyers}> <ShoppingBasketOutlined/> <p>Buyers</p> </li>
+              <li onClick={toPeople}> <People/> <p>People</p> </li>
+              <li onClick={search} > <SearchTwoTone/> <p>Search</p></li>
 
               <br/>
-              <li onClick={toProfile}> My profile</li>
-              <li onClick={settings}> Edit Profile </li>
+              <li onClick={toProfile}><div><Person/> <p>My profile</p> </div> </li>
+              <li onClick={settings}> <Settings/> <p>Edit Profile</p> </li>
 
               <br/>
-              <li onClick={AboutUs}> About Us </li>
-              <li onClick={toAppInfo}> App info </li>
+              <li onClick={AboutUs}> <InfoOutlined/> <p>About Us</p> </li>
+              <li onClick={toAppInfo}> <p>App info </p></li>
         </ul>
 
  </div>

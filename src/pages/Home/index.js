@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import {useQuery}  from '@apollo/client';
 import {Skeleton,LinearProg} from "../../components/Skeleton/skeleton";
 import { Waypoint} from "react-waypoint";
@@ -6,11 +6,9 @@ import { Waypoint} from "react-waypoint";
 import  "./home.css";
 import Header from "../../components/Header";
 import PostCard from "../../components/Postcard/postCard";
-
 import { GET_PAGINATED_POSTS} from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import { useAnalytics } from 'use-analytics';
 
 
 
@@ -19,21 +17,14 @@ import { useAnalytics } from 'use-analytics';
 /**Home componen */
 function Home() {
         UsedocumentTitle("Home");
-        const {track} = useAnalytics()
-
-
-      useEffect(() => {
-        console.log(track("landed to home page"))
-      },[track])
-
         const variables = {
-          after: null,
+          cursor: null,
           limit: HOME_PAGE_POSTS_LIMIT,
         };
 
         const { data,loading, fetchMore } = useQuery(GET_PAGINATED_POSTS,{
           variables,
-          fetchPolicy:"cache-and-network"
+          notifyOnNetworkStatusChange:true
           });
 
         const skeleton = (
@@ -67,28 +58,28 @@ function Home() {
           )
         }
 
-const { posts, cursor} = data.getPaginatedPosts;
+
+const { posts ,cursor } = data.getPaginatedPosts;
   const main =  posts && (
   <div className="homeContainer">
-          { posts.map( (post, i) =>
-            <div className="card" key={post.id}>
+          { posts.map( (post, i) => (
+            <div className="card"  key={post.id} >
                   { <PostCard  post={post}/>}
                   {i === posts.length - 10 &&
                     <Waypoint onEnter={
                       () => fetchMore({
                         variables:{
-                          after: cursor,
+                          cursor: cursor,
                           limit: HOME_PAGE_POSTS_LIMIT
                       },
                       updateQuery:(pv,{fetchMoreResult}) => {
-                        console.log(fetchMoreResult)
                         if(!fetchMoreResult){
                           return pv
                         }
                         return {
                           getPaginatedPosts:{
                            __typename: "PostsConnection",
-                           posts: [ ...pv.getPaginatedPosts.posts, ...fetchMoreResult.getPaginatedPosts.posts ],
+                           posts: [ pv.getPaginatedPosts.posts, ...fetchMoreResult.getPaginatedPosts.posts ],
                            hasMore: fetchMoreResult.getPaginatedPosts.hasMore,
                            cursor: fetchMoreResult.getPaginatedPosts.cursor
                           }
@@ -97,7 +88,7 @@ const { posts, cursor} = data.getPaginatedPosts;
                   })} />
                   }
             </div>
-            )}
+            ))}
   </div>
   )
 

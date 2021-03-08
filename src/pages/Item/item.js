@@ -13,6 +13,7 @@ import Accordian from "../../components/Acordion/Accordian";
 import CreateComment from "../../components/CreateCommnet/createComment";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 import {SkeletonPost, SkeletonBar2} from "../../components/Skeleton/skeleton";
+import Netlify from "../../Assets/netlify.jpg";
 
 
 
@@ -47,7 +48,7 @@ function Item() {
 
 const {id , image,likes, price,crossedPrice, title, description, features,location, comments, createdAt} = data.getPost;
 const weekday = weekDay(createdAt)
-
+const Image = image || Netlify;
 
  const itemFeatures = features && features.split("#")
  const main = (
@@ -55,15 +56,13 @@ const weekday = weekDay(createdAt)
     <div className="itemCard">
         <div className="cardMedia" >
 
-            {image ? <LazyLoadImage
+            {<LazyLoadImage
               alt="alt_tag"
-              src={image}
+              src={Image}
               effect="blur"
               width="100%"
               height="50%"
-            /> : <SkeletonPost/>}
-
-          {/* {image ? <img alt={auth.username} height="50%" width="100%" src={image}/> : <SkeletonPost/>} */}
+            />}
        </div>
 
         <div className="itemStats">

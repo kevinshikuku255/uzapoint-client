@@ -64,12 +64,11 @@ export const createApolloClient = (API_URL, websocketApiUrl) => {
              getPaginatedPosts:{
                 merge: true
              },
-             getPaginatedBuys:{
-                merge: true
-             },
              getUserPosts: {
                merge: true
-             }
+             },
+             userBuysConnection:{
+               merge:true             }
           }
         },
         UserPayload:{

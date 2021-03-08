@@ -59,8 +59,6 @@ function Buyers() {
         }
 
 const { buys, cursor} = data.getPaginatedBuys;
-console.log(data)
-console.log(buys.length -10)
   const main =  buys && (
   <div className="homeContainer">
           { buys.map( (buy, i) =>
@@ -80,7 +78,7 @@ console.log(buys.length -10)
                         return {
                           getPaginatedBuys:{
                            __typename: "BuysConnection",
-                           buys: [ ...pv.getPaginatedBuys.buys, ...fetchMoreResult.getPaginatedBuys.buys ],
+                           buys: [ ...fetchMoreResult.getPaginatedBuys.buys ],
                            hasMore: fetchMoreResult.getPaginatedBuys.hasMore,
                            cursor: fetchMoreResult.getPaginatedBuys.cursor
                           }

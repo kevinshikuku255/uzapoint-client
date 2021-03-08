@@ -126,8 +126,8 @@ export const GET_POSTS = gql`
 
 /**Gets all available posts */
 export const GET_PAGINATED_POSTS = gql`
-  query( $after: String, $limit: Int) {
-    getPaginatedPosts( after: $after, limit: $limit)
+  query( $cursor: String, $limit: Int) {
+    getPaginatedPosts( cursor: $cursor, limit: $limit)
      {
       count
       cursor

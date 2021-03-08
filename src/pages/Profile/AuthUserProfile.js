@@ -4,12 +4,13 @@ import {useQuery} from "@apollo/client";
 import { GET_USER} from "../../graphql/user";
 
 import Avatar from '@material-ui/core/Avatar';
-import { InfoOutlined, ImageOutlined } from "@material-ui/icons";
+import { InfoOutlined, ImageOutlined, AddShoppingCartSharp } from "@material-ui/icons";
 
 import Footer from "../../components/Footer/index";
 import ProfileHeader from "../../components/Header/profileHeader";
 import Info from "../windoshoppe/info";
 import Items from "./items";
+import UserBuys from "./buys"
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 import {  Skeleton } from "../../components/Skeleton/skeleton";
 
@@ -45,8 +46,9 @@ function AuthProfileComponent() {
 
 
  const { data,loading} = useQuery(GET_USER,{
-   variables:{
-     username:name
+   fetchPolicy:"cache-and-network",
+     variables:{
+       username:name
    }
  });
 
@@ -60,7 +62,7 @@ function AuthProfileComponent() {
            </>
          )
       }
- const {  username,image, email, phonenumber, fullname, businessdescription, posts} = data.getUser;
+ const {  username,image, email, phonenumber, fullname, businessdescription, posts, buys} = data.getUser;
 
  const toEditProfile = () =>{
    history.push(`/profile/${username}/editprofile`)
@@ -75,22 +77,27 @@ const main =
                   </div>
                   <div onClick={() => setTab(1)}>
                      <ImageOutlined/>
-                     <h4 style={{color: tab === 1 ? "blue" : ""}} >Items</h4>
+                     <h4 style={{color: tab === 1 ? "blue" : ""}} >sales</h4>
                   </div>
+                  { buys && <div onClick={() => setTab(2)}>
+                     <AddShoppingCartSharp/>
+                     <h4 style={{color: tab === 2 ? "blue" : ""}} >buying</h4>
+                  </div>}
 
-
-                  <div onClick={() => setTab(2)}>
+                  <div onClick={() => setTab(3)}>
                      <InfoOutlined/>
-                     <h4 style={{color: tab === 2 ? "blue" : ""}}>Help</h4>
+                     <h4 style={{color: tab === 3 ? "blue" : ""}}>Help</h4>
                   </div>
             </div>
 
        { tab === 0 &&
         <div className="profile_Infor">
-            {/* { coverImage ?  <img height="100rem" alt="cover" width="100%" src={coverImage}/> : <SkeletonPost/> } */}
             <div className="bioData">
-               <h2>{fullname}</h2>
-               <p>{username}</p> <br/>
+               { fullname && username &&
+               <>
+                <h2>{fullname}</h2>
+                <p>{username}</p><br/>
+               </>}
 
                { email && phonenumber &&
                <>
@@ -113,7 +120,8 @@ const main =
        </div>
        }
        {tab === 1 && <Items posts={posts}/>}
-       {tab === 2 && <Info/> }
+       {tab === 2 && <UserBuys buys={buys}/>}
+       {tab === 3 && <Info/> }
      </>
 
  return (

@@ -10,9 +10,9 @@ import  "./postGrid.css";
 /** This is a user post grid component */
 const  Buygrid = ({buy})  => {
       const [{auth}] = useStore();
-      const { id, author, pricerange,  title,  createdAt} = buy;
-      const weekday = weekDay(createdAt)
-
+      const { id, author, pricerange,  title,features, createdAt} = buy;
+      const weekday = weekDay(createdAt);
+      const featuresList = features?.split("#")
 
  return (
   <>
@@ -27,9 +27,20 @@ const  Buygrid = ({buy})  => {
 
         </div>
 
-        <div className="grid_post_title">
+        { pricerange &&
+         <div className="grid_post_price">
             {pricerange && <p><b>{`Ksh ${pricerange}`}</b></p>}
-        </div>
+         </div>}
+
+        {features &&
+         <div className="grid_post_price" >
+          <b>Desired feature:</b>
+          <ul>
+            {featuresList.map((f, i) => (
+              <li key={i}>{f}</li>
+            ))}
+          </ul>
+        </div>}
     </div>
   </>
  )

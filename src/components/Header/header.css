@@ -22,6 +22,7 @@
   cursor: pointer;
 }
 
+
 /* -------------------------------out------------------------------------------- */
 .loggedOutHeader ul li {
      float: left;
@@ -82,8 +83,13 @@ padding: 20px 28px;
 position: relative;
 float: right;
 cursor: pointer;
+font-size: large;
 }
-
+li p{
+  position: absolute;
+  display: inline-block;
+  margin: 2.5px 0 0 5px;
+}
 .loggedInHeader .nav_icon{
 display: block;
 background-color: black;
@@ -177,19 +183,11 @@ top:-6px;
   margin-left: 2rem;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.emptyDiv{
+  width: 100%;
+  height: 10rem;
+  background-color: red;
+}
 
 
 
@@ -205,9 +203,9 @@ top:-6px;
   }
 
   .loggedInHeader .menu{
-    background:linear-gradient(#2ceaff, red);
+    background:none;
     border-top:none;
-    color: rgb(230, 230, 230);
+    color: rgb(0, 0, 0);
     font-size: large;
     font-weight: bolder;
     padding-top: 0;

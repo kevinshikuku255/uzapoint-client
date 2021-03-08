@@ -48,12 +48,11 @@ let loader;
  const {buys, count, cursor} = data.getUserBuys;
 
 const main = (
-  <div className="prifilebuyGrid">
+  <div className="prifilebuyGrid" style={{marginTop:"3.2rem"}}>
           { data && buys.map( (buy, i) =>
             <div className="ProfileGridcard" key={buy.id}>
                 { <Buygrid  buy={buy} count={count}/>}
-                {<hr/>}
-                  { data && i === buys.length - 10 &&
+                  { i === buys.length - 10 &&
                     <Waypoint onEnter={
                       () => fetchMore({
                         variables:{

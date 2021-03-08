@@ -2,7 +2,7 @@ import {useEffect} from 'react'
 
 
 /** Custon document title */
-function UsedocumentTitle(value) {
+const UsedocumentTitle = (value) => {
   useEffect( () => {
     document.title = `Windoshoppe | ${value}`
   },[value])

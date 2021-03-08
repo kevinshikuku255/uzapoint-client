@@ -6,8 +6,6 @@ import {useMutation} from "@apollo/client"
 import {useStore } from '../../store';
 import {MAX_POST_IMAGE_SIZE } from '../../constants/ImageSize';
 import {CREATE_POST,GET_PAGINATED_POSTS} from "../../graphql/post";
-import {GET_AUTH_USER} from '../../graphql/user';
-import {HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import {CircularProgress, TextareaAutosize} from '@material-ui/core';
 import {Close} from '@material-ui/icons';
 
@@ -67,13 +65,32 @@ const values = { title, description, price ,crossedPrice, image, features, autho
       onError(err){
       setErrors(err)
     },
-    refetchQueries:[
-      { query:GET_PAGINATED_POSTS, variables:{
-          after: null,
-          limit: HOME_PAGE_POSTS_LIMIT,
-       }},
-      { query:GET_AUTH_USER}
-       ]
+    update(cache,{data}){
+      //add new data to existing data
+      const newPost = data?.createPost
+      const existingPosts = cache.readQuery({
+        query:GET_PAGINATED_POSTS,
+        variables:{
+          limit:15,
+          cursor:null
+        }
+      });
+      cache.writeQuery({
+        query:GET_PAGINATED_POSTS,
+        variables:{
+          limit:15,
+          cursor:null
+        },
+        data:{
+          getPaginatedPosts:{
+              posts:[
+                ...existingPosts?.getPaginatedPosts.posts,
+                newPost
+              ]
+          }
+        }
+      })
+    }
 });
 
 const hadleTitleChange = e => setTitle(e.target.value);

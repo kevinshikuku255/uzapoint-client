@@ -34,10 +34,30 @@ function CreateComment({postId}) {
 
   const [submitCommnet,{ loading, data}] = useMutation(CREATE_COMMENT,{
      variables,
-     refetchQueries:[
-       {query:GET_POST, variables:{
+    update(cache,{data}){
+      //add new data to existing data
+      const newComment = data?.createComment
+      const existingComments = cache.readQuery({
+        query:GET_POST,
+        variables:{
           id:postId
-    }}]
+        }
+      });
+      cache.writeQuery({
+        query:GET_POST,
+        variables:{
+          id:postId
+        },
+        data:{
+          getPost:{
+              comments:[
+                ...existingComments?.getPost.comments,
+                newComment
+          ]
+          }
+        }
+      })
+    }
   });
 
   const handleSubmit = async (e) => {

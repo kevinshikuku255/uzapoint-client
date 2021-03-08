@@ -1,21 +1,26 @@
 .media_wrapper{
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid #d8d8d8;
+  margin-top: 1rem;
+  border-top: 2px solid skyblue;
 }
 
 .prices{
   display: flex;
   justify-content: space-around;
+  margin-top: 5px;
   align-items: center;
 }
 .prices button{
   margin-left: 1rem;
 }
-.grid_post_title{
-margin:0.5rem 0 2rem 1rem;
+.grid_post_price, .grid_post_title{
+margin:0.5rem 2rem;
 }
 
+ul{
+  margin-left: 3rem;
+}
 .crossed_price{
   text-decoration:line-through;
   color:gray;

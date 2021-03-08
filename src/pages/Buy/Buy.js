@@ -7,7 +7,7 @@ import PurchaseForm from "../../components/CreateItem/CreateBuy";
 
 /**Sell component */
 function Sell() {
-        UsedocumentTitle("Sell")
+        UsedocumentTitle("Buy")
 
 
 

@@ -1,7 +1,7 @@
 import React from "react"
 import {useHistory} from "react-router-dom";
 import { timeAgo } from '../../Utils/date';
-import {SkeletonSmallAvator, SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
+import { SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
 import  "./postcard.css"
 
 
@@ -26,9 +26,8 @@ const BuyCard = ({buy}) => {
     <div className="postCard">
         <div className="A">
             <div className="B" onClick={toProfile} >
-                { <SkeletonSmallAvator name={author.username}/> }
                 <div>
-                    <h4>{author.username}</h4>
+                    <h4 style={{color:"skyblue"}} >{author.username}</h4>
                     <p> {timeAgo(createdAt)}</p>
                 </div>
             </div>

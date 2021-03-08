@@ -44,6 +44,15 @@ export const GET_USER = gql`
         ${postCommentsPayload}
         ${postLikesPayload}
       }
+      buys {
+        id
+        title
+        description
+        features
+        pricerange
+        createdAt
+        ${postAuthorPayload}
+      }
       following {
         id
         user

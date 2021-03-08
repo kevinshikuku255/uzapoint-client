@@ -39,9 +39,9 @@ return(
 
          <div className="call_us">
            <p>0740253367</p>
-           <a href={`https://api.whatsapp.com/send?phone=+254740253367`}>
+           <a href={`href="tel:0740253367"`}>
               <div className="contact_us">
-                <a href="tel:0740253367"><PhoneAndroidIcon/></a>
+                 <PhoneAndroidIcon/>
                 <p>Call Me</p>
               </div>
            </a>
@@ -106,8 +106,6 @@ return(
           <p style={{color:"deeppink"}}> Happy selling and Buying </p>
         </div>
       </div>
-
-
   </div>
 </div>
 

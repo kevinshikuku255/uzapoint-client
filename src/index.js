@@ -1,43 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from '@apollo/client';
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter} from 'react-router-dom';
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks';
 import { createApolloClient } from './Utils/apollo_client';
 import { StoreProvider } from './store';
 import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import {AuthUserProvider} from "./Utils/authUserContext";
+import { AuthUserProvider} from "./Utils/authUserContext";
 import { AnalyticsProvider } from 'use-analytics';
-import googleAnalytics from '@analytics/google-analytics'
-
-
-import Analytics from 'analytics';
-/* Initialize analytics & load plugins */
-
-/** my custom plugin */
-const myPlugin = {
-    name:"my_custon_plugin",
-    page: ({payload}) => {
-      console.log("page view fired", payload)
-    },
-    track: ({payload}) => {
-      console.log("track event", payload)
-    }
-  }
-
-const analytics = Analytics({
-  app: 'windoshoppe',
-  plugins: [
-     myPlugin,
-     googleAnalytics({
-      trackingId: '1504G-QDX26EEZTX75290',
-    })
-  ]
-})
-
-
+import { analytics} from "./Utils/GoogleAnalytics"
 
 // GraphQL HTTP URL
 const API_URL = process.env.REACT_APP_API_URL;

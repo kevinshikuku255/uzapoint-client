@@ -1,10 +1,9 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
-import   "./header.css";
-import HomeIcon from '@material-ui/icons/Home';
+import {Home} from '@material-ui/icons';
 import AddShoppingCartSharpIcon from '@material-ui/icons/AddShoppingCartSharp';
 import Routes from "../../store/routes";
-
+import   "./header.css";
 /**Logged out Header... */
 const LoggedOut = () => {
 const history = useHistory()
@@ -20,8 +19,8 @@ return(
  <div className="loggedOutHeader">
    <div className="loggedOutTab">
       { path === "/" ?
-      <p><span className="logo"> <HomeIcon/> </span></p> :
-      <p  onClick={backHome}><span className="logo"><HomeIcon/></span></p>}
+      <p><span className="logo"> <Home/> </span></p> :
+      <p  onClick={backHome}><span className="logo"><Home/></span></p>}
       {" "}
       { path === "/buyers" ?
       <p><span className="logo"> <AddShoppingCartSharpIcon/> </span></p> :
