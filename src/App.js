@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import './App.css';
 import ReactGA from 'react-ga';
-ReactGA.initialize("1504G-QDX26EEZTX75290");
+ReactGA.initialize("G-QDX26EEZTX");
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 

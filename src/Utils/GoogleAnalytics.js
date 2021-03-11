@@ -22,7 +22,7 @@ export const analytics = Analytics({
   plugins: [
      myPlugin,
      googleAnalytics({
-       trackingId: "1504G-QDX26EEZTX75290"
+       trackingId: "G-QDX26EEZTX"
     })
   ]
 })
