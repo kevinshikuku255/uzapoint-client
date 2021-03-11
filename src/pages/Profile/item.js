@@ -54,7 +54,12 @@ function AuthUserSingleItem() {
  const ID = history.location.pathname.split("/").pop();
 
 
-const {data, loading} = useQuery(GET_POST, {variables:{id:ID}});
+const {data, loading} = useQuery(GET_POST, {
+          variables:{id:ID},
+          fetchPolicy:"cache-first",
+          pollInterval:500000,
+          notifyOnNetworkStatusChange:true,
+  });
 
   let loader;
   if(loading){

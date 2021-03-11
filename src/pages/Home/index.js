@@ -24,7 +24,9 @@ function Home() {
 
         const { data,loading, fetchMore } = useQuery(GET_PAGINATED_POSTS,{
           variables,
-          notifyOnNetworkStatusChange:true
+          fetchPolicy:"cache-first",
+          pollInterval:50000000,
+          notifyOnNetworkStatusChange:true,
           });
 
         const skeleton = (

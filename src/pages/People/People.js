@@ -5,7 +5,7 @@ import RouteHeader from "../../components/Header/routeHeader";
 import {GET_USERS} from "../../graphql/user";
 import {PEOPLE_PAGE_USERS_LIMIT} from "../../constants/DataLimit";
 import Person from "./person";
-import {LinearProg, PeopleSkeleton } from "../../components/Skeleton/skeleton";
+import { PeopleSkeleton } from "../../components/Skeleton/skeleton";
 import { EmojiEmotionsSharp } from "@material-ui/icons";
 
 /** People component */
@@ -18,14 +18,18 @@ function People() {
     limit: PEOPLE_PAGE_USERS_LIMIT,
   };
 
-  const {data, loading} = useQuery(GET_USERS, {variables});
+  const {data, loading} = useQuery(GET_USERS, {
+          variables,
+          fetchPolicy:"cache-first",
+          pollInterval:500000,
+          notifyOnNetworkStatusChange:true,
+    });
 
   let loader;
   if(loading){
    return(
      loader = <div>
                 <RouteHeader tag={"People"}/>
-                <LinearProg/>
                 <div className="people_loader">
                    <PeopleSkeleton/>
                    <PeopleSkeleton/>

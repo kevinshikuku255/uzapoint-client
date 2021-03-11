@@ -25,7 +25,12 @@ function Buyers() {
           limit: HOME_PAGE_POSTS_LIMIT,
         };
 
-        const { data,loading, fetchMore } = useQuery(GET_PAGINATED_BUYS,{variables});
+        const { data,loading, fetchMore } = useQuery(GET_PAGINATED_BUYS,{
+          variables,
+          fetchPolicy:"cache-first",
+          pollInterval:500000,
+          notifyOnNetworkStatusChange:true,
+          });
         const skeleton = (
           <>
             <Skeleton/>

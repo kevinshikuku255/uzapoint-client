@@ -1,7 +1,9 @@
-import React,{useEffect} from 'react';
-import {Route, Switch, useLocation} from 'react-router-dom';
-import { useAnalytics } from 'use-analytics'
+import React from 'react';
+import {Route, Switch} from 'react-router-dom';
 import './App.css';
+import ReactGA from 'react-ga';
+ReactGA.initialize("1504G-QDX26EEZTX75290");
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 
 const SignIn  = React.lazy( () => import("./pages/Auth/SignIn"));
@@ -25,8 +27,6 @@ const People = React.lazy( () => import("./pages/People/People"));
 
 
 function App() {
- const location = useLocation();
- const {track} = useAnalytics();
  const fall_back = (
     <div className="fallback">
      <div className="header"/>
@@ -34,12 +34,7 @@ function App() {
     </div>
  )
 
-   useEffect(() => {
-      track("Navigation", {
-        location: location.pathname,
-        sender:"voke"
-      })
-   },[location, track])
+
 
 
 

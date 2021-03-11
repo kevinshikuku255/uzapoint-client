@@ -48,6 +48,7 @@
   padding: 5px;
   cursor: pointer;
   text-transform: capitalize;
+  text-shadow: 1px 1px 4px rgb(169, 40, 40);
 }
 .logo:hover{
   color: white;
