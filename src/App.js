@@ -6,7 +6,7 @@ import ReactGA from 'react-ga';
 dotenv.config();
 
 
-ReactGA.initialize( process.env.REACT_GA);
+ReactGA.initialize("G-QDX26EEZTX");
 
 
 const SignIn  = React.lazy( () => import("./pages/Auth/SignIn"));
