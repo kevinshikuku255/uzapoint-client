@@ -1,13 +1,11 @@
-import dotenv from 'dotenv';
 import React,{useEffect} from 'react';
-import {Route, Switch, withRouter} from 'react-router-dom';
+import {Route, Switch, useHistory} from 'react-router-dom';
 import './App.css';
 import ReactGA from 'react-ga';
-dotenv.config();
 
 
-ReactGA.initialize("G-TZFVVVBBZ4");
 
+ReactGA.initialize('G-TZFVVVBBZ4');
 
 const SignIn  = React.lazy( () => import("./pages/Auth/SignIn"));
 const SignUp  = React.lazy( () => import("./pages/Auth/SignUp"));
@@ -32,6 +30,7 @@ const People = React.lazy( () => import("./pages/People/People"));
 
 
 function App() {
+ const history = useHistory();
  const fall_back = (
     <div className="fallback">
      <div className="header"/>
@@ -39,9 +38,11 @@ function App() {
     </div>
  )
 
+
+console.log(history)
 useEffect( () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
-} )
+},[history] )
 
 
   return (
@@ -74,4 +75,4 @@ useEffect( () => {
   );
 }
 
-export default withRouter(App);
+export default App;
