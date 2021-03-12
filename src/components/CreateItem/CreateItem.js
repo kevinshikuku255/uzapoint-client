@@ -136,6 +136,7 @@ const form = (
  <form onSubmit={handleSubmit}>
 
    <div className="create_post_wrapper">
+   {postImagePrevew}
    {image && <p onClick={ () => setImage("") } className="close" > <Close/> </p>}
    <br/>
    <div className="post_description">
@@ -187,9 +188,9 @@ const form = (
              onChange={handleCrossedPriceChange}
              className="priceInput"
            />
-       </div>
        <div className="photo_input">
           <PostImageUpload  label="Photo"  handleChange={handlePostImageUpload}/>
+       </div>
        </div>
    </div>
 
@@ -216,13 +217,12 @@ const message = (
 )
 
   return(
-<>
-   {postImagePrevew}
+<div className="preview" >
    {loading ? loader : form}
    {errors && error}
    {!errors && warning &&  message}
 
-</>
+</div>
   )
 };
 export default PostForm;

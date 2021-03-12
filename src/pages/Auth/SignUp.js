@@ -2,11 +2,10 @@ import React, {useState} from 'react';
 import {useMutation} from '@apollo/client';
 import jwtDecode  from 'jwt-decode';
 import Avatar from '@material-ui/core/Avatar';
-import {Link} from "react-router-dom"
 import CircularProgress from  "@material-ui/core/CircularProgress";
 
 
-
+import { makeStyles } from '@material-ui/core/styles';
 import { SET_AUTH_USER } from '../../store/auth';
 import { useStore } from '../../store';
 import { SIGN_UP } from '../../graphql/user';
@@ -15,9 +14,10 @@ import Header from "../../components/Header/loggedOut";
 import Footer from "../../components/Footer";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 import Routes from "../../store/routes";
+import useGAEvents from "../../Hooks/useGAEvents"
 import './Auth.css'
 
-import { makeStyles } from '@material-ui/core/styles';
+
 
 
 
@@ -85,9 +85,10 @@ function SignUp() {
   const classes = useStyles();
   const [errors, setErrors] = useState("");
   const [ , dispatch] = useStore();
+  const GAEventTracker = useGAEvents("Click on item")
   const [values, setValues] = useState( {username: '', phonenumber: '',  password: '', confirmPassword: ''});
   UsedocumentTitle("SignUp");
-    const {backHome, toAppInfo} = Routes()
+    const {backHome, toAppInfo, AboutUs} = Routes()
 
 /** change hundler... */
   const handleChange = e => {
@@ -129,6 +130,7 @@ const dispatchAction = (token) =>{
 /**Handle form submit */
   const handleSubmit = (e) => {
        e.preventDefault();
+       GAEventTracker("Create Account", `${e.target.children[1].defaultValue} - ${e.target.children[2].defaultValue}`);
        signUpUser();
        setErrors("")
   };
@@ -220,7 +222,7 @@ const main = (
              </>
 
         </form>
-        <Link to="/aboutus"> <p className={classes.aboutUs} >About us</p> </Link>
+      <p onClick={AboutUs} className={classes.aboutUs} >About us</p>
 
       </div>
 </div>

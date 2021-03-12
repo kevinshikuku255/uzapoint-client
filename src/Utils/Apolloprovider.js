@@ -1,4 +1,4 @@
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 import React from "react"
 import {ApolloProvider} from "@apollo/client"
 import { createApolloClient } from './apollo_client';

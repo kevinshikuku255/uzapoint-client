@@ -30,7 +30,7 @@ export const timeAgo = unixTimestamp => {
   if (interval === 1) {
     return interval + ' day ago';
   }else if(interval > 1){
-    return interval + ' days ago';
+    return `${interval} days ago`;
   }
 
 

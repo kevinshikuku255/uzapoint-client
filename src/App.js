@@ -1,9 +1,12 @@
-import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import dotenv from 'dotenv';
+import React,{useEffect} from 'react';
+import {Route, Switch, withRouter} from 'react-router-dom';
 import './App.css';
 import ReactGA from 'react-ga';
-ReactGA.initialize("G-QDX26EEZTX");
-ReactGA.pageview(window.location.pathname + window.location.search);
+dotenv.config();
+
+
+ReactGA.initialize( process.env.REACT_GA);
 
 
 const SignIn  = React.lazy( () => import("./pages/Auth/SignIn"));
@@ -26,6 +29,8 @@ const AppInfo = React.lazy( () => import( "./pages/windoshoppe/appInfo"));
 const People = React.lazy( () => import("./pages/People/People"));
 
 
+
+
 function App() {
  const fall_back = (
     <div className="fallback">
@@ -34,8 +39,9 @@ function App() {
     </div>
  )
 
-
-
+useEffect( () => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+} )
 
 
   return (
@@ -68,4 +74,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);

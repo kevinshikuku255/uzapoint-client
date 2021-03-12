@@ -7,20 +7,22 @@ import  "./postcard.css"
 
 import { Share} from '@material-ui/icons';
 import NetlifyImg from "../../Assets/netlify.jpg"
+import useGaEvents from "../../Hooks/useGAEvents";
 
 /**This is a post... */
 const Postcard = ({post}) => {
       const history = useHistory();
+      const GAEventTracker = useGaEvents("Click on item")
 
        const {id , author, image,likes, price,crossedPrice, title, comments, createdAt} =  post;
        const Image = image || NetlifyImg;
-       console.log(post)
 
       const toProfile = () =>{
           history.push(`/${author.username}`)
       }
 
-      const toPost = () =>{
+      const toPost = (e) =>{
+          GAEventTracker("Item view", e.target.currentSrc)
           history.push(`/item/${id}`)
       }
 
@@ -38,6 +40,10 @@ const Postcard = ({post}) => {
               {""}
             </div>
         </div>
+        {title &&
+        <div className="itemTitle">
+          {title}
+        </div>}
         <div className="cardMedia" onClick={toPost}>
             <LazyLoadImage
               alt="alt_tag"
@@ -52,13 +58,9 @@ const Postcard = ({post}) => {
         <div className="itemStats">
           <p>{likes.length} likes</p>
           <p>{comments.length} comments</p>
-           <p onClick={toProfile}><Share/> </p>
+           <p onClick={toProfile} style={{cursor:"pointer"}} ><Share/> </p>
         </div>
 
-        <div className="itemTitle">
-          <p style={{fontWeight:"bolder"}} >Name:</p>
-          {title}
-        </div>
 
         { price &&
         <div className="itemPrice">

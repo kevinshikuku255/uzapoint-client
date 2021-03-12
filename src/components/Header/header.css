@@ -36,7 +36,7 @@
   color:rgb(255, 255, 255);
 }
 
-.logo{
+.logo, .Applogo{
   float: left;
   display: flex;
   justify-content: center;
@@ -48,7 +48,8 @@
   padding: 5px;
   cursor: pointer;
   text-transform: capitalize;
-  text-shadow: 1px 1px 4px rgb(169, 40, 40);
+  text-shadow: 1px 1px 4px #1bbbf5;
+
 }
 .logo:hover{
   color: white;
@@ -197,6 +198,18 @@ top:-6px;
 /* -------------------------------------------------------------------------- */
 @media (min-width:48em){
 
+.loggedInHeader, .othertHeader{
+  color: black;
+  position: fixed;
+  top: 0;
+  z-index: 11;
+  background-color:white;
+  width: 100vw;
+  height: 4rem;
+  transform: all .3s;
+}
+
+
   .loggedInHeader ul li {
      /* float: left; */
      margin-top: 0;
@@ -205,24 +218,13 @@ top:-6px;
 
   .loggedInHeader .menu{
     background:none;
-    border-top:none;
-    color: rgb(0, 0, 0);
-    font-size: large;
-    font-weight: bolder;
-    padding-top: 0;
-    position: relative;
-    right: 0;
-    float: right;
-    clear: none;
-    transition:unset;
-    height: 100vh;
-    display: block;
     font-stretch: extra-condensed;
-    margin: 3.1rem 12vw 0 0;
+    margin: 4rem 25vw 0 0;
     width: 15rem;
+    font-size: xx-large;
+    padding: 0 0 0 4rem;
     box-shadow: none;
-    border-right: 2px solid #00000062;
-    border-left: 2px solid #00000048;
+    border-left: 1px solid gray;
 }
   .loggedInHeader .menu_icon{
     display: none;
@@ -231,4 +233,21 @@ top:-6px;
 .loggedInTabs{
 margin-left: 5rem;
 }
+.Applogo{
+  justify-content: center;
+  font-size: xx-large;
+  margin-top: .5rem;
+  margin-left: .7rem;
+  text-shadow: 1px 1px 4px #1bbbf5;
+}
+
+ .loggedInHeader ul li{
+   margin-top: 1rem;
+   font-family: sans-serif;
+ }
+
+.logo:hover, .loggedInHeader ul li:hover{
+  color: #030bff;
+}
+
 }

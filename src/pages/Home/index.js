@@ -9,7 +9,7 @@ import PostCard from "../../components/Postcard/postCard";
 import { GET_PAGINATED_POSTS} from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-
+import CreateItem from "../../components/CreateItem/CreateItem";
 
 
 
@@ -98,8 +98,13 @@ const { posts ,cursor } = data.getPaginatedPosts;
 <>
   <Header/>
   {loading && loader}
+
   {data && !loading  && main}
   {(!loading && !data) && loader }
+
+  <div className="createItemForm" >
+    <CreateItem/>
+  </div>
 </>
  )
 }

@@ -1,55 +1,71 @@
 import {useHistory} from "react-router-dom";
 import {useStore} from "../store";
+import useGAEvents from "../Hooks/useGAEvents"
 /** Application routes */
 
 
 function Routes() {
 const history = useHistory();
  const [{auth}] = useStore();
+ const GAEventTracker = useGAEvents("Click on item")
 
 const route = {
-      backHome: () =>{
+      backHome: (e) =>{
+       GAEventTracker("Page navigation", e.target.baseURI)
        history.push('/')
     },
-     sell: () => {
+     sell: (e) => {
+     GAEventTracker("Page navigation", e.target.baseURI)
       return history.push('./sell')
    },
-    buy: () => {
+    buy: (e) => {
+      GAEventTracker("Page navigation", e.target.baseURI)
       return history.push('./buy')
    },
-    buyers: () => {
+    buyers: (e) => {
+      GAEventTracker("Page navigation", e.target.baseURI)
       return history.push('./buyers')
    },
-    search:  () =>{
+    search:  (e) =>{
+       GAEventTracker("Page navigation", e.target.baseURI)
        history.push('/search')
     },
-    AboutUs:  () =>{
+    AboutUs:  (e) =>{
+       GAEventTracker("Page navigation", e.target.baseURI)
        history.push('/aboutus')
     },
-    toPrile:  () =>{
+    toPrile:  (e) =>{
+       GAEventTracker("Page navigation", e.target.baseURI)
        history.push(`/profile/${auth.user.username}`)
     },
-    toAppInfo: () =>{
+    toAppInfo: (e) =>{
+        GAEventTracker("Page navigation", e.target.baseURI)
        history.push(`/windoshoppe`)
     },
-    settings: () =>{
+    settings: (e) =>{
+       GAEventTracker("Page navigation", e.target.baseURI)
        history.push(`/profile/${auth.user.username}/editprofile`)
     },
-    toProfile:  () =>{
+    toProfile:  (e) =>{
+        GAEventTracker("Page navigation", e.target.baseURI)
        history.push(`/profile/${auth.user.username}`)
     },
-    toPeople: () => {
+    toPeople: (e) => {
+       GAEventTracker("Page navigation", e.target.baseURI)
       history.push("/people")
    },
-   signup: () =>{
+   signup: (e) =>{
+      GAEventTracker("Page navigation", e.target.baseURI)
       history.push('/signup')
    },
-  Login: () =>{
-     history.push('/signin')
-  },
-  goBack: () => {
-     history.goBack()
-  }
+   Login: (e) =>{
+      GAEventTracker("Page navigation", e.target.baseURI)
+      history.push('/signin')
+   },
+   goBack: (e) => {
+      GAEventTracker("Page navigation", e.target.baseURI)
+      history.goBack()
+   }
  }
 
  return route

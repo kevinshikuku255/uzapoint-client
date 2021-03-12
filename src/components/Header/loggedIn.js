@@ -18,7 +18,7 @@ return(
 <>
  <div className="loggedInHeader" style={{ transform : path === "/" ? "translate(0vw)" : "translate(100vw)"} } >
     <div className="loggedInTabs">
-         <p > <span className="logo">Windoshoppe</span></p>
+         <p > <span className="Applogo">Windoshoppe</span></p>
 
     </div>
 
@@ -35,11 +35,9 @@ return(
               <li onClick={toPeople}> <People/> <p>People</p> </li>
               <li onClick={search} > <SearchTwoTone/> <p>Search</p></li>
 
-              <br/>
               <li onClick={toProfile}><div><Person/> <p>My profile</p> </div> </li>
               <li onClick={settings}> <Settings/> <p>Edit Profile</p> </li>
 
-              <br/>
               <li onClick={AboutUs}> <InfoOutlined/> <p>About Us</p> </li>
               <li onClick={toAppInfo}> <p>App info </p></li>
         </ul>

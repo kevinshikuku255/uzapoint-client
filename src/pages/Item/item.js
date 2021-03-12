@@ -9,7 +9,6 @@ import LikeButton from "../../components/Like/Like";
 import { weekDay} from '../../Utils/date';
 import Comments from "../../components/Comment/comments";
 import "./item.css"
-import Accordian from "../../components/Acordion/Accordian";
 import CreateComment from "../../components/CreateCommnet/createComment";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 import {SkeletonPost, SkeletonBar2} from "../../components/Skeleton/skeleton";
@@ -26,7 +25,8 @@ function Item() {
  const { data,loading} = useQuery(GET_POST,{
    variables:{
      id: _id
-   }
+   },
+   pollInterval:50000
  });
 
 
@@ -55,7 +55,7 @@ const Image = image || Netlify;
   <>
     <div className="itemCard">
         <div className="cardMedia" >
-
+            {title && <div className="cardTitle">  {title}</div>}
             {<LazyLoadImage
               alt="alt_tag"
               src={Image}
@@ -75,14 +75,12 @@ const Image = image || Netlify;
           {/* { (auth.user.username === author.username) && <DeleteButton id={id}/>} */}
         </div>
 
-        <div className="cardTitle"> <p style={{fontWeight:"bolder"}} >Name:</p> {title}</div>
 
         <div className="item_price">
-            <b>Price:</b>
-            <ul>
-              <li>{ price && <p>Ksh.{price}</p>}</li>
-              <li>{crossedPrice && <p>Ksh.<i>{crossedPrice}</i> </p>}</li>
-            </ul>
+            <>
+              { price && <p>Ksh.{price}</p>}
+              {crossedPrice && <p style={{color:"red"}} > was Ksh. <i>{crossedPrice}</i> </p>}
+            </>
         </div>
 
         <div className="itemlocation">
@@ -93,7 +91,7 @@ const Image = image || Netlify;
        {description &&
         <div className="itemDescription">
           <p style={{fontWeight:"bolder"}}>Item description:</p>
-          <Accordian description={description}/>
+           {description}
         </div>
        }
 

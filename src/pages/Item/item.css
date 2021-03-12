@@ -17,26 +17,24 @@
 .cardTitle{
  flex: 2rem;
  margin:0 1rem;
- padding-bottom: 1rem;
- border-bottom: 1px solid #80808020;
 }
 
 .item_price{
- margin:1rem 0 0 1rem;
+ margin:0 1rem;
 }
- .item_price ul{
-  margin-left: .5rem;
+
+.item_price ul{
+  margin-left: 3rem;
  }
+
+
 
  .item_price ul li:last-child{
-   text-decoration: line-through;
-   margin-left: 5px;
-   color: gray;
+   text-decoration-line: line-through;
+   margin-left: 2rem;
+   color: #ff0000;
  }
 
-.item_price ul li{
- list-style-type: none;
-}
 
 
 
@@ -75,42 +73,65 @@ padding: 1rem;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 /* -------------------------------------------------------------------------- */
 @media(min-width:48em){
  .itemCard{
- margin-top: 4rem;
- margin: 3.5rem 0 0 20vw;
+ margin-top: 5rem;
+ margin: 4.5rem 0 0 20vw;
  padding: 0 1rem 10px 0;
- width: 40vw;
+ width: 30rem;
  font-size: smaller;
- border-right: 1px solid black;
 }
 
-.itemCard .itemComments{
-  position: absolute;
-  top: 0;
-  /* right: 0; */
-  margin-top: 6rem;
-  margin-left: 45vw;
-  max-width: 30vw;
-  border-top:none;
+.cardMedia{
+ flex: content;
+ cursor: pointer;
+ width: 30vw;
 }
-
 
 .itemDescription, .itemlocation, .itemFeatures, .itemComments{
  padding:  .4rem;
 }
 .cardTitle{
  flex: 2rem;
- margin:0;
  padding-bottom: 0;
- border-bottom: 1px solid gray;
+ border-bottom: none;
 }
 
+.itemDescription, .itemlocation, .itemFeatures{
+ padding:  1rem;
+ border-top: none;
+}
 
 .createComment{
-  width: 100vw;
+  width: 35rem;
 }
+
+
+.itemComments{
+  position: absolute;
+  top: 0;
+  /* right: 0; */
+  margin-top: 6rem;
+  margin-left: 35rem;
+  padding-left: 2rem;
+  min-height: 100vh;
+  width: 30rem;
+  border-left: 1px solid gray;
+  border-top:none;
+}
+
 }
 
 

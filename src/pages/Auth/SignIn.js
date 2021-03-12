@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {useMutation} from '@apollo/client';
-import {Link} from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import {CircularProgress, Avatar} from  "@material-ui/core"
 import { SIGN_IN } from '../../graphql/user';
@@ -12,7 +11,7 @@ import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
 import Routes from "../../store/routes";
 import Logo from "../../Assets/icon.png";
 import jwtDecode  from 'jwt-decode';
-
+import useGAEvents from "../../Hooks/useGAEvents"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -83,8 +82,9 @@ function SignIn() {
   const [errors, setErrors] = useState('');
   const [, dispatch] = useStore();
   const classes = useStyles();
+  const GAEventTracker = useGAEvents("Click on item");
   UsedocumentTitle("SignIn");
-  const {backHome, toAppInfo} = Routes();
+  const {backHome, toAppInfo, AboutUs, signup} = Routes();
 
 
 /**submit hundler */
@@ -123,6 +123,8 @@ const dispatchAction = (token) =>{
 
   const handleSubmit = (e) => {
       e.preventDefault();
+      console.log(e.target.children[1].defaultValue)
+      GAEventTracker("signIn", e.target.children[1].defaultValue);
       signInUser();
       setErrors('');
   };
@@ -199,9 +201,11 @@ const main = (
 
 
         </form>
-        <p style={{textAlign:"center"}}>Dont have an accout yet? <Link to="/signup" className="Link" > Create</Link></p> <br/>
+        <p style={{textAlign:"center"}}>
+                Dont have an accout yet? <i className="Link" onClick={signup} > Create</i>
+        </p> <br/>
 
-        <Link to="/aboutus"> <p className={classes.aboutUs} >About us</p> </Link>
+       <p onClick={AboutUs} className={classes.aboutUs} >About us</p>
       </div>
 
 </div>

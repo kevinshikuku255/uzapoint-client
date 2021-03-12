@@ -37,10 +37,14 @@
  cursor: pointer;
 }
 
-.itemTitle, .itemPrice,  .itemDescription{
+.itemPrice,  .itemDescription{
   margin: 0 1rem 0.5rem 1rem;
 }
 
+.itemTitle{
+   margin-left: 2rem;
+   color: rgb(0, 30, 255);
+}
 
 .itemPrice .priceInfo{
   display: flex;
@@ -78,17 +82,39 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ------------------------------Media Queries-------------------------------------------- */
 @media(min-width:48em){
 
 .postCard{
- display: flex;
- flex-wrap: nowrap;
- padding: 1rem 1rem;
- font-size: small;
+ margin: 2rem 0 0 0;
+ padding: 0  0 1rem 0;
+ font-size: xx-small;
  flex-direction: column;
- border: 2px solid rgb(202, 202, 202);
- border-radius: 10px;
+ border-bottom: 2px solid blue;
+ border-radius:none;
 }
 
 .cardAcations{
@@ -98,8 +124,21 @@
   margin: 0 5px;
   padding: .5rem 0;
 }
-.itemTitle, .itemPrice{
-  margin: .5rem .5rem .5rem .5rem;
+.itemPrice{
+  margin: 0 0 0 4rem;
 }
+
+.itemTitle{
+   margin-left: 4rem;
+   color: rgb(0, 30, 255);
+}
+
+.cardMedia{
+ flex: content;
+ width: 30rem;
+ cursor: pointer;
+}
+
+
 
 }

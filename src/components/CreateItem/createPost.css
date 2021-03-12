@@ -87,3 +87,53 @@
   border-radius: 20px;
   border: 2px solid gray;
 }
+
+
+
+
+
+
+
+
+
+
+@media(min-width:48em){
+
+.create_post_wrapper{
+  width: 30vw;
+  padding: 0;
+  margin: 0;
+}
+
+.image_preview{
+  width: 20rem;
+  margin-top: 3.3rem;
+}
+
+.description, .title, .priceInput{
+ resize: none;
+ text-align: start;
+ flex-grow: inherit;
+ font-size: larger;
+ font-family: sans-serif;
+ width: 100%;
+ margin-top: 1rem;
+ border-bottom: 1px solid #0000ff48;
+}
+
+.post_description{
+ display: flex;
+ flex-direction: column;
+ width: 27vw;
+ margin: auto;
+}
+
+
+.displayBtn button{
+  background: none;
+  padding:0.4rem 1rem;
+  border-radius: 20px;
+  border: 2px solid gray;
+}
+
+}

@@ -58,6 +58,13 @@ width: 80vw;
   margin-top: 3rem;
 }
 
+.Link{
+  cursor: pointer;
+  color:blue;
+  font-size: larger;
+  font-weight: bolder;
+}
+
 .loader h5{
  color:rgb(13, 255, 0);
  font-weight: bolder;
