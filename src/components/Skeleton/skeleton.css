@@ -54,12 +54,13 @@
 }
 
 .skeleton-small-avator{
- width: 4rem;
- height: 4rem;
+ width: 3rem;
+ height: 3rem;
  border-radius: 50%;
  background-color: rgba(0, 0, 255, 0.679);
  color: white;
  display: flex;
+ font-size: x-small;
  justify-content: center;
  align-items: center;
 }
@@ -174,13 +175,11 @@
 }
 
 .SkeletonPostCard{
-  height: 15rem;
-  background-color: rgba(0, 255, 255, 0.33);
+  height: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: medium;
   font-family: sans-serif;
+  border-top: 1px solid #80808021;
   padding: 0 .4rem 0 1.4rem;
 }
 

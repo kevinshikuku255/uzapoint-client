@@ -1,23 +1,24 @@
 .postCard{
  display: flex;
  flex-wrap: nowrap;
- padding: 1rem 0;
+ padding-top: 1rem;
  flex-direction: column;
- border-bottom: 2px solid rgba(0, 0, 0, 0.282);
- margin-bottom: .5rem;
+ border-bottom: 1px solid rgba(0, 0, 0, 0.282);
  margin-top: .3rem;
 }
 /* -------------------------------------------------------------------------- */
 
 .B{
   display: flex;
+  /* justify-content: center; */
   align-items: center;
-  padding: 0  0 .5rem 1rem;
+  flex-direction: row;
+  margin: 0  0 0 1rem;
 }
 
 .B h4{
   text-transform: capitalize;
-  padding-left: .5rem;
+  font-size: larger;
 }
 .B p{
   font-size: smaller;
@@ -25,11 +26,20 @@
   padding-left: .5rem;
 }
 
+.itemTitle{
+   margin-left: 1rem;
+   color: rgb(0, 30, 255);
+}
+
+
 .cardAcations {
  margin-left: auto;
  padding: 0 2rem;
 
 }
+
+
+
 
 /* -------------------------------------------------------------------------- */
 .cardMedia{
@@ -41,10 +51,6 @@
   margin: 0 1rem 0.5rem 1rem;
 }
 
-.itemTitle{
-   margin-left: 2rem;
-   color: rgb(0, 30, 255);
-}
 
 .itemPrice .priceInfo{
   display: flex;
@@ -80,10 +86,14 @@
   box-shadow: 1px 1px 4px  black;
 }
 
+.buyer_avator{
+  display: flex;
+  margin: 0 0 .2rem .5rem;
+}
 
-
-
-
+.buyer_avator p{
+  margin-top: auto;
+}
 
 
 

@@ -2,10 +2,10 @@ import React,{useState} from 'react';
 import  "./createPost.css";
 import PostImageUpload from "./PostImageUpload";
 
-import {useMutation} from "@apollo/client"
+import {useMutation } from "@apollo/client"
 import {useStore } from '../../store';
 import {MAX_POST_IMAGE_SIZE } from '../../constants/ImageSize';
-import {CREATE_POST,GET_PAGINATED_POSTS} from "../../graphql/post";
+import {CREATE_POST, GET_PAGINATED_POSTS} from "../../graphql/post";
 import {CircularProgress, TextareaAutosize} from '@material-ui/core';
 import {Close} from '@material-ui/icons';
 
@@ -27,7 +27,6 @@ function PostForm(){
   const [warning, setWarning] = useState('');
 
 
-
    const handleReset = () => {
     setTitle('');
     setImage('');
@@ -45,7 +44,7 @@ function PostForm(){
         const file = e.target.files[0];
         if (!file) return;
         if (file.size >= MAX_POST_IMAGE_SIZE) {
-            throw new Error( `File size should be less then ${MAX_POST_IMAGE_SIZE / 3000000}MB`)
+            throw new Error( `File size should be less then ${MAX_POST_IMAGE_SIZE / 3000000}Mb`)
         }
       previewFile(file)
   };
@@ -58,11 +57,15 @@ const previewFile = (file) => {
       }
 }
 
+
+
+
 const values = { title, description, price ,crossedPrice, image, features, authorId: auth.user.id}
 
  const [createPost, { loading }] = useMutation(CREATE_POST,{
     variables: values,
       onError(err){
+        console.log(err)
       setErrors(err)
     },
     update(cache,{data}){

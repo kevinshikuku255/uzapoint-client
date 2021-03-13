@@ -1,10 +1,11 @@
 import React from 'react';
 import {useQuery}  from '@apollo/client';
-import {Skeleton,LinearProg} from "../../components/Skeleton/skeleton";
+import {Skeleton} from "../../components/Skeleton/skeleton";
 import { Waypoint} from "react-waypoint";
 
 import  "./buyers.css";
 import RouteHeader from "../../components/Header/routeHeader";
+import Header from "../../components/Header";
 import Buycard from "../../components/Postcard/buyCard";
 
 import { GET_PAGINATED_BUYS} from "../../graphql/buy";
@@ -27,7 +28,7 @@ function Buyers() {
 
         const { data,loading, fetchMore } = useQuery(GET_PAGINATED_BUYS,{
           variables,
-          fetchPolicy:"cache-first",
+          fetchPolicy:"cache-and-network",
           pollInterval:500000,
           notifyOnNetworkStatusChange:true,
           });
@@ -43,21 +44,10 @@ function Buyers() {
         )
 
         let loader;
-        if(loading){
+        if(!data || loading ){
           return loader = (
             <div>
               <RouteHeader/>
-              <LinearProg/>
-              {skeleton}
-            </div>
-          )
-        }
-
-        if(!loading && !data){
-          return loader = (
-            <div>
-              <RouteHeader/>
-              <LinearProg/>
               {skeleton}
             </div>
           )
@@ -98,7 +88,7 @@ const { buys, cursor} = data.getPaginatedBuys;
 
  return (
 <>
-  <RouteHeader tag={"People want to buy"}/>
+  <Header/>
   {loading && loader}
   {data && !loading  && main}
   {(!loading && !data) && loader }

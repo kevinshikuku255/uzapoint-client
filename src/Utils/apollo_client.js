@@ -59,27 +59,19 @@ export const createApolloClient = (API_URL, websocketApiUrl) => {
     {
 /* -------------------------------type policies------------------------------------------- */
     typePolicies: {
-        Query: {
-          fields: {
-             getPaginatedPosts:{
-                merge: true
-             },
-             getUserPosts: {
-               merge: true
-             },
-             userBuysConnection:{
-               merge:true             }
-          }
-        },
-        UserPayload:{
-          keyFields:["id"]
-        },
-       PostPayload:{
-          keyFields:["id"]
-      },
-       CommentPayload:{
-          keyFields:["id"]
-      }
+        PostsPayload:{
+              keyFields: false,
+              fields:{
+                cache_posts: {
+                      read: (_, {readField}) => {
+                        const cachePosts = readField("posts");
+                        const vvv = () => (cachePosts)
+                        return vvv
+
+                    }
+                },
+              }
+        }
     }
   }
 /* -------------------------------------------------------------------------- */

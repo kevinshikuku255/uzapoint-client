@@ -104,11 +104,11 @@ export const GET_POSTS = gql`
   query( $skip: Int, $limit: Int) {
     getPosts( skip: $skip, limit: $limit)
      {
-      count
+      cache_posts @client
       posts {
         id
         title
-        description
+        description 
         features
         price
         location
@@ -172,6 +172,34 @@ export const GET_POST = gql`
     }
   }
 `;
+
+
+
+/**
+ * Gets user's specific post in real time
+ */
+export const GET_ITEMS_SUBSCRIPTION = gql`
+  subscription {
+    newPost {
+        id
+        title
+        description
+        features
+        location
+        price
+        crossedPrice
+        image
+        imagePublicId
+        createdAt
+    }
+  }
+`;
+
+
+
+
+
+
 
 
 /**

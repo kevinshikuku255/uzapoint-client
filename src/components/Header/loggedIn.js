@@ -1,7 +1,8 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
 import   "./header.css";
-import {InfoOutlined, People, SearchTwoTone, Settings, Person, ShoppingBasketOutlined} from '@material-ui/icons';
+import AddShoppingCartSharpIcon from '@material-ui/icons/AddShoppingCartSharp';
+import {InfoOutlined, People, SearchTwoTone, Settings, Person, Home, ShoppingBasketOutlined} from '@material-ui/icons';
 import Routes from "../../store/routes";
 
 
@@ -10,15 +11,20 @@ import Routes from "../../store/routes";
 const LoggedIn = () => {
  const history = useHistory()
  const path = history.location.pathname
- const {sell, search,buyers, AboutUs, toAppInfo,settings,toProfile, buy,  toPeople} = Routes()
+ const {sell, search,buyers, AboutUs, toAppInfo,settings,toProfile, buy, backHome, toPeople} = Routes()
 
 
 
 return(
 <>
- <div className="loggedInHeader" style={{ transform : path === "/" ? "translate(0vw)" : "translate(100vw)"} } >
+ <div className="loggedInHeader">
     <div className="loggedInTabs">
-         <p > <span className="Applogo">Windoshoppe</span></p>
+         { path === "/" ?
+             <p> <span className="Applogo" style={{color:"gray"}} ><Home fontSize="large" /></span> </p> :
+              <p> <span className="Applogo" onClick={backHome} > <Home fontSize="large" /></span></p>}
+
+         { path === "/buyers" ?
+           <p><span className="Applogo" style={{color:"gray"}} > <AddShoppingCartSharpIcon fontSize="large" /> </span></p> : <p> <span className="Applogo"  onClick={buyers}><AddShoppingCartSharpIcon fontSize="large" /></span></p>}
 
     </div>
 
@@ -28,7 +34,7 @@ return(
     </label>
 
         <ul className="menu">
-             {/* <div className="emptyDiv"/> */}
+
               <li onClick={sell}> SELL</li>
               <li onClick={buy}> BUY </li>
               <li onClick={buyers}> <ShoppingBasketOutlined/> <p>Buyers</p> </li>
@@ -40,6 +46,7 @@ return(
 
               <li onClick={AboutUs}> <InfoOutlined/> <p>About Us</p> </li>
               <li onClick={toAppInfo}> <p>App info </p></li>
+              <div className="emptyDiv"> &copy; windoshoppe 2021 </div>
         </ul>
 
  </div>

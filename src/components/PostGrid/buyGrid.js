@@ -17,19 +17,24 @@ const  Buygrid = ({buy})  => {
  return (
   <>
     <div className="media_wrapper">
+        <div className="buy_avator" >
+          <h6>{`@${author.username}`}</h6>
+          <p>{weekday}</p>
+        </div>
         <div className="media">
             {<SkeletonBuyersCard title={title}/>}
-          </div>
+        </div>
         <div className="prices">
 
-           <p>{weekday}</p>
+
            {(auth.user.username ===  author.username) && <DeleteButton id={id}/>}
 
         </div>
 
         { pricerange &&
          <div className="grid_post_price">
-            {pricerange && <p><b>{`Ksh ${pricerange}`}</b></p>}
+            <b>Price-range</b>
+            {pricerange && <p style={{color:"blue"}} >{`Ksh ${pricerange}`}</p>}
          </div>}
 
         {features &&

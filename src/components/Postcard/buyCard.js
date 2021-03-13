@@ -1,7 +1,7 @@
 import React from "react"
 import {useHistory} from "react-router-dom";
 import { timeAgo } from '../../Utils/date';
-import { SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
+import { SkeletonBuyersCard, SkeletonSmallAvator} from "../../components/Skeleton/skeleton";
 import  "./postcard.css"
 
 
@@ -10,38 +10,26 @@ import  "./postcard.css"
 const BuyCard = ({buy}) => {
       const history = useHistory();
 
-       const {id , author, pricerange, title,  description, createdAt} =  buy;
-
+       const {author, pricerange, title,  description, features, createdAt} =  buy;
+       const featuresList = features?.split("#")
 
       const toProfile = () =>{
           history.push(`/${author.username}`)
       }
 
-      const toPost = () =>{
-          history.push(`/buyitem/${id}`)
-      }
-
    return(
   <>
     <div className="postCard">
-        <div className="A">
-            <div className="B" onClick={toProfile} >
-                <div>
-                    <h4 style={{color:"skyblue"}} >{author.username}</h4>
-                    <p> {timeAgo(createdAt)}</p>
-                </div>
-            </div>
-            <div className="actionBtn">
-              {""}
-            </div>
+        <div className="buyer_avator"  onClick={toProfile} >
+          <SkeletonSmallAvator name={author.username} />
+          <p> {timeAgo(createdAt)}</p>
         </div>
-        <div className="cardMedia" onClick={toPost}>
+        <div className="cardMedia" >
             {<SkeletonBuyersCard title={title}/>}
         </div>
-
         { pricerange &&
         <div className="itemPrice">
-          <p style={{fontWeight:"bolder"}} >Price:</p>
+          <p style={{fontWeight:"bolder"}} >price-range:</p>
           <div className="priceInfo">
             { pricerange && <h4 style={{color:"blue"}} >Ksh {pricerange}</h4>}
           </div>
@@ -55,7 +43,16 @@ const BuyCard = ({buy}) => {
             </>
           }
         </div>
-        <br/>
+
+        {features &&
+         <div className="grid_post_price" >
+          <b>Desired feature:</b>
+          <ul>
+            {featuresList.map((f, i) => (
+              <li key={i}>{f}</li>
+            ))}
+          </ul>
+        </div>}
 
     </div>
   </>

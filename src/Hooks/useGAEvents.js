@@ -1,5 +1,6 @@
 import ReactGA from "react-ga";
 
+ReactGA.initialize('G-TZFVVVBBZ4');
 
 /** Google analytics events tracker */
 const useGaEvents = ( category = "Event category") => {

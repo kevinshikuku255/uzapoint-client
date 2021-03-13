@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import { timeAgo } from '../../Utils/date';
 import { SkeletonPost} from "../../components/Skeleton/skeleton";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
 import  "./postcard.css"
 
 import { Share} from '@material-ui/icons';
@@ -14,7 +15,7 @@ const Postcard = ({post}) => {
       const history = useHistory();
       const GAEventTracker = useGaEvents("Click on item")
 
-       const {id , author, image,likes, price,crossedPrice, title, comments, createdAt} =  post;
+       const {id , author, image, likes, price,crossedPrice, title, comments, createdAt} =  post ;
        const Image = image || NetlifyImg;
 
       const toProfile = () =>{
@@ -29,30 +30,23 @@ const Postcard = ({post}) => {
    return(
   <>
     <div className="postCard">
-        <div className="A">
             <div className="B" onClick={toProfile} >
-                <div>
                     <h4 style={{color:"skyblue"}} >{author.username}</h4>
                     <p> {timeAgo(createdAt)}</p>
-                </div>
             </div>
-            <div className="actionBtn">
-              {""}
-            </div>
-        </div>
         {title &&
         <div className="itemTitle">
           {title}
         </div>}
         <div className="cardMedia" onClick={toPost}>
-            <LazyLoadImage
+            {<LazyLoadImage
               alt="alt_tag"
               src={Image}
               effect="blur"
               width="100%"
               height="50%"
               placeholder={<SkeletonPost/>}
-            />
+            />  ||  <SkeletonBuyersCard title={title} />}
         </div>
 
         <div className="itemStats">

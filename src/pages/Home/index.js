@@ -1,7 +1,8 @@
 import React from 'react';
 import {useQuery}  from '@apollo/client';
-import {Skeleton,LinearProg} from "../../components/Skeleton/skeleton";
+import {Skeleton} from "../../components/Skeleton/skeleton";
 import { Waypoint} from "react-waypoint";
+import { useStore } from '../../store';
 
 import  "./home.css";
 import Header from "../../components/Header";
@@ -17,6 +18,7 @@ import CreateItem from "../../components/CreateItem/CreateItem";
 /**Home componen */
 function Home() {
         UsedocumentTitle("Home");
+         const [{auth}] = useStore();
         const variables = {
           cursor: null,
           limit: HOME_PAGE_POSTS_LIMIT,
@@ -24,7 +26,7 @@ function Home() {
 
         const { data,loading, fetchMore } = useQuery(GET_PAGINATED_POSTS,{
           variables,
-          fetchPolicy:"cache-first",
+          fetchPolicy:"cache-and-network",
           pollInterval:50000000,
           notifyOnNetworkStatusChange:true,
           });
@@ -41,7 +43,7 @@ function Home() {
         )
 
         let loader;
-        if(loading){
+        if(loading || !data){
           return loader = (
             <div>
               <Header/>
@@ -50,24 +52,13 @@ function Home() {
           )
         }
 
-        if(!loading && !data){
-          return loader = (
-            <div>
-              <Header/>
-              <LinearProg/>
-              {skeleton}
-            </div>
-          )
-        }
-
-
-const { posts ,cursor } = data.getPaginatedPosts;
+const { posts ,cursor , hasMore } = data.getPaginatedPosts;
   const main =  posts && (
   <div className="homeContainer">
           { posts.map( (post, i) => (
             <div className="card"  key={post.id} >
                   { <PostCard  post={post}/>}
-                  {i === posts.length - 10 &&
+                  { hasMore && i === posts.length - 10 &&
                     <Waypoint onEnter={
                       () => fetchMore({
                         variables:{
@@ -81,7 +72,7 @@ const { posts ,cursor } = data.getPaginatedPosts;
                         return {
                           getPaginatedPosts:{
                            __typename: "PostsConnection",
-                           posts: [ pv.getPaginatedPosts.posts, ...fetchMoreResult.getPaginatedPosts.posts ],
+                           posts: [ ...pv.getPaginatedPosts.posts, ...fetchMoreResult.getPaginatedPosts.posts ],
                            hasMore: fetchMoreResult.getPaginatedPosts.hasMore,
                            cursor: fetchMoreResult.getPaginatedPosts.cursor
                           }
@@ -102,9 +93,10 @@ const { posts ,cursor } = data.getPaginatedPosts;
   {data && !loading  && main}
   {(!loading && !data) && loader }
 
+  {auth.user &&
   <div className="createItemForm" >
     <CreateItem/>
-  </div>
+  </div>}
 </>
  )
 }

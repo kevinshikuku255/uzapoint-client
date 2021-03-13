@@ -20,8 +20,8 @@ export const Skeleton = () => {
           <div className="skeleton-media">Windoshoppe</div>
            <div className="skeleton-action">
                 <p className="skeleton-button"/>
-                <p className="skeleton-button1"/>
-                <p className="skeleton-button2"/>
+                {/* <p className="skeleton-button1"/>
+                <p className="skeleton-button2"/> */}
            </div>
        </div>
     </div>
@@ -68,8 +68,8 @@ export const SkeletonButtons = () => {
   return(
     <div className="SkeletonButtons">
       <p className="SkeletonButton"/>
-      <p className="SkeletonButton"/>
-      <p className="SkeletonButton"/>
+      {/* <p className="SkeletonButton"/>
+      <p className="SkeletonButton"/> */}
     </div>
   )
 }
@@ -94,8 +94,6 @@ export const SkeletonBar2 = () => {
   return(
    <div>
       <p className="SkeletonBar1"/>
-      <p className="SkeletonBar2"/>
-      <p className="SkeletonBar3"/>
    </div>
   )
 }

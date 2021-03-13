@@ -11,7 +11,6 @@ const history = useHistory();
 
 const route = {
       backHome: (e) =>{
-       GAEventTracker("Page navigation", e.target.baseURI)
        history.push('/')
     },
      sell: (e) => {
