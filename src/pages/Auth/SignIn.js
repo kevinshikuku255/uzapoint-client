@@ -123,6 +123,10 @@ const dispatchAction = (token) =>{
 
   const handleSubmit = (e) => {
       e.preventDefault();
+<<<<<<< HEAD
+=======
+      GAEventTracker("signIn", e.target.children[0].defaultValue);
+>>>>>>> a094eb3362ebeba84448d28f95f54f24d6456120
       signInUser();
       setErrors('');
       GAEventTracker("signIn", e.target.children[0].defaultValue);
