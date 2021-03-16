@@ -1,7 +1,7 @@
 import React from "react"
 import {useHistory} from "react-router-dom";
 import { timeAgo } from '../../Utils/date';
-import { SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
+// import { SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
 import NetlifyImg from "../../Assets/netlify.jpg"
 import useGaEvents from "../../Hooks/useGAEvents";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -35,7 +35,7 @@ const Postcard = ({post}) => {
                     <p> {timeAgo(createdAt)}</p>
             </div>
         <div className="cardMedia" onClick={toPost}>
-            { image ?  <LazyLoadImage
+            { <LazyLoadImage
               alt="alt_tag"
               src={image}
               effect="blur"
@@ -43,7 +43,7 @@ const Postcard = ({post}) => {
               height="50%"
               placeholder={NetlifyImg}
               />
-               : <SkeletonBuyersCard title={title} />}
+               }
         </div>
         {title && image &&
         <div className="itemTitle">
