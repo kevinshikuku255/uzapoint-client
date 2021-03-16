@@ -27,7 +27,6 @@ function Home() {
         const { data,loading, fetchMore } = useQuery(GET_PAGINATED_POSTS,{
           variables,
           fetchPolicy:"cache-and-network",
-          pollInterval:50000,
           notifyOnNetworkStatusChange:true,
           });
 
