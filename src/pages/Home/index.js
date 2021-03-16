@@ -4,15 +4,13 @@ import {Skeleton} from "../../components/Skeleton/skeleton";
 import { Waypoint} from "react-waypoint";
 import { useStore } from '../../store';
 
-import  "./home.css";
 import Header from "../../components/Header";
 import PostCard from "../../components/Postcard/postCard";
 import { GET_PAGINATED_POSTS} from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import CreateItem from "../../components/CreateItem/CreateItem";
-
-
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
+import {CreateItem} from "../../components/CreateItem/CreateItem";
+import  "./home.css";
 
 
 /**Home componen */

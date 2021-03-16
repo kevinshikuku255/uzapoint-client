@@ -11,7 +11,7 @@ import ProfileHeader from "../../components/Header/profileHeader";
 import Info from "../windoshoppe/info";
 import Items from "./items";
 import UserBuys from "./buys"
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {  Skeleton } from "../../components/Skeleton/skeleton";
 
 

@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Other from "../../components/Header/otherHeader";
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import PostForm from "../../components/CreateItem/CreateItem";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
+import {CreateItem} from "../../components/CreateItem/CreateItem";
 
 
 /**Sell component */
@@ -15,7 +15,7 @@ function Sell() {
    <>
      <Other tag="Display an item to sell"/>
      <div style={{marginTop:"3rem"}}>
-       <PostForm/>
+       <CreateItem/>
      </div>
    </>
     )

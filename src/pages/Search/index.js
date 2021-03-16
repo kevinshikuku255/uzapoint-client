@@ -6,7 +6,7 @@ import EmojiEmotionsOutlined from "@material-ui/icons/EmojiEmotionsOutlined"
 import OtherHeader from "../../components/Header/otherHeader";
 import { SEARCH_POSTS } from "../../graphql/post";
 import  SerchResult from "./searchResult";
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import CircularProgress from  "@material-ui/core/CircularProgress"
 import "./search.css"
 

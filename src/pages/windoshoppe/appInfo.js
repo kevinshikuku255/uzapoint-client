@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowBack} from '@material-ui/icons';
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import Routes from "../../store/routes";
 import './about.css';
 

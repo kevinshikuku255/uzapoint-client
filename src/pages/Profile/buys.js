@@ -1,7 +1,7 @@
 import React from 'react';
 import RouteHeader from "../../components/Header/routeHeader";
 import Buygrid from "../../components/PostGrid/buyGrid";
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 
 
 /**AuthUser buys */

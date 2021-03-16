@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 /**
  * create comment component
  */
-function CreateComment({postId}) {
+export const CreateComment = ({postId}) => {
   const commentInputRef = useRef(null);
    const classes = useStyles();
   const [comment, setComment] = useState('');
@@ -100,4 +100,4 @@ useEffect(() => {
  )
 }
 
-export default CreateComment;
+

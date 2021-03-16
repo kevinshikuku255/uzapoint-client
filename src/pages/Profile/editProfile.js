@@ -10,7 +10,7 @@ import { Skeleton} from "../../components/Skeleton/skeleton";
 import RouteHeader from "../../components/Header/routeHeader";
 import {EDIT_USER_PROFILE, GET_AUTH_USER, GET_USER  }from "../../graphql/user";
 import { SET_AUTH_USER} from '../../store/auth';
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useStore } from '../../store';

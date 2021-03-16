@@ -7,7 +7,7 @@ import { useStore } from '../../store';
 import { SET_AUTH_USER } from '../../store/auth';
 import Header from "../../components/Header/loggedOut";
 import Footer from "../../components/Footer";
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import Routes from "../../store/routes";
 import Logo from "../../Assets/icon.png";
 import jwtDecode  from 'jwt-decode';

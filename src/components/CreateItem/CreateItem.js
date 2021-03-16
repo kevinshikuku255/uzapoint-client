@@ -13,9 +13,9 @@ import {Close} from '@material-ui/icons';
 
 
 /**
- * create post component
+ * create item component
  */
-function PostForm(){
+export const  CreateItem = () => {
   const [{ auth }] = useStore();
   const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
@@ -228,4 +228,3 @@ const message = (
 </div>
   )
 };
-export default PostForm;

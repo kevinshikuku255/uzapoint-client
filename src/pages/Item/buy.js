@@ -6,7 +6,7 @@ import {GET_BUY } from '../../graphql/buy';
 import RouteHeader from "../../components/Header/routeHeader";
 import { weekDay} from '../../Utils/date';
 import "./item.css"
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {SkeletonPost, SkeletonBar2, SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
 
 

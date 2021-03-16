@@ -9,10 +9,10 @@ import LikeButton from "../../components/Like/Like";
 import { weekDay} from '../../Utils/date';
 import Comments from "../../components/Comment/comments";
 import "./item.css"
-import CreateComment from "../../components/CreateCommnet/createComment";
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {CreateComment} from "../../components/CreateCommnet/createComment";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {SkeletonPost, SkeletonBar2, SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
-import Netlify from "../../Assets/netlify.jpg";
+import NetlifyImg from "../../Assets/netlify.jpg";
 
 
 
@@ -62,7 +62,7 @@ const weekday = weekDay(createdAt)
               effect="blur"
               width="100%"
               height="50%"
-              placeholder={Netlify}
+              placeholder={NetlifyImg}
             /> : <SkeletonBuyersCard title={title}/> }
        </div>
 

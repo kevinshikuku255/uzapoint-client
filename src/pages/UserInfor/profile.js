@@ -9,7 +9,7 @@ import  './profile.css'
 
 import {GET_USER, GET_USER_BUYS } from '../../graphql/user';
 import { weekDay } from '../../Utils/date';
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {SkeletonBar2, SkeletonPost} from "../../components/Skeleton/skeleton";
 
 const  useStyles = makeStyles((theme) => ({

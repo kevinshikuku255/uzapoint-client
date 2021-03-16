@@ -1,12 +1,14 @@
 import React from "react"
 import {useHistory} from "react-router-dom";
 import { timeAgo } from '../../Utils/date';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
-import  "./postcard.css"
-
 import NetlifyImg from "../../Assets/netlify.jpg"
 import useGaEvents from "../../Hooks/useGAEvents";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import  "./postcard.css"
+
+
+
 
 /**This is a post... */
 const Postcard = ({post}) => {
@@ -47,14 +49,6 @@ const Postcard = ({post}) => {
         <div className="itemTitle">
           {title}
         </div>}
-
-
-        {/* <div className="itemStats">
-          <p>{likes.length} likes</p>
-          <p>{comments.length} comments</p>
-           <p onClick={toProfile} style={{cursor:"pointer"}} ><Share/> </p>
-        </div> */}
-
 
         { price &&
         <div className="itemPrice">

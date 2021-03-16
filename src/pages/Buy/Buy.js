@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Other from "../../components/Header/otherHeader";
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import PurchaseForm from "../../components/CreateItem/CreateBuy";
 
 

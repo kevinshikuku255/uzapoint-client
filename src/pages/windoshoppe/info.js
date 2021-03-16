@@ -8,7 +8,7 @@ import People from '@material-ui/icons/People';
 import FileCopyOutlined from '@material-ui/icons/FileCopyOutlined';
 import NoteAddOutlined from '@material-ui/icons/NoteAddOutlined'
 import QuestionAnswerOutlined from '@material-ui/icons/QuestionAnswerOutlined';
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import Routes from "../../store/routes";
 import  './about.css'
 

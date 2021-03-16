@@ -6,8 +6,8 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import {GET_POST} from "../../graphql/post";
 import Comments from "../../components/Comment/comments";
-import CreateComment from "../../components/CreateCommnet/createComment";
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {CreateComment} from "../../components/CreateCommnet/createComment";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import { SkeletonPost, SkeletonBar2} from "../../components/Skeleton/skeleton";
 import { weekDay } from '../../Utils/date';
 import { makeStyles } from '@material-ui/core/styles';

@@ -9,7 +9,7 @@ import Buycard from "../../components/Postcard/buyCard";
 
 import { GET_PAGINATED_BUYS} from "../../graphql/buy";
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 
 
 

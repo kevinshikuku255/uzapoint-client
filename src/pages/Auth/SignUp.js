@@ -12,7 +12,7 @@ import { SIGN_UP } from '../../graphql/user';
 import Logo from "../../Assets/icon.png";
 import Header from "../../components/Header/loggedOut";
 import Footer from "../../components/Footer";
-import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
+import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import Routes from "../../store/routes";
 import useGAEvents from "../../Hooks/useGAEvents"
 import './Auth.css'
