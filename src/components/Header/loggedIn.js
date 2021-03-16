@@ -20,11 +20,11 @@ return(
  <div className="loggedInHeader">
     <div className="loggedInTabs">
          { path === "/" ?
-             <p> <span className="Applogo" style={{color:"gray"}} ><Home fontSize="large" /></span> </p> :
-              <p> <span className="Applogo" onClick={backHome} > <Home fontSize="large" /></span></p>}
+             <p> <span className="Applogo" style={{color:"gray"}} ><Home fontSize="default" /></span> </p> :
+              <p> <span className="Applogo" onClick={backHome} > <Home fontSize="default" /></span></p>}
 
          { path === "/buyers" ?
-           <p><span className="Applogo" style={{color:"gray"}} > <AddShoppingCartSharpIcon fontSize="large" /> </span></p> : <p> <span className="Applogo"  onClick={buyers}><AddShoppingCartSharpIcon fontSize="large" /></span></p>}
+           <p><span className="Applogo" style={{color:"gray"}}> <AddShoppingCartSharpIcon fontSize="default"/> </span></p> : <p> <span className="Applogo"  onClick={buyers}><AddShoppingCartSharpIcon fontSize="default"/></span></p>}
 
     </div>
 

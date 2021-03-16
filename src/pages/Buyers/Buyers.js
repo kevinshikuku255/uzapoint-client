@@ -4,7 +4,6 @@ import {Skeleton} from "../../components/Skeleton/skeleton";
 import { Waypoint} from "react-waypoint";
 
 import  "./buyers.css";
-import RouteHeader from "../../components/Header/routeHeader";
 import Header from "../../components/Header";
 import Buycard from "../../components/Postcard/buyCard";
 
@@ -29,7 +28,6 @@ function Buyers() {
         const { data,loading, fetchMore } = useQuery(GET_PAGINATED_BUYS,{
           variables,
           fetchPolicy:"cache-and-network",
-          pollInterval:500000,
           notifyOnNetworkStatusChange:true,
           });
         const skeleton = (
@@ -47,7 +45,7 @@ function Buyers() {
         if(!data || loading ){
           return loader = (
             <div>
-              <RouteHeader/>
+              <Header/>
               {skeleton}
             </div>
           )

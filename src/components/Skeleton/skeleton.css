@@ -180,7 +180,8 @@
   font-size: medium;
   font-family: sans-serif;
   border-top: 1px solid #80808021;
-  padding: 0 .4rem 0 1.4rem;
+  border-bottom: 1px solid #80808021;
+  padding: .6rem .4rem 0.6rem 1rem;
 }
 
 

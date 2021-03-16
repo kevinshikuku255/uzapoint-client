@@ -11,7 +11,7 @@ import Comments from "../../components/Comment/comments";
 import "./item.css"
 import CreateComment from "../../components/CreateCommnet/createComment";
 import UsedocumentTitle from "../../Hooks/UseDocumentTitle";
-import {SkeletonPost, SkeletonBar2} from "../../components/Skeleton/skeleton";
+import {SkeletonPost, SkeletonBar2, SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
 import Netlify from "../../Assets/netlify.jpg";
 
 
@@ -26,7 +26,7 @@ function Item() {
    variables:{
      id: _id
    },
-   pollInterval:50000
+   fetchPolicy:"cache-and-network"
  });
 
 
@@ -48,21 +48,22 @@ function Item() {
 
 const {id , image,likes, price,crossedPrice, title, description, features,location, comments, createdAt} = data.getPost;
 const weekday = weekDay(createdAt)
-const Image = image || Netlify;
+
 
  const itemFeatures = features && features.split("#")
  const main = (
   <>
     <div className="itemCard">
         <div className="cardMedia" >
-            {title && <div className="cardTitle">  {title}</div>}
-            {<LazyLoadImage
+            {title && image && <div className="cardTitle">  {title}</div>}
+            { image ? <LazyLoadImage
               alt="alt_tag"
-              src={Image}
+              src={image}
               effect="blur"
               width="100%"
               height="50%"
-            />}
+              placeholder={Netlify}
+            /> : <SkeletonBuyersCard title={title}/> }
        </div>
 
         <div className="itemStats">
@@ -72,7 +73,6 @@ const Image = image || Netlify;
         </div>
         <div className="itemBtns">
           <LikeButton likes={likes} postId={id}/>
-          {/* { (auth.user.username === author.username) && <DeleteButton id={id}/>} */}
         </div>
 
 

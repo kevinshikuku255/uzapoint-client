@@ -3,7 +3,7 @@
  flex-wrap: nowrap;
  padding-top: 1rem;
  flex-direction: column;
- border-bottom: 1px solid rgba(0, 0, 0, 0.282);
+ border-bottom: 4px solid #00000021;
  margin-top: .3rem;
 }
 /* -------------------------------------------------------------------------- */
