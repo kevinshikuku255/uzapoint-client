@@ -1,10 +1,7 @@
 import React from "react"
 import {useHistory} from "react-router-dom";
 import { timeAgo } from '../../Utils/date';
-// import { SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
-import NetlifyImg from "../../Assets/netlify.jpg"
 import useGaEvents from "../../Hooks/useGAEvents";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import  "./postcard.css"
 
 
@@ -27,6 +24,7 @@ const Postcard = ({post}) => {
           history.push(`/item/${id}`)
       }
 
+
    return(
   <>
     <div className="postCard">
@@ -34,18 +32,17 @@ const Postcard = ({post}) => {
                     <h4 style={{color:"skyblue"}} >{author.username}</h4>
                     <p> {timeAgo(createdAt)}</p>
             </div>
-        <div className="cardMedia" onClick={toPost}>
-            { <LazyLoadImage
+        <div  onClick={toPost} >
+        <div className="cardMedia">
+            { image && <img
               alt="alt_tag"
               src={image}
-              effect="blur"
               width="100%"
               height="50%"
-              placeholder={NetlifyImg}
               />
-               }
+             }
         </div>
-        {title && image &&
+        {title &&
         <div className="itemTitle">
           {title}
         </div>}
@@ -59,6 +56,7 @@ const Postcard = ({post}) => {
           </div>
         </div>
         }
+      </div>
     </div>
   </>
 

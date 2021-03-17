@@ -48,9 +48,9 @@ export const SkeletonSmallAvator = ({name}) => {
 }
 
 /* ----------------------------SkeletonPost---------------------------------------------- */
-export const SkeletonPost = () => {
+export const SkeletonPost = ({title}) => {
   return(
-    <p className="SkeletonPost">Windoshoppe</p>
+    <p className="SkeletonPost">{title}</p>
   )
 }
 

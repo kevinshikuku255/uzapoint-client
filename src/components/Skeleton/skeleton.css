@@ -85,16 +85,15 @@
 
 .skeleton-media, .SkeletonPost{
  height: 17rem;
- /* width: 98vw; */
  animation: loading 2s infinite linear;
  margin:5px 1vw ;
  display: flex;
  justify-content: center;
  align-items: center;
- font-size: xx-large;
+ font-size: small;
  font-style: oblique;
+ font-family:"san-serif";
  font-weight: lighter;
- color: rgba(128, 128, 128, 0.597);
 }
 
 .skeleton-button{

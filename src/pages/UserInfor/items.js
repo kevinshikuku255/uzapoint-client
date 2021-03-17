@@ -6,7 +6,7 @@ import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import Postgrid from "../../components/PostGrid/postGrid";
 import {useRouteMatch} from 'react-router-dom';
 import { Waypoint} from "react-waypoint";
-import {LinearProg, SkeletonPost,SkeletonBar2 } from "../../components/Skeleton/skeleton";
+import { SkeletonPost,SkeletonBar2 } from "../../components/Skeleton/skeleton";
 
 /**User items */
 function UserItems() {
@@ -27,7 +27,6 @@ let loader;
    return(
      <div>
        <RouteHeader tag={` 0 Items`}/>
-       <LinearProg/>
        <SkeletonPost/>
        <SkeletonBar2/><br/>
 
