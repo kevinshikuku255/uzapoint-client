@@ -1,7 +1,7 @@
 import React from 'react';
 import {useRouteMatch} from 'react-router-dom';
 import {useQuery}  from '@apollo/client';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import LazyLoad from 'react-lazyload';
 
 import {GET_POST } from '../../graphql/post';
 import RouteHeader from "../../components/Header/routeHeader";
@@ -12,7 +12,7 @@ import "./item.css"
 import {CreateComment} from "../../components/CreateCommnet/createComment";
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {SkeletonPost, SkeletonBar2, SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
-import NetlifyImg from "../../Assets/netlify.jpg";
+
 
 
 
@@ -56,14 +56,14 @@ const weekday = weekDay(createdAt)
     <div className="itemCard">
         <div className="cardMedia" >
             {title && image && <div className="cardTitle">  {title}</div>}
-            { image ? <LazyLoadImage
+            { image ?
+            <LazyLoad height="50%" >
+            <img
               alt="alt_tag"
               src={image}
               effect="blur"
               width="100%"
-              height="50%"
-              placeholder={NetlifyImg}
-            /> : <SkeletonBuyersCard title={title}/> }
+            /> </LazyLoad> : <SkeletonBuyersCard title={title}/> }
        </div>
 
         <div className="itemStats">

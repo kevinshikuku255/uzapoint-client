@@ -2,7 +2,7 @@ import React from 'react';
 import {useHistory} from "react-router-dom";
 import {useQuery} from "@apollo/client";
 import RouteHeader from "../../components/Header/routeHeader";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import LazyLoad from 'react-lazyload';
 
 import {GET_POST} from "../../graphql/post";
 import Comments from "../../components/Comment/comments";
@@ -83,14 +83,13 @@ const Image = image || Netlify;
 const main = (
   <div>
     <div className={classes.auth_user_item_media}>
-            <LazyLoadImage
+          <LazyLoad height="50%" >
+            <img
               alt="alt_tag"
               src={Image}
-              effect="blur"
               width="100%"
-              height="50%"
-              placeholder={<SkeletonPost/>}
             />
+          </LazyLoad>
       <div className={classes.auth_user__item_info}>
         <b>{weekday}</b>
         <p>{`Likes: ${likes.length}`}</p>
