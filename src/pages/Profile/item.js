@@ -11,7 +11,6 @@ import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import { SkeletonPost, SkeletonBar2} from "../../components/Skeleton/skeleton";
 import { weekDay } from '../../Utils/date';
 import { makeStyles } from '@material-ui/core/styles';
-import Netlify from "../../Assets/netlify.jpg";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -74,22 +73,23 @@ const {data, loading} = useQuery(GET_POST, {
     )
   }
 
-const {id,  description, likes,comments, image,price, crossedPrice, features, createdAt} = data.getPost;
+const {id,  description, likes,comments, image,price, title, crossedPrice, features, createdAt} = data.getPost;
 const weekday = weekDay(createdAt)
 const itemFeatures = features && features.split("#");
-const Image = image || Netlify;
+const slicedTitle = title.slice(0,50)
 
 
 const main = (
   <div>
     <div className={classes.auth_user_item_media}>
-          <LazyLoad height="50%" >
-            <img
+          {image ? <LazyLoad height="50%" >
+            <image
               alt="alt_tag"
-              src={Image}
+              src={image}
               width="100%"
             />
-          </LazyLoad>
+          </LazyLoad> : <SkeletonPost title={slicedTitle}/>}
+
       <div className={classes.auth_user__item_info}>
         <b>{weekday}</b>
         <p>{`Likes: ${likes.length}`}</p>

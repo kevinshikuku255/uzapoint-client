@@ -62,7 +62,6 @@ const route = {
       history.push('/signin')
    },
    goBack: (e) => {
-      GAEventTracker("Page navigation", e.target.baseURI)
       history.goBack()
    }
  }

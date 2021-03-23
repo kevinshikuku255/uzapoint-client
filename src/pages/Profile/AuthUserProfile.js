@@ -4,7 +4,7 @@ import {useQuery} from "@apollo/client";
 import { GET_USER} from "../../graphql/user";
 
 import Avatar from '@material-ui/core/Avatar';
-import { InfoOutlined, ImageOutlined, AddShoppingCartSharp } from "@material-ui/icons";
+import { InfoOutlined, ShoppingBasketOutlined, AddShoppingCartSharp } from "@material-ui/icons";
 
 import Footer from "../../components/Footer/index";
 import ProfileHeader from "../../components/Header/profileHeader";
@@ -30,6 +30,20 @@ const  useStyles = makeStyles((theme) => ({
   textAlign:"center",
   margin:theme.spacing(2,0),
   fontSize:"2rem"
+  },
+  p:{
+    padding: theme.spacing(.5, 1),
+    backgroundColor:"#0000ff67",
+    border:"1px solid blue",
+    borderRadius:"5px",
+    boxShadow: "1px 1px 4px #3e3e8c",
+    color:"black",
+    cursor: "pointer",
+    fontWeight: "bolder",
+    fontFamily: "sansSerif",
+    width:"30%",
+    margin:"auto",
+    marginTop:"2rem"
   }
 }));
 
@@ -76,12 +90,12 @@ const main =
                      <Avatar alt="avator" onClick={() => setTab(0)} src={image || ""} className={classes.small}/>
                   </div>
                   <div onClick={() => setTab(1)}>
-                     <ImageOutlined/>
-                     <h4 style={{color: tab === 1 ? "blue" : ""}} >sales</h4>
+                     <ShoppingBasketOutlined/>
+                     <h4 style={{color: tab === 1 ? "blue" : ""}} >Sales</h4>
                   </div>
                   { buys && <div onClick={() => setTab(2)}>
                      <AddShoppingCartSharp/>
-                     <h4 style={{color: tab === 2 ? "blue" : ""}} >buying</h4>
+                     <h4 style={{color: tab === 2 ? "blue" : ""}} >Buying</h4>
                   </div>}
 
                   <div onClick={() => setTab(3)}>

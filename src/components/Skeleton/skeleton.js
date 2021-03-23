@@ -18,10 +18,9 @@ export const Skeleton = () => {
            </div>
 
           <div className="skeleton-media">Windoshoppe</div>
+
            <div className="skeleton-action">
                 <p className="skeleton-button"/>
-                {/* <p className="skeleton-button1"/>
-                <p className="skeleton-button2"/> */}
            </div>
        </div>
     </div>
@@ -51,6 +50,13 @@ export const SkeletonSmallAvator = ({name}) => {
 export const SkeletonPost = ({title}) => {
   return(
     <p className="SkeletonPost">{title}</p>
+  )
+}
+
+/* ----------------------------SkeletonPostLoader---------------------------------------------- */
+export const SkeletonPostLoader = ({title}) => {
+  return(
+    <p className="SkeletonPostLoader">{title}</p>
   )
 }
 

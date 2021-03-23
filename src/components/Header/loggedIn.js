@@ -2,7 +2,7 @@ import React from "react";
 import {useHistory} from "react-router-dom";
 import   "./header.css";
 import AddShoppingCartSharpIcon from '@material-ui/icons/AddShoppingCartSharp';
-import {InfoOutlined, People, SearchTwoTone, Settings, Person, Home, ShoppingBasketOutlined} from '@material-ui/icons';
+import {InfoOutlined, People, SearchTwoTone, Settings, Person, Home} from '@material-ui/icons';
 import Routes from "../../store/routes";
 
 
@@ -37,7 +37,6 @@ return(
 
               <li onClick={sell}> SELL</li>
               <li onClick={buy}> BUY </li>
-              <li onClick={buyers}> <ShoppingBasketOutlined/> <p>Buyers</p> </li>
               <li onClick={toPeople}> <People/> <p>People</p> </li>
               <li onClick={search} > <SearchTwoTone/> <p>Search</p></li>
 

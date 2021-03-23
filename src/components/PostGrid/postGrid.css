@@ -2,6 +2,14 @@
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
+  border-bottom: 3px solid rgba(68, 68, 68, 0.282);
+}
+
+.action_btns{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .prices{
@@ -17,6 +25,8 @@
 margin:0.5rem 2rem;
 }
 
+
+
 ul{
   margin-left: 3rem;
 }
@@ -26,18 +36,31 @@ ul{
   margin-left:5px;
   font-size: smaller;
 }
-.buy_avator{
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------------------------------------------------------------------------- */
+@media(min-width:48em){
+.media_wrapper{
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  margin-top: 1rem;
+  width: 30rem;
 }
 
-.buy_avator h6{
-  font-size: larger;
-  color: skyblue;
-  margin-left: .5rem;
-  font-family: sans-serif;
+  .media{
+    width: 30rem;
+  }
 }
 
-.buy_avator p{
-  margin-left: 1rem;
-}
+
+

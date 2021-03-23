@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
   signInLogo:{
     display: "flex",
+    flexDirection:"column",
     alignItems: "center",
     fontWeight: "bolder",
     fontSize: "xx-large",

@@ -20,6 +20,7 @@ export const  CreateItem = () => {
   const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
+  const [location, setLocation] = useState('');
   const [crossedPrice, setCrossedPrice] = useState('');
   const [description, setDescription] = useState('');
   const [features, setFeatures] = useState('');
@@ -32,6 +33,7 @@ export const  CreateItem = () => {
     setImage('');
     setErrors('');
     setPrice('');
+    setLocation('');
     setCrossedPrice('');
     setDescription('')
     setFeatures('')
@@ -60,7 +62,7 @@ const previewFile = (file) => {
 
 
 
-const values = { title, description, price ,crossedPrice, image, features, authorId: auth.user.id}
+const values = { title, description, price ,crossedPrice,location, image, features, authorId: auth.user.id}
 
  const [createPost, { loading }] = useMutation(CREATE_POST,{
     variables: values,
@@ -99,6 +101,7 @@ const values = { title, description, price ,crossedPrice, image, features, autho
 const hadleTitleChange = e => setTitle(e.target.value);
 const hadleFeaturesChange = e => setFeatures(e.target.value);
 const handlePriceChange = e => setPrice(e.target.value);
+const handleLocationChange = e => setLocation(e.target.value);
 const handleCrossedPriceChange = e => setCrossedPrice(e.target.value);
 const handleDescriptionChange = e => setDescription(e.target.value)
 
@@ -145,9 +148,9 @@ const form = (
    <div className="post_description">
        <div>
           <TextareaAutosize
-            placeholder="name"
+            placeholder="Name"
             name="title"
-            rows="1"
+            rows={1}
             onChange={hadleTitleChange}
             value={values.title}
             className="title"
@@ -156,8 +159,8 @@ const form = (
 
         <div >
            <TextareaAutosize
-               placeholder="product description"
-               rowsMin={2}
+               placeholder="Product description"
+               rowsMin={1}
                name='description'
                onChange={handleDescriptionChange}
                value={values.description}
@@ -166,8 +169,8 @@ const form = (
        </div>
         <div >
            <TextareaAutosize
-               placeholder="separet product features by  #  "
-               rowsMin={2}
+               placeholder="Separet product features by  #  "
+               rowsMin={1}
                name='features'
                onChange={hadleFeaturesChange}
                value={values.features}
@@ -176,7 +179,7 @@ const form = (
        </div>
        <div className="price_input">
            <input
-             placeholder='price'
+             placeholder='Price'
              name="price"
              value={values.price}
              style={{color:"blue"}}
@@ -184,11 +187,19 @@ const form = (
              className="priceInput"
            /> <br/>
            <input
-             placeholder='price before'
+             placeholder='Price before'
              name="crossedPrice"
              style={{color:"red"}}
              value={values.crossedPrice}
              onChange={handleCrossedPriceChange}
+             className="priceInput"
+           />
+           <input
+             placeholder='Located?'
+             name="location"
+             style={{color:"green"}}
+             value={values.location}
+             onChange={handleLocationChange}
              className="priceInput"
            />
        <div className="photo_input">

@@ -131,21 +131,28 @@ button{
 /* -------------------------------Media queries------------------------------------------- */
 @media(min-width:48em){
 
-.profileContainer{
- margin: 3.5rem auto 10rem auto;
- width: 35vw;
+.profile_container{
+ margin: 4rem auto 10rem auto;
+ display: block;
+ width: 40rem;
  font-size: small;
 }
 
  .prifileGrid{
- display: flex;
- flex-wrap: wrap;
- justify-content: center;
- align-items: center;
- flex-direction: row;
+ display: block;
+ width: 30rem;
 }
+
+.prifileGrid{
+ display:none;
+ flex-direction: column;
 }
+
 
 .coverImg img{
   max-height: 7rem;
 }
+
+
+}
+

@@ -18,13 +18,10 @@ function AppInfo() {
         </div>
         <div className="app_Info_component">
             <h1>Windoshoppe</h1>
-            <p>version 0.1.0</p>
-            <p>Developed and maintained by IT students TMUC </p>
-            <i> &copy; 2020-2021 windoshoppe </i>
+            <p className="description">Buy and Sell Anything!</p>
+            <p  className="description"> At best prices</p>
             <br/> <br/>
-            {/* <p>To support development of this application</p>
-            <p>M-pesa: 0740253367</p> */}
-
+            <i> &copy; 2020-2021 windoshoppe </i>
         </div>
     </div>
     </>

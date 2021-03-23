@@ -4,7 +4,7 @@ import { timeAgo } from '../../Utils/date';
 import LazyLoad from 'react-lazyload';
 import useGaEvents from "../../Hooks/useGAEvents";
 import  "./postcard.css"
-
+import {SkeletonPost} from "../Skeleton/skeleton";
 
 
 
@@ -15,7 +15,7 @@ const Postcard = ({post}) => {
 
        const {id , author, image, price,crossedPrice, title,  createdAt} =  post ;
 
-
+      const slicedTitle = title.slice(0,50);
       const toProfile = () =>{
           history.push(`/${author.username}`)
       }
@@ -34,19 +34,19 @@ const Postcard = ({post}) => {
                     <p> {timeAgo(createdAt)}</p>
             </div>
         <div  onClick={toPost} >
-        <div className="cardMedia">
+         {image ? <div className="cardMedia">
             { image &&
             <LazyLoad height="50%" >
             <img
-              alt="alt_tag"
+              alt={title}
               src={image}
               width="100%"
-
               />
             </LazyLoad>
              }
-        </div>
-        {title &&
+        </div> : <SkeletonPost title={slicedTitle}/> }
+
+        {image && title &&
         <div className="itemTitle">
           {title}
         </div>}
@@ -55,7 +55,7 @@ const Postcard = ({post}) => {
         <div className="itemPrice">
           <p style={{fontWeight:"bolder"}} >Price:</p>
           <div className="priceInfo">
-            { price && <h4 style={{color:"blue"}} >Ksh {price}</h4>}
+            {price && <h4 style={{color:"blue"}} >Ksh {price}</h4>}
             {crossedPrice && <p style={{color:"brown"}} >was.. Ksh {crossedPrice}</p>}
           </div>
         </div>

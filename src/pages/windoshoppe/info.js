@@ -42,7 +42,7 @@ return(
            <a href={`href="tel:0740253367"`}>
               <div className="contact_us">
                  <PhoneAndroidIcon/>
-                <p>Call Me</p>
+                <p>Call center</p>
               </div>
            </a>
 

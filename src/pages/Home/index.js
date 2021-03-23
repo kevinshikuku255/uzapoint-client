@@ -1,12 +1,11 @@
 import React from 'react';
 import {useQuery}  from '@apollo/client';
 import {Skeleton} from "../../components/Skeleton/skeleton";
-import { Waypoint} from "react-waypoint";
 import { useStore } from '../../store';
 
 import Header from "../../components/Header";
 import PostCard from "../../components/Postcard/postCard";
-import { GET_PAGINATED_POSTS} from "../../graphql/post";
+import { GET_POSTS} from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {CreateItem} from "../../components/CreateItem/CreateItem";
@@ -22,10 +21,9 @@ function Home() {
           limit: HOME_PAGE_POSTS_LIMIT,
         };
 
-        const { data,loading, fetchMore } = useQuery(GET_PAGINATED_POSTS,{
+        const { data,loading} = useQuery(GET_POSTS,{
           variables,
           fetchPolicy:"cache-and-network",
-          notifyOnNetworkStatusChange:true,
           });
 
         const skeleton = (
@@ -36,11 +34,15 @@ function Home() {
             <Skeleton/>
             <Skeleton/>
             <Skeleton/>
+            <Skeleton/>
+            <Skeleton/>
+            <Skeleton/>
+            <Skeleton/>
           </>
         )
 
         let loader;
-        if(loading || !data){
+        if(!data){
           return loader = (
             <div>
               <Header/>
@@ -49,34 +51,25 @@ function Home() {
           )
         }
 
-const { posts ,cursor , hasMore } = data.getPaginatedPosts;
+
+        if(loading){
+          return loader = (
+            <div>
+              <Header/>
+              {skeleton}
+            </div>
+          )
+        }
+
+const { posts } = data.getPosts;
   const main =  posts && (
   <div className="homeContainer">
+           <div className="warning">
+              <h1>WARNING</h1>
+           </div>
           { posts.map( (post, i) => (
             <div className="card"  key={post.id} >
                   { <PostCard  post={post}/>}
-                  { hasMore && i === posts.length - 10 &&
-                    <Waypoint onEnter={
-                      () => fetchMore({
-                        variables:{
-                          cursor: cursor,
-                          limit: HOME_PAGE_POSTS_LIMIT
-                      },
-                      updateQuery:(pv,{fetchMoreResult}) => {
-                        if(!fetchMoreResult){
-                          return pv
-                        }
-                        return {
-                          getPaginatedPosts:{
-                           __typename: "PostsConnection",
-                           posts: [ ...pv.getPaginatedPosts.posts, ...fetchMoreResult.getPaginatedPosts.posts ],
-                           hasMore: fetchMoreResult.getPaginatedPosts.hasMore,
-                           cursor: fetchMoreResult.getPaginatedPosts.cursor
-                          }
-                        }
-                      }
-                  })} />
-                  }
             </div>
             ))}
   </div>

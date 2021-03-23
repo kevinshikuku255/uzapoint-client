@@ -47,6 +47,18 @@ const handleErrors = () => {
 
 
 
+// const mergeArrayField = (
+//        field,
+//        existing,
+//        incoming
+//         ) =>  {
+//           const merged = Object.assign({...existing})
+//           incoming.forEach( (item) => {
+//             merged[readField(field, item)] = item
+//           })
+//           return merged
+//         }
+
 
 // Creates a new Apollo Client
 /**
@@ -59,6 +71,15 @@ export const createApolloClient = (API_URL, websocketApiUrl) => {
     {
 /* -------------------------------type policies------------------------------------------- */
     typePolicies: {
+        PostsConnection:{
+           fields:{
+             posts:{
+               merge(existing, incoming){
+                 return{ ...existing, ...incoming}
+               }
+             }
+           }
+        },
         PostsPayload:{
               keyFields: false,
               fields:{

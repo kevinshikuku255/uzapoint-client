@@ -40,14 +40,13 @@
 
 
 
-
 /* -------------------------------------------------------------------------- */
 .cardMedia{
  flex: content;
  cursor: pointer;
 }
 
-.itemPrice,  .itemDescription{
+.itemPrice,  .itemDescription, .itemFeatures, .itemFeatures ul {
   margin: 0 1rem 0.5rem 1rem;
 }
 
@@ -56,14 +55,11 @@
   display: flex;
 }
 
-.priceInfo{
+
+.itemPrice .priceInfo p{
   margin-left: 1rem;
 }
-.priceInfo p{
-  margin-left: 2rem;
-  text-decoration: line-through;
-  font-weight: lighter;
-}
+
 
 .itemStats{
   display: flex;
@@ -102,6 +98,43 @@
 
 
 
+/** Item buttons*/
+
+.buy_itemBtns {
+display: flex;
+padding: 0 .4rem 1rem .4rem;
+margin: .5rem 0;
+align-items: center;
+justify-content: space-between;
+border-bottom: 5px solid rgba(0, 0, 0, 0.124);
+}
+
+.buy_button{
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  align-items: center;
+  border: 1px solid blue;
+  box-shadow: 1px 1px 4px rgb(62, 62, 140);
+  border-radius: 5px;
+  padding: .2rem .8rem;
+}
+
+.buy_profilebutton{
+  display: flex;
+  justify-content: space-around;
+  cursor: pointer;
+  align-items: center;
+  border: 1px solid blue;
+  background-color: #0000ff67;
+  box-shadow: 1px 1px 4px #3e3e8c;
+  border-radius: 5px;
+  padding: .2rem .8rem;
+  font-weight: bolder;
+  font-family: sans-serif;
+}
+
+
 
 
 
@@ -122,8 +155,9 @@
  margin: 2rem 0 0 0;
  padding: 0  0 1rem 0;
  font-size: xx-small;
+ width: 30rem;
  flex-direction: column;
- border-bottom: 2px solid blue;
+ border-bottom: 2px solid rgb(171, 171, 172);
  border-radius:none;
 }
 
@@ -134,10 +168,6 @@
   margin: 0 5px;
   padding: .5rem 0;
 }
-.itemPrice{
-  margin: 0 0 0 4rem;
-}
-
 .itemTitle{
    margin-left: 4rem;
    color: rgb(0, 30, 255);

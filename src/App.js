@@ -39,7 +39,6 @@ function App() {
  )
 
 
-console.log(history)
 useEffect( () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
 },[history] )

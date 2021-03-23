@@ -83,16 +83,29 @@
   animation: loading 2s infinite linear;
 }
 
-.skeleton-media, .SkeletonPost{
+.SkeletonPost{
  height: 17rem;
- animation: loading 2s infinite linear;
+ background-color: rgba(137, 43, 226, 0.453);
  margin:5px 1vw ;
+ border-radius: 5px;
+ box-shadow: 1px 1px 4px blueviolet;
+ padding: .5rem;
  display: flex;
  justify-content: center;
  align-items: center;
  font-size: small;
- font-style: oblique;
- font-family:"san-serif";
+ font-weight: bold;
+}
+
+.skeleton-media, .SkeletonPostLoader{
+ height: 17rem;
+ animation: loading 2s infinite linear;
+ margin:5px 1vw ;
+ padding: .5rem;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ font-size: small;
  font-weight: lighter;
 }
 
@@ -258,4 +271,60 @@
   flex-direction: column;
   align-items: center;
   height: 50vh;
+}
+
+
+
+
+.Skeleton{
+ background-color: rgba(137, 43, 226, 0.453);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(min-width:48em){
+
+.skeleton-item{
+ content: "";
+ width: 35rem;
+ padding: .5rem 0;
+ margin-top: 3.5rem;
+ margin-left: 20rem;
+ border:none
+}
+
+.skeleton-media, .SkeletonPost{
+ height: 17rem;
+ width: 30rem;
+ margin:5px 1vw ;
+ display: flex;
+}
+
+.Skeleton{
+  width: 30rem;
+}
+
+.SkeletonBar1, .SkeletonBar2, .SkeletonBar3, .SkeletonBar4, .SkeletonBar5, .SkeletonBar6, .skeleton-button1, .skeleton-action{
+  width: 30rem;
+  height: 1rem;
+}
+
+.skeleton-button{
+ width: 30rem;
+ height: .6rem;
+ animation: loading 2s infinite linear;
+ margin-left: .9vw;
+ margin-top: 10px;
+}
+
 }

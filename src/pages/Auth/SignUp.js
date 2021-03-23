@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
   signInLogo:{
     display: "flex",
     alignItems: "center",
+    flexDirection:"column",
     fontWeight: "bolder",
     fontSize: "xx-large",
     cursor: "pointer",

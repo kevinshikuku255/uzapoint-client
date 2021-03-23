@@ -1,5 +1,5 @@
 import React from 'react';
-import {useRouteMatch} from 'react-router-dom';
+import {useRouteMatch, useHistory} from 'react-router-dom';
 import {useQuery}  from '@apollo/client';
 import LazyLoad from 'react-lazyload';
 
@@ -11,7 +11,8 @@ import Comments from "../../components/Comment/comments";
 import "./item.css"
 import {CreateComment} from "../../components/CreateCommnet/createComment";
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
-import {SkeletonPost, SkeletonBar2, SkeletonBuyersCard} from "../../components/Skeleton/skeleton";
+import {SkeletonPost,SkeletonPostLoader, SkeletonBar2} from "../../components/Skeleton/skeleton";
+import {Place, WhatsApp, Call} from "@material-ui/icons";
 
 
 
@@ -19,6 +20,7 @@ import {SkeletonPost, SkeletonBar2, SkeletonBuyersCard} from "../../components/S
 /**single Item component */
 function Item() {
  const path = useRouteMatch();
+ const history = useHistory();
  const _id = path.params.id.split(':').pop();
  UsedocumentTitle("Item")
 
@@ -37,7 +39,7 @@ function Item() {
     <>
     <RouteHeader tag="product details"/>
     <br/> <br/>
-    <SkeletonPost/>
+    <SkeletonPostLoader/>
     <SkeletonBar2/>
     </>
     )
@@ -46,10 +48,15 @@ function Item() {
 
 
 
-const {id , image,likes, price,crossedPrice, title, description, features,location, comments, createdAt} = data.getPost;
-const weekday = weekDay(createdAt)
+const { id , image,likes, price,crossedPrice, title, author, description,
+        features,location, comments, createdAt} = data.getPost;
 
-
+const weekday = weekDay(createdAt);
+const slicedTitle = title.slice(0,50);
+const internationalPhone = author.phonenumber && `+254${author.phonenumber.substring(1)}`;
+const toProfile = () =>{
+    history.push(`/${author.username}`)
+}
  const itemFeatures = features && features.split("#")
  const main = (
   <>
@@ -63,7 +70,7 @@ const weekday = weekDay(createdAt)
               src={image}
               effect="blur"
               width="100%"
-            /> </LazyLoad> : <SkeletonBuyersCard title={title}/> }
+            /> </LazyLoad> : <SkeletonPost title={slicedTitle}/> }
        </div>
 
         <div className="itemStats">
@@ -72,7 +79,15 @@ const weekday = weekDay(createdAt)
           <p>{weekday}</p>
         </div>
         <div className="itemBtns">
-          <LikeButton likes={likes} postId={id}/>
+            <a className="button" href={`https://api.whatsapp.com/send?phone=${internationalPhone}`}>
+              <WhatsApp/>
+              <p>Whatsapp</p>
+            </a>
+            <a href={`tel:${author.phonenumber}`} className="button">
+                <Call/>
+                <p>Call me</p>
+            </a>
+            <LikeButton likes={likes} postId={id}/>
         </div>
 
 
@@ -83,14 +98,13 @@ const weekday = weekDay(createdAt)
             </>
         </div>
 
-        <div className="itemlocation">
-          <p style={{fontWeight:"bolder"}}>Location:</p>
-          {location ? `Located: ${location}` : "Location not specified..."}
-        </div>
+        {(location || author?.location) && <div className="itemlocation">
+          <Place/>
+          {location ? `${location}` : `${author.location}`}
+        </div>}
 
        {description &&
         <div className="itemDescription">
-          <p style={{fontWeight:"bolder"}}>Item description:</p>
            {description}
         </div>
        }
@@ -106,6 +120,8 @@ const weekday = weekDay(createdAt)
 
         </div>
         }
+
+         <div onClick={toProfile} className="profilebutton"> check my profile </div>
 
           <div className="createComment">
            <CreateComment postId={id} comments={comments}/>

@@ -64,11 +64,12 @@ export const CREATE_POST = gql`
         $description:String,
         $price:String,
         $features: String
+        $location: String
         $image: Upload,
         $authorId: ID!,
         $crossedPrice:String
   ) {
-    createPost(title:$title, description:$description, features:$features, price:$price, crossedPrice:$crossedPrice, image:$image, authorId:$authorId) {
+    createPost(title:$title, description:$description, features:$features, price:$price, crossedPrice:$crossedPrice, location:$location, image:$image, authorId:$authorId) {
       id
     }
   }
@@ -108,7 +109,7 @@ export const GET_POSTS = gql`
       posts {
         id
         title
-        description 
+        description
         features
         price
         location

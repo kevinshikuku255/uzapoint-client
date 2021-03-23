@@ -3,7 +3,10 @@ import {useMutation} from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
 
 import {GET_POSTS, DELETE_POST} from "../../graphql/post";
+import {GET_BUYS} from "../../graphql/buy";
+import {GET_AUTH_USER} from "../../graphql/user";
 import {DELETE_COMMENT} from "../../graphql/comment";
+import {DELETE_BUY} from "../../graphql/buy";
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import Routes from "../../store/routes";
 const useStyles = makeStyles((theme) => ({
@@ -12,22 +15,22 @@ const useStyles = makeStyles((theme) => ({
     outline:"none",
     borderRadius:"5px",
     padding:".2rem 1rem"
-  }
+  },
 }))
 
 
 
 
 /** Delete button component */
-function DeleteButton({id,commentId}){
- const {backHome}  = Routes();
+function DeleteButton({id,commentId, buyId}){
  const classes = useStyles();
+ const {goBack} = Routes()
 
 
 
 //..................... dynamic muation ......................
-const mutation = commentId ? DELETE_COMMENT :  DELETE_POST;
-const _id = id || commentId;
+const mutation = commentId ? DELETE_COMMENT : buyId  ? DELETE_BUY :  DELETE_POST;
+const _id = id || commentId || buyId;
  const [deletePostOrCommentMutation, {loading, data}] = useMutation(mutation,{
     variables:{
         id: _id
@@ -35,6 +38,11 @@ const _id = id || commentId;
     refetchQueries:[
             {query:GET_POSTS,
              variables:{ skip: 0, limit: HOME_PAGE_POSTS_LIMIT} },
+            {query:GET_BUYS,
+             variables:{ skip:0, limit:HOME_PAGE_POSTS_LIMIT}
+            },
+            {query:GET_AUTH_USER},
+
             ],
      onError(err){
          console.log(err)
@@ -44,8 +52,8 @@ const _id = id || commentId;
 
 const hundleDelete = () => {
     deletePostOrCommentMutation();
-    if(id){
-        backHome();
+    if(buyId){
+       goBack()
     }
 }
 
