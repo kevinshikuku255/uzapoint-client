@@ -23,6 +23,13 @@
 }
 
 
+.header_avatar{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* -------------------------------out------------------------------------------- */
 .loggedOutHeader ul li {
      float: left;

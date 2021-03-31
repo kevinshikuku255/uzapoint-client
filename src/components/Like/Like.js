@@ -3,31 +3,29 @@ import {useHistory} from 'react-router-dom';
 import {useMutation} from "@apollo/client";
 import { useStore } from '../../store';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { ThumbUpAltSharp, ThumbUpAltOutlined } from '@material-ui/icons';
 import { CREATE_LIKE, DELETE_LIKE } from '../../graphql/like';
 import { GET_POST } from '../../graphql/post';
+
+
 const useStyles = makeStyles((theme) => ({
-  btn:{
-    border:"none",
-    outline:"none",
-    borderRadius:"5px",
-    padding:".3rem 1rem"
+  thumpsup:{
+   marginRight:"1.5rem"
   }
 }))
 
 /** Like buton that performs like and unlike */
-function LikeButton( { postId, likes} ){
+const LikeButton = ( { postId, likes} ) => {
       const  [{auth}]  = useStore();
       const history = useHistory();
-        const classes = useStyles();
+      const classes = useStyles();
 
       const toSigup = () =>{
           history.push(`/signup`)
       }
 
-
       const hasLiked = likes.find(
-        l => l.user === auth.user.id && l.post === postId
+        l => l.user.username === auth.user.username && l.post.id === postId
       );
 
 
@@ -58,23 +56,12 @@ let likeButton;
 
   likeButton = auth.user ? (
       hasLiked || (loading && !data) ? (
-      <>
-        <p style={{textAlign:"center"}}>
-          <button className={classes.btn} style={{ backgroundColor:"skyblue"}} onClick={createLike} > Liked </button>
-        </p>
-
-      </>
+           <ThumbUpAltSharp onClick={createLike} style={{color:"red"}} fontSize="large" className={classes.thumpsup} />
       ):(
-       <>
-        <p style={{textAlign:"center"}}>
-           <button onClick={createLike} className={classes.btn} style={{ backgroundColor:"gray"}}>Like</button>
-        </p>
-       </>
+           <ThumbUpAltOutlined onClick={createLike} style={{color:"gray"}} fontSize="large" className={classes.thumpsup}/>
       )
-  ):(
-   <>
-    <p> <button onClick={toSigup} className={classes.btn} style={{ backgroundColor:"gray"}}> Like </button> </p>
-   </>
+      ):(
+         <ThumbUpAltSharp onClick={toSigup}  fontSize="large" className={classes.thumpsup}/>
   )
 
     return(

@@ -7,6 +7,7 @@ import Buygrid from "../../components/PostGrid/buyGrid";
 import {useRouteMatch} from 'react-router-dom';
 import { Waypoint} from "react-waypoint";
 import { SkeletonPost,SkeletonBar2 } from "../../components/Skeleton/skeleton";
+import {ShoppingBasketOutlined} from "@material-ui/icons";
 
 
 /**User items */
@@ -21,7 +22,11 @@ const variables = {
 };
 
 
- const { data,loading, fetchMore}= useQuery(GET_USER_BUYS,{variables});
+ const { data,loading, fetchMore}= useQuery(GET_USER_BUYS,
+ {
+   variables,
+   fetchPolicy:"cache-and-network"
+   });
 
 
 let loader;
@@ -81,7 +86,7 @@ const main = (
 
  return (
   <>
-  <RouteHeader tag={` ${count} items`}/>
+  <RouteHeader tag={<p> <ShoppingBasketOutlined/> wants to buy {count} </p> } />
   {loading ? loader : main}
   </>
  )

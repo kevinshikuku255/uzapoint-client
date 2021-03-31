@@ -1,16 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useRouteMatch, useHistory} from 'react-router-dom';
 import {useQuery}  from '@apollo/client';
 import Avatar from '@material-ui/core/Avatar';
-import {Email, PhoneAndroid, LocationOn, WhatsApp} from '@material-ui/icons';
+import {Email, PhoneAndroid, LocationOn, WhatsApp, CloseRounded} from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import RouteHeader from "../../components/Header/routeHeader";
 import  './profile.css'
 
-import {GET_USER, GET_USER_BUYS } from '../../graphql/user';
+import {GET_USER } from '../../graphql/user';
 import { weekDay } from '../../Utils/date';
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {SkeletonBar2, SkeletonPost} from "../../components/Skeleton/skeleton";
+import Overlay from "../../components/Acordion/Overlay";
+import Netlify from "../../Assets/netlify.jpg";
 
 const  useStyles = makeStyles((theme) => ({
   large: {
@@ -29,7 +31,8 @@ const  Profile = ()  => {
  const classes = useStyles();
  const name = path.params.username.split(':').pop();
  const history = useHistory();
- UsedocumentTitle("Profile")
+ UsedocumentTitle("Profile");
+ const [open, setOpen] = useState(false)
 //  const path = history.location.pathname
 
 
@@ -39,15 +42,6 @@ const  Profile = ()  => {
    }
  });
 
- const {data:user_buys, loading:loading_buys} = useQuery(GET_USER_BUYS,{
-          variables:{
-            username:name,
-            skip:0,
-            limit:0
-          }
- });
-
-const buys_count = !loading_buys ? user_buys.getUserBuys.count : 0
 
 /** Loading section */
       let loader;
@@ -61,32 +55,39 @@ const buys_count = !loading_buys ? user_buys.getUserBuys.count : 0
          )
       }
 
+const {username, fullname,location, posts,buys, businessdescription, phonenumber, email, image,coverImage, createdAt} = data.getUser;
 
-const {username, fullname,location, posts, businessdescription, phonenumber, email, image, createdAt} = data.getUser;
+console.log(buys)
 
-
-const avator = image ?  image : null;
 const weekday = weekDay(createdAt);
 const internationalPhone = phonenumber && `+254${phonenumber.substring(1)}`;
 
 
 /* ------------------ Route links functions-------------------------------------------------------- */
  const itemsLink = () =>{
-    history.push(`/profile/:${username}/items`)
+    history.push(`/profile/${username}/items`)
  }
 
  const buysLink = () =>{
-    history.push(`/profile/:${username}/buys`)
+    history.push(`/profile/${username}/buys`)
  }
 /* -------------------------------------------------------------------------- */
 
 
 const main =
  <>
-
+      <div className="coverPhoto" >
+        {<>
+        <img
+          src={coverImage || Netlify}
+          width="100%"
+          height="100%"
+        />
+        </>}
+      </div>
    <div className="profile_container">
      <div className="avator">
-          <Avatar alt="logo" src={avator} className={classes.large}/>
+          <Avatar alt="logo" src={image} className={classes.large} onClick={() => setOpen(true)}/>
           <div>
               <p>{fullname ? fullname : username}</p>
               {phonenumber && <p>  {`phone:${phonenumber}` }</p>}
@@ -111,28 +112,31 @@ const main =
        </p>
      </div>
 
-     <div className="joine_date">
+     <div className="profile_description">
        <b> Joined:</b>
-       {weekday}
+       <p>{weekday}</p>
      </div>
 
 
       {location &&
       <div className="location">
-        <p className="bold">Direction:</p>
-        <p><LocationOn/></p> <p>{location}</p>
+         <b className="bold">Direction:</b>
+         <p> <LocationOn/> {location} </p>
       </div>}
 
       <div className="items" >
+        { posts.length &&
         <div>
             <p>Selling {`${posts.length}`} items</p>
             <p onClick={itemsLink}>
-               { !posts.length ? <button disabled >See all</button> : <button >See all</button> }
+               { <button >See all</button> }
             </p>
-        </div>
+        </div>}
         <div>
-            <p>Buying  {`${buys_count}`} items</p>
-            <p onClick={buysLink}> <button>See all</button></p>
+            {buys.length && <div>
+               <p>Buying  {`${buys.length}`} items</p>
+               <p onClick={buysLink}> <button>See all</button></p>
+            </div>}
         </div>
       </div>
    </div>
@@ -140,17 +144,18 @@ const main =
  </>
 
 
-
+const btn = <p onClick={() => setOpen(false)} > <CloseRounded fontSize="large"/> </p>
 
  return (
   <>
      <RouteHeader tag={username}/>
      <main>
+       <Overlay state={open} btn={btn} image={image}/>
        {loading ? loader : main}
      </main>
   </>
 
-)
+ )
 }
 
 export default Profile

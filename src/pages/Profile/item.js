@@ -73,7 +73,7 @@ const {data, loading} = useQuery(GET_POST, {
     )
   }
 
-const {id,  description, likes,comments, image,price, title, crossedPrice, features, createdAt} = data.getPost;
+const {id,  description, likes,comments, image,price, title, crossedPrice, features, createdAt} = data?.getPost;
 const weekday = weekDay(createdAt)
 const itemFeatures = features && features.split("#");
 const slicedTitle = title.slice(0,50)

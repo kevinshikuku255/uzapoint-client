@@ -2,10 +2,9 @@ import React,{useEffect} from 'react';
 import {Route, Switch, useHistory} from 'react-router-dom';
 import './App.css';
 import ReactGA from 'react-ga';
-
-
-
 ReactGA.initialize('G-TZFVVVBBZ4');
+ReactGA.pageview(window.location.pathname + window.location.search);
+
 
 const SignIn  = React.lazy( () => import("./pages/Auth/SignIn"));
 const SignUp  = React.lazy( () => import("./pages/Auth/SignUp"));
@@ -30,7 +29,24 @@ const People = React.lazy( () => import("./pages/People/People"));
 
 
 function App() {
- const history = useHistory();
+   const history = useHistory();
+   history.listen((location) => {
+
+   if(location.pathname.includes('/item')){
+      let rootURL = location.pathname.split("/")[1]
+      ReactGA.pageview(rootURL)
+   }else {
+      ReactGA.set({page:location.pathname});
+      ReactGA.pageview(location.pathname)
+   }
+   });
+
+
+
+
+
+
+
  const fall_back = (
     <div className="fallback">
      <div className="header"/>

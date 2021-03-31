@@ -3,13 +3,16 @@ import {useHistory} from "react-router-dom";
 import   "./header.css";
 import AddShoppingCartSharpIcon from '@material-ui/icons/AddShoppingCartSharp';
 import {InfoOutlined, People, SearchTwoTone, Settings, Person, Home} from '@material-ui/icons';
+import Avatar from "@material-ui/core/Avatar";
 import Routes from "../../store/routes";
+import {useStore} from "../../store";
 
 
 
 /** Logged in Header */
 const LoggedIn = () => {
- const history = useHistory()
+ const history = useHistory();
+ const [{auth}] = useStore();
  const path = history.location.pathname
  const {sell, search,buyers, AboutUs, toAppInfo,settings,toProfile, buy, backHome, toPeople} = Routes()
 
@@ -26,6 +29,9 @@ return(
          { path === "/buyers" ?
            <p><span className="Applogo" style={{color:"gray"}}> <AddShoppingCartSharpIcon fontSize="default"/> </span></p> : <p> <span className="Applogo"  onClick={buyers}><AddShoppingCartSharpIcon fontSize="default"/></span></p>}
 
+
+          <p onClick={search}> <span className="Applogo" ><SearchTwoTone/></span> </p>
+
     </div>
 
     <input className="menu_btn" type="checkbox" id="loggedIn_menu_btn"/>
@@ -34,13 +40,14 @@ return(
     </label>
 
         <ul className="menu">
-
+              <div onClick={toProfile}>
+                   <div className="header_avatar"> <Avatar src={auth?.user?.image}/> <p>My profile</p> </div>
+              </div>
               <li onClick={sell}> SELL</li>
               <li onClick={buy}> BUY </li>
               <li onClick={toPeople}> <People/> <p>People</p> </li>
               <li onClick={search} > <SearchTwoTone/> <p>Search</p></li>
 
-              <li onClick={toProfile}><div><Person/> <p>My profile</p> </div> </li>
               <li onClick={settings}> <Settings/> <p>Edit Profile</p> </li>
 
               <li onClick={AboutUs}> <InfoOutlined/> <p>About Us</p> </li>

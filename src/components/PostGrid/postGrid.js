@@ -3,20 +3,29 @@ import {useHistory} from "react-router-dom";
 import {useStore} from "../../store"
 import { SkeletonPost} from "../../components/Skeleton/skeleton";
 import { weekDay } from '../../Utils/date';
-import DeleteButton from "../Delete/Delete"
+import DeleteButton from "../Delete/Delete";
+import ReactGA from 'react-ga';
 import  "./postGrid.css";
 
 
 /** This is a user post grid component */
-const  Postgrid = ({post})  => {
+const  Postgrid = ({post, likedItem})  => {
       const history = useHistory();
       const [{auth}] = useStore();
       const { id, image, author, crossedPrice, price, title,  createdAt} = post;
       const weekday = weekDay(createdAt);
-
-
       const toSingleItem = () =>{
-          history.push(`/${auth.user.username}/${id}`)
+          ReactGA.event({
+            category:"Item",
+            action:"view",
+            transport:"beacon",
+            label:"Repeat user",
+          })
+          if(likedItem){
+            return
+          }else{
+             history.push(`/${auth.user.username}/${id}`)
+          }
         }
 
  return (
@@ -34,7 +43,7 @@ const  Postgrid = ({post})  => {
         <div className="prices">
            <p><b>{`Ksh ${price}`}</b></p>
            {crossedPrice && <p className="crossed_price" >{`Ksh ${crossedPrice}`}</p>}
-           {(auth.user.username ===  author.username) && <DeleteButton id={id}/>}
+           {(auth.user.username ===  author?.username) && <DeleteButton id={id}/>}
 
         </div>
 

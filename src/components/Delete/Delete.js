@@ -9,6 +9,10 @@ import {DELETE_COMMENT} from "../../graphql/comment";
 import {DELETE_BUY} from "../../graphql/buy";
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import Routes from "../../store/routes";
+import { DeleteForever} from '@material-ui/icons';
+
+
+
 const useStyles = makeStyles((theme) => ({
   btn:{
     border:"none",

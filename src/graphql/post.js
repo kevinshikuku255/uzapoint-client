@@ -57,6 +57,45 @@ export const postLikesPayload = `
 `;
 
 
+/** Records to select from post likes */
+export const likesPostPayload = `
+  likes{
+      id
+      post {
+          id
+          title
+          description
+          features
+          price
+          crossedPrice
+          imagePublicId
+          image
+          createdAt
+      }
+     user {
+        username
+        fullname
+        phonenumber
+        email
+        image
+        imagePublicId
+        location
+        businessdescription
+        createdAt
+    }
+  }
+`;
+
+
+/** Records to select from post views */
+export const postViewsPayload = `
+  views {
+    id
+    user
+    post
+  }
+`;
+
 /** Creates a post */
 export const CREATE_POST = gql`
   mutation(
@@ -82,6 +121,33 @@ export const GET_FOLLOWED_POSTS = gql`
   query($userId: String!, $skip: Int, $limit: Int) {
     getFollowedPosts(userId: $userId, skip: $skip, limit: $limit) {
       count
+      likes {
+          id
+          post {
+              id
+              title
+              description
+              features
+              price
+              crossedPrice
+              image
+              imagePublicId
+              createdAt
+              ${postAuthorPayload}
+              ${postCommentsPayload}
+              ${likesPostPayload}
+              ${postViewsPayload}
+          }
+        user {
+              id
+              username
+              location
+              businessdescription
+              phonenumber
+              email
+              image
+         }
+      }
       posts {
         id
         title
@@ -94,7 +160,8 @@ export const GET_FOLLOWED_POSTS = gql`
         createdAt
         ${postAuthorPayload}
         ${postCommentsPayload}
-        ${postLikesPayload}
+        ${likesPostPayload}
+        ${postViewsPayload}
       }
     }
   }
@@ -118,7 +185,8 @@ export const GET_POSTS = gql`
         createdAt
         ${postAuthorPayload}
         ${postCommentsPayload}
-        ${postLikesPayload}
+        ${likesPostPayload}
+        ${postViewsPayload}
       }
     }
   }
@@ -145,7 +213,7 @@ export const GET_PAGINATED_POSTS = gql`
         createdAt
         ${postAuthorPayload}
         ${postCommentsPayload}
-        ${postLikesPayload}
+        ${likesPostPayload}
       }
     }
   }
@@ -169,7 +237,7 @@ export const GET_POST = gql`
       createdAt
       ${postAuthorPayload}
       ${postCommentsPayload}
-      ${postLikesPayload}
+      ${likesPostPayload}
     }
   }
 `;

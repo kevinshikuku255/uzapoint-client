@@ -16,7 +16,7 @@ return(
  <div className="othertHeader">
       <div className="loggedOutTab">
          <p onClick={goBack}><span className="logo"><ArrowBackIos/></span></p>
-         <p><span className="logo"> {tag} </span></p>
+         <div><span className="logo"> {tag} </span></div>
       </div>
  </div>
 </>

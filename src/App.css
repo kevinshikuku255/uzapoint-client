@@ -78,3 +78,15 @@ a{
   padding: 1rem 0  0  1.5em ;
   background-color: #2ceaff;
 }
+
+button {
+    border: none;
+    background-color:none;
+    padding: 0;
+    display: 0;
+    width: fit-content;
+    outline: none;
+    border-radius: 8px;
+    box-shadow: none;
+    cursor: pointer;
+}

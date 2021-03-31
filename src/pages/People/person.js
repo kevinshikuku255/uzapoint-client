@@ -1,7 +1,6 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import {useHistory} from "react-router-dom";
-import icon from "../../Assets/icon.png";
 import "./people.css";
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,7 +24,7 @@ function Person({person}) {
  return (
   <div className="person_wrapper" onClick={toProfile} >
       <div className="person_header">
-         <Avatar alt="avator" src={image || icon} className={classes.large}/>
+         <Avatar alt="avator" src={image} className={classes.large}/>
          <div className="person_contact">
             <h4>{username}</h4>
             <p>{email}</p>

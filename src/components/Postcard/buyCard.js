@@ -1,7 +1,8 @@
 import React from "react"
 import {useHistory} from "react-router-dom";
 import { timeAgo } from '../../Utils/date';
-import {SkeletonPost, SkeletonSmallAvator} from "../../components/Skeleton/skeleton";
+import {SkeletonPost} from "../../components/Skeleton/skeleton";
+import {Avatar } from '@material-ui/core'
 import {WhatsApp, Call} from "@material-ui/icons";
 import  "./postcard.css"
 
@@ -15,7 +16,7 @@ const BuyCard = ({buy}) => {
        const featuresList = features?.split("#")
        const slicedTitle = title.slice(0,50);
        const internationalPhone = author.phonenumber && `+254${author.phonenumber.substring(1)}`;
-      const toProfile = () =>{
+       const toProfile = () =>{
           history.push(`/${author.username}`)
       }
 
@@ -23,7 +24,7 @@ const BuyCard = ({buy}) => {
   <>
     <div className="postCard">
         <div className="buyer_avator"  onClick={toProfile} >
-          <SkeletonSmallAvator name={author.username} />
+          <Avatar name={author.username} src={author.image} />
           <p> {timeAgo(createdAt)}</p>
         </div>
         <div className="cardMedia" >

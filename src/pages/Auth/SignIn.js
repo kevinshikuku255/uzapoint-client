@@ -11,8 +11,7 @@ import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import Routes from "../../store/routes";
 import Logo from "../../Assets/icon.png";
 import jwtDecode  from 'jwt-decode';
-import useGAEvents from "../../Hooks/useGAEvents"
-
+import ReactGA from 'react-ga';
 
 const useStyles = makeStyles((theme) => ({
   large: {
@@ -83,7 +82,6 @@ function SignIn() {
   const [errors, setErrors] = useState('');
   const [, dispatch] = useStore();
   const classes = useStyles();
-  const GAEventTracker = useGAEvents("Click on item");
   UsedocumentTitle("SignIn");
   const {backHome, toAppInfo, AboutUs, signup} = Routes();
 
@@ -124,9 +122,14 @@ const dispatchAction = (token) =>{
 
   const handleSubmit = (e) => {
       e.preventDefault();
+      ReactGA.event({
+        category:"Form",
+        action:"signin",
+        transport:"beacon",
+        label:"New user",
+      })
       signInUser();
       setErrors('');
-      GAEventTracker("signIn", e.target.children[0].defaultValue);
   };
 
 

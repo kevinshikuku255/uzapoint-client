@@ -1,5 +1,4 @@
 import React from 'react';
-
 import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';

@@ -5,14 +5,14 @@ import { GET_USER_POSTS } from '../../graphql/user';
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import Postgrid from "../../components/PostGrid/postGrid";
 import {useRouteMatch} from 'react-router-dom';
-import { Waypoint} from "react-waypoint";
 import { SkeletonPost,SkeletonBar2 } from "../../components/Skeleton/skeleton";
+import {ShoppingBasketOutlined} from "@material-ui/icons";
 
 /**User items */
 function UserItems() {
 
 const location = useRouteMatch();
-const username = location.params.username.split(':').pop()
+const username = location.params.username.split(':').pop();
 const variables = {
   username,
   skip: 0,
@@ -20,7 +20,12 @@ const variables = {
 };
 
 
- const { data,loading, fetchMore} = useQuery(GET_USER_POSTS,{ variables });
+ const { data,loading, fetchMore} = useQuery(GET_USER_POSTS,
+ {
+   fetchPolicy:"cache-and-network",
+   variables,
+   });
+
 
 let loader;
  if(loading){
@@ -42,37 +47,14 @@ let loader;
    )
  }
 
- const {posts, count, cursor} = data.getUserPosts;
+ const {posts, count} = data?.getUserPosts;
+
 
 const main = (
   <div className="prifileGrid" style={{marginTop:"3.2rem"}}>
           { data && posts.map( (post, i) =>
             <div className="ProfileGridcard" key={`${post.id}${i}`}>
                 { <Postgrid  post={post} count={count}/>}
-                {<hr/>}
-                  { data && i === posts.length - 10 &&
-                    <Waypoint onEnter={
-                      () => fetchMore({
-                        variables:{
-                          after: cursor,
-                          limit: HOME_PAGE_POSTS_LIMIT
-                      },
-                      updateQuery:(pv,{fetchMoreResult}) => {
-                        if(!fetchMoreResult){
-                          return pv
-                        }
-                        return {
-                          getUserPosts:{
-                           __typename: "userPostConnection",
-                           posts: [ ...pv.getUserPosts.posts, ...fetchMoreResult.getUserPosts.posts ],
-                           hasMore: fetchMoreResult.getUserPosts.hasMore,
-                           cursor: fetchMoreResult.getUserPosts.cursor
-                          }
-                        }
-                      }
-                  })} />
-
-                  }
             </div>
             )}
   </div>
@@ -80,7 +62,7 @@ const main = (
 
  return (
   <>
-  <RouteHeader tag={` ${count} items`}/>
+  <RouteHeader tag={<p> <ShoppingBasketOutlined/> {count} available</p> } />
   {loading ? loader : main}
   </>
  )

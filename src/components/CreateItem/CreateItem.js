@@ -106,7 +106,7 @@ const handleCrossedPriceChange = e => setCrossedPrice(e.target.value);
 const handleDescriptionChange = e => setDescription(e.target.value)
 
 
-const handleSubmit = async (e) => {
+const handleSubmit = (e) => {
     e.preventDefault();
     createPost();
     handleReset();

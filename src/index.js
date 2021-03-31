@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { hydrate, render} from 'react-dom';
 import { ApolloProvider } from '@apollo/client';
 import { BrowserRouter} from 'react-router-dom';
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks';
@@ -9,8 +9,6 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { AuthUserProvider} from "./Utils/authUserContext";
-import { AnalyticsProvider } from 'use-analytics';
-import { analytics} from "./Utils/GoogleAnalytics"
 
 // GraphQL HTTP URL
 const API_URL = process.env.REACT_APP_API_URL;
@@ -23,10 +21,11 @@ const websocketApiUrl = WEBSOCKET_API_URL
   : API_URL.replace('https://', 'ws://').replace('http://', 'ws://');
 
 const apolloClient = createApolloClient(API_URL, websocketApiUrl);
+const rootElement = document.getElementById('root');
 
-ReactDOM.render(
+if(rootElement.hasChildNodes()){
+  hydrate(
   <React.StrictMode>
-    <AnalyticsProvider instance={analytics}>
     <ApolloProvider client={apolloClient}>
       <ApolloHooksProvider client={apolloClient}>
           <StoreProvider>
@@ -38,10 +37,26 @@ ReactDOM.render(
           </StoreProvider>
       </ApolloHooksProvider>
     </ApolloProvider>
-    </AnalyticsProvider>
   </React.StrictMode>,
-  document.getElementById('root')
-);
+  document.getElementById('root') // we're running in browser
+  )
+} else {
+  render(
+  <React.StrictMode>
+    <ApolloProvider client={apolloClient}>
+      <ApolloHooksProvider client={apolloClient}>
+          <StoreProvider>
+            <BrowserRouter>
+                <AuthUserProvider>
+                      <App/>
+                </AuthUserProvider>
+            </BrowserRouter>
+          </StoreProvider>
+      </ApolloHooksProvider>
+    </ApolloProvider>
+  </React.StrictMode>,
+  document.getElementById('root') // we're running on server
+  )
+}
 
 serviceWorkerRegistration.register();
-

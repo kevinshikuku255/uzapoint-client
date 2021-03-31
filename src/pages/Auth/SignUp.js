@@ -14,7 +14,7 @@ import Header from "../../components/Header/loggedOut";
 import Footer from "../../components/Footer";
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import Routes from "../../store/routes";
-import useGAEvents from "../../Hooks/useGAEvents"
+import ReactGA from 'react-ga';
 import './Auth.css'
 
 
@@ -86,10 +86,9 @@ function SignUp() {
   const classes = useStyles();
   const [errors, setErrors] = useState("");
   const [ , dispatch] = useStore();
-  const GAEventTracker = useGAEvents("Click on item")
   const [values, setValues] = useState( {username: '', phonenumber: '',  password: '', confirmPassword: ''});
   UsedocumentTitle("SignUp");
-    const {backHome, toAppInfo, AboutUs} = Routes()
+    const {backHome, toAppInfo} = Routes()
 
 /** change hundler... */
   const handleChange = e => {
@@ -131,7 +130,12 @@ const dispatchAction = (token) =>{
 /**Handle form submit */
   const handleSubmit = (e) => {
        e.preventDefault();
-       GAEventTracker("Create Account", `${e.target.children[1].defaultValue} - ${e.target.children[2].defaultValue}`);
+        ReactGA.event({
+          category:"Form",
+          action:"signin",
+          transport:"beacon",
+          label:"Repeat user",
+        })
        signUpUser();
        setErrors("")
   };
@@ -218,13 +222,15 @@ const main = (
                 value={values.confirmPassword}
                 onChange={handleChange}
                 className={classes.signInInput}
-                />
+                /> <br/> <br/>
+
+            <p style={{textAlign:"center"}}>
+             <a href="/aboutus"> Buy signup you  agree with our terms of usage and policy </a>
+            </p>
                <button type="submit" className={classes.signInButton}>  Login </button>
              </>
 
         </form>
-      <p onClick={AboutUs} className={classes.aboutUs} >About us</p>
-
       </div>
 </div>
 

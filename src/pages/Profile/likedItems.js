@@ -6,17 +6,18 @@ import {ShoppingBasket} from "@material-ui/icons";
 
 
 /**AuthUser items */
-function UserItems({posts}) {
-const count = posts.length;
-UsedocumentTitle("Items")
+function LikedItems({posts}) {
+const count = posts.length
+UsedocumentTitle("Items liked")
 
  return (
   <>
-  <RouteHeader tag={ <p><ShoppingBasket/> {count} </p>  }/>
+  <RouteHeader tag={<p><ShoppingBasket/> {count} </p>  }/>
+
   <div className="auth_prifile_grid">
           { posts && posts.map( (post) =>
-            (<div className="ProfileGridcard" key={post.id}>
-                { <Postgrid  post={post} count={count}/>}
+            (<div className="ProfileGridcard" key={post.createdAt}>
+                { <Postgrid  post={post} count={count} likedItem={true} />}
             </div>)
             )}
   </div>
@@ -24,4 +25,4 @@ UsedocumentTitle("Items")
  )
 }
 
-export default UserItems;
+export default LikedItems;

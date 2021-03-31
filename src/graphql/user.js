@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { postCommentsPayload, postAuthorPayload, postLikesPayload} from './post';
+import { postCommentsPayload, postAuthorPayload, likesPostPayload, postViewsPayload} from './post';
 
 /**
  * Records to select from user
@@ -20,8 +20,6 @@ const userPayload = `
 `;
 
 
-
-
 /**
  * Gets specific user by username
  */
@@ -29,6 +27,7 @@ export const GET_USER = gql`
   query( $username: String) {
     getUser( username: $username) {
       ${userPayload}
+      ${likesPostPayload}
       isOnline
       posts {
         id
@@ -42,7 +41,8 @@ export const GET_USER = gql`
         createdAt
         ${postAuthorPayload}
         ${postCommentsPayload}
-        ${postLikesPayload}
+        ${likesPostPayload}
+        ${postViewsPayload}
       }
       buys {
         id
@@ -81,13 +81,13 @@ export const GET_USER = gql`
   }
 `;
 
-/**
- * Gets user posts
- */
+/** Gets user posts */
 export const GET_USER_POSTS = gql`
   query($username: String!, $skip: Int, $limit: Int) {
     getUserPosts(username: $username, skip: $skip, limit: $limit) {
       count
+      cursor
+      hasMore
       posts {
         id
         title
@@ -100,14 +100,15 @@ export const GET_USER_POSTS = gql`
         createdAt
         ${postAuthorPayload}
         ${postCommentsPayload}
-        ${postLikesPayload}
+        ${likesPostPayload}
+        ${postViewsPayload}
       }
     }
   }
 `;
 
 /**
- * Gets user posts
+ * Gets user buys
  */
 export const GET_USER_BUYS = gql`
   query($username: String!, $skip: Int, $limit: Int) {
@@ -134,6 +135,7 @@ export const GET_AUTH_USER = gql`
   query {
     getAuthUser {
       ${userPayload}
+      ${likesPostPayload}
       newNotifications {
         id
         createdAt
@@ -168,11 +170,6 @@ export const GET_AUTH_USER = gql`
         image
         lastMessage
         lastMessageCreatedAt
-      }
-      likes {
-        id
-        user
-        post
       }
       posts {
         id
@@ -251,8 +248,8 @@ export const SEARCH_USERS = gql`
  * Uploads user photo
  */
 export const UPLOAD_PHOTO = gql`
-  mutation($input: UploadUserPhotoInput!) {
-    uploadUserPhoto(input: $input) {
+  mutation( $id: ID! $image: Upload! $isCover: Boolean ) {
+    uploadUserPhoto(id:$id, image: $image, isCover:$isCover) {
       id
     }
   }

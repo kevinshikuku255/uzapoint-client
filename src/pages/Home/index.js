@@ -11,7 +11,6 @@ import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {CreateItem} from "../../components/CreateItem/CreateItem";
 import  "./home.css";
 
-
 /**Home componen */
 function Home() {
         UsedocumentTitle("Home");
@@ -64,9 +63,6 @@ function Home() {
 const { posts } = data.getPosts;
   const main =  posts && (
   <div className="homeContainer">
-           <div className="warning">
-              <h1>WARNING</h1>
-           </div>
           { posts.map( (post, i) => (
             <div className="card"  key={post.id} >
                   { <PostCard  post={post}/>}
@@ -87,6 +83,7 @@ const { posts } = data.getPosts;
   <div className="createItemForm" >
     <CreateItem/>
   </div>}
+
 </>
  )
 }
