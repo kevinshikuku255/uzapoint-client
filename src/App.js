@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import {Route, Switch, useHistory} from 'react-router-dom';
 import './App.css';
 import ReactGA from 'react-ga';
-ReactGA.initialize('G-TZFVVVBBZ4');
+ReactGA.initialize('UA-192087437-1');
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 

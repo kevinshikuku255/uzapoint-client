@@ -65,7 +65,7 @@ const { posts } = data.getPosts;
   <div className="homeContainer">
           { posts.map( (post, i) => (
             <div className="card"  key={post.id} >
-                  { <PostCard  post={post}/>}
+                  { <PostCard  post={post} index={i}/>}
             </div>
             ))}
   </div>

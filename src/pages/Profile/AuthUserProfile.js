@@ -19,6 +19,7 @@ import ImageUpload from "./imageUpload";
 import Netlify from "../../Assets/netlify.jpg";
 import './profile.css';
 import { makeStyles } from '@material-ui/core/styles';
+
 const  useStyles = makeStyles((theme) => ({
   small: {
     width: theme.spacing(8),
@@ -136,6 +137,7 @@ const main =
               src={coverImage || Netlify}
               width="100%"
               height="100%"
+              alt={username}
             />
             <ImageUpload isCover={true} />
             </>}

@@ -26,6 +26,7 @@
     "react-lazyload": "^3.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-simple-image-slider": "^2.0.3",
     "react-waypoint": "^9.0.3",
     "semantic-ui-react": "^2.0.2",
     "subscriptions-transport-ws": "^0.9.18",

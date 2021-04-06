@@ -20,7 +20,7 @@ const variables = {
 };
 
 
- const { data,loading, fetchMore} = useQuery(GET_USER_POSTS,
+ const { data,loading} = useQuery(GET_USER_POSTS,
  {
    fetchPolicy:"cache-and-network",
    variables,

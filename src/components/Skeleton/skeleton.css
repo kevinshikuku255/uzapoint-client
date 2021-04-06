@@ -85,10 +85,9 @@
 
 .SkeletonPost{
  height: 17rem;
- background-color: rgba(137, 43, 226, 0.453);
+ background-color: rgb(255, 255, 255);
  margin:5px 1vw ;
- border-radius: 5px;
- box-shadow: 1px 1px 4px blueviolet;
+ box-shadow:.5px .5px 12px rgba(137, 43, 226, 0.481);
  padding: .5rem;
  display: flex;
  justify-content: center;

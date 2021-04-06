@@ -1,5 +1,5 @@
 import React from 'react';
-import {useRouteMatch, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {useQuery}  from '@apollo/client';
 import LazyLoad from 'react-lazyload';
 
@@ -18,15 +18,13 @@ import {Place, WhatsApp, Call} from "@material-ui/icons";
 
 
 /**single Item component */
-function Item() {
- const path = useRouteMatch();
+function Item({match}) {
  const history = useHistory();
- const _id = path.params.id.split(':').pop();
  UsedocumentTitle("Item")
 
  const { data,loading} = useQuery(GET_POST,{
    variables:{
-     id: _id
+     id: match.params.id
    },
    fetchPolicy:"cache-and-network"
  });

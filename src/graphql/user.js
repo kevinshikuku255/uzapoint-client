@@ -98,10 +98,6 @@ export const GET_USER_POSTS = gql`
         imagePublicId
         image
         createdAt
-        ${postAuthorPayload}
-        ${postCommentsPayload}
-        ${likesPostPayload}
-        ${postViewsPayload}
       }
     }
   }

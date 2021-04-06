@@ -57,8 +57,6 @@ const  Profile = ()  => {
 
 const {username, fullname,location, posts,buys, businessdescription, phonenumber, email, image,coverImage, createdAt} = data.getUser;
 
-console.log(buys)
-
 const weekday = weekDay(createdAt);
 const internationalPhone = phonenumber && `+254${phonenumber.substring(1)}`;
 
@@ -76,12 +74,13 @@ const internationalPhone = phonenumber && `+254${phonenumber.substring(1)}`;
 
 const main =
  <>
-      <div className="coverPhoto" >
+      <div className="userinfor_cover_photo" >
         {<>
         <img
           src={coverImage || Netlify}
           width="100%"
           height="100%"
+          alt={username}
         />
         </>}
       </div>
@@ -150,7 +149,7 @@ const btn = <p onClick={() => setOpen(false)} > <CloseRounded fontSize="large"/>
   <>
      <RouteHeader tag={username}/>
      <main>
-       <Overlay state={open} btn={btn} image={image}/>
+       <Overlay state={open} btn={btn} image={image} alt={username} />
        {loading ? loader : main}
      </main>
   </>

@@ -2,7 +2,7 @@ import React from "react";
 import {useHistory} from "react-router-dom";
 import   "./header.css";
 import AddShoppingCartSharpIcon from '@material-ui/icons/AddShoppingCartSharp';
-import {InfoOutlined, People, SearchTwoTone, Settings, Person, Home} from '@material-ui/icons';
+import {InfoOutlined, People, SearchTwoTone, Settings, Home} from '@material-ui/icons';
 import Avatar from "@material-ui/core/Avatar";
 import Routes from "../../store/routes";
 import {useStore} from "../../store";

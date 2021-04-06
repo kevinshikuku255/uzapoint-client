@@ -3,7 +3,7 @@ import "./acodion.css";
 
 
 /** Image overlay */
-function Overlay({image, btn, state}) {
+function Overlay({image, btn, state, alt}) {
 
  return (
   <div>
@@ -13,7 +13,7 @@ function Overlay({image, btn, state}) {
        image &&
        <>
          <div className="close_btn" > {btn} </div>
-         <img src={image} width="100%" height="50%"/>
+         <img src={image} alt={alt} width="100%" height="50%"/>
        </>
        }
      </div>

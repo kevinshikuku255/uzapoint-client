@@ -7,7 +7,7 @@ import useGAEvents from "../Hooks/useGAEvents"
 function Routes() {
 const history = useHistory();
  const [{auth}] = useStore();
- const GAEventTracker = useGAEvents("Click on item")
+ const GAEventTracker = useGAEvents("Route")
 
 const route = {
       backHome: (e) =>{
