@@ -182,6 +182,7 @@ export const GET_POSTS = gql`
         location
         crossedPrice
         image
+        imagePublicId
         createdAt
         ${postAuthorPayload}
         ${postCommentsPayload}

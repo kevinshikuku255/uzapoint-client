@@ -18,7 +18,7 @@ const Postcard = ({post, index}) => {
           history.push(`/${author.username}`)
       }
 
-
+console.log(imagePublicId)
 /* -------------------------------------------------------------------------- */
       const toPost = async (e) => {
           GAEventTracker("Item view", e.target.currentSrc);

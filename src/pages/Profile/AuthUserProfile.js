@@ -101,7 +101,7 @@ function AuthProfileComponent() {
 
  const postsLikes = posts.map( p => p.likes.length).reduce((cur, prev) => ( cur + prev ),0);
 
-
+console.log(coverImagePublicId);
 
  const toEditProfile = () =>{
    history.push(`/profile/${username}/editprofile`)
@@ -138,7 +138,7 @@ const main =
                <Image
                public-id={coverImagePublicId}
                loading="lazy">
-               <Transformation height="100%" width="100%" crop="fill"/>
+               <Transformation height="20%" width="100%" crop="fill"/>
                </Image>
                <ImageUpload isCover={true} />
             </>
