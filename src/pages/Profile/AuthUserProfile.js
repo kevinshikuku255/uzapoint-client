@@ -18,7 +18,8 @@ import {  Skeleton } from "../../components/Skeleton/skeleton";
 import ImageUpload from "./imageUpload";
 import './profile.css';
 import { makeStyles } from '@material-ui/core/styles';
-import {Image, Transformation} from 'cloudinary-react';
+import Netlify from "../../Assets/netlify.jpg"
+import {Image, Transformation, Placeholder} from 'cloudinary-react';
 
 const  useStyles = makeStyles((theme) => ({
   small: {
@@ -135,12 +136,14 @@ const main =
          <div className="coverPhoto" >
 
             {<>
+               {coverImagePublicId ?
                <Image
                   publicId={coverImagePublicId}
                   loading="lazy"
                   >
-                  <Transformation height="20%" width="100%" crop="fill"/>
-               </Image>
+                  <Transformation height="40%" width="100%" crop="fill"/>
+                   <Placeholder type="blur"/>
+               </Image> : <img src={Netlify} width="100%" alt={username} />}
                <ImageUpload isCover={true} />
             </>
             }

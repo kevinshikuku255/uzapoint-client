@@ -1,7 +1,6 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
 import {useQuery}  from '@apollo/client';
-import LazyLoad from 'react-lazyload';
 
 import {GET_POST } from '../../graphql/post';
 import RouteHeader from "../../components/Header/routeHeader";
@@ -13,7 +12,7 @@ import {CreateComment} from "../../components/CreateCommnet/createComment";
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {SkeletonPost,SkeletonPostLoader, SkeletonBar2} from "../../components/Skeleton/skeleton";
 import {Place, WhatsApp, Call} from "@material-ui/icons";
-
+import {Image, Transformation, Placeholder} from 'cloudinary-react';
 
 
 
@@ -46,7 +45,7 @@ function Item({match}) {
 
 
 
-const { id , image,likes, price,crossedPrice, title, author, description,
+const { id , imagePublicId,likes, price,crossedPrice, title, author, description,
         features,location, comments, createdAt} = data.getPost;
 
 const weekday = weekDay(createdAt);
@@ -60,16 +59,16 @@ const toProfile = () =>{
   <>
     <div className="itemCard">
         <div className="cardMedia" >
-            {title && image && <div className="cardTitle">  {title}</div>}
-            { image ?
-            <LazyLoad height="50%" >
-            <img
-              alt="alt_tag"
-              src={image}
-              effect="blur"
-              width="100%"
-            /> </LazyLoad> : <SkeletonPost title={slicedTitle}/> }
-       </div>
+            {title && imagePublicId && <div className="cardTitle">  {title}</div>}
+            { imagePublicId ?
+               <Image
+                  publicId={imagePublicId}
+                  loading="lazy"
+                  >
+                  <Placeholder type="blur"/>
+                  <Transformation height="50%" width="100%" crop="fill"/>
+               </Image> : <SkeletonPost title={`${slicedTitle}...`}/> }
+         </div>
 
         <div className="itemStats">
           <p>{likes.length} likes</p>

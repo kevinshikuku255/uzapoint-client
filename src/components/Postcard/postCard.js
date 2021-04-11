@@ -4,7 +4,8 @@ import { timeAgo } from '../../Utils/date';
 import useGaEvents from "../../Hooks/useGAEvents";
 import  "./postcard.css"
 import {SkeletonPost} from "../Skeleton/skeleton";
-import {Image, Transformation} from 'cloudinary-react';
+import {Image, Transformation, Placeholder} from 'cloudinary-react';
+import {Avatar } from '@material-ui/core'
 
 /**This is a post... */
 const Postcard = ({post}) => {
@@ -30,9 +31,10 @@ const Postcard = ({post}) => {
   <>
 
     <div className="postCard">
-        <div className="B" onClick={toProfile} >
-                <h4 style={{color:"skyblue"}} >{author.username}</h4>
-                <p> {timeAgo(createdAt)}</p>
+        <div className="buyer_avator"  onClick={toProfile} >
+          <Avatar name={author.username} src={author.image} />
+          <p> {author.username}</p>
+          <p style={{marginLeft:".5rem"}} > {timeAgo(createdAt)}</p>
         </div>
         <div  onClick={toPost} >
          {imagePublicId ? <div className="cardMedia">
@@ -40,6 +42,7 @@ const Postcard = ({post}) => {
                <Image
                   publicId={imagePublicId}
                   loading="lazy">
+                  <Placeholder type="blur"/>
                   <Transformation height="50%" width="100%" crop="fill"/>
                </Image>
              }

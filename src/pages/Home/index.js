@@ -22,7 +22,7 @@ function Home() {
 
         const { data,loading} = useQuery(GET_POSTS,{
           variables,
-          fetchPolicy:"cache-and-network",
+          // fetchPolicy:"cache-and-network",
           });
 
         const skeleton = (

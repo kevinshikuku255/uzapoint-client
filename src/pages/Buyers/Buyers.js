@@ -27,7 +27,7 @@ function Buyers() {
 
         const { data,loading, fetchMore } = useQuery(GET_PAGINATED_BUYS,{
           variables,
-          fetchPolicy:"cache-and-network",
+          // fetchPolicy:"cache-and-network",
           notifyOnNetworkStatusChange:true,
           });
         const skeleton = (

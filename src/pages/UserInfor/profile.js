@@ -12,7 +12,7 @@ import { weekDay } from '../../Utils/date';
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {SkeletonBar2, SkeletonPost} from "../../components/Skeleton/skeleton";
 import Overlay from "../../components/Acordion/Overlay";
-import Netlify from "../../Assets/netlify.jpg";
+import {Image, Transformation, Placeholder} from 'cloudinary-react';
 
 const  useStyles = makeStyles((theme) => ({
   large: {
@@ -33,7 +33,6 @@ const  Profile = ()  => {
  const history = useHistory();
  UsedocumentTitle("Profile");
  const [open, setOpen] = useState(false)
-//  const path = history.location.pathname
 
 
  const { data,loading} = useQuery(GET_USER,{
@@ -55,7 +54,7 @@ const  Profile = ()  => {
          )
       }
 
-const {username, fullname,location, posts,buys, businessdescription, phonenumber, email, image,coverImage, createdAt} = data.getUser;
+const {username, fullname,location, posts,buys, businessdescription, phonenumber, email,image, imagePublicId,coverImagePublicId, createdAt} = data.getUser;
 
 const weekday = weekDay(createdAt);
 const internationalPhone = phonenumber && `+254${phonenumber.substring(1)}`;
@@ -74,19 +73,29 @@ const internationalPhone = phonenumber && `+254${phonenumber.substring(1)}`;
 
 const main =
  <>
+      {coverImagePublicId &&
       <div className="userinfor_cover_photo" >
         {<>
-        <img
-          src={coverImage || Netlify}
-          width="100%"
-          height="100%"
-          alt={username}
-        />
+          <Image
+            publicId={coverImagePublicId}
+            loading="lazy"
+            >
+            <Transformation height="20%" width="100%" crop="fill"/>
+            <Placeholder type="blur"/>
+          </Image>
         </>}
-      </div>
+      </div>}
    <div className="profile_container">
      <div className="avator">
-          <Avatar alt="logo" src={image} className={classes.large} onClick={() => setOpen(true)}/>
+          { imagePublicId ? <Image
+            publicId={imagePublicId}
+            loading="lazy"
+            onClick={() => setOpen(true)}
+            >
+            <Transformation height="30rem" width="30rem" crop="fill" radius="50%"/>
+            <Placeholder type="blur"/>
+          </Image>: <Avatar alt="logo" className={classes.large}/>}
+
           <div>
               <p>{fullname ? fullname : username}</p>
               {phonenumber && <p>  {`phone:${phonenumber}` }</p>}
@@ -124,7 +133,7 @@ const main =
       </div>}
 
       <div className="items" >
-        { posts.length &&
+        { posts.length > 0 &&
         <div>
             <p>Selling {`${posts.length}`} items</p>
             <p onClick={itemsLink}>
@@ -132,7 +141,7 @@ const main =
             </p>
         </div>}
         <div>
-            {buys.length && <div>
+            {buys.length > 0 && <div>
                <p>Buying  {`${buys.length}`} items</p>
                <p onClick={buysLink}> <button>See all</button></p>
             </div>}

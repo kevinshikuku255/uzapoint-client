@@ -1,20 +1,13 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import {useHistory} from "react-router-dom";
+import Avatar from '@material-ui/core/Avatar';
 import "./people.css";
+import {Image, Transformation, Placeholder} from 'cloudinary-react';
 
-import { makeStyles } from '@material-ui/core/styles';
-const  useStyles = makeStyles((theme) => ({
-  large: {
-    width: theme.spacing(4),
-    height: theme.spacing(4),
-  },
-}));
 
 function Person({person}) {
- const {username, image, phonenumber} = person;
+ const {username, imagePublicId, phonenumber} = person;
  const history = useHistory();
- const classes = useStyles();
 
  const toProfile = () =>{
      history.push(`/${username}`)
@@ -24,7 +17,13 @@ function Person({person}) {
  return (
   <div className="person_wrapper" onClick={toProfile} >
       <div className="person_header">
-         <Avatar alt="avator" src={image} className={classes.large}/>
+         {imagePublicId ? <Image
+            publicId={imagePublicId}
+            loading="lazy"
+            >
+            <Transformation height="20rem" width="20rem" crop="fill" radius="50%"/>
+            <Placeholder type="blur"/>
+          </Image>: <Avatar alt="avator"/>}
          <div className="person_contact">
             <h4>{username}</h4>
             <p>{phonenumber}</p>
