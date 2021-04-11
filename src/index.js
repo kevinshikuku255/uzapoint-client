@@ -9,6 +9,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { AuthUserProvider} from "./Utils/authUserContext";
+import {CloudinaryContext} from 'cloudinary-react';
 
 // GraphQL HTTP URL
 const API_URL = process.env.REACT_APP_API_URL;
@@ -22,6 +23,7 @@ const websocketApiUrl = WEBSOCKET_API_URL
 
 const apolloClient = createApolloClient(API_URL, websocketApiUrl);
 const rootElement = document.getElementById('root');
+const claudName = process.env.CLOUDINARY_CLOUD_NAME
 
 if(rootElement.hasChildNodes()){
   hydrate(
@@ -31,7 +33,9 @@ if(rootElement.hasChildNodes()){
           <StoreProvider>
             <BrowserRouter>
                 <AuthUserProvider>
+                   <CloudinaryContext cloudName={claudName}>
                       <App/>
+                  </CloudinaryContext>
                 </AuthUserProvider>
             </BrowserRouter>
           </StoreProvider>
