@@ -13,6 +13,7 @@ const Postcard = ({post}) => {
       const GAEventTracker = useGaEvents("Click on item");
 
       const {id , author, imagePublicId, price,crossedPrice, title, createdAt} =  post ;
+      console.log(imagePublicId)
 
       const slicedTitle = title.slice(0,50);
       const toProfile = () =>{
