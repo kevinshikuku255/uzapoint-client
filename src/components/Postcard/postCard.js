@@ -11,13 +11,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 const Postcard = ({post}) => {
       const history = useHistory();
       const GAEventTracker = useGaEvents("Click on item");
-
-<<<<<<< HEAD
       const {id , author, image, price,crossedPrice, title, createdAt} =  post ;
-=======
-      const {id , author, imagePublicId, price,crossedPrice, title, createdAt} =  post ;
-      console.log(imagePublicId)
->>>>>>> 55cce6c29bfdacf9b0616a65b26650c220ce0cb5
 
       const slicedTitle = title.slice(0,50);
       const toProfile = () =>{
