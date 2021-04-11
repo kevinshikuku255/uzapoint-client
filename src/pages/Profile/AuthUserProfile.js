@@ -16,9 +16,9 @@ import Clients from "./clients"
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {  Skeleton } from "../../components/Skeleton/skeleton";
 import ImageUpload from "./imageUpload";
-import Netlify from "../../Assets/netlify.jpg";
 import './profile.css';
 import { makeStyles } from '@material-ui/core/styles';
+import {Image, Transformation} from 'cloudinary-react';
 
 const  useStyles = makeStyles((theme) => ({
   small: {
@@ -97,9 +97,10 @@ function AuthProfileComponent() {
            </>
          )
       }
- const {  username, email, phonenumber, fullname, posts, businessdescription, image ,coverImage, likes, buys} = data.getUser;
+ const {  username, email, phonenumber, fullname, posts, businessdescription, image,coverImagePublicId, likes, buys} = data.getUser;
 
  const postsLikes = posts.map( p => p.likes.length).reduce((cur, prev) => ( cur + prev ),0);
+
 
 
  const toEditProfile = () =>{
@@ -132,15 +133,17 @@ const main =
        { tab === 0 &&
         <>
          <div className="coverPhoto" >
+
             {<>
-            <img
-              src={coverImage || Netlify}
-              width="100%"
-              height="100%"
-              alt={username}
-            />
-            <ImageUpload isCover={true} />
-            </>}
+               <Image
+               public-id={coverImagePublicId}
+               loading="lazy">
+               <Transformation height="100%" width="100%" crop="fill"/>
+               </Image>
+               <ImageUpload isCover={true} />
+            </>
+            }
+
          </div>
         <div className="profile_Infor">
             <div className="bioData">

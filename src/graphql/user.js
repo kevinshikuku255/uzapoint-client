@@ -204,6 +204,7 @@ export const GET_USERS = gql`
         phonenumber
         email
         image
+        imagePublicId
         following {
           id
           user
@@ -236,6 +237,7 @@ export const SEARCH_USERS = gql`
       id
       username
       image
+      imagePublicId
     }
   }
 `;

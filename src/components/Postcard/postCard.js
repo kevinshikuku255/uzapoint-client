@@ -1,17 +1,17 @@
 import React from "react"
 import {useHistory} from "react-router-dom";
 import { timeAgo } from '../../Utils/date';
-import LazyLoad from 'react-lazyload';
 import useGaEvents from "../../Hooks/useGAEvents";
 import  "./postcard.css"
 import {SkeletonPost} from "../Skeleton/skeleton";
+import {Image, Transformation} from 'cloudinary-react';
 
 /**This is a post... */
 const Postcard = ({post, index}) => {
       const history = useHistory();
       const GAEventTracker = useGaEvents("Click on item");
 
-      const {id , author, image, price,crossedPrice, title, createdAt} =  post ;
+      const {id , author, imagePublicId, price,crossedPrice, title, createdAt} =  post ;
 
       const slicedTitle = title.slice(0,50);
       const toProfile = () =>{
@@ -36,19 +36,17 @@ const Postcard = ({post, index}) => {
                 <p> {timeAgo(createdAt)}</p>
         </div>
         <div  onClick={toPost} >
-         {image ? <div className="cardMedia">
-            { image &&
-            <LazyLoad height="50%" >
-            <img
-              alt={title}
-              src={image}
-              width="100%"
-              />
-            </LazyLoad>
+         {imagePublicId ? <div className="cardMedia">
+            { imagePublicId &&
+               <Image
+                  public-id={imagePublicId}
+                  loading="lazy">
+                  <Transformation height="50%" width="100%" crop="fill"/>
+               </Image>
              }
         </div> : <SkeletonPost title={slicedTitle}/> }
 
-        {image && title &&
+        {imagePublicId && title &&
         <div className="itemTitle">
           {title}
         </div>}
