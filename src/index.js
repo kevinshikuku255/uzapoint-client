@@ -23,7 +23,7 @@ const websocketApiUrl = WEBSOCKET_API_URL
 
 const apolloClient = createApolloClient(API_URL, websocketApiUrl);
 const rootElement = document.getElementById('root');
-const cloudName = process.env.CLOUDINARY_CLOUD_NAME
+// const cloudName = process.env.CLOUDINARY_CLOUD_NAME
 
 if(rootElement.hasChildNodes()){
   hydrate(
@@ -33,7 +33,7 @@ if(rootElement.hasChildNodes()){
           <StoreProvider>
             <BrowserRouter>
                 <AuthUserProvider>
-                   <CloudinaryContext cloudName={cloudName}>
+                   <CloudinaryContext cloudName="dsvun26ld">
                       <App/>
                   </CloudinaryContext>
                 </AuthUserProvider>
@@ -52,7 +52,7 @@ if(rootElement.hasChildNodes()){
           <StoreProvider>
             <BrowserRouter>
                 <AuthUserProvider>
-                    <CloudinaryContext cloudName={cloudName}>
+                    <CloudinaryContext cloudName="dsvun26ld">
                       <App/>
                     </CloudinaryContext>
                 </AuthUserProvider>

@@ -12,7 +12,7 @@ import { weekDay } from '../../Utils/date';
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {SkeletonBar2, SkeletonPost} from "../../components/Skeleton/skeleton";
 import Overlay from "../../components/Acordion/Overlay";
-import {Image, Transformation, Placeholder} from 'cloudinary-react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const  useStyles = makeStyles((theme) => ({
   large: {
@@ -54,7 +54,7 @@ const  Profile = ()  => {
          )
       }
 
-const {username, fullname,location, posts,buys, businessdescription, phonenumber, email,image, imagePublicId,coverImagePublicId, createdAt} = data.getUser;
+const {username, fullname,location, posts,buys, businessdescription, phonenumber, email, image,coverImage, createdAt} = data.getUser;
 
 const weekday = weekDay(createdAt);
 const internationalPhone = phonenumber && `+254${phonenumber.substring(1)}`;
@@ -73,29 +73,21 @@ const internationalPhone = phonenumber && `+254${phonenumber.substring(1)}`;
 
 const main =
  <>
-      {coverImagePublicId &&
+      {coverImage &&
       <div className="userinfor_cover_photo" >
         {<>
-          <Image
-            publicId={coverImagePublicId}
+          <LazyLoadImage
+            alt={username}
+            effect="blur"
+            height="30%"
+            width="100%"
             loading="lazy"
-            >
-            <Transformation height="20%" width="100%" crop="fill"/>
-            <Placeholder type="blur"/>
-          </Image>
+            src={coverImage}/>
         </>}
       </div>}
    <div className="profile_container">
      <div className="avator">
-          { imagePublicId ? <Image
-            publicId={imagePublicId}
-            loading="lazy"
-            onClick={() => setOpen(true)}
-            >
-            <Transformation height="30rem" width="30rem" crop="fill" radius="50%"/>
-            <Placeholder type="blur"/>
-          </Image>: <Avatar alt="logo" className={classes.large}/>}
-
+          {<Avatar alt="logo" src={image} className={classes.large}/>}
           <div>
               <p>{fullname ? fullname : username}</p>
               {phonenumber && <p>  {`phone:${phonenumber}` }</p>}

@@ -19,7 +19,7 @@ import ImageUpload from "./imageUpload";
 import './profile.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Netlify from "../../Assets/netlify.jpg"
-import {Image, Transformation, Placeholder} from 'cloudinary-react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const  useStyles = makeStyles((theme) => ({
   small: {
@@ -98,11 +98,10 @@ function AuthProfileComponent() {
            </>
          )
       }
- const {  username, email, phonenumber, fullname, posts, businessdescription, image,coverImagePublicId, likes, buys} = data.getUser;
+ const {  username, email, phonenumber, fullname, posts, businessdescription, image,coverImage, likes, buys} = data.getUser;
 
  const postsLikes = posts.map( p => p.likes.length).reduce((cur, prev) => ( cur + prev ),0);
 
-console.log(coverImagePublicId);
 
  const toEditProfile = () =>{
    history.push(`/profile/${username}/editprofile`)
@@ -136,14 +135,15 @@ const main =
          <div className="coverPhoto" >
 
             {<>
-               {coverImagePublicId ?
-               <Image
-                  publicId={coverImagePublicId}
-                  loading="lazy"
-                  >
-                  <Transformation height="40%" width="100%" crop="fill"/>
-                   <Placeholder type="blur"/>
-               </Image> : <img src={Netlify} width="100%" alt={username} />}
+               {coverImage ?
+              <LazyLoadImage
+                alt={username}
+                effect="blur"
+                height="30%"
+                width="100%"
+                loading="lazy"
+                src={coverImage}/>
+               : <img src={Netlify} width="100%" alt={username} />}
                <ImageUpload isCover={true} />
             </>
             }
