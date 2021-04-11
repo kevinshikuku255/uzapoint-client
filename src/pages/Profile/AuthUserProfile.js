@@ -136,9 +136,9 @@ const main =
 
             {<>
                <Image
-               public-id={coverImagePublicId}
-               loading="lazy">
-               <Transformation height="20%" width="100%" crop="fill"/>
+                  publicId={coverImagePublicId}
+                  loading="lazy">
+                  <Transformation height="20%" width="100%" crop="fill"/>
                </Image>
                <ImageUpload isCover={true} />
             </>

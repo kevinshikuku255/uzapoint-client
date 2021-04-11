@@ -7,7 +7,7 @@ import {SkeletonPost} from "../Skeleton/skeleton";
 import {Image, Transformation} from 'cloudinary-react';
 
 /**This is a post... */
-const Postcard = ({post, index}) => {
+const Postcard = ({post}) => {
       const history = useHistory();
       const GAEventTracker = useGaEvents("Click on item");
 
@@ -18,7 +18,6 @@ const Postcard = ({post, index}) => {
           history.push(`/${author.username}`)
       }
 
-console.log(imagePublicId)
 /* -------------------------------------------------------------------------- */
       const toPost = async (e) => {
           GAEventTracker("Item view", e.target.currentSrc);
@@ -39,7 +38,7 @@ console.log(imagePublicId)
          {imagePublicId ? <div className="cardMedia">
             { imagePublicId &&
                <Image
-                  public-id={imagePublicId}
+                  publicId={imagePublicId}
                   loading="lazy">
                   <Transformation height="50%" width="100%" crop="fill"/>
                </Image>
