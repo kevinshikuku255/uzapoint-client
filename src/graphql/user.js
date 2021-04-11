@@ -341,6 +341,7 @@ export const USER_SUGGESTIONS = gql`
       id
       username
       image
+      phonenumber
     }
   }
 `;

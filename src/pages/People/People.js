@@ -2,8 +2,7 @@ import React from 'react';
 import {useStore} from "../../store"
 import {useQuery} from "@apollo/client";
 import RouteHeader from "../../components/Header/routeHeader";
-import {GET_USERS} from "../../graphql/user";
-import {PEOPLE_PAGE_USERS_LIMIT} from "../../constants/DataLimit";
+import {USER_SUGGESTIONS} from "../../graphql/user";
 import Person from "./person";
 import { PeopleSkeleton } from "../../components/Skeleton/skeleton";
 import { EmojiEmotionsSharp } from "@material-ui/icons";
@@ -14,15 +13,10 @@ function People() {
 
    const variables = {
     userId: auth.user.id,
-    skip: 0,
-    limit: PEOPLE_PAGE_USERS_LIMIT,
   };
 
-  const {data, loading} = useQuery(GET_USERS, {
+  const {data, loading} = useQuery(USER_SUGGESTIONS, {
           variables,
-          fetchPolicy:"cache-first",
-          pollInterval:500000,
-          notifyOnNetworkStatusChange:true,
     });
 
   let loader;
@@ -30,6 +24,7 @@ function People() {
    return(
      loader = <div>
                 <RouteHeader tag={"People"}/>
+                <br/> <br/>
                 <div className="people_loader">
                    <PeopleSkeleton/>
                    <PeopleSkeleton/>
@@ -45,7 +40,7 @@ function People() {
 
 
 
- const people = data.getUsers.users;
+const people = data.suggestPeople;
 
 let noPeople;
 if(!people.length && !loading){

@@ -50,12 +50,13 @@ let loader;
  const {posts, count} = data?.getUserPosts;
 
 
+
 const main = (
   <div className="prifileGrid" style={{marginTop:"3.2rem"}}>
           { data && posts.map( (post, i) =>
-            <div className="ProfileGridcard" key={`${post.id}${i}`}>
+            (<div className="ProfileGridcard" key={`${post.id}${i}`}>
                 { <Postgrid  post={post} count={count}/>}
-            </div>
+            </div>)
             )}
   </div>
 )

@@ -136,9 +136,9 @@ border-bottom: 5px solid rgba(0, 0, 0, 0.124);
 
 
 .sugested_people{
-  height: 6rem;
-  width: auto;
-  background-color: red;
+  position: absolute;
+  top:5rem;
+
 }
 
 

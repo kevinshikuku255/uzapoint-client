@@ -54,7 +54,7 @@ let loader;
 const main = (
   <div className="prifilebuyGrid" style={{marginTop:"3.2rem"}}>
           { data && buys.map( (buy, i) =>
-            <div className="ProfileGridcard" key={buy.id}>
+            (<div className="ProfileGridcard" key={buy.id}>
                 { <Buygrid  buy={buy} count={count}/>}
                   { i === buys.length - 10 &&
                     <Waypoint onEnter={
@@ -79,7 +79,7 @@ const main = (
                   })} />
 
                   }
-            </div>
+            </div>)
             )}
   </div>
 )

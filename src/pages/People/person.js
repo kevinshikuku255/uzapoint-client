@@ -12,7 +12,7 @@ const  useStyles = makeStyles((theme) => ({
 }));
 
 function Person({person}) {
- const {username, image, email, phonenumber, location, businessdescription} = person;
+ const {username, image, phonenumber} = person;
  const history = useHistory();
  const classes = useStyles();
 
@@ -27,15 +27,8 @@ function Person({person}) {
          <Avatar alt="avator" src={image} className={classes.large}/>
          <div className="person_contact">
             <h4>{username}</h4>
-            <p>{email}</p>
             <p>{phonenumber}</p>
          </div>
-      </div>
-      <div className="peron_more" >
-       <p>{businessdescription}</p> <br/>
-       {location && ( <div> <h6>Located</h6> <p>{location}</p> </div> )}
-
-
       </div>
   </div>
  )

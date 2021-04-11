@@ -42,11 +42,6 @@ function App() {
    });
 
 
-
-
-
-
-
  const fall_back = (
     <div className="fallback">
      <div className="header"/>
