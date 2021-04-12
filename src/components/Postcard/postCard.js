@@ -6,11 +6,13 @@ import  "./postcard.css"
 import {SkeletonPost} from "../Skeleton/skeleton";
 import {Avatar } from '@material-ui/core';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import {WhatsApp, Call} from "@material-ui/icons";
 
 /**This is a post... */
 const Postcard = ({post}) => {
       const history = useHistory();
       const GAEventTracker = useGaEvents("Click on item");
+
       const {id , author, image, price,crossedPrice, title, createdAt} =  post ;
 
       const slicedTitle = title.slice(0,50);
@@ -35,7 +37,7 @@ const Postcard = ({post}) => {
           <p> {author.username}</p>
           <p style={{marginLeft:"2rem"}} > {timeAgo(createdAt)}</p>
         </div>
-        <div  onClick={toPost} >
+        <div>
          {image ? <div className="cardMedia">
             { image &&
               <LazyLoadImage
@@ -43,10 +45,11 @@ const Postcard = ({post}) => {
                 effect="blur"
                 height="50%"
                 width="100%"
+                onClick={toPost}
                 loading="lazy"
                 src={image}/>
              }
-        </div> : <SkeletonPost title={slicedTitle}/> }
+        </div> : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div> }
 
         {image && title &&
         <div className="itemTitle">
@@ -62,6 +65,19 @@ const Postcard = ({post}) => {
           </div>
         </div>
         }
+
+        <div className="buy_itemBtns">
+            <a className="buy_button" href={`https://api.whatsapp.com/send?phone=${"internationalPhone"}`}>
+              <WhatsApp/>
+              <p>Whatsapp</p>
+            </a>
+            <a href={`tel:${author.phonenumber}`} className="buy_button">
+                <Call/>
+                <p>Call me</p>
+            </a>
+            <p onClick={toProfile} className="buy_profilebutton">My profile</p>
+        </div>
+
       </div>
     </div>
   </>

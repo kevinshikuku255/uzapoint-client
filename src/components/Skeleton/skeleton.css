@@ -87,7 +87,7 @@
  height: 17rem;
  background-color: rgb(255, 255, 255);
  margin:5px 1vw ;
- box-shadow:.5px .5px 12px rgba(137, 43, 226, 0.481);
+ box-shadow:.5px .5px 3px #892be27b;
  padding: .5rem;
  display: flex;
  justify-content: center;

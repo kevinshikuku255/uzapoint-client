@@ -29,6 +29,9 @@ return(
          { path === "/buyers" ?
            <p><span className="Applogo" style={{color:"gray"}}> <AddShoppingCartSharpIcon fontSize="default"/> </span></p> : <p> <span className="Applogo"  onClick={buyers}><AddShoppingCartSharpIcon fontSize="default"/></span></p>}
 
+         { path === "/buyers" ?
+               <p><span className="Applogo" style={{color:"gray"}}> <AddShoppingCartSharpIcon fontSize="default"/> </span></p> : <p> <span className="Applogo"  onClick={buyers}><AddShoppingCartSharpIcon fontSize="default"/></span></p>}
+
 
           <p onClick={search}> <span className="Applogo" ><SearchTwoTone/></span> </p>
 

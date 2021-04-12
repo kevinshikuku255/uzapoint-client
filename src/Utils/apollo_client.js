@@ -4,14 +4,13 @@ import {
   ApolloLink,
   split,
 } from "@apollo/client";
-import { persistCache } from 'apollo3-cache-persist';
+// import { persistCache } from 'apollo3-cache-persist';
 import { setContext } from '@apollo/client/link/context';
 import { createUploadLink } from "apollo-upload-client";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { onError } from "@apollo/client/link/error";
 import { RetryLink } from "@apollo/client/link/retry";
 import { getMainDefinition } from 'apollo-utilities';
-
 
 
 
@@ -99,12 +98,12 @@ export const createApolloClient = (API_URL, websocketApiUrl) => {
 );
 
 
-const init = async () => {
-      await persistCache({
-      cache,
-      storage: window.localStorage,
-    });
-}
+// const persist_cache = async () => {
+//       await persistCache({
+//       cache,
+//       storage: window.localStorage,
+//     });
+// }
 
 
 
@@ -132,8 +131,8 @@ const wsLink = new WebSocketLink({
   wsLink.subscriptionClient.maxConnectTimeGenerator.duration = () =>
     wsLink.subscriptionClient.maxConnectTimeGenerator.max;
 
-  // Split links, so we can send data to each link
-  // depending on what kind of operation is being sent
+  /* Split links, so we can send data to each link
+   depending on what kind of operation is being sent */
   const terminatingLink = split(
     ({ query }) => {
       const { kind, operation } = getMainDefinition(query);
@@ -143,7 +142,7 @@ const wsLink = new WebSocketLink({
     uploadLink
   );
 
-  init()
+  // persist_cache();
 /* -------------------------------------------------------------------------- */
   return new ApolloClient({
     link: ApolloLink.from([errorLink, authLink, retryLink, terminatingLink]),

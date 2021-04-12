@@ -10,6 +10,30 @@
 
 
 
+.snack_bar{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  z-index: 13;
+  margin: auto;
+  margin-top: 3.8rem;
+  width:fit-content !important;
+  height: 1rem !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media(min-width:48em){
 .homeContainer{

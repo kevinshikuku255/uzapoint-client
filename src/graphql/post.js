@@ -301,3 +301,25 @@ export const DELETE_POST = gql`
     }
   }
 `;
+
+
+/**
+ * Get new post updates in real time
+ */
+export const GET_NEW_POST_SUBSCRIPTION = gql`
+  subscription {
+  newPost {
+        id
+        title
+        description
+        features
+        location
+        price
+        crossedPrice
+        image
+        imagePublicId
+        createdAt
+        updatedAt
+    }
+  }
+`;

@@ -5,7 +5,7 @@ import AddShoppingCartSharpIcon from '@material-ui/icons/AddShoppingCartSharp';
 import Routes from "../../store/routes";
 import   "./header.css";
 /**Logged out Header... */
-const LoggedOut = () => {
+const LoggedOut = ({notification_icon}) => {
 const history = useHistory()
 const path = history.location.pathname;
 const {signup, Login, backHome, buyers } = Routes()
@@ -18,13 +18,16 @@ return(
 <>
  <div className="loggedOutHeader">
    <div className="loggedOutTab">
+
       { path === "/" ?
       <p><span className="logo"> <Home/> </span></p> :
       <p  onClick={backHome}><span className="logo"><Home/></span></p>}
-      {" "}
+
       { path === "/buyers" ?
       <p><span className="logo"> <AddShoppingCartSharpIcon/> </span></p> :
       <p  onClick={buyers}><span className="logo"><AddShoppingCartSharpIcon/></span></p>}
+
+      {<p><span className="logo">{notification_icon}</span></p>}
 
    </div>
 

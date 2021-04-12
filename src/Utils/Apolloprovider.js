@@ -27,10 +27,10 @@ const apolloClient = createApolloClient(API_URL, websocketApiUrl);
 
 export default(
    <ApolloProvider client = {apolloClient}>
-     <ApolloHooksProvider client = {apolloClient}>
-       <StoreProvider>
-          <App/>
-        </StoreProvider>
-   </ApolloHooksProvider>
+        <ApolloHooksProvider client = {apolloClient}>
+          <StoreProvider>
+              <App/>
+            </StoreProvider>
+      </ApolloHooksProvider>
    </ApolloProvider>
 )
