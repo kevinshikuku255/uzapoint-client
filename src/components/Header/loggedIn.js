@@ -10,7 +10,7 @@ import {useStore} from "../../store";
 
 
 /** Logged in Header */
-const LoggedIn = () => {
+const LoggedIn = ({notification_icon}) => {
  const history = useHistory();
  const [{auth}] = useStore();
  const path = history.location.pathname
@@ -29,11 +29,7 @@ return(
          { path === "/buyers" ?
            <p><span className="Applogo" style={{color:"gray"}}> <AddShoppingCartSharpIcon fontSize="default"/> </span></p> : <p> <span className="Applogo"  onClick={buyers}><AddShoppingCartSharpIcon fontSize="default"/></span></p>}
 
-         { path === "/buyers" ?
-               <p><span className="Applogo" style={{color:"gray"}}> <AddShoppingCartSharpIcon fontSize="default"/> </span></p> : <p> <span className="Applogo"  onClick={buyers}><AddShoppingCartSharpIcon fontSize="default"/></span></p>}
-
-
-          <p onClick={search}> <span className="Applogo" ><SearchTwoTone/></span> </p>
+          {<p><span className="logo">{notification_icon}</span></p>}
 
     </div>
 
