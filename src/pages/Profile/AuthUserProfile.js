@@ -139,7 +139,11 @@ const main =
               <LazyLoadImage
                 alt={username}
                 effect="blur"
+<<<<<<< HEAD
                 height="50%"
+=======
+                height="100%"
+>>>>>>> edc68846a575c3d292073711a6e26bd5c2284327
                 width="100%"
                 loading="lazy"
                 src={coverImage}/>
