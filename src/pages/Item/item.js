@@ -59,7 +59,6 @@ const toProfile = () =>{
   <>
     <div className="itemCard">
         <div className="cardMedia" >
-            {title && image && <div className="cardTitle">  {title}</div>}
          {image ? <div className="cardMedia">
             { image &&
               <LazyLoadImage
