@@ -6,7 +6,7 @@ import  "./postcard.css"
 import {SkeletonPost} from "../Skeleton/skeleton";
 import {Avatar } from '@material-ui/core';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import {WhatsApp, Call} from "@material-ui/icons";
+import {WhatsApp, Call,Person} from "@material-ui/icons";
 
 /**This is a post... */
 const Postcard = ({post}) => {
@@ -15,7 +15,7 @@ const Postcard = ({post}) => {
 
       const {id , author, image, price,crossedPrice, title, createdAt} =  post ;
 
-      const slicedTitle = title.slice(0,50);
+      const slicedTitle = post?.title?.slice(0,50);
       const toProfile = () =>{
           history.push(`/${author.username}`)
       }
@@ -33,7 +33,7 @@ const Postcard = ({post}) => {
 
     <div className="postCard">
         <div className="buyer_avator"  onClick={toProfile} >
-          <Avatar name={author.username} src={author.image} />
+          <Avatar name={author.username} src={author?.image} />
           <p> {author.username}</p>
           <p style={{marginLeft:"2rem"}} > {timeAgo(createdAt)}</p>
         </div>
@@ -75,7 +75,7 @@ const Postcard = ({post}) => {
                 <Call/>
                 <p>Call me</p>
             </a>
-            <p onClick={toProfile} className="buy_profilebutton">My profile</p>
+            <p onClick={toProfile} className="buy_profilebutton"> <Person/> My profile</p>
         </div>
 
       </div>

@@ -5,7 +5,7 @@ import { GET_USER_POSTS } from '../../graphql/user';
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import Postgrid from "../../components/PostGrid/postGrid";
 import {useRouteMatch} from 'react-router-dom';
-import { SkeletonPost,SkeletonBar2 } from "../../components/Skeleton/skeleton";
+import {Skeleton } from "../../components/Skeleton/skeleton";
 import {ShoppingBasketOutlined} from "@material-ui/icons";
 
 /**User items */
@@ -32,17 +32,14 @@ let loader;
    return(
      <div>
        <RouteHeader tag={` 0 Items`}/>
-       <SkeletonPost/>
-       <SkeletonBar2/><br/>
+       <Skeleton/>
+       <Skeleton/>
+       <Skeleton/>
+       <Skeleton/>
+       <Skeleton/>
+       <Skeleton/>
+       <Skeleton/>
 
-       <SkeletonPost/>
-       <SkeletonBar2/><br/>
-
-       <SkeletonPost/>
-       <SkeletonBar2/><br/>
-
-       <SkeletonPost/>
-       <SkeletonBar2/><br/>
      </div>
    )
  }

@@ -59,10 +59,11 @@ const classes = useStyles();
  return(
    <>
      <div className="like_details" >
-       <button className="like_details_btn" onClick={() => setOpen(!open)} > {open ?
-                         <h3><KeyboardArrowUpOutlined/> Close</h3>
-                             : <h3 style={{color:"blue"}}  ><KeyboardArrowDownOutlined/> Open </h3> }
-       </button>
+       <p className="like_details_btn" onClick={() => setOpen(!open)} >
+       {open ?
+         <h3><KeyboardArrowUpOutlined/> Close</h3>
+           : <h3 style={{color:"blue"}}  ><KeyboardArrowDownOutlined/> Open </h3> }
+       </p>
 
        { open && likes.map( (like) => (
          <div key={like.id} className="client_thumnail">

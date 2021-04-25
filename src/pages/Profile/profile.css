@@ -201,6 +201,10 @@ button h3{
   margin-top: .5rem;
 }
 
+.like_details_btn h3{
+  display: flex;
+  align-items: center;
+}
 
 
 

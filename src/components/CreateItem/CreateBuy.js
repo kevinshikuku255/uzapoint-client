@@ -4,9 +4,7 @@ import  "./createPost.css";
 
 import {useMutation} from "@apollo/client"
 import {useStore } from '../../store';
-import {CREATE_BUY,GET_PAGINATED_BUYS} from "../../graphql/buy";
-import {GET_AUTH_USER} from '../../graphql/user';
-import {HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
+import {CREATE_BUY,GET_BUYS} from "../../graphql/buy";
 import {CircularProgress, TextareaAutosize} from '@material-ui/core';
 
 
@@ -44,13 +42,30 @@ const values = { title, description, pricerange , features, authorId: auth.user.
       onError(err){
       setErrors(err)
     },
-    refetchQueries:[
-      { query:GET_PAGINATED_BUYS, variables:{
-          after: null,
-          limit: HOME_PAGE_POSTS_LIMIT,
-       }},
-      { query:GET_AUTH_USER}
-       ]
+    update(cache,{data}){
+      //add new data to existing data
+      const newBuy = data?.createBuy;
+      const existingBuys = cache.readQuery({
+        query:GET_BUYS,
+        variables:{
+          skip:0,
+          limit:50,
+        }
+      });
+      console.log(newBuy);
+      cache.writeQuery({
+        query:GET_BUYS,
+        variables:{
+          skip:0,
+          limit:50,
+        },
+        data:{
+          getBuys:{
+              buys:[...existingBuys?.getBuys.buys, newBuy]
+          }
+        }
+      })
+    }
 });
 
 const hadleTitleChange = e => setTitle(e.target.value);

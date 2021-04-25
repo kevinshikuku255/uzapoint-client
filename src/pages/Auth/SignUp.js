@@ -10,7 +10,7 @@ import { SET_AUTH_USER } from '../../store/auth';
 import { useStore } from '../../store';
 import { SIGN_UP } from '../../graphql/user';
 import Logo from "../../Assets/icon.png";
-import Header from "../../components/Header/loggedOut";
+import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import Routes from "../../store/routes";

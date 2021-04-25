@@ -73,7 +73,7 @@
   margin-bottom: 7px;
   width: 7rem;
   height: .3rem;
- animation: loading 2s infinite linear;
+  animation: loading 2s infinite linear;
 }
 
 .skeleton-time{

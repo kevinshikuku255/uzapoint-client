@@ -2,8 +2,11 @@ import React,{useEffect} from 'react';
 import {Route, Switch, useHistory} from 'react-router-dom';
 import './App.css';
 import ReactGA from 'react-ga';
+import {PostNoficiactionProvider} from './Utils/PostNotificationContext';
+
 ReactGA.initialize('UA-192087437-1');
 ReactGA.pageview(window.location.pathname + window.location.search);
+
 
 
 const SignIn  = React.lazy( () => import("./pages/Auth/SignIn"));
@@ -24,7 +27,7 @@ const EditProfile = React.lazy( () => import("./pages/Profile/editProfile"));
 const AuthUserSingleItem = React.lazy( () => import("./pages/Profile/item"));
 const AppInfo = React.lazy( () => import( "./pages/windoshoppe/appInfo"));
 const People = React.lazy( () => import("./pages/People/People"));
-
+const PostNotification = React.lazy(()=> import('./pages/Notification/index'));
 
 
 
@@ -54,8 +57,9 @@ useEffect( () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
 },[history] )
 
-
   return (
+   <>
+     <PostNoficiactionProvider>
         <div className="App">
            <React.Suspense fallback={ <div>{fall_back}</div>}>
                <Switch>
@@ -69,8 +73,8 @@ useEffect( () => {
                   <Route exact path='/buy' component={Buy}/>
                   <Route exact path='/buyers' component={Buyers}/>
                   <Route exact path='/people' component={People}/>
+                  <Route exact path='/notification' component={PostNotification}/>
 
-                  <Route exact path="/:username" component={Profile}/>
                   <Route exact path="/profile/:username/items" component={UserItems}/>
                   <Route exact path="/profile/:username/buys" component={UserBuys}/>
                   <Route exact path='/item/:id' component={Item}/>
@@ -79,9 +83,12 @@ useEffect( () => {
                   <Route exact path='/profile/:username' component={AuthProfileComponent}/>
                   <Route exact path='/profile/:username/editprofile' component={EditProfile}/>
                   <Route exact path='/:username/:id' component={AuthUserSingleItem}/>
+                  <Route exact path="/:username" component={Profile}/>
              </Switch>
            </React.Suspense>
         </div>
+      </PostNoficiactionProvider>
+   </>
   );
 }
 

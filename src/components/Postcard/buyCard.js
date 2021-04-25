@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import { timeAgo } from '../../Utils/date';
 import {SkeletonPost} from "../../components/Skeleton/skeleton";
 import {Avatar } from '@material-ui/core'
-import {WhatsApp, Call} from "@material-ui/icons";
+import {WhatsApp, Call, Person} from "@material-ui/icons";
 import  "./postcard.css"
 
 
@@ -49,7 +49,7 @@ const BuyCard = ({buy}) => {
                 <Call/>
                 <p>Call me</p>
             </a>
-            <p onClick={toProfile} className="buy_profilebutton">My profile</p>
+            <p onClick={toProfile} className="buy_profilebutton"> <Person/> My profile</p>
         </div>
 
 
@@ -57,7 +57,7 @@ const BuyCard = ({buy}) => {
         <div className="itemPrice">
           <p style={{fontWeight:"bolder"}} >price-range:</p>
           <div className="priceInfo">
-            { pricerange && <h4 style={{color:"blue"}} >Ksh {pricerange}</h4>}
+            { pricerange && <h6 style={{color:"blueviolet"}} >Ksh {pricerange}</h6>}
           </div>
         </div>
         }

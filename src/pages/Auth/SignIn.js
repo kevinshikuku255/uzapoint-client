@@ -5,7 +5,7 @@ import {CircularProgress, Avatar} from  "@material-ui/core"
 import { SIGN_IN } from '../../graphql/user';
 import { useStore } from '../../store';
 import { SET_AUTH_USER } from '../../store/auth';
-import Header from "../../components/Header/loggedOut";
+import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import Routes from "../../store/routes";

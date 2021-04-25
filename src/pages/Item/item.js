@@ -10,10 +10,9 @@ import Comments from "../../components/Comment/comments";
 import "./item.css"
 import {CreateComment} from "../../components/CreateCommnet/createComment";
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
-import {SkeletonPost,SkeletonPostLoader, SkeletonBar2} from "../../components/Skeleton/skeleton";
+import {SkeletonPost, CircularProg} from "../../components/Skeleton/skeleton";
 import {Place, WhatsApp, Call} from "@material-ui/icons";
-import {Image, Transformation, Placeholder} from 'cloudinary-react';
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 /**single Item component */
@@ -36,8 +35,9 @@ function Item({match}) {
     <>
     <RouteHeader tag="product details"/>
     <br/> <br/>
-    <SkeletonPostLoader/>
-    <SkeletonBar2/>
+    <div className="circula_progress" >
+       <CircularProg/>
+    </div>
     </>
     )
   }
@@ -45,11 +45,11 @@ function Item({match}) {
 
 
 
-const { id , imagePublicId,likes, price,crossedPrice, title, author, description,
+const { id , image,likes, price,crossedPrice, title, author, description,
         features,location, comments, createdAt} = data.getPost;
 
 const weekday = weekDay(createdAt);
-const slicedTitle = title.slice(0,50);
+const slicedTitle = title.slice(0,100);
 const internationalPhone = author.phonenumber && `+254${author.phonenumber.substring(1)}`;
 const toProfile = () =>{
     history.push(`/${author.username}`)
@@ -59,15 +59,18 @@ const toProfile = () =>{
   <>
     <div className="itemCard">
         <div className="cardMedia" >
-            {title && imagePublicId && <div className="cardTitle">  {title}</div>}
-            { imagePublicId ?
-               <Image
-                  publicId={imagePublicId}
-                  loading="lazy"
-                  >
-                  <Placeholder type="blur"/>
-                  <Transformation height="50%" width="100%" crop="fill"/>
-               </Image> : <SkeletonPost title={`${slicedTitle}...`}/> }
+            {title && image && <div className="cardTitle">  {title}</div>}
+         {image ? <div className="cardMedia">
+            { image &&
+              <LazyLoadImage
+                alt={title}
+                effect="blur"
+                height="50%"
+                width="100%"
+                loading="lazy"
+                src={image}/>
+             }
+        </div> : <div>  <SkeletonPost title={slicedTitle}/> </div> }
          </div>
 
         <div className="itemStats">
@@ -127,7 +130,7 @@ const toProfile = () =>{
         <div className="itemComments">
           <p style={{fontWeight:"bolder"}}>Comments and Reviews:</p>
           <div>
-            {comments.length && comments.map( comment => (
+            {comments?.length && comments.map( (comment) => (
                 <div className="comment" key={comment.id}>
                   <Comments comment={comment}/>
                 </div>

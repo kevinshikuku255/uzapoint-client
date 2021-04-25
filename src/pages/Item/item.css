@@ -102,7 +102,12 @@ border-bottom: 5px solid rgba(0, 0, 0, 0.124);
 
 
 
-
+.circula_progress{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vw;
+}
 
 
 

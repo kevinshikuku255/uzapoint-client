@@ -1,16 +1,15 @@
-import React,{useState, useEffect} from 'react';
-import {useQuery, useSubscription}  from '@apollo/client';
+import React from 'react';
+import {useQuery}  from '@apollo/client';
 import {Skeleton} from "../../components/Skeleton/skeleton";
 import { useStore } from '../../store';
 
 import Header from "../../components/Header";
 import PostCard from "../../components/Postcard/postCard";
-import { GET_POSTS, GET_NEW_POST_SUBSCRIPTION} from "../../graphql/post";
+import { GET_POSTS} from "../../graphql/post";
 import { HOME_PAGE_POSTS_LIMIT } from '../../constants/DataLimit';
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {CreateItem} from "../../components/CreateItem/CreateItem";
-import {NotificationsActive, NotificationsTwoTone} from '@material-ui/icons';
-import {Snackbar, SnackbarContent} from '@material-ui/core';
+import {NotificationsTwoTone} from '@material-ui/icons';
 import  "./home.css";
 
 
@@ -19,35 +18,13 @@ function Home() {
         UsedocumentTitle("Home");
          const [{auth}] = useStore();
          const variables = {
-          cursor: null,
+          skip: 0,
           limit: HOME_PAGE_POSTS_LIMIT,
         };
-
         const { data,loading} = useQuery(GET_POSTS,{
           variables,
           // fetchPolicy:"cache-and-network",
           });
-
-
-
-/* ---------------------------------------------------------------------------------------------- */
-       const {data:subs_data, loading:subs_loading} = useSubscription(GET_NEW_POST_SUBSCRIPTION);
-       const [open, setOpen] = useState(false);
-
-      useEffect(() => {
-          if(!subs_loading && subs_data){
-            setOpen(true)
-            return
-          }
-      },[subs_data, subs_loading])
-
-      const hundleClose = (e) => {
-          setOpen(false)
-      }
-
-/* --------------------------------------------------------------------------------------------------- */
-
-
 
 
         const skeleton = (
@@ -69,7 +46,7 @@ function Home() {
         if(!data){
           return loader = (
             <div>
-              <Header/>
+              <Header notification_icon={<NotificationsTwoTone style={{color:"gray"}}/>}/>
               {skeleton}
             </div>
           )
@@ -96,31 +73,11 @@ const { posts } = data.getPosts;
   </div>
   )
 
-const infoIcon = !subs_loading && subs_data ?
-                     <NotificationsActive style={{color:"blue"}} /> : <NotificationsTwoTone style={{color:"gray"}}/>
+
 
  return (
 <>
-  <Header notification_icon={infoIcon}/>
-{
-<Snackbar
- open={open}
- anchorOrigin={{
-   vertical: 'bottom',
-   horizontal: 'left'
- }}
- draggable={true}
- onClose={hundleClose}
- autoHideDuration={5000}
- className="snack_bar"
->
-  <SnackbarContent
-   style={{backgroundColor:"blue"}}
-   message = {"New items "}
-  />
-</Snackbar>
-}
-
+  <Header/>
   {loading && loader}
   {data && !loading  && main}
   {(!loading && !data) && loader }

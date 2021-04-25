@@ -33,9 +33,9 @@ if(rootElement.hasChildNodes()){
           <StoreProvider>
             <BrowserRouter>
                 <AuthUserProvider>
-                   <CloudinaryContext cloudName="dsvun26ld">
-                      <App/>
-                  </CloudinaryContext>
+                      <CloudinaryContext cloudName="dsvun26ld">
+                          <App/>
+                      </CloudinaryContext>
                 </AuthUserProvider>
             </BrowserRouter>
           </StoreProvider>

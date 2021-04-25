@@ -5,7 +5,7 @@ import PostImageUpload from "./PostImageUpload";
 import {useMutation } from "@apollo/client"
 import {useStore } from '../../store';
 import {MAX_POST_IMAGE_SIZE } from '../../constants/ImageSize';
-import {CREATE_POST, GET_PAGINATED_POSTS} from "../../graphql/post";
+import {CREATE_POST, GET_POSTS} from "../../graphql/post";
 import {CircularProgress, TextareaAutosize} from '@material-ui/core';
 import {Close} from '@material-ui/icons';
 
@@ -46,7 +46,8 @@ export const  CreateItem = () => {
         const file = e.target.files[0];
         if (!file) return;
         if (file.size >= MAX_POST_IMAGE_SIZE) {
-            throw new Error( `File size should be less then ${MAX_POST_IMAGE_SIZE / 3000000}Mb`)
+          window.alert(`File size should be less then ${MAX_POST_IMAGE_SIZE / 3000000}Mb`);
+          throw new Error( `File size should be less then ${MAX_POST_IMAGE_SIZE / 3000000}Mb`)
         }
       previewFile(file)
   };
@@ -66,32 +67,30 @@ const values = { title, description, price ,crossedPrice,location, image, featur
 
  const [createPost, { loading }] = useMutation(CREATE_POST,{
     variables: values,
-      onError(err){
+    onError(err){
         console.log(err)
       setErrors(err)
     },
     update(cache,{data}){
       //add new data to existing data
-      const newPost = data?.createPost
+      const newPost = data?.createPost;
+      console.log(newPost);
       const existingPosts = cache.readQuery({
-        query:GET_PAGINATED_POSTS,
+        query:GET_POSTS,
         variables:{
-          limit:15,
-          cursor:null
+          skip:0,
+          limit:50,
         }
       });
       cache.writeQuery({
-        query:GET_PAGINATED_POSTS,
+        query:GET_POSTS,
         variables:{
-          limit:15,
-          cursor:null
+          skip:0,
+          limit:50,
         },
         data:{
-          getPaginatedPosts:{
-              posts:[
-                ...existingPosts?.getPaginatedPosts.posts,
-                newPost
-              ]
+          getPosts:{
+              posts:[...existingPosts?.getPosts.posts, newPost]
           }
         }
       })

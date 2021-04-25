@@ -10,15 +10,22 @@ import  './profile.css'
 import {GET_USER } from '../../graphql/user';
 import { weekDay } from '../../Utils/date';
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
-import {SkeletonBar2, SkeletonPost} from "../../components/Skeleton/skeleton";
+import {CircularProg} from "../../components/Skeleton/skeleton";
 import Overlay from "../../components/Acordion/Overlay";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Netlify from "../../Assets/netlify.jpg"
 
 const  useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(6),
     height: theme.spacing(6),
     backgroundColor:"#2ceaff"
+  },
+  loading: {
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    height:"50vh"
   }
 
 }));
@@ -48,8 +55,10 @@ const  Profile = ()  => {
          return (
            <>
             <RouteHeader tag={"username"}/>
-            <SkeletonPost/>
-            <SkeletonBar2/>
+            <br/>
+             <div className={classes.loading}>
+               <CircularProg/>
+             </div>
            </>
          )
       }
@@ -73,16 +82,17 @@ const internationalPhone = phonenumber && `+254${phonenumber.substring(1)}`;
 
 const main =
  <>
-      {coverImage &&
+      {
       <div className="userinfor_cover_photo" >
         {<>
           <LazyLoadImage
             alt={username}
             effect="blur"
-            height="50%"
+            placeholder={<div/>}
+            min-height="140px"
             width="100%"
             loading="lazy"
-            src={coverImage}/>
+            src={coverImage || Netlify}/>
         </>}
       </div>}
    <div className="profile_container">
@@ -127,15 +137,11 @@ const main =
       <div className="items" >
         { posts.length > 0 &&
         <div>
-            <p>Selling {`${posts.length}`} items</p>
-            <p onClick={itemsLink}>
-               { <button >See all</button> }
-            </p>
+            <p onClick={itemsLink} >Selling {`${posts.length}`} items</p>
         </div>}
         <div>
             {buys.length > 0 && <div>
-               <p>Buying  {`${buys.length}`} items</p>
-               <p onClick={buysLink}> <button>See all</button></p>
+               <p onClick={buysLink}>Buying  {`${buys.length}`} items</p>
             </div>}
         </div>
       </div>
