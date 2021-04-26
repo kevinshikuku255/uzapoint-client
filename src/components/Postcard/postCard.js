@@ -1,12 +1,12 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
-import {Image, Transformation} from "cloudinary-react";
+// import {Image, Transformation} from "cloudinary-react";
 import { timeAgo } from '../../Utils/date';
 import useGaEvents from "../../Hooks/useGAEvents";
 import  "./postcard.css"
 import {SkeletonPost} from "../Skeleton/skeleton";
 import {Avatar } from '@material-ui/core';
-// import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import {WhatsApp, Call,Person} from "@material-ui/icons";
 
 /**This is a post... */
@@ -14,7 +14,7 @@ const Postcard = ({post}) => {
       const history = useHistory();
       const GAEventTracker = useGaEvents("Click on item");
 
-      const {id , author, imagePublicId, price,crossedPrice, title, createdAt} =  post ;
+      const {id , author, image, price,crossedPrice, title, createdAt} =  post ;
 
       const slicedTitle = post?.title?.slice(0,50);
       const toProfile = () =>{
@@ -39,7 +39,7 @@ const Postcard = ({post}) => {
           <p style={{marginLeft:"2rem"}} > {timeAgo(createdAt)}</p>
         </div>
         <div>
-        {imagePublicId ?
+        {/* {imagePublicId ?
           <div onClick={toPost} >
               <Image publicId={imagePublicId}>
                 <Transformation
@@ -49,21 +49,21 @@ const Postcard = ({post}) => {
                 />
             </Image>
           </div>
-           : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div>}
-         {/* {image ? <div className="cardMedia">
+           : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div>} */}
+         {image ? <div className="cardMedia">
             { image &&
               <LazyLoadImage
                 alt={title}
-                effect="blur"
+                effect="black-and-white"
                 height="50%"
                 width="100%"
                 onClick={toPost}
                 loading="lazy"
                 src={image}/>
              }
-        </div> : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div> } */}
+        </div> : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div> }
 
-        {imagePublicId && title &&
+        {image && title &&
         <div className="itemTitle">
           {title}
         </div>}
