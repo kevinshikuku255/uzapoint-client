@@ -40,7 +40,7 @@ const Postcard = ({post}) => {
         </div>
         <div>
         {imagePublicId ?
-          <Image publicId={imagePublicId} >
+          <Image publicId={imagePublicId} onClick={toPost}>
               <Transformation
                 width="100vw"
                 height="400"
