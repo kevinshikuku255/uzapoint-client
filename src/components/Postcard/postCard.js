@@ -43,9 +43,10 @@ const Postcard = ({post}) => {
           <div onClick={toPost} >
               <Image publicId={imagePublicId}>
                 <Transformation
-                  width="100%"
+                  min-width="500"
+                  max-width="1000"
                   height="400"
-                  crop="scale"
+                  crop="fill"
                 />
             </Image>
           </div>
