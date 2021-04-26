@@ -32,7 +32,6 @@ export const PostNoficiactionProvider = ({children}) => {
            vertical: 'bottom',
            horizontal: 'left'
          }}
-         draggable={true}
          onClose={hundleClose}
          autoHideDuration={5000}
          className="snack_bar"
