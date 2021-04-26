@@ -40,13 +40,16 @@ const Postcard = ({post}) => {
         </div>
         <div>
         {imagePublicId ?
-          <Image publicId={imagePublicId} onClick={toPost}>
-              <Transformation
-                width="100vw"
-                height="400"
-                crop="scale"
-              />
-          </Image> : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div>}
+          <div onClick={toPost} >
+              <Image publicId={imagePublicId}>
+                <Transformation
+                  width="100%"
+                  height="400"
+                  crop="scale"
+                />
+            </Image>
+          </div>
+           : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div>}
          {/* {image ? <div className="cardMedia">
             { image &&
               <LazyLoadImage
