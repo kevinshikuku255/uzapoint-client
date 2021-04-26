@@ -42,7 +42,8 @@ const Postcard = ({post}) => {
         {imagePublicId ?
           <Image publicId={imagePublicId} >
               <Transformation
-                width="200"
+                width="100vw"
+                height="400"
                 crop="scale"
               />
           </Image> : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div>}
