@@ -1,6 +1,6 @@
 import React from 'react';
 import   "./header.css";
-import {InfoOutlined, People, SearchTwoTone, Settings, ShoppingCart,ShoppingBasket, PersonOutlined} from '@material-ui/icons';
+import {InfoOutlined,Share, People, SearchTwoTone, Settings, ShoppingCart,ShoppingBasket, PersonOutlined} from '@material-ui/icons';
 import Routes from "../../store/routes";
 import {useHistory} from "react-router-dom";
 
@@ -26,7 +26,7 @@ export function SideBar() {
               <li onClick={settings}> <Settings/> <p>Edit Profile</p> </li> <br/>
 
               <li onClick={AboutUs}> <InfoOutlined/> <p>About Us</p> </li>
-              <li onClick={toAppInfo}> <p>App info </p></li>
+              <li onClick={toAppInfo}><Share/> <p>App info </p></li>
               <div className="emptyDiv"> &copy; windoshoppe 2021 </div>
         </ul>
   </div>

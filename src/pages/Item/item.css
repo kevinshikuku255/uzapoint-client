@@ -4,6 +4,13 @@
  flex-direction: column;
  margin-top: 3.0rem;
 }
+.buyCard{
+ display: flex;
+ flex-wrap: nowrap;
+ flex-direction: column;
+ margin-top: 3rem;
+ padding: 1.5rem;
+}
 
 /* -------------------------------------------------------------------------- */
 
@@ -40,7 +47,6 @@
 
 .itemDescription, .itemlocation, .itemFeatures, .itemComments{
  padding:  1rem;
- border-top: 1px solid #80808025;
 }
 
 .itemFeatures ul{

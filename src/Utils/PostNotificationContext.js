@@ -9,7 +9,9 @@ export const PostNotificationContext = createContext();
 
 /** Gives a global new post notification */
 export const PostNoficiactionProvider = ({children}) => {
-  const {data, loading} = useSubscription(GET_NEW_POST_SUBSCRIPTION);
+  const {data, loading} = useSubscription(GET_NEW_POST_SUBSCRIPTION, {
+    
+  });
   const [open, setOpen] = useState(false);
 
    useEffect(() => {

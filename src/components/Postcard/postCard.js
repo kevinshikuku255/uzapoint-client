@@ -14,7 +14,7 @@ const Postcard = ({post}) => {
       const history = useHistory();
       const GAEventTracker = useGaEvents("Click on item");
 
-      const {id , author, image, price,crossedPrice, title, createdAt} =  post ;
+      const {id , author, image, inStock, price,crossedPrice, title, createdAt} =  post ;
 
       const slicedTitle = post?.title?.slice(0,50);
       const toProfile = () =>{
@@ -39,22 +39,11 @@ const Postcard = ({post}) => {
           <p style={{marginLeft:"2rem"}} > {timeAgo(createdAt)}</p>
         </div>
         <div>
-        {/* {imagePublicId ?
-          <div onClick={toPost} >
-              <Image publicId={imagePublicId}>
-                <Transformation
-                  width="auto"
-                  height="400"
-                  crop="thump"
-                />
-            </Image>
-          </div>
-           : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div>} */}
          {image ? <div className="cardMedia">
             { image &&
               <LazyLoadImage
                 alt={title}
-                effect="black-and-white"
+                effect="blur"
                 height="50%"
                 width="100%"
                 onClick={toPost}
@@ -69,13 +58,16 @@ const Postcard = ({post}) => {
         </div>}
 
         { price &&
+        <>
         <div className="itemPrice">
           <p style={{fontWeight:"bolder"}} >Price:</p>
           <div className="priceInfo">
             {price && <p style={{color:"blue"}} >Ksh {price}</p>}
-            {crossedPrice && <p style={{color:"brown"}} >was.. Ksh {crossedPrice}</p>}
+            {crossedPrice && <p className="crossedPrice">{crossedPrice}</p>}
           </div>
         </div>
+        <div> {inStock && <p className="inStock">{inStock} in Stock</p>}</div>
+        </>
         }
 
         <div className="buy_itemBtns">

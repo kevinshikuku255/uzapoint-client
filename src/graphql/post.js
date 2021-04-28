@@ -66,6 +66,7 @@ export const likesPostPayload = `
           title
           description
           features
+          inStock
           price
           crossedPrice
           imagePublicId
@@ -128,6 +129,7 @@ export const GET_FOLLOWED_POSTS = gql`
               title
               description
               features
+              inStock
               price
               crossedPrice
               image
@@ -153,6 +155,7 @@ export const GET_FOLLOWED_POSTS = gql`
         title
         description
         features
+        inStock
         price
         crossedPrice
         image
@@ -178,6 +181,7 @@ export const GET_POSTS = gql`
         title
         description
         features
+        inStock
         price
         location
         crossedPrice
@@ -207,6 +211,7 @@ export const GET_PAGINATED_POSTS = gql`
         title
         description
         features
+        inStock
         price
         location
         crossedPrice
@@ -231,6 +236,7 @@ export const GET_POST = gql`
       title
       description
       features
+      inStock
       price
       location
       crossedPrice
@@ -255,6 +261,7 @@ export const GET_ITEMS_SUBSCRIPTION = gql`
         title
         description
         features
+        inStock
         location
         price
         crossedPrice
@@ -293,10 +300,35 @@ export const SEARCH_POSTS = gql`
 `;
 
 
+/** Edits specific user post  */
+export const UPDATE_POST = gql`
+ mutation($postId:ID! $title:String $description:String $features:String, $inStock:String, $price:String, $crossedPrice:String){
+   updatePost(
+     postId:$postId
+     title:$title
+     description:$description
+     features:$features
+     inStock:$inStock
+     price:$price
+     crossedPrice:$crossedPrice
+   ){
+      id
+      title
+      description
+      features
+      price
+      location
+      inStock
+      crossedPrice
+      image
+   }
+ }
+`;
+
 /** Deletes a post */
 export const DELETE_POST = gql`
   mutation($id: ID! $imagePublicId:String) {
-    deletePost(id: $id imagePublicId:$imagePublicId) {
+    deletePost(id: $id imagePublicId:$imagePublicId){
       id
     }
   }

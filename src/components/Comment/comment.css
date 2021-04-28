@@ -1,9 +1,10 @@
 
 .commentWrapper{
   background-color: #80808054;
-  margin-top: .5rem;
+  margin:.5rem 0 2rem 1.5rem;
   padding: .1rem .5rem;
-  border-radius: 10px;
+  border-radius: 5px;
+  width: 75vw;
 }
 
 .delete_btn{

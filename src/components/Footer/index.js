@@ -5,7 +5,7 @@ import React from 'react'
 function Index() {
  return (
   <div className="footer">
-    <h6 style={{fontSize:"xx-small"}} >Made with <span style={{color:"red"}} >Love</span> by kevin shikuku</h6>
+    {/* <h6 style={{fontSize:"xx-small"}} >made with <span style={{color:"red"}} >love</span> by kevin shikuku</h6> */}
   </div>
  )
 }

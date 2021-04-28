@@ -12,12 +12,17 @@ import  "./postcard.css"
 const BuyCard = ({buy}) => {
       const history = useHistory();
 
-       const {author, pricerange, title,  description, features, createdAt} =  buy;
+       const {id, author, pricerange, title,  description, features, createdAt} =  buy;
        const featuresList = features?.split("#")
        const slicedTitle = title.slice(0,50);
        const internationalPhone = author.phonenumber && `+254${author.phonenumber.substring(1)}`;
        const toProfile = () =>{
           history.push(`/${author.username}`)
+      }
+
+/* -------------------------------------------------------------------------- */
+      const toBuy = async (e) => {
+          history.push(`/buy/${id}`);
       }
 
    return(
@@ -27,7 +32,7 @@ const BuyCard = ({buy}) => {
           <Avatar name={author.username} src={author.image} />
           <p> {timeAgo(createdAt)}</p>
         </div>
-        <div className="cardMedia" >
+        <div className="cardMedia" onClick={toBuy}>
             {<SkeletonPost title={slicedTitle}/>}
         </div>
 

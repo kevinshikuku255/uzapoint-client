@@ -41,24 +41,23 @@ function BuyItem() {
 
 const {pricerange, title, description, features,location, createdAt} = data.getBuy;
 const weekday = weekDay(createdAt)
-console.log(data)
 
  const itemFeatures = features && features.split("#")
  const main = (
   <>
-    <div className="itemCard">
+    <div className="buyCard">
         <div className="cardMedia" >
           <SkeletonBuyersCard title={title}/>
        </div>
 
         <div className="itemStats">
-          <p>{weekday}</p>
+          <p>Posted on -  <b>{weekday}</b></p>
         </div>
 
 
         {pricerange &&
         <div className="item_price">
-            <b>Price:</b>
+            <b>Price-range</b>
                <div style={{color:"blue"}} >{ pricerange && <p>Ksh.{pricerange}</p>}</div>
         </div>}
 
@@ -77,7 +76,7 @@ console.log(data)
 
         {features &&
         <div className="itemFeatures">
-          <p style={{fontWeight:"bolder"}}>Item features:</p>
+          <p style={{fontWeight:"bolder"}}>Desired features:</p>
             <ul>
               {itemFeatures.map((item, i) => (
                  <li key={i} >{item}</li>

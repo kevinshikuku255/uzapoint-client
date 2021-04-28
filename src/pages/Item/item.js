@@ -45,7 +45,7 @@ function Item({match}) {
 
 
 
-const { id , image,likes, price,crossedPrice, title, author, description,
+const { id , image,likes,inStock, price,crossedPrice, title, author, description,
         features,location, comments, createdAt} = data.getPost;
 
 const weekday = weekDay(createdAt);
@@ -97,10 +97,16 @@ const toProfile = () =>{
             </>
         </div>
 
+
+       <div className="itemlocation">
+          {inStock && <p>{inStock} <b>availabel in stock</b></p>}
+       </div>
+
         {(location || author?.location) && <div className="itemlocation">
           <Place/>
           {location ? `${location}` : `${author.location}`}
         </div>}
+
 
        {description &&
         <div className="itemDescription">
@@ -127,7 +133,6 @@ const toProfile = () =>{
           </div>
 
         <div className="itemComments">
-          <p style={{fontWeight:"bolder"}}>Comments and Reviews:</p>
           <div>
             {comments?.length && comments.map( (comment) => (
                 <div className="comment" key={comment.id}>

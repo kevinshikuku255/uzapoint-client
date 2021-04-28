@@ -38,7 +38,15 @@
 
 }
 
+.crossedPrice{
+   text-decoration-line: line-through;
+   color: #ff0000;
+}
 
+.inStock{
+ float: right;
+ margin: 0 2rem .5rem 0;
+}
 
 /* -------------------------------------------------------------------------- */
 .cardMedia{
@@ -101,6 +109,7 @@
 /** Item buttons*/
 
 .buy_itemBtns {
+clear: both;
 display: flex;
 padding: 0 .4rem 1rem .4rem;
 margin: .5rem 0;

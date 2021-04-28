@@ -8,11 +8,15 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   btn:{
-    border:"none",
-    outline:"none",
-    borderRadius:"5px",
-    padding:".2rem 1rem"
-  }
+   color:"blueviolet",
+   fontWeight:"bold",
+   position:"absolute",
+   right:"0",
+   marginRight:"2rem"
+  },
+ createComment:{
+  margin:"1rem"
+}
 }))
 
 /**
@@ -22,6 +26,7 @@ export const CreateComment = ({postId}) => {
   const commentInputRef = useRef(null);
    const classes = useStyles();
   const [comment, setComment] = useState('');
+  const none = comment ? "" : "none";
 
 /* -------------------------------------------------------------------------- */
   const [{auth}] = useStore()
@@ -76,11 +81,10 @@ useEffect(() => {
  return (
   <>
     {user &&
-        <div>
+        <div className={classes.createComment}>
             <div className="formDescription">
               <p>Create Comment:</p>
             </div>
-            <form onSubmit={handleSubmit} className="form">
                 <TextareaAutosize
                           rowsMin={3}
                           placeholder="comment/review the product"
@@ -90,10 +94,9 @@ useEffect(() => {
                           ref={commentInputRef}
                           onChange={ e => setComment(e.target.value)}
                           />
-            <button disabled={!comment ? true : false} className={classes.btn}  >
+            <p className={classes.btn} onClick={handleSubmit} style={{display:none}}>
               {loading ? "Sending..." : data ? "Sent!" : "Send"}
-            </button>
-            </form>
+            </p>
         </div>
     }
  </>

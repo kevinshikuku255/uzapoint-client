@@ -30,7 +30,7 @@ const AuthUserSingleItem = React.lazy( () => import("./pages/Profile/item"));
 const AppInfo = React.lazy( () => import( "./pages/windoshoppe/appInfo"));
 const People = React.lazy( () => import("./pages/People/People"));
 const PostNotification = React.lazy(()=> import('./pages/Notification/index'));
-
+const EditPost = React.lazy(() => import('./pages/Profile/editPost'));
 
 
 function App() {
@@ -62,7 +62,7 @@ useEffect( () => {
   return (
    <>
      <PostNoficiactionProvider>
-         <CloudinaryContext cloudName="dsvun26ld" dpr="auto">
+         <CloudinaryContext cloudName="dsvun26ld" dpr="w-auto">
             <div className="App">
                <React.Suspense fallback={ <div>{fall_back}</div>}>
                      <Switch>
@@ -81,9 +81,10 @@ useEffect( () => {
                         <Route exact path="/profile/:username/items" component={UserItems}/>
                         <Route exact path="/profile/:username/buys" component={UserBuys}/>
                         <Route exact path='/item/:id' component={Item}/>
-                        <Route exact path='/buyitem/:id' component={BuyItem}/>
+                        <Route exact path='/buy/:id' component={BuyItem}/>
 
                         <Route exact path='/profile/:username' component={AuthProfileComponent}/>
+                        <Route exact path='/:username/edit/:id' component={EditPost}/>
                         <Route exact path='/profile/:username/editprofile' component={EditProfile}/>
                         <Route exact path='/:username/:id' component={AuthUserSingleItem}/>
                         <Route exact path="/:username" component={Profile}/>

@@ -1,18 +1,14 @@
 import React,{useState} from 'react';
 import {useRouteMatch} from 'react-router-dom';
-import {useMutation, useQuery} from "@apollo/client";
-import {TextareaAutosize, CircularProgress} from '@material-ui/core';
-import jwtDecode  from 'jwt-decode';
-import {LocationOn, BusinessCenter, EmailOutlined, AccountCircleRounded} from '@material-ui/icons';
+import {useMutation} from "@apollo/client";
+import {TextareaAutosize} from '@material-ui/core';
+import {Description,DescriptionOutlined, InfoTwoTone,MoneyOff, MoneyOffOutlined,StorageOutlined } from '@material-ui/icons';
 
-import { Skeleton} from "../../components/Skeleton/skeleton";
 import RouteHeader from "../../components/Header/routeHeader";
-import {EDIT_USER_PROFILE, GET_AUTH_USER, GET_USER  }from "../../graphql/user";
-import { SET_AUTH_USER} from '../../store/auth';
+import {UPDATE_POST, GET_POST  }from "../../graphql/post";
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 
 import { makeStyles } from '@material-ui/core/styles';
-import { useStore } from '../../store';
 import Routes from "../../store/routes";
 
 
@@ -29,14 +25,6 @@ main:{
  justifyContent: "center",
  alignItems:"center",
  flexDirection: "column",
-},
-edit_profile_avator:{
- display: "flex",
- alignItems: "center",
- justifyContent: "center",
- flexDirection: "column",
- margin: "2rem",
- cursor: "pointer",
 },
 edit_profile_spinner:{
   display: "flex",
@@ -86,25 +74,17 @@ submit_btn:{
 
 
 
-/** Edit profile component */
-function EditProfile() {
+/** Edits specific user post */
+function EditPost() {
    const path = useRouteMatch();
-   const routeName = path.params.username
+   const postId = path.params.id;
    const classes = useStyles();
    const {goBack} = Routes();
-   UsedocumentTitle("Edit Profile")
-   const [{auth}, dispatch] = useStore();
-  //  const [ , ] = useStore();
-   const [errors, setErrors] = useState("");
-   const userId = auth.user.id;
-  //  const value = useContext(AuthUserContext);
-   const [values, setValues] = useState({ fullname:"", location:"", email:"", businessdescription:"", id:userId});
+   UsedocumentTitle("Edit post");
 
- const { loading:authuserLoading} = useQuery(GET_USER,{
-   variables:{
-     username:routeName
-   }
- });
+   const [errors, setErrors] = useState("");
+   const [values, setValues] = useState({ title:"", description:"", inStock:"", price:"", crossedPrice:"", postId, features:""});
+
 
 /** change hundler... */
   const handleChange = e => {
@@ -114,37 +94,22 @@ function EditProfile() {
 
 
 
-const dispatchAction = (token) =>{
-  dispatch({
-    type:SET_AUTH_USER,
-     payload:token
-  })
-}
-
-
 /** Use mutation */
-  let [submitUser,{ loading }] =  useMutation(EDIT_USER_PROFILE,{
-      update(_, result){
-        const token = result.data.editUserProfile.token;
-        const decodedToken = jwtDecode(token);
-        localStorage.removeItem("jwt");
-        localStorage.removeItem("apollo-cache-persist");
-        localStorage.setItem('jwt',token);
-        dispatchAction(decodedToken)
-    },
+  let [updatePost] =  useMutation(UPDATE_POST,{
      variables:values,
      refetchQueries:[
-       {query:GET_AUTH_USER}
+       {query:GET_POST, variables:{id: postId}}
      ],
         onError(err){
-          setErrors(err.graphQLErrors)
+          console.log(err.graphQLErrors);
+          setErrors(err.graphQLErrors);
         },
       });
 
 
   const handleSubmit = async (e) => {
      e.preventDefault();
-     submitUser();
+     updatePost();
      setErrors("");
      goBack();
   };
@@ -168,108 +133,102 @@ const renderErrors = apiError => {
   };
 
 
-  /** Loading section */
-  let loader
-  if(authuserLoading){
-    loader = (
-      <>
-      <RouteHeader tag={"Edit Profile"}/>
-      <Skeleton/>
-    </>
-    )
-    return loader
-  }
-
-   const   username  = auth.user.username;
-
-
-  let load;
-  if(loading){
-    return(
-      loader =
-      <div className={classes.main}>
-      <RouteHeader tag={"Edit Profile"}/>
-      <div className={classes.edit_profile_avator}>
-        <h2 style={{textTransform:"capitalize"}} >{username}</h2>
-      </div>
-       <div className={classes.edit_profile_spinner}>
-         <CircularProgress/>
-         <h3>Editing...</h3>
-       </div>
-      </div>
-    )
-  }
  return (
   <div>
-    <RouteHeader tag={"Edit Profile"}/>
+    <RouteHeader tag={"Edit Item"}/>
     <main className={classes.main}>
-      <div className={classes.edit_profile_avator}>
-        <h2  style={{textTransform:"capitalize"}}  >{username}</h2>
-      </div>
-      {loading ? load :
-
+      {
       <form onSubmit={handleSubmit}>
+       <h4>Fill all fields then submit !</h4>
 
         { errors.length > 0  && (
               <p style={{color:"red"}} >{renderErrors(errors)}</p>
             )}
             <br/>
+
             <div className={classes.edit_input}>
-                <div className={classes.edit_icon}> <AccountCircleRounded/> </div>
+                <div className={classes.edit_icon}> <InfoTwoTone/> </div>
                 <div className={classes.edit_details}>
-                  <h3>Fullname</h3>
+                  <h3>Name</h3>
                   <input
                      className={classes.input}
                      type="text"
-                     placeholder="Add your fullname"
-                     name="fullname"
+                     placeholder="Product name"
+                     name="title"
                      onChange={handleChange}
-                     value={values.fullname}/>
+                     value={values.title}/>
                 </div>
             </div>
 
             <div className={classes.edit_input}>
-                <div className={classes.edit_icon}> <EmailOutlined/> </div>
+                <div className={classes.edit_icon}> <StorageOutlined/> </div>
                 <div className={classes.edit_details}>
-                  <h3>Email adress</h3>
+                  <h3>Availale in stock</h3>
                   <input
                      className={classes.input}
-                     type="email"
-                     placeholder="Add youremail adress"
-                     name="email"
+                     type="text"
+                     placeholder="Total number"
+                     name="inStock"
                      onChange={handleChange}
-                     value={values.email}/>
+                     value={values.inStock}/>
                 </div>
             </div>
 
             <div className={classes.edit_input}>
-                <div className={classes.edit_icon}> <LocationOn/> </div>
+                <div className={classes.edit_icon}> <MoneyOff/> </div>
                 <div className={classes.edit_details}>
-                  <h3>Location</h3>
+                  <h3>New price</h3>
                   <input
                      type="text"
                      className={classes.input}
-                     placeholder="Add your location"
+                     placeholder="Price"
                      onChange={handleChange}
-                     name="location"
-                     value={values.location}/>
+                     name="price"
+                     value={values.price}/>
                 </div>
-
             </div>
             <div className={classes.edit_input}>
-                <div className={classes.edit_icon}> <BusinessCenter/> </div>
+                <div className={classes.edit_icon}> <MoneyOffOutlined/> </div>
                 <div className={classes.edit_details}>
-                  <h3>Business description</h3>
+                  <h3>Old price</h3>
+                  <input
+                     type="text"
+                     className={classes.input}
+                     placeholder="Initial price"
+                     onChange={handleChange}
+                     name="crossedPrice"
+                     value={values.crossedPrice}/>
+                </div>
+            </div>
+            <div className={classes.edit_input}>
+                <div className={classes.edit_icon}> <Description/> </div>
+                <div className={classes.edit_details}>
+                  <h3>Product description</h3>
                   <TextareaAutosize
                         className={classes.edit_profile_textarea}
                         type="text"
-                        name="businessdescription"
+                        name="description"
                         onChange={handleChange}
-                        placeholder="Add your Business description"
-                        value={values.businessdescription}
+                        placeholder="Describe your product"
+                        value={values.description}
                         rowsMin={2}/>
                 </div>
             </div>
+            <div className={classes.edit_input}>
+                <div className={classes.edit_icon}> <DescriptionOutlined/> </div>
+                <div className={classes.edit_details}>
+                  <h3>New product features</h3>
+                  <TextareaAutosize
+                        className={classes.edit_profile_textarea}
+                        type="text"
+                        name="features"
+                        onChange={handleChange}
+                        placeholder="Product features separate with #"
+                        value={values.features}
+                        rowsMin={2}/>
+                </div>
+            </div>
+            <button type="submit" className={classes.submit_btn} >Submit</button>
       </form>
       }
     </main>
@@ -277,4 +236,4 @@ const renderErrors = apiError => {
  )
 }
 
-export default EditProfile;
+export default EditPost;

@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 auth_user__item_info:{
   display: "flex",
   flexDirection: "row",
+  marginBottom:"2rem",
   justifyContent: "space-around",
 },
 auth_user_item_description:{
@@ -39,7 +40,7 @@ createComment:{
   width: "100vw",
 },
 auth_user_item_media:{
-  marginTop: "3.1rem",
+  marginTop: "3.5rem",
 }
 }))
 
@@ -73,7 +74,7 @@ const {data, loading} = useQuery(GET_POST, {
     )
   }
 
-const {id,  description, likes,comments, image,price, title, crossedPrice, features, createdAt} = data?.getPost;
+const {id,  description, likes,comments,inStock, image,price, title, crossedPrice, features, createdAt} = data?.getPost;
 const weekday = weekDay(createdAt)
 const itemFeatures = features && features.split("#");
 const slicedTitle = title.slice(0,50)
@@ -99,7 +100,10 @@ const main = (
 
     <div>
       <div className={classes.auth_user_item_description}>
-        <h3>Description:</h3>
+        {inStock && <p>{inStock} <b>in stock</b> </p>}
+      </div>
+      <div className={classes.auth_user_item_description}>
+        <h2>Description:</h2>
         <p>{description}</p>
       </div>
 
@@ -128,7 +132,6 @@ const main = (
         <CreateComment postId={id} comments={comments}/>
       </div>
       <div className={classes.itemComments}>
-        <p style={{fontWeight:"bolder"}}>Comments and Reviews:</p>
         <div>
           {comments.length && comments.map( (comment) => (
               <div className="comment" key={comment.id}>

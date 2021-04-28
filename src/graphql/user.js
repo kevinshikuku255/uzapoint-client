@@ -10,6 +10,9 @@ const userPayload = `
   fullname
   phonenumber
   email
+  facebook
+  twitter
+  instagram
   image
   imagePublicId
   coverImage
@@ -32,6 +35,7 @@ export const GET_USER = gql`
       posts {
         id
         title
+        inStock
         description
         features
         price
@@ -94,6 +98,7 @@ export const GET_USER_POSTS = gql`
         description
         features
         price
+        inStock
         crossedPrice
         imagePublicId
         image
@@ -132,50 +137,27 @@ export const GET_AUTH_USER = gql`
     getAuthUser {
       ${userPayload}
       ${likesPostPayload}
-      newNotifications {
-        id
-        createdAt
-        author {
-          id
-          username
-          image
-        }
-        follow {
-          id
-        }
-        comment {
-          id
-          #  Error -- Field "post" must not have a selection since type "ID" has no subfields.
-          # post {
-          #   id
-          #   image
-          # }
-        }
-        like {
-          id
-          post {
-            id
-            image
-          }
-        }
-      }
-      newConversations {
-        id
-        username
-        fullName
-        image
-        lastMessage
-        lastMessageCreatedAt
-      }
+      isOnline
       posts {
         id
         title
         description
+        features
         price
         crossedPrice
-        image
         imagePublicId
+        image
         createdAt
+        ${likesPostPayload}
+      }
+      buys {
+        id
+        title
+        description
+        features
+        pricerange
+        createdAt
+        ${postAuthorPayload}
       }
       following {
         id
@@ -184,6 +166,22 @@ export const GET_AUTH_USER = gql`
       followers {
         id
         user
+      }
+      notifications {
+        id
+        author {
+          id
+          username
+        }
+        follow {
+          id
+        }
+        like {
+          id
+        }
+        comment {
+          id
+        }
       }
     }
   }
@@ -294,6 +292,22 @@ export const EDIT_USER_PROFILE = gql`
      email:$email
      location:$location
      businessdescription:$businessdescription
+   ){
+     token
+   }
+ }
+`;
+
+
+
+/** Add links to user */
+export const ADD_LINKS = gql`
+ mutation($id:ID $twitter:String  $instagram:String $facebook:String ){
+   addLinks(
+     id:$id
+     twitter:$twitter
+     instagram:$instagram
+     facebook:$facebook
    ){
      token
    }

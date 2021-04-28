@@ -14,10 +14,8 @@ import Routes from "../../store/routes";
 
 const useStyles = makeStyles((theme) => ({
   btn:{
-    border:"none",
-    outline:"none",
-    borderRadius:"5px",
-    padding:".2rem 1rem"
+    fontWeight:"bold",
+    color:"red"
   },
 }))
 
@@ -62,9 +60,9 @@ const hundleDelete = () => {
 
  return(
   <>
-        <button style={{backgroundColor:"#c25454"}} className={classes.btn} onClick={hundleDelete}>
+        <p className={classes.btn} onClick={hundleDelete}>
             {loading ? "Deleting..." : data ? "Deleted" : "Delete"}
-        </button>
+        </p>
   </>
    )
 }

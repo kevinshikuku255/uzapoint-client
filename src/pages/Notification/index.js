@@ -22,7 +22,7 @@ const PostNotification = () => {
          <div className="notification_img">
             <img src={Netlify} width="100" height="50%"/>
          </div> */}
-         <h1>WORKING ON IT</h1>
+         <h1>New item created !!</h1>
       </div>
     </div>
  )
