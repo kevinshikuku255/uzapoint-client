@@ -1,12 +1,10 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
-// import {Image, Transformation} from "cloudinary-react";
 import { timeAgo } from '../../Utils/date';
 import useGaEvents from "../../Hooks/useGAEvents";
 import  "./postcard.css"
 import {SkeletonPost} from "../Skeleton/skeleton";
 import {Avatar } from '@material-ui/core';
-// import { LazyLoadImage } from 'react-lazy-load-image-component';
 import {WhatsApp, Call,Person} from "@material-ui/icons";
 import Img from "react-cool-img";
 
@@ -44,23 +42,16 @@ const Postcard = ({post}) => {
             { image &&
                 <Img
                   style={{
-                    backgroundColor:"grey",
-                    width:"50%",
-                    height:"100%"
+                    backgroundColor:"#a2a2a282",
+                    width:"100%",
+                    height:"50%"
                   }}
+                  width="100%"
+                  height="50%"
                   src={image}
                   alt={title}
                   debounce={1000}
                 />
-              // <LazyLoadImage
-              //   alt={title}
-              //   effect="blur"
-              //   height="50%"
-              //   width="100%"
-              //   onClick={toPost}
-              //   loading="lazy"
-              //   placeholder={<SkeletonPost/>}
-              //   src={image}/>
              }
         </div> : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div> }
 

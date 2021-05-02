@@ -48,20 +48,16 @@ const  Postgrid = ({post, likedItem})  => {
             { image ?
             <Img
               style={{
-                backgroundColor:"grey",
-                width:"50%",
-                height:"100%"
+                backgroundColor:"#a2a2a282",
+                width:"100%",
+                height:"50%"
               }}
+              width="100%"
+              height="50%"
               src={image}
               alt={title}
               debounce={1000}
             />
-            // <img
-            //   alt="alt_tag"
-            //   src={image}
-            //   width="100%"
-            //   height="50%"
-            //   />
               : <SkeletonPost title={title}  />
              }
           </div>
