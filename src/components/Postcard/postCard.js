@@ -8,10 +8,7 @@ import {SkeletonPost} from "../Skeleton/skeleton";
 import {Avatar } from '@material-ui/core';
 // import { LazyLoadImage } from 'react-lazy-load-image-component';
 import {WhatsApp, Call,Person} from "@material-ui/icons";
-<<<<<<< HEAD
 import Img from "react-cool-img";
-=======
->>>>>>> bd079dbf112bf59849f09c682fd247e7ea9a42b8
 
 /**This is a post... */
 const Postcard = ({post}) => {
@@ -45,7 +42,6 @@ const Postcard = ({post}) => {
         <div>
          {image ? <div className="cardMedia">
             { image &&
-<<<<<<< HEAD
                 <Img
                   style={{
                     backgroundColor:"grey",
@@ -65,17 +61,6 @@ const Postcard = ({post}) => {
               //   loading="lazy"
               //   placeholder={<SkeletonPost/>}
               //   src={image}/>
-=======
-              <LazyLoadImage
-                alt={title}
-                effect="blur"
-                height="50%"
-                width="100%"
-                onClick={toPost}
-                loading="lazy"
-                placeholder={<SkeletonPost/>}
-                src={image}/>
->>>>>>> bd079dbf112bf59849f09c682fd247e7ea9a42b8
              }
         </div> : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div> }
 
