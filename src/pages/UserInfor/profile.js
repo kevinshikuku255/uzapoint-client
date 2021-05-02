@@ -7,13 +7,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import RouteHeader from "../../components/Header/routeHeader";
 import  './profile.css'
 
+
 import {GET_USER } from '../../graphql/user';
 import { weekDay } from '../../Utils/date';
 import {UsedocumentTitle} from "../../Hooks/UseDocumentTitle";
 import {CircularProg} from "../../components/Skeleton/skeleton";
 import Overlay from "../../components/Acordion/Overlay";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Netlify from "../../Assets/netlify.jpg"
+import Netlify from "../../Assets/netlify.jpg";
+import Img from "react-cool-img";
+
 
 const  useStyles = makeStyles((theme) => ({
   large: {
@@ -88,14 +90,18 @@ const main =
       {
       <div>
         {<>
-          <LazyLoadImage
-            alt={username}
-            effect="blur"
-            placeholder={<div/>}
+          <Img
+            style={{
+              backgroundColor:"#a2a2a282",
+              height:"140px",
+              width:"100%"
+            }}
             height="140px"
             width="100%"
-            loading="lazy"
-            src={coverImage || Netlify}/>
+            src={coverImage || Netlify}
+            alt={username}
+            debounce={1000}
+          />
         </>}
       </div>}
      <div className="avator">

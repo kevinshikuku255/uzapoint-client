@@ -20,7 +20,8 @@ import ImageUpload from "./imageUpload";
 import './profile.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Netlify from "../../Assets/netlify.jpg"
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Img from "react-cool-img";
+
 
 const  useStyles = makeStyles((theme) => ({
   small: {
@@ -136,13 +137,18 @@ const main =
 
             {<>
                {coverImage ?
-              <LazyLoadImage
-                alt={username}
-                effect="blur"
-                height="7rem"
-                width="100%"
-                loading="lazy"
-                src={coverImage}/>
+                  <Img
+                     style={{
+                     backgroundColor:"#a2a2a282",
+                     height:"140px",
+                     width:"100%"
+                     }}
+                     height="140px"
+                     width="100%"
+                     src={coverImage}
+                     alt={username}
+                     debounce={1000}
+                  />
                : <img src={Netlify} width="100%" alt={username} />}
                <ImageUpload isCover={true} />
             </>
