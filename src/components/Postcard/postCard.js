@@ -8,6 +8,7 @@ import {SkeletonPost} from "../Skeleton/skeleton";
 import {Avatar } from '@material-ui/core';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import {WhatsApp, Call,Person} from "@material-ui/icons";
+import placeholder from "../../Assets/placeholder.jpeg";
 
 /**This is a post... */
 const Postcard = ({post}) => {
@@ -48,6 +49,7 @@ const Postcard = ({post}) => {
                 width="100%"
                 onClick={toPost}
                 loading="lazy"
+                placeholderSrc={placeholder}
                 src={image}/>
              }
         </div> : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div> }

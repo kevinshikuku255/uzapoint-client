@@ -31,8 +31,6 @@ function People() {
                    <PeopleSkeleton/>
                    <PeopleSkeleton/>
                    <PeopleSkeleton/>
-                   <PeopleSkeleton/>
-                   <PeopleSkeleton/>
                 </div>
               </div>
    )
