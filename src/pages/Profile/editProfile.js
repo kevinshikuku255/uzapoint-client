@@ -270,6 +270,7 @@ const renderErrors = apiError => {
                         rowsMin={2}/>
                 </div>
             </div>
+          <button type="submit" className={classes.submit_btn} >Submit</button>
       </form>
       }
     </main>
