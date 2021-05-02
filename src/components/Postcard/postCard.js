@@ -6,9 +6,9 @@ import useGaEvents from "../../Hooks/useGAEvents";
 import  "./postcard.css"
 import {SkeletonPost} from "../Skeleton/skeleton";
 import {Avatar } from '@material-ui/core';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+// import { LazyLoadImage } from 'react-lazy-load-image-component';
 import {WhatsApp, Call,Person} from "@material-ui/icons";
-import placeholder from "../../Assets/placeholder.jpeg";
+import Img from "react-cool-img";
 
 /**This is a post... */
 const Postcard = ({post}) => {
@@ -42,15 +42,25 @@ const Postcard = ({post}) => {
         <div>
          {image ? <div className="cardMedia">
             { image &&
-              <LazyLoadImage
-                alt={title}
-                effect="blur"
-                height="50%"
-                width="100%"
-                onClick={toPost}
-                loading="lazy"
-                placeholderSrc={placeholder}
-                src={image}/>
+                <Img
+                  style={{
+                    backgroundColor:"grey",
+                    width:"50%",
+                    height:"100%"
+                  }}
+                  src={image}
+                  alt={title}
+                  debounce={1000}
+                />
+              // <LazyLoadImage
+              //   alt={title}
+              //   effect="blur"
+              //   height="50%"
+              //   width="100%"
+              //   onClick={toPost}
+              //   loading="lazy"
+              //   placeholder={<SkeletonPost/>}
+              //   src={image}/>
              }
         </div> : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div> }
 

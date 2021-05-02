@@ -7,6 +7,7 @@ import DeleteButton from "../Delete/Delete";
 import ReactGA from 'react-ga';
 import  "./postGrid.css";
 import { makeStyles } from '@material-ui/core/styles';
+import Img from "react-cool-img";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,12 +45,24 @@ const  Postgrid = ({post, likedItem})  => {
   <>
     <div className="media_wrapper">
         <div className="media" onClick={toSingleItem}>
-            { image ? <img
-              alt="alt_tag"
+            { image ?
+            <Img
+              style={{
+                backgroundColor:"grey",
+                width:"50%",
+                height:"100%"
+              }}
               src={image}
-              width="100%"
-              height="50%"
-              /> : <SkeletonPost title={title}  />
+              alt={title}
+              debounce={1000}
+            />
+            // <img
+            //   alt="alt_tag"
+            //   src={image}
+            //   width="100%"
+            //   height="50%"
+            //   />
+              : <SkeletonPost title={title}  />
              }
           </div>
         <div className="prices">
