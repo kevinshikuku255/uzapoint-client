@@ -50,7 +50,7 @@ const  Postgrid = ({post, likedItem})  => {
               style={{
                 backgroundColor:"#a2a2a282",
                 width:"100%",
-                height:"50%"
+                height:"30%"
               }}
               width="100%"
               height="50%"

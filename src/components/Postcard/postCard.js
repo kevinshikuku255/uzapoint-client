@@ -40,11 +40,12 @@ const Postcard = ({post}) => {
         <div>
          {image ? <div className="cardMedia">
             { image &&
+              <div onClick={toPost}>
                 <Img
                   style={{
                     backgroundColor:"#a2a2a282",
                     width:"100%",
-                    height:"50%"
+                    height:"30%"
                   }}
                   width="100%"
                   height="50%"
@@ -52,6 +53,7 @@ const Postcard = ({post}) => {
                   alt={title}
                   debounce={1000}
                 />
+             </div>
              }
         </div> : <div onClick={toPost}>  <SkeletonPost title={slicedTitle}/> </div> }
 
